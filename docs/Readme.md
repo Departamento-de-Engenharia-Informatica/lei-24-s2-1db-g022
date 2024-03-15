@@ -4,12 +4,12 @@
 
 The teams consists of students identified in the following table.
 
-| Student Number | Name              |
-|----------------|-------------------|
-| **1XXXXXX**    | Name of student 1 |
-| **1XXXXXX**    | Name of student 2 |
-| **1XXXXXX**    | Name of student 3 |
-| **1XXXXXX**    | Name of student 4 |
+| Student Number | Name          |
+|----------------|---------------|
+| **1170499**    | Daniel Silva  |
+| **1191330**    | Luigy Lima    |
+| **1191337**    | Tomás Pereira |
+| **1200356**    | Diogo Almeida |
 
 # 2. Task Distribution ###
 
