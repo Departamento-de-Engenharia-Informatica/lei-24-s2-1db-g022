@@ -1,1 +1,101 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="356px" preserveAspectRatio="none" style="width:530px;height:356px;background:#FFFFFF;" version="1.1" viewBox="0 0 530 356" width="530px" zoomAndPan="magnify"><defs/><g><!--cluster actors--><g id="cluster_actors"><rect fill="none" height="320" rx="2.5" ry="2.5" style="stroke:#FFFF00;stroke-width:1.0;" width="172" x="7" y="30.5"/><text fill="#000000" font-family="sans-serif" font-size="20" font-weight="bold" lengthAdjust="spacing" textLength="147" x="19.5" y="51.8359">System Actors</text></g><!--cluster usecases--><g id="cluster_usecases"><rect fill="none" height="112" rx="2.5" ry="2.5" style="stroke:#FFFF00;stroke-width:1.0;" width="279" x="229.5" y="203.5"/><text fill="#000000" font-family="sans-serif" font-size="20" font-weight="bold" lengthAdjust="spacing" textLength="105" x="316.5" y="224.8359">Use Cases</text></g><!--entity Freelancer--><g id="elem_Freelancer"><ellipse cx="93" cy="108" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M93,116 L93,143 M80,124 L106,124 M93,143 L80,158 M93,143 L106,158 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="20" lengthAdjust="spacing" textLength="99" x="43.5" y="178.8359">Freelancer</text></g><!--entity Employee--><g id="elem_Employee"><ellipse cx="93" cy="227.5" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M93,235.5 L93,262.5 M80,243.5 L106,243.5 M93,262.5 L80,277.5 M93,262.5 L106,277.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="20" lengthAdjust="spacing" textLength="124" x="31" y="298.3359">Organization</text><text fill="#000000" font-family="sans-serif" font-size="20" lengthAdjust="spacing" textLength="93" x="31" y="321.8906">Employee</text></g><g id="elem_UC6"><ellipse cx="368.9796" cy="272.5959" fill="#F1F1F1" rx="123.4796" ry="27.0959" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="20" lengthAdjust="spacing" textLength="196" x="267.9796" y="279.5139">UC6 - Create a Task</text></g><g id="elem_GMN5"><path d="M244.5,122 L244.5,142.44 L142.67,143.1 L244.5,150.44 L244.5,179.1094 A0,0 0 0 0 244.5,179.1094 L493.5,179.1094 A0,0 0 0 0 493.5,179.1094 L493.5,132 L483.5,122 L244.5,122 A0,0 0 0 0 244.5,122 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M483.5,122 L483.5,132 L493.5,132 L483.5,122 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="20" lengthAdjust="spacing" textLength="228" x="250.5" y="146.3359">Actor identified but still</text><text fill="#000000" font-family="sans-serif" font-size="20" lengthAdjust="spacing" textLength="208" x="250.5" y="169.8906">no concrete use cases</text></g><g id="elem_GMN11"><path d="M215,6 L215,86.6641 L523,86.6641 L523,16 L513,6 L215,6 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M513,6 L513,16 L523,16 L513,6 " fill="#FEFFDD" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="20" lengthAdjust="spacing" textLength="273" x="221" y="30.3359">Rectangles and Titles are for</text><text fill="#000000" font-family="sans-serif" font-size="20" lengthAdjust="spacing" textLength="287" x="221" y="53.8906">demonstration purposes only.</text><text fill="#000000" font-family="sans-serif" font-size="20" lengthAdjust="spacing" textLength="235" x="221" y="77.4453">Omitt on your diagrams.</text></g><!--link Employee to UC6--><g id="link_Employee_UC6"><path d="M155.15,272.5 C180.35,272.5 210.54,272.5 240.17,272.5 " fill="none" id="Employee-to-UC6" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="245.3,272.5,236.3,268.5,240.3,272.5,236.3,276.5,245.3,272.5" style="stroke:#181818;stroke-width:1.0;"/></g><!--link actors to GMN11--><g id="link_actors_GMN11"><path d="M179.5139,58.884 C179.9664,58.8542 180.4198,58.8244 180.8741,58.7946 C184.5082,58.5558 188.1969,58.3134 191.9278,58.0682 C199.3895,57.5778 207.02,57.0762 214.72,56.57 " fill="none" id="actors-GMN11" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--SRC=[NLB1JiCm3BtdAwnTE0qX3XoHOC0LYS6DYqdTBbeQLuwhqI7-7JTTjx4UejXvVdxFRjw6rA5W6zblgOAAQkoZld3ITTWJtDwugpnZeEN4VYFS4gZqv4ul7VejDhJM8H88USNKH3glpHkiU1TI0pN6JEwi-8Z_SM3V8qj5ikB80WF5o3ltwzoL1ZNkZqomGZkU0ZPZyVCtjfsrSf5g1MMGq6mKgZ2o1axE7UbXiHwoKWiFNbdo0Z03bYjCdKi0Bq8KCNcIi-JYLHfCOOyZvsTwjfuy41MEEHXbkiHA1mrSNtALnX0gIXhgOFF-wXMoXXZBSsBmdBoGKVJcqPlHx2XLCBB-SpBFON9Xu8ATR1mY0wtkO0ah8JH2X7VCsmAtV07Emc6vl2_9tmlvqtGAzctkRJCpGU_ZDkmg13LFvYgo_oEhb151rql79WaunU6w05xRe4QROE1UR4DbWVdwPF0F]--></g></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="1082px" preserveAspectRatio="none" style="width:741px;height:1082px;background:#FFFFFF;" version="1.1" viewBox="0 0 741 1082" width="741px" zoomAndPan="magnify"><defs/><g><rect fill="none" height="27.6094" id="_title" style="stroke:none;stroke-width:1.0;" width="137" x="295" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="127" x="300" y="24.5332">Use Case Diagram</text><!--MD5=[99b31deea5d7419a569cd5090bf83263]
+cluster System--><g id="cluster_System"><rect fill="none" height="822" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="517" x="218" y="45.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="50" x="451.5" y="62.1426">System</text></g><g id="elem_UC01"><ellipse cx="476.3113" cy="125.3716" fill="#F1F1F1" rx="206.8113" ry="43.7623" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="386" x="283.3113" y="129.1002">UC01: Register skills that may be appointed to a collaborator.</text></g><g id="elem_UC02"><ellipse cx="476.7471" cy="224.6588" fill="#F1F1F1" rx="88.2471" ry="20.0494" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="134" x="409.7471" y="228.3873">UC02: Register a Job</text></g><g id="elem_UC03"><ellipse cx="476.5795" cy="330.5253" fill="#F1F1F1" rx="242.5795" ry="50.9159" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="459" x="247.0795" y="334.2538">UC03: Register a collaborator with a job and fundamental characteristics.</text></g><g id="elem_UC04"><ellipse cx="476.641" cy="445.7376" fill="#F1F1F1" rx="133.641" ry="29.1282" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="234" x="359.641" y="449.4661">UC04: Assign skills to a collaborator .</text></g><g id="elem_UC05"><ellipse cx="476.5369" cy="545.8168" fill="#F1F1F1" rx="166.5369" ry="35.7074" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="303" x="325.0369" y="549.5453">UC05: Generate a team proposal automatically .</text></g><g id="elem_UC06"><ellipse cx="476.613" cy="638.432" fill="#F1F1F1" rx="99.613" ry="22.3226" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="160" x="396.613" y="642.1605">UC06: Register a vehicle.</text></g><g id="elem_UC07"><ellipse cx="476.641" cy="725.7376" fill="#F1F1F1" rx="133.641" ry="29.1282" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="234" x="359.641" y="729.4661">UC07: Register a vehicle´s check-up.</text></g><g id="elem_UC08"><ellipse cx="476.6994" cy="820.7492" fill="#F1F1F1" rx="141.1994" ry="30.6399" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="250" x="351.6994" y="824.4778">UC08: List vehicles that need check-up.</text></g><!--MD5=[4e12f11bc1b49ef762be0804cf29784a]
+entity HumanResourcesManager--><g id="elem_HumanResourcesManager"><ellipse cx="90" cy="300.1094" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M90,308.1094 L90,335.1094 M77,316.1094 L103,316.1094 M90,335.1094 L77,350.1094 M90,335.1094 L103,350.1094 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="168" x="6" y="366.1426">HumanResourcesManager</text></g><!--MD5=[04b1498491270279ecb0d57ba03a56e7]
+entity FleetManager--><g id="elem_FleetManager"><ellipse cx="90" cy="695.1094" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M90,703.1094 L90,730.1094 M77,711.1094 L103,711.1094 M90,730.1094 L77,745.1094 M90,730.1094 L103,745.1094 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="46" y="761.1426">FleetManager</text></g><!--MD5=[4d2c5091a9949f13552f19c89f5df0dc]
+entity Collaborator--><g id="elem_Collaborator"><ellipse cx="90" cy="895.1094" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M90,903.1094 L90,930.1094 M77,911.1094 L103,911.1094 M90,930.1094 L77,945.1094 M90,930.1094 L103,945.1094 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="51" y="961.1426">Collaborator</text></g><!--MD5=[42c14d5a3e21d7d0785b0fbc91b3ee0b]
+entity GreenSpacesUser--><g id="elem_GreenSpacesUser"><ellipse cx="90" cy="1008.1094" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M90,1016.1094 L90,1043.1094 M77,1024.1094 L103,1024.1094 M90,1043.1094 L77,1058.1094 M90,1043.1094 L103,1058.1094 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="32" y="1074.1426">GreenSpacesUser</text></g><!--MD5=[833533faa99274fcd902cfc59d4c0944]
+entity GreenSpacesManager--><g id="elem_GreenSpacesManager"><ellipse cx="476.5" cy="895.1094" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M476.5,903.1094 L476.5,930.1094 M463.5,911.1094 L489.5,911.1094 M476.5,930.1094 L463.5,945.1094 M476.5,930.1094 L489.5,945.1094 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="143" x="405" y="961.1426">GreenSpacesManager</text></g><!--MD5=[bacb8234caec60d841bd47018bdbca7e]
+link HumanResourcesManager to UC01--><g id="link_HumanResourcesManager_UC01"><path d="M113.19,291.4394 C133.96,258.4094 168.05,212.4994 210,186.6094 C235.78,170.6994 265.27,158.9294 295.01,150.2294 " fill="none" id="HumanResourcesManager-to-UC01" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="300.18,148.7494,290.4274,147.3758,295.3724,150.123,292.6252,155.068,300.18,148.7494" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[0d3edf1c9852f31da9931ce13d24912d]
+link HumanResourcesManager to UC02--><g id="link_HumanResourcesManager_UC02"><path d="M148.15,291.4794 C167.1,280.1694 188.78,268.9294 210,261.6094 C266.26,242.2194 332.56,232.9594 384.84,228.5594 " fill="none" id="HumanResourcesManager-to-UC02" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="389.85,228.1494,380.5489,224.9106,384.8673,228.5646,381.2133,232.883,389.85,228.1494" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[3891cd7a93fb2aa7b1765e23458c8c51]
+link HumanResourcesManager to UC03--><g id="link_HumanResourcesManager_UC03"><path d="M174.43,330.6094 C191.09,330.6094 209.37,330.6094 228.43,330.6094 " fill="none" id="HumanResourcesManager-to-UC03" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="233.83,330.6094,224.83,326.6094,228.83,330.6094,224.83,334.6094,233.83,330.6094" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[56486b6fb82ab53f1ea01964edc45ec4]
+link HumanResourcesManager to UC04--><g id="link_HumanResourcesManager_UC04"><path d="M150.2,369.7594 C168.72,380.5194 189.64,391.2394 210,398.6094 C254.5,414.7094 305.27,425.4294 350.4,432.4994 " fill="none" id="HumanResourcesManager-to-UC04" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="355.6,433.2994,347.3094,427.9828,350.6576,432.5423,346.0981,435.8905,355.6,433.2994" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[cfc6404bb4a8acfdb93cc015dc6c47d3]
+link HumanResourcesManager to UC05--><g id="link_HumanResourcesManager_UC05"><path d="M109.24,369.6394 C128.78,406.9894 163.4,461.9094 210,491.6094 C241.22,511.5094 278.35,524.2794 314.79,532.4194 " fill="none" id="HumanResourcesManager-to-UC05" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="319.69,533.4894,311.7395,527.6765,314.8031,532.432,310.0476,535.4956,319.69,533.4894" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[6236f6fe8debce895e0fd174af931898]
+link FleetManager to UC06--><g id="link_FleetManager_UC06"><path d="M134.28,705.7694 C156.5,696.2994 184.26,685.5394 210,678.6094 C265.16,663.7694 328.35,653.9694 379.24,647.7894 " fill="none" id="FleetManager-to-UC06" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="384.44,647.1594,375.0256,644.2666,379.476,647.7585,375.9841,652.2089,384.44,647.1594" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[81012ebcb17b8df67a71df8d28aaa3a2]
+link FleetManager to UC07--><g id="link_FleetManager_UC07"><path d="M134.36,725.6094 C183.46,725.6094 265.94,725.6094 337.51,725.6094 " fill="none" id="FleetManager-to-UC07" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="342.64,725.6094,333.64,721.6094,337.64,725.6094,333.64,729.6094,342.64,725.6094" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[819246d58f73a981fcda3630f33940f6]
+link FleetManager to UC08--><g id="link_FleetManager_UC08"><path d="M134.14,744.5194 C156.45,753.7294 184.32,764.3394 210,771.6094 C256.24,784.6894 308.02,795.1494 353.49,802.9894 " fill="none" id="FleetManager-to-UC08" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="358.43,803.8394,350.2331,798.3795,353.5015,802.9965,348.8845,806.265,358.43,803.8394" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[44007185c3b0f1d08365c2b5b4c42f0b]
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+'skinparam shadowing false
+
+title Use Case Diagram
+
+left to right direction
+
+    actor HumanResourcesManager
+    actor FleetManager
+    actor Collaborator
+    actor GreenSpacesUser
+    actor GreenSpacesManager
+
+rectangle System {
+    usecase "UC01: Register skills that may be appointed to a collaborator." as UC01
+    HumanResourcesManager - -> UC01
+    usecase "UC02: Register a Job" as UC02
+    HumanResourcesManager - -> UC02
+    usecase "UC03: Register a collaborator with a job and fundamental characteristics." as UC03
+    HumanResourcesManager - -> UC03
+    usecase "UC04: Assign skills to a collaborator ." as UC04
+    HumanResourcesManager - -> UC04
+    usecase "UC05: Generate a team proposal automatically ." as UC05
+    HumanResourcesManager - -> UC05
+    usecase "UC06: Register a vehicle." as UC06
+    FleetManager - -> UC06
+    usecase "UC07: Register a vehicle´s check-up." as UC07
+    FleetManager - -> UC07
+    usecase "UC08: List vehicles that need check-up." as UC08
+    FleetManager - -> UC08
+
+
+}
+
+
+
+@enduml
+
+@startuml
+skinparam packageStyle rectangle
+
+title Use Case Diagram
+
+left to right direction
+
+    actor HumanResourcesManager
+    actor FleetManager
+    actor Collaborator
+    actor GreenSpacesUser
+    actor GreenSpacesManager
+
+rectangle System {
+    usecase "UC01: Register skills that may be appointed to a collaborator." as UC01
+    HumanResourcesManager - -> UC01
+    usecase "UC02: Register a Job" as UC02
+    HumanResourcesManager - -> UC02
+    usecase "UC03: Register a collaborator with a job and fundamental characteristics." as UC03
+    HumanResourcesManager - -> UC03
+    usecase "UC04: Assign skills to a collaborator ." as UC04
+    HumanResourcesManager - -> UC04
+    usecase "UC05: Generate a team proposal automatically ." as UC05
+    HumanResourcesManager - -> UC05
+    usecase "UC06: Register a vehicle." as UC06
+    FleetManager - -> UC06
+    usecase "UC07: Register a vehicle´s check-up." as UC07
+    FleetManager - -> UC07
+    usecase "UC08: List vehicles that need check-up." as UC08
+    FleetManager - -> UC08
+
+
+}
+
+
+
+@enduml
+
+PlantUML version 1.2022.12(Sun Oct 23 19:12:26 BST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>
