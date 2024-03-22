@@ -1,16 +1,16 @@
-# US03 - As an HRM, I want to register a collaborator with a job and fundamental characteristics.
+# US03 - As a Human Resource Manager, I want to register a collaborator with a job and fundamental characteristics.
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-US03 - As an HRM, I want to register a collaborator with a job and fundamental characteristics.
+US03 - As a Human Resource Manager, I want to register a collaborator with a job and fundamental characteristics.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	Each information about the collaborator should be provided by the HRM.
+>	Each information about the collaborator should be provided by the Human Resource Manager.
 
 **From the client clarifications:**
 
