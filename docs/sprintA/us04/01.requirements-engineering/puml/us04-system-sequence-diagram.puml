@@ -3,11 +3,11 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - Alternative One
+title System Sequence Diagram (SSD) - US04 As an HRM, I want to assign one or more skills to a collaborator.
 
 autonumber
 
-actor "Organization\nHRM" as HRM
+actor "Human Resources Manager (HRM)" as HRM
 participant ":System" as System
 
 activate HRM
