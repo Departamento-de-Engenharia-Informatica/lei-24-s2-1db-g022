@@ -36,6 +36,7 @@ The list must clearly identify the vehicles through: plate number, brand, model 
 
 * **AC1:** The list must contain all vehicles that have already exceeded the number of km required for the inspection or those that are close to it.
 * **AC2:** The list must clearly identify the vehicles through: plate number, brand, model and the that justified the checkup need.
+* **AC3:** All required fields must be filled in.
 
 ### 1.4. Found out Dependencies
 
