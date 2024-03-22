@@ -55,8 +55,6 @@ As an HRM, I want to assign one or more skills to a collaborator.
 
 **_Other alternatives might exist._**
 
-#### Alternative One
-
 ![System Sequence Diagram - Alternative One](svg/us04-system-sequence-diagram.svg)
 
 ### 1.7 Other Relevant Remarks
