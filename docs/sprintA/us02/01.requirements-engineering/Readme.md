@@ -63,9 +63,7 @@ By definition a set can´t have duplicates. Assuring no duplicates is not a busi
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**_Other alternatives might exist._**
-
-![System Sequence Diagram - Alternative One](svg/us002-system-sequence-diagram.svg)
+![System Sequence Diagram - US02](svg/us002-system-sequence-diagram.svg)
 
 ### 1.7 Other Relevant Remarks
 
