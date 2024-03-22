@@ -8,7 +8,7 @@ title Use Case Diagram
 left to right direction
 
     actor HumanResourcesManager
-    actor FleetManager
+    actor VehicleAndEquipmentFleetManager
     actor Collaborator
     actor GreenSpacesUser
     actor GreenSpacesManager
@@ -25,11 +25,11 @@ rectangle System {
     usecase "UC05: Generate a team proposal automatically ." as UC05
     HumanResourcesManager --> UC05
     usecase "UC06: Register a vehicle." as UC06
-    FleetManager --> UC06
+    VehicleAndEquipmentFleetManager --> UC06
     usecase "UC07: Register a vehicle´s check-up." as UC07
-    FleetManager --> UC07
+    VehicleAndEquipmentFleetManager --> UC07
     usecase "UC08: List vehicles that need check-up." as UC08
-    FleetManager --> UC08
+    VehicleAndEquipmentFleetManager --> UC08
 
 
 }
