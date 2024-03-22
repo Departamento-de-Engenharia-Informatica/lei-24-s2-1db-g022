@@ -31,6 +31,7 @@ As an HRM, I want to assign one or more skills to a collaborator.
 
 * **AC1:** Need to be an employee of the organization.  
 * **AC2:** Carries out design, construction and/or maintenance tasks for green areas, depending on their skills.
+* **AC3:** All required fields must be filled in.
 
 ### 1.4. Found out Dependencies
 
