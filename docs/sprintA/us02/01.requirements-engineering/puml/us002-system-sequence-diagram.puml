@@ -1,0 +1,25 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US01 Register a job
+
+autonumber
+
+actor "Organization\nHRM" as HRM
+participant ":System" as System
+
+    HRM -> System : asks to create a new job
+    activate System
+
+    System --> HRM : requests data (name)
+    deactivate System
+
+    HRM -> System : gives necessary data
+    activate System
+
+    System -> HRM : displays operation success
+    deactivate System
+
+@enduml
