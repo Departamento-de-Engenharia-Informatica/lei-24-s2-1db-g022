@@ -3,31 +3,31 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - Alternative One
+title System Sequence Diagram (SSD) - US08 As an FM, I want to list the vehicles needing the check-up
 
 autonumber
 
-actor "Organization\nEmployee" as Employee
+actor "Fleet Manager (FM)" as FM
 participant ":System" as System
 
-activate Employee
+activate FM
 
-    Employee -> System : asks to create a new task
+    FM -> System : asks to create a new task
     activate System
 
-        System --> Employee : requests data (vehicle, Current Km, Maintenance/Check-up Frequency)
+        System --> FM : requests data (vehicle, Current Km, Maintenance/Check-up Frequency)
     deactivate System
 
-    Employee -> System : types requested data
+    FM -> System : types requested data
     activate System
 
-        System --> Employee : shows all data and requests confirmation
+        System --> FM : shows all data and requests confirmation
     deactivate System
 
-    Employee -> System : confirms data
+    FM -> System : confirms data
     activate System
 
-        System --> Employee : displays operation success
+        System --> FM : displays operation success
     deactivate System
 
 @enduml
