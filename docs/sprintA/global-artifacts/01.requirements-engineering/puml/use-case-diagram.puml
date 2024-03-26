@@ -7,11 +7,11 @@ title Use Case Diagram
 
 left to right direction
 
-    actor HumanResourcesManager
-    actor VehicleAndEquipmentFleetManager
+    actor "Human Resources Manager" as HumanResourcesManager
+    actor "Vehicle And Equipment FleetManager" as VehicleAndEquipmentFleetManager
     actor Collaborator
-    actor GreenSpacesUser
-    actor GreenSpacesManager
+    actor "Green Spaces User" as GreenSpacesUser
+    actor "Green Spaces Manager" as GreenSpacesManager
 
 rectangle System {
     usecase "UC01: Register skills that may be appointed to a collaborator." as UC01
