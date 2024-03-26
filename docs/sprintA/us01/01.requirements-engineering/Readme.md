@@ -74,11 +74,7 @@ As a Human Resources Manager (HRM), I want to register skills that a collaborato
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**_Other alternatives might exist._**
-
-#### Alternative One
-
-![System Sequence Diagram - Alternative One](svg/us01-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us01-system-sequence-diagram.svg)
 
 
 ### 1.7 Other Relevant Remarks

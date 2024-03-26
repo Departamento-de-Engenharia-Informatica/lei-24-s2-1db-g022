@@ -3,11 +3,11 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - Alternative One
+title System Sequence Diagram (SSD) - US01 - Register Skills
 
 autonumber
 
-actor "Organization\nHRM" as HRM
+actor "Human Resources Manager" as HRM
 participant ":System" as System
 
 activate HRM
@@ -17,6 +17,14 @@ activate HRM
 
         System --> HRM : requests data (name)
     deactivate System
+
+    HRM->System: Send data (name)
+    activate System
+
+        System --> HRM : displays the data and requests confirmation
+
+    deactivate System
+
 
     HRM -> System : confirms data
     activate System
