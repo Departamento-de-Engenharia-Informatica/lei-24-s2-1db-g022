@@ -1,0 +1,31 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Register Vehicle Check-up
+
+autonumber
+
+actor VFM
+participant ":System" as System
+
+    VFM -> System : asks to register a vehicle check-up
+    activate System
+
+        System --> VFM : requests data (Plate number, date, kms at checkup.)
+    deactivate System
+
+    VFM -> System : types requested data
+    activate System
+
+       System --> VFM : shows all data and requests confirmation
+    deactivate System
+
+    VFM -> System : confirms data
+    activate System
+
+        System --> VFM : displays operation success
+    deactivate System
+
+@enduml
