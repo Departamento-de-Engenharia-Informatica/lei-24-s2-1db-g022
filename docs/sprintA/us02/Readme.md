@@ -1,4 +1,4 @@
-# US02 - As an HRM, I want to register a job.
+# US02 - Register a job.
 
 [Requirements Engineering](01.requirements-engineering/Readme.md)
 
