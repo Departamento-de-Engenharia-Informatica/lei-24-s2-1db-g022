@@ -7,7 +7,7 @@ title System Sequence Diagram (SSD) - Register Vehicle Check-up
 
 autonumber
 
-actor VFM
+actor "Vehicle and Equipment \nFleet Manager (VFM)" as VFM
 participant ":System" as System
 
     VFM -> System : asks to register a vehicle check-up
