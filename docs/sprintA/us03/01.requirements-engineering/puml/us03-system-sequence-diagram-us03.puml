@@ -7,7 +7,7 @@ title System Sequence Diagram (SSD) - Register a collaborator
 
 autonumber
 
-actor "Organization\nHRM" as HRM
+actor "Human Resource Manager (HRM)" as HRM
 participant ":System" as System
 
 activate HRM
