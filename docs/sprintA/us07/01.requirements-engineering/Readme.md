@@ -1,11 +1,11 @@
-# US07 - As an FM, I wish to register a vehicle’s check-up.
+# US07 - Register a vehicle’s check-up.
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
+US07 - As a Vehicle and Equipment Fleet Manager, I want to register a vehicle’s check-up.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -17,55 +17,39 @@ As an organization employee, I want to create a new task in order to be further 
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** Can a vehicle have more than one check-up?
 >
-> **Answer:** Duration is estimated in days.
+> **Answer:** Yes.
 
-> **Question:** Monetary data is expressed in any particular currency?
+> **Question:** Which attributes will you need for the vehicle's check-up?
 >
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
-
+> **Answer:** Plate number, date, kms at checkup.
+ 
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC2:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* There is a dependency on "US006 - Register vehicle" as there must be at least one vehicle to be able to do a check-up.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
-	
-* Selected data:
-    * a task category 
+    * a plate number
+    * a date
+    * the km at checkup
 
 **Output Data:**
 
-* List of existing task categories
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**_Other alternatives might exist._**
-
-#### Alternative One
-
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
-
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
+![System Sequence Diagram](svg/us07-system-sequence-diagram-alternative-one.svg)
 
 ### 1.7 Other Relevant Remarks
 
