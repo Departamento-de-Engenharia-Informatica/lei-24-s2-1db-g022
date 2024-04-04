@@ -3,37 +3,33 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - Alternative One
+title System Sequence Diagram (SSD) - US01 - Register Skills
 
 autonumber
 
-actor "Organization\nEmployee" as Employee
+actor "Human Resources Manager (HRM)" as HRM
 participant ":System" as System
 
-activate Employee
+activate HRM
 
-    Employee -> System : asks to create a new task
+    HRM -> System : asks to register a new skill
     activate System
 
-        System --> Employee : requests data (i.e. reference, designation, informal\ndescription, technical description, duration, cost)
+        System --> HRM : requests data (name)
     deactivate System
 
-    Employee -> System : types requested data
+    HRM->System: Send data (name)
     activate System
 
-        System --> Employee : shows task category list and asks to select one
+        System --> HRM : displays the data and requests confirmation
+
     deactivate System
 
-    Employee -> System : selects a task category
+
+    HRM -> System : confirms data
     activate System
 
-        System --> Employee : shows all data and requests confirmation
-    deactivate System
-
-    Employee -> System : confirms data
-    activate System
-
-        System --> Employee : displays operation success
+        System --> HRM : displays operation success
     deactivate System
 
 @enduml

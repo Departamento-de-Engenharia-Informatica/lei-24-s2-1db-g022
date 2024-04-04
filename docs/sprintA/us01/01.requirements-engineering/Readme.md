@@ -1,72 +1,102 @@
-# US01 - As a Human Resources Manager (HRM), I want to register skills that may be appointed to a collaborator.
+# US01 - Register Skills
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
+As a Human Resources Manager (HRM), I want to register skills that a collaborator may have.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
-
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+> Skills can only be registered by a Human Resources Manager (HRM).
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:**  Which information can be introduced to create a new skill?
 >
-> **Answer:** Duration is estimated in days.
+> **Answer:** The skill name.
 
-> **Question:** Monetary data is expressed in any particular currency?
+> **Question:** Which information is mandatory for creating a new skill?
 >
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** The skill name.
+
+> **Question:** Which are the skills accepted? Or should we enable the HRM to introduce anything as a skill?
+>
+> **Answer:** All, it's up to HRM to decide. (special characters or algarisms should not be allowed in the skill name).
+
+> **Question:** Que criterios sao necessarios para registar uma skill?
+>
+> **Answer:** o nome da skill, por exemplo:
+> podador
+> condutor de veiculos pesados
+> aplicador de fito-farmacos
+
+> **Question:** Quando é criado uma skill que ja existe o que sistema devera fazer?
+>
+> **Answer:** Por definição não é possível ter valores duplicados num conjunto. A verificação de duplicados não é uma
+> regra de negócio é do nível tecnológico.
+
+> **Question:**
+>1. Do I need to add skills by writing them or can I just give a file with all of the skills?
+>2. Does the HRM need to see the confirmation of the sucess of the operation and the skills added or just the sucess of
+    the operation?
+>3. Is there any other possible outcome like if the HMR does not put the requested data, do I need to ask the user to to
+    register a diferent competence?
+>
+> **Answer:**
+>1. Both are acceptable since the business the same the crucial difference resides in the UX.
+>2. It will depend if you opt to insert one skil or a set of skils in a batch. Maybe some adaptation needed.
+>3. This US is quite simple, atm a skill is simply a name.
+
+> **Question:**
+>Dear client, which is the difference between collaborator and employ? And employ could have skills? HRM, VFM, GSM and GSU are employers?
+>
+> **Answer:**
+>Employee and collaborator are synonyms.
+
+> **Question:**
+> Should the system able the HRM to introduce multiple skills in one interaction before saving all of them?
+>
+> **Answer:**
+> it's not required to do so.
+
+> **Question:**
+> The indentificator of the skill will be the name, or the system will generate authomatically and Id when the manager insert the name?
+>
+> **Answer:**
+> A skill is just a name, can be a composition os words like "Light Vehicle Driving Licence".
+> I have no knowledge about systems IDs.
+
 
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
+* **AC2:** Special characters or algarisms should not be allowed in the skill name.
 * **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* n/a
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
-	
-* Selected data:
-    * a task category 
+    * a skill name
 
 **Output Data:**
 
-* List of existing task categories
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**_Other alternatives might exist._**
+![System Sequence Diagram - Alternative One](svg/us01-system-sequence-diagram.svg)
 
-#### Alternative One
-
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
-
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* n/a
