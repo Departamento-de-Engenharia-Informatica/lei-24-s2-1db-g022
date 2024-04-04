@@ -10,11 +10,16 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Business Transactions**
 
-* 
+* Skills
+* Vehicles
+* Job
+* Collaborator
+* Team
+* Check-up
 
 ---
 
-**Transaction Line Itemss**
+**Transaction Line Items**
 
 * 
 
@@ -30,17 +35,26 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 * 
 
+
 ---  
 
 **Roles of People or Organizations**
 
-* 
+* (HRM) Human Resources Manager
+* (VFM) Vehicle and Equipment Fleet Manager
+* Collaborator
+* Green Spaces Manager
+* Green Spaces User
+
 
 ---
 
 **Places**
 
-* 
+* Garden
+* Medium-sized park
+* Large-sized par
+  
 
 ---
 
@@ -52,7 +66,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Physical Objects**
 
-* 
+* Vehicles/GreenSpace/Tools/Equipments
 
 ---
 
@@ -82,7 +96,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Organizations**
 
-* 
+* MusgoSublime (MS)
 
 ---
 
@@ -124,10 +138,10 @@ An association is a relationship between instances of objects that indicates a r
 - etc.
 
 
-| Concept (A) 		|  Association   	|  Concept (B) |
-|----------	   		|:-------------:		|------:       |
-| C1  	| verb1    		 	| C2  |
-| ...  	| ...    		 	| ...  |
+| Concept (A) 		 | Association   	 | Concept (B) |
+|----------------|:---------------:|------------:|
+| C1  	          |  verb1    		 	  |          C2 |
+| ...  	         |   ...    		 	   |         ... |
 
 
 

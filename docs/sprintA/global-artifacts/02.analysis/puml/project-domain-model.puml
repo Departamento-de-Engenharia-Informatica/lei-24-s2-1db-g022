@@ -8,77 +8,81 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-'title Domain Model
+title Domain Model
 
 'class Platform {
 '  -description
 '}
 
-class Organization {
+
+
+class Collaborator {
     name
-    vatNumber
-    website
+    dateOfBirth
+    admissionDate
+    address
     phoneNumber
     email
+    cc
+    cardNumber
+
+}
+class VehicleFleetManager {
+
+}
+class HumanResourceManager {
+
+
 }
 
-class Task {
-    reference
-    description
-    informalDesc
-    technicalDesc
-    duration
-    cost
+class Team{
+
 }
 
-class Category {
-    description
+class Vehicle{
+    brand
+    model
+    type
+    tare
+    grossWeight
+    currentKm
+    registerDate
+    acquisitionDate
+    checkupFrequency
+    licensePlate
 }
 
-class Employee {
+class CheckUp{
+    date
+    km
+}
+
+class Skill{
     name
-    email
-    position
-    phone
 }
 
-class TechnicalSkill{
-    shortDescription
-    fullDescription
+class Job{
+    name
 }
 
-class ActivityArea{
-    shortDescription
-    fullDescription
-}
 
-class FeatureTS{
-    mandatory
-}
+Collaborator  <|--  HumanResourceManager
+Collaborator <|-- VehicleFleetManager
+HumanResourceManager "1" -- "*" Collaborator : Register >
+Collaborator "1" -- "*" Vehicle : can use >
+Collaborator "*" -- "1" Team : Contain <
+Vehicle "1" -- "*" CheckUp :  Check Vehicle <
+HumanResourceManager "*" -- "*" Skill : Register >
+Skill "*" -- "*" Collaborator : has <
+Job "1" -- "*" Collaborator : has <
+HumanResourceManager "*" -- "*" Job : Register >
+VehicleFleetManager "1" -- "*" Vehicle : Register >
 
-'class User {
-'    name
-'    email
-'    password
-'}
-class PostalAddress{
-    street
-    zipCode
-    city
-}
-'Platform "1" -- "*" Organization : has registered >
-'Platform "1" -- "*" Category : defines >
-Organization "1" - "0..*" Employee : has >
-Organization "1" - "0..*" Task: owns >
-'Task "*" -- "1" Employee: created by >
-Employee "1" -- "*" Task : creates >
-'Employee "0..1" -- "1" User: acts as >
-Task "*" - "1" Category: cataloged as >
-TechnicalSkill "*" - "1" ActivityArea: regarding an >
 
-Category "*" - "*" TechnicalSkill :  : requires >
-(Category, TechnicalSkill) . FeatureTS
 
-Organization "1" -left "1" PostalAddress : located At >
+
+
+
+
 
 @enduml
