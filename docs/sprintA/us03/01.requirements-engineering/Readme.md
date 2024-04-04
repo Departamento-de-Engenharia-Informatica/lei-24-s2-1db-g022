@@ -17,11 +17,31 @@ US03 - As a Human Resource Manager, I want to register a collaborator with a job
 > **Question:** Should the system able the HRM to insert multiple collaborators in one interaction before saving them?
 >
 > **Answer:** it's not required to do so.
+> 
+> **Question:** I have some questions regarding the business rules of this US:
+> 
+> Is there any limitation regarding the length of the name of the collaborator?
+> 
+> Should we consider valid only the birthdates in which the collaborator has more than 18 years?
+> 
+> What should be the format for the phone number? 9 numbers?
+> 
+> What is the format for the numbers from the id doc types?
+>
+> Are there any other business rules?
+> 
+> **Answer:** According to the Portuguese law a name should contain at maximum six words;
+> 
+> yes;
+> 
+> validating 9 digits will be acceptable; validating with international format would be excelent;
+> 
+> each doc type has specific formats like taxpayer number, Citizen Card ou passport.
 
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC2:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
 
 ### 1.4. Found out Dependencies
 
