@@ -65,7 +65,7 @@ HumanResourceManager "1" -- "*" Collaborator : Register >
 Collaborator "1" -- "*" Vehicle : can use >
 Collaborator "*" -- "1" Team : Contain <
 Vehicle "1" -- "*" CheckUp :  has >
-HumanResourceManager "*" -- "*" Skill : Register >
+HumanResourceManager "1" -- "*" Skill : Register >
 Skill "*" -- "*" Collaborator : has <
 Job "1" -- "*" Collaborator : has <
 HumanResourceManager "*" -- "*" Job : Register >
