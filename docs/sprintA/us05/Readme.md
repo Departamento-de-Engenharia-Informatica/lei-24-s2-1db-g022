@@ -1,4 +1,4 @@
-# US05 - As a HRM, I want to generate a team proposal automatically.
+# US05 - Generate team.
 
 [Requirements Engineering](01.requirements-engineering/Readme.md)
 
