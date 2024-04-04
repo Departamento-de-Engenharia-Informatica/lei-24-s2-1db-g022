@@ -21,10 +21,10 @@ activate HRM
     HRM -> System : types requested data
     activate System
 
-    System --> HRM : shows job list and asks to select one
+    System --> HRM : requests job (name)
     deactivate System
 
-    HRM -> System : selects a job
+    HRM -> System :  types a job (name)
     activate System
 
     System --> HRM : shows all data and job confirmation

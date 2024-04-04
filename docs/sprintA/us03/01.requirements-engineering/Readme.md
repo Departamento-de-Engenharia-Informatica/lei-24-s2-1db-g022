@@ -1,4 +1,4 @@
-# US03 - Register a collaborator with a job and fundamental characteristics.
+# US03 - Register a collaborator
 
 ## 1. Requirements Engineering
 
@@ -10,14 +10,14 @@ US03 - As a Human Resource Manager, I want to register a collaborator with a job
 
 **From the specifications document:**
 
->	Each information about the collaborator should be provided by the Human Resource Manager.
+>Skills can only be registered by a Human Resources Manager (HRM).
 
 **From the client clarifications:**
 
 > **Question:** Should the system able the HRM to insert multiple collaborators in one interaction before saving them?
 >
 > **Answer:** it's not required to do so.
-> 
+
 > **Question:** I have some questions regarding the business rules of this US:
 > 
 > Is there any limitation regarding the length of the name of the collaborator?
@@ -38,12 +38,22 @@ US03 - As a Human Resource Manager, I want to register a collaborator with a job
 > 
 > each doc type has specific formats like taxpayer number, Citizen Card ou passport.
 
+> **Question:** When creating a collaborator with an existing name ... What the system do?
+>
+> What characteristics are important to success the register?
+> 
+> **Answer:** It's not common and most improbable to have different individual with same name in the same context, however it’s ID documentation number should be unique for sure.
+>
+>I believe that question was already answered, name, birthdate, admission date, id doc type, id doc number, contact info (email, mobile), address.
+
+
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC1:** name, birthdate, admission date, address, contact info (mobile and email), ID doc type and respective number should be provided by HRMAll required fields must be filled in.
+* **AC2:** All required fields must be filled in.
+* **AC2:** id doc number must be unique.
 
-### 1.4. Found out Dependencies
+* ### 1.4. Found out Dependencies
 
 * There is a dependency on "US02 - Register a job" as there must be at least one job to register a collaborator.
 
@@ -60,9 +70,8 @@ US03 - As a Human Resource Manager, I want to register a collaborator with a job
     * an email
     * an id doc type
     * an id doc number
+    * a job (name)
 
-* Selected data:
-    * a job name
 
 **Output Data:**
 
@@ -75,4 +84,4 @@ US03 - As a Human Resource Manager, I want to register a collaborator with a job
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* N/A.
