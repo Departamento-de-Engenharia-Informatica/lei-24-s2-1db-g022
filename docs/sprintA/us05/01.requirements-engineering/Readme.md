@@ -1,4 +1,4 @@
-# US05 - Generate a team proposal automatically.
+# US05 - Generate team.
 
 
 ## 1. Requirements Engineering
@@ -15,7 +15,8 @@ As a HRM, I want to generate a team proposal automatically.
 
 **From the client clarifications:**
 
-> **Question:** 1. What information will the customer provide?
+> **Question:**
+>1. What information will the customer provide?
 > 2. What should the output of the automation be? (should it just store the team proposal or show it to the customer?)
      Will the team proposal be a document about all the instructions of each team member/worker?
 >
@@ -33,23 +34,55 @@ As a HRM, I want to generate a team proposal automatically.
 > and the skill needed: 4 tree pruner and 1 light vehicle driver
 > meaning that one team member have 2 skills.
 
+> **Question:**
+> I would like to ask if, in this US, there should be any more information in the team generated beyond the
+> collaborators in which it consists?
+>
+> I would also like to know if a collaborator can be in more than one team at the same time?
+>
+> **Answer:**
+> The information shouldd contain each of team members and the its skills.
+>
+> no;
+
+> **Question:**
+> I would to know which business rules apply for the input data to generate a team proposal.
+>
+> **Answer:**
+> max and min team size, and a a list of skills needed.
+> For instance:
+> min: 3
+> max: 4
+
+> **Question:**
+> Are the skills(input) typed or selected
+>
+>Does the output show the team members with or without their skills?
+>
+> **Answer:**
+> the ux/ui is up to the dev team.
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The maximum team size and the set of skills need to be supplied by the HRM.
-* **AC2:** The number of collaborators must be an integer and positive above zero.
+* **AC2:** The number of collaborators(Min and Max) must be an integer and positive above zero.
+* **AC3:** The number Max size of collaborators must be an integer and positive above a Min size.
+* **AC4:** The skills number size must be an integer and positive above a zero.
 
 ### 1.4. Found out Dependencies
 
 * There is a dependency on "US01 - Create a skills" as there must be at least one skill to create a proposal.
+* There is a dependency on "US03 - Register a Collaborator" there must be at least one Collaborator registered in the
+  system.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * a number size
-	
-* Selected data:
+    * a team max size;
+    * a team min size;
+    * a number skills size.
     * list of skills
 
 **Output Data:**
@@ -59,15 +92,8 @@ As a HRM, I want to generate a team proposal automatically.
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**_Other alternatives might exist._**
-
-#### Alternative One
-
 ![System Sequence Diagram - Alternative One](svg/us05-system-sequence-diagram-alternative-one.svg)
 
-#### Alternative Two
-
-n/a
 
 ### 1.7 Other Relevant Remarks
 

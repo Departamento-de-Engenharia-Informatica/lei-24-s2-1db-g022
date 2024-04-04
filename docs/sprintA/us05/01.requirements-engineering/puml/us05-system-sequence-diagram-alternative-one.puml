@@ -3,11 +3,11 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - Alternative One
+title System Sequence Diagram (SSD) - US05 - Generate team
 
 autonumber
 
-actor "Organization\nHRM" as HRM
+actor "Human Resources Manager (HRM)" as HRM
 participant ":System" as System
 
 activate HRM
@@ -15,16 +15,16 @@ activate HRM
     HRM -> System : asks to generate a new proposals teams
     activate System
 
-        System --> HRM : requests data (i.e. number size, skills)
+        System --> HRM : requests data (i.e. team max size,team min size, skills number size)
     deactivate System
 
     HRM -> System : types requested data
     activate System
 
-        System --> HRM : shows a list of skills and asks you to select the skills
+        System --> HRM : requests data (List skills names)
     deactivate System
 
-    HRM -> System : selects a skills
+    HRM -> System : insert a skills names
     activate System
 
         System --> HRM : shows all data and requests confirmation
@@ -40,7 +40,7 @@ activate HRM
     HRM -> System : choose one of the proposals and confirms
     activate System
 
-           System -> HRM : displays operation success
+           System --> HRM : displays operation success
 
     deactivate System
 @enduml
