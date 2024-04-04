@@ -1,4 +1,4 @@
-# US03 - As a Human Resource Manager, I want to register a collaborator with a job and fundamental characteristics.
+# US03 - Register a collaborator with a job and fundamental characteristics.
 
 ## 1. Requirements Engineering
 
