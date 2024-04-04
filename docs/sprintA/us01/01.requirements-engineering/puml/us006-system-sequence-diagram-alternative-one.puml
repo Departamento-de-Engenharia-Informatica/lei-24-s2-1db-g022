@@ -7,7 +7,7 @@ title System Sequence Diagram (SSD) - US01 - Register Skills
 
 autonumber
 
-actor "Human Resources Manager" as HRM
+actor "Human Resources Manager (HRM)" as HRM
 participant ":System" as System
 
 activate HRM

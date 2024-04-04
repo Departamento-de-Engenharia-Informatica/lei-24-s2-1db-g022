@@ -1,4 +1,4 @@
-# US01 - As a Human Resources Manager (HRM), I want to register skills that may be appointed to a collaborator. 
+# US01 - Register Skills
 
 [Requirements Engineering](01.requirements-engineering/Readme.md)
 
