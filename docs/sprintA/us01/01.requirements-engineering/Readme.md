@@ -51,6 +51,26 @@ As a Human Resources Manager (HRM), I want to register skills that a collaborato
 >2. It will depend if you opt to insert one skil or a set of skils in a batch. Maybe some adaptation needed.
 >3. This US is quite simple, atm a skill is simply a name.
 
+> **Question:**
+>Dear client, which is the difference between collaborator and employ? And employ could have skills? HRM, VFM, GSM and GSU are employers?
+>
+> **Answer:**
+>Employee and collaborator are synonyms.
+
+> **Question:**
+> Should the system able the HRM to introduce multiple skills in one interaction before saving all of them?
+>
+> **Answer:**
+> it's not required to do so.
+
+> **Question:**
+> The indentificator of the skill will be the name, or the system will generate authomatically and Id when the manager insert the name?
+>
+> **Answer:**
+> A skill is just a name, can be a composition os words like "Light Vehicle Driving Licence".
+> I have no knowledge about systems IDs.
+
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
