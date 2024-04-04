@@ -2,18 +2,11 @@
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
-'skinparam linetype ortho
-'left to right direction
 skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
 title Domain Model
-
-'class Platform {
-'  -description
-'}
-
 
 
 class Collaborator {
@@ -71,18 +64,11 @@ Collaborator <|-- VehicleFleetManager
 HumanResourceManager "1" -- "*" Collaborator : Register >
 Collaborator "1" -- "*" Vehicle : can use >
 Collaborator "*" -- "1" Team : Contain <
-Vehicle "1" -- "*" CheckUp :  Check Vehicle <
+Vehicle "1" -- "*" CheckUp :  has >
 HumanResourceManager "*" -- "*" Skill : Register >
 Skill "*" -- "*" Collaborator : has <
 Job "1" -- "*" Collaborator : has <
 HumanResourceManager "*" -- "*" Job : Register >
 VehicleFleetManager "1" -- "*" Vehicle : Register >
-
-
-
-
-
-
-
 
 @enduml
