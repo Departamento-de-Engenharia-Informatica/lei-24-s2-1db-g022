@@ -35,5 +35,5 @@ activate HRM
 
     System --> HRM : displays operation success
     deactivate System
-
+    deactivate HRM
 @enduml
