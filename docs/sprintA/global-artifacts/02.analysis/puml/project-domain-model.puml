@@ -60,15 +60,15 @@ class Job{
 
 
 Collaborator  <|--  HumanResourceManager
-Collaborator <|-- VehicleFleetManager
-HumanResourceManager "1" -- "*" Collaborator : Register >
-Collaborator "1" -- "*" Vehicle : can use >
-Collaborator "*" -- "1" Team : Contain <
-Vehicle "1" -- "*" CheckUp :  has >
-HumanResourceManager "1" -- "*" Skill : Register >
-Skill "*" -- "*" Collaborator : has <
-Job "1" -- "*" Collaborator : has <
-HumanResourceManager "*" -- "*" Job : Register >
-VehicleFleetManager "1" -- "*" Vehicle : Register >
+Collaborator <|- VehicleFleetManager
+HumanResourceManager "1" -- "*" Collaborator : Registers >
+Collaborator "0..1" -- "*" Vehicle : drives >
+Collaborator "*" -- "1" Team : Contains <
+Vehicle "1" -- "*" CheckUp :  does >
+HumanResourceManager "1" -- "1..*" Skill : Registers >
+Skill "1..*" -- "*" Collaborator : has <
+Job "1" -- "1..*" Collaborator : has <
+HumanResourceManager "*" - "1..*" Job : Registers >
+VehicleFleetManager "1" -- "1..*" Vehicle : Registers >
 
 @enduml
