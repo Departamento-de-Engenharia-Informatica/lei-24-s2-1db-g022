@@ -14,10 +14,18 @@ US03 - As a Human Resource Manager, I want to register a collaborator with a job
 
 **From the client clarifications:**
 
+> **Question:** When creating a collaborator with an existing name ... What the system do?
+>
+> What characteristics are important to success the register?
+>
+> **Answer:** It's not common and most improbable to have different individual with same name in the same context, however it’s ID documentation number should be unique for sure.
+>
+>I believe that question was already answered, name, birthdate, admission date, id doc type, id doc number, contact info (email, mobile), address.
+
 > **Question:** Should the system able the HRM to insert multiple collaborators in one interaction before saving them?
 >
 > **Answer:** it's not required to do so.
-> 
+
 > **Question:** I have some questions regarding the business rules of this US:
 > 
 > Is there any limitation regarding the length of the name of the collaborator?
@@ -40,8 +48,14 @@ US03 - As a Human Resource Manager, I want to register a collaborator with a job
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC1:** Name, birthdate, admission date, address, contact info (mobile and email), ID doc type and respective number should be provided by HRM.
+* **AC2:** All required fields must be filled in.
+* **AC3:** Id doc number must be unique.
+* **AC4:** Name can have 6 words maximum.
+* **AC5:** Dates must follow this format: dd-mm-yyyy.
+* **AC6:** Need to certify that the collaborator has at least 18 years of age.
+* **AC7:** Phone number needs to use this format: +999(max 3 numbers) 999999999 
+
 
 ### 1.4. Found out Dependencies
 
