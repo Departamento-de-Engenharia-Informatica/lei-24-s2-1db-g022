@@ -9,6 +9,7 @@ autonumber
 
 actor "Vehicle and Equipment \nFleet Manager (VFM)" as VFM
 participant ":System" as System
+activate VFM
 
     VFM -> System : asks to register a vehicle check-up
     activate System
