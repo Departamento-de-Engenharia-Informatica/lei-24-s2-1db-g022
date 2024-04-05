@@ -7,13 +7,10 @@
 
 US07 - As a Vehicle and Equipment Fleet Manager, I want to register a vehicle’s check-up.
 
-### 1.2. Customer Specifications and Clarifications 
+### 1.2. Customer Specifications and Clarifications
 
 **From the specifications document:**
-
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
-
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>Skills can only be registered by a Human Resources Manager (VFM).
 
 **From the client clarifications:**
 
@@ -24,11 +21,12 @@ US07 - As a Vehicle and Equipment Fleet Manager, I want to register a vehicle’
 > **Question:** Which attributes will you need for the vehicle's check-up?
 >
 > **Answer:** Plate number, date, kms at checkup.
- 
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
-* **AC2:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC2:** KM must be a number greater than zero.
+* **AC3:** Date must follow this format: dd-mm-yyyy.
 
 ### 1.4. Found out Dependencies
 
@@ -39,9 +37,9 @@ US07 - As a Vehicle and Equipment Fleet Manager, I want to register a vehicle’
 **Input Data:**
 
 * Typed data:
-    * a plate number
-    * a date
-    * the km at checkup
+  * a plate number
+  * a date
+  * the km at checkup
 
 **Output Data:**
 
@@ -53,4 +51,4 @@ US07 - As a Vehicle and Equipment Fleet Manager, I want to register a vehicle’
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* N/A
