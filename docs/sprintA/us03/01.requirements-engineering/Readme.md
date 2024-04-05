@@ -14,19 +14,19 @@ US03 - As a Human Resource Manager, I want to register a collaborator with a job
 
 *From the client clarifications:*
 
-> *Question:* When creating a collaborator with an existing name ... What the system do?
+>**Question:** When creating a collaborator with an existing name ... What the system do?
 >
 >What characteristics are important to success the register?
 >
->*Answer:* It's not common and most improbable to have different individual with same name in the same context, however it’s ID documentation number should be unique for sure.
+>**Answer:** It's not common and most improbable to have different individual with same name in the same context, however it’s ID documentation number should be unique for sure.
 >
->Ibelieve that question was already answered, name, birthdate, admission date, id doc type, id doc number, contact info (email, mobile), address.
+>I believe that question was already answered, name, birthdate, admission date, id doc type, id doc number, contact info (email, mobile), address.
 
-> *Question:* Should the system able the HRM to insert multiple collaborators in one interaction before saving them?
+>**Question:** Should the system able the HRM to insert multiple collaborators in one interaction before saving them?
 >
->*Answer:* it's not required to do so.
+>**Answer:** it's not required to do so.
 
-> *Question:* I have some questions regarding the business rules of this US:
+>**Question:** I have some questions regarding the business rules of this US:
 >
 > Is there any limitation regarding the length of the name of the collaborator?
 >
@@ -38,7 +38,7 @@ US03 - As a Human Resource Manager, I want to register a collaborator with a job
 >
 >Are there any other business rules?
 >
-> *Answer:* According to the Portuguese law a name should contain at maximum six words;
+>**Answer:** According to the Portuguese law a name should contain at maximum six words;
 >
 > yes;
 >
