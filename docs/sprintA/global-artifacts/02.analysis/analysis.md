@@ -21,19 +21,24 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Transaction Line Items**
 
-* 
+* Skills
+* Vehicles
 
 ---
 
 **Product/Service related to a Transaction or Transaction Line Item**
 
-* 
+* Check-up
 
 ---
 
 **Transaction Records**
 
-* 
+* Collaborator
+* Skills
+* Job
+* Vehicles
+
 
 
 ---  
@@ -84,13 +89,16 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Containers**
 
-* 
+* GreenSpaces
 
 ---
 
 **Elements of Containers**
 
-* 
+* Infrastructures
+* Wooded garden area
+* Equipment
+* Services
 
 ---
 
@@ -102,8 +110,9 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Other External/Collaborating Systems**
 
-* 
-
+* (HRM) Human Resources Manager
+* (VFM) Vehicle and Equipment Fleet Manager
+* Collaborator
 ---
 
 **Records of finance, work, contracts, legal matters**
@@ -120,7 +129,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Documents mentioned/used to perform some work/**
 
-* 
+* Check-up
 
 ---
 
@@ -129,19 +138,22 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 An association is a relationship between instances of objects that indicates a relevant connection and that is worth of remembering, or it is derivable from the List of Common Associations:
 
-- **_A_** is physically or logically part of **_B_**
-- **_A_** is physically or logically contained in/on **_B_**
-- **_A_** is a description for **_B_**
-- **_A_** known/logged/recorded/reported/captured in **_B_**
-- **_A_** uses or manages or owns **_B_**
-- **_A_** is related with a transaction (item) of **_B_**
-- etc.
 
 
-| Concept (A) 		 | Association   	 | Concept (B) |
-|----------------|:---------------:|------------:|
-| C1  	          |  verb1    		 	  |          C2 |
-| ...  	         |   ...    		 	   |         ... |
+| Concept (A) 	        | Association        | Concept (B)      |  
+|-----------------------|:------------------:|-----------------:|
+|Collaborator           |   Has	             |    Job           |
+|Collaborator  	        |   Drives    	     |    Vehicle       |
+|Collaborator  	        |   Has   	         |    Skill         |
+|Team  	                |   Contains  	     |    Collaborator  |
+|HumanResourceManager  	|   Registers    	 |    Job           |
+|HumanResourceManager   |   Registers    	 |    Collaborator  |     
+|HumanResourceManager  	|   Registers    	 |    Skill         |
+|VehicleFleetManager  	|   Registers  	     |    Vehicle       |
+|Vehicle  	            |   Does   	         |    CheckUp       |
+|HumanResourceManager  	|   Generalization   |    Collaborator  |
+|VehicleFleetManager    |   Generalization   |    Collaborator  |
+
 
 
 
