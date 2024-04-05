@@ -2,60 +2,39 @@
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
-
-'left to right direction
-
 skinparam classAttributeIconSize 0
-
 hide circle
 hide methods
 
-'title Domain Model
+title Domain Model - US06 Register a vehicle
 
-'class Platform {
-'  -description
-'}
-
-class Organization {
+class Collaborator {
     name
-    vatNumber
-    website
+    dateOfBirth
+    admissionDate
+    address
     phoneNumber
     email
+    cc
+    cardNumber
 }
 
-class Task {
-    reference
-    description
-    informalDesc
-    technicalDesc
-    duration
-    cost
+class VehicleFleetManager {
 }
 
-class Category {
-    description
+class Vehicle{
+    brand
+    model
+    type
+    tare
+    grossWeight
+    currentKm
+    registerDate
+    acquisitionDate
+    checkupFrequency
+    licensePlate
 }
 
-class Employee {
-    name
-    email
-    position
-    phone
-}
-
-'class User {
-'    name
-'    email
-'    password
-'}
-
-'Platform "1" -- "*" Organization : has registered >
-'Platform "1" -- "*" Category : defines >
-Organization "1" - "0..*" Employee : has >
-Organization "1" - "0..*" Task: owns >
-'Task "*" -- "1" Employee: created by >
-Employee "1" -- "*" Task : creates >
-'Employee "0..1" -- "1" User: acts as >
-Task "*" - "1" Category: cataloged as >
+Collaborator <|- VehicleFleetManager
+VehicleFleetManager "1" -- "1..*" Vehicle : Registers >
 @enduml

@@ -1,4 +1,4 @@
-# US06 - As an FM, I wish to register a vehicle including Brand, Model, Type, Tare, GrossWeight, Current Km, Register Date, Acquisition Date, Maintenance/Checkup Frequency (in Kms)
+# US06 - Register a vehicle.
 
 ## 2. Analysis
 
