@@ -13,7 +13,7 @@ participant ":System" as System
     VFM -> System : asks to register a vehicle check-up
     activate System
 
-        System --> VFM : requests data (Plate number, date, kms at checkup.)
+        System --> VFM : requests data (license plate, date, kms at checkup.)
     deactivate System
 
     VFM -> System : types requested data

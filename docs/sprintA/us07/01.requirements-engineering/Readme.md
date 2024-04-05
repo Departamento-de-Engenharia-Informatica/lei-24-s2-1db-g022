@@ -37,7 +37,7 @@ US07 - As a Vehicle and Equipment Fleet Manager, I want to register a vehicle’
 **Input Data:**
 
 * Typed data:
-  * a plate number
+  * a license plate
   * a date
   * the km at checkup
 
