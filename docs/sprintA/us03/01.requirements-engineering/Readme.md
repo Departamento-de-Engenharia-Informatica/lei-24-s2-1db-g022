@@ -10,7 +10,7 @@ US03 - As a Human Resource Manager, I want to register a collaborator with a job
 
 *From the specifications document:*
 
->Skills can only be registered by a Human Resources Manager (HRM).
+>Collaborator can only be registered by a Human Resources Manager (HRM).
 
 *From the client clarifications:*
 
@@ -50,11 +50,10 @@ US03 - As a Human Resource Manager, I want to register a collaborator with a job
 
 * *AC1:* Name, birthdate, admission date, address, contact info (mobile and email), ID doc type and respective number should be provided by HRM.
 * *AC2:* All required fields must be filled in.
-* *AC3:* Id doc number must be unique.
-* *AC4:* Name can have 6 words maximum.
-* *AC5:* Dates must follow this format: dd-mm-yyyy.
-* *AC6:* Need to certify that the collaborator has at least 18 years of age.
-* *AC7:* Phone number needs to use this format: +999(max 3 numbers) 999999999
+* *AC3:* Name can have 6 words maximum.
+* *AC4:* Dates must follow this format: dd-mm-yyyy.
+* *AC5:* Need to certify that the collaborator has at least 18 years of age.
+* *AC6:* Phone number needs to use this format: +999(max 3 numbers) 999999999
 
 
 * ### 1.4. Found out Dependencies

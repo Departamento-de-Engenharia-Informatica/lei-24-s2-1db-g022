@@ -19,9 +19,6 @@ As a Human Resources Manager (HRM), I want to register skills that a collaborato
 >
 > **Answer:** The skill name.
 
-> **Question:** Which information is mandatory for creating a new skill?
->
-> **Answer:** The skill name.
 
 > **Question:** Which are the skills accepted? Or should we enable the HRM to introduce anything as a skill?
 >
@@ -74,8 +71,8 @@ As a Human Resources Manager (HRM), I want to register skills that a collaborato
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
-* **AC2:** Special characters or algarisms should not be allowed in the skill name.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC2:** Special characters or numbers should not be allowed in the skill name.
+* **AC3:** When creating a skill with an existing name, the system must reject such operation and the user must be able to modify the typed name.
 
 ### 1.4. Found out Dependencies
 

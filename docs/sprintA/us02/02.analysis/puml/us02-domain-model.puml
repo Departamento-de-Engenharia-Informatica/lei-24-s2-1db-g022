@@ -1,0 +1,33 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+title Domain Model - US02 Register a job
+
+class HumanResourceManager {
+}
+
+class Collaborator {
+    name
+    dateOfBirth
+    admissionDate
+    address
+    phoneNumber
+    email
+    cc
+    cardNumber
+
+}
+
+class Job{
+    name
+}
+
+Collaborator  <|--  HumanResourceManager
+HumanResourceManager "1" - "1..*" Job : Registers >
+
+@enduml

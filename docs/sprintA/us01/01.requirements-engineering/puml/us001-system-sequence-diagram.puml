@@ -18,7 +18,7 @@ activate HRM
         System --> HRM : requests data (name)
     deactivate System
 
-    HRM->System: Send data (name)
+    HRM->System: type data (name)
     activate System
 
         System --> HRM : displays the data and requests confirmation

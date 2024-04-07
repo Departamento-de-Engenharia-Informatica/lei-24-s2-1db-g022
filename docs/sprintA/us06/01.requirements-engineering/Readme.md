@@ -13,6 +13,9 @@ Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Checkup F
 **From the specifications document:**
 
 > Vehicles can only be registered by the Vehicle and Equipment Fleet Manager (VFM).
+>
+> Vehicles must be registered with a licence plate, a brand, a model, a type, a tare,
+a gross weight, a current Km, a register date, an acquisition date, a maintenance/checkup frequency (in Kms).
 
 **From the client clarifications:**
 
@@ -50,7 +53,7 @@ In theory If there is no need to registering a vehicle, no vehicles will be regi
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
-* **AC2:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC2:** When registering a vehicle with an existing licence plate, the system must reject such operation and the user must be able to modify the typed licence plate.
 * **AC3:** The licence plate must follow the following format: After 2020: AA-00-AA | 
 between 2005-2020 00-AA-00 | 
 between 1992-2005 00-00-XX
@@ -73,7 +76,7 @@ between 1992-2005 00-00-XX
     * a Register Date
     * an Acquisition Date
     * a Maintenance/Checkup Frequency (in Kms).
-    * a License Plate
+    * a Licence Plate
 
 **Output Data:**
 

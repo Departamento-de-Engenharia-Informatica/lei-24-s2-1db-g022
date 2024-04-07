@@ -15,7 +15,7 @@ activate HRM
     HRM -> System : asks to register a new collaborator
     activate System
 
-    System --> HRM : requests data (name, birthdate, admission date, address, \ncontact info (mobile and email), ID doc type and respective number)
+    System --> HRM : requests data (name, birthdate, admission date, address, \nmobile, email, ID doc type and respective number)
     deactivate System
 
     HRM -> System : types requested data
