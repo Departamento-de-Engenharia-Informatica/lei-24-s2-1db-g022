@@ -1,4 +1,4 @@
-# US08 - As an FM, I want to list the vehicles needing the check-up.
+# US08 - List vehicles.
 
 [Requirements Engineering](01.requirements-engineering/Readme.md)
 

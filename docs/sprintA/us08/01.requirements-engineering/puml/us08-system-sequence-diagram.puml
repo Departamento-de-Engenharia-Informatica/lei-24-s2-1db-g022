@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - US08 As an FM, I want to list the vehicles needing the check-up
+title System Sequence Diagram (SSD) - US08 List vehicles
 
 autonumber
 
@@ -12,13 +12,7 @@ participant ":System" as System
 
 activate FM
 
-    FM -> System : asks to create a new task
-    activate System
-
-        System --> FM : requests data (vehicle, Current Km, Maintenance/Check-up Frequency)
-    deactivate System
-
-    FM -> System : types requested data
+    FM -> System : asks to list vehicles needing the check-up
     activate System
 
         System --> FM : shows all data and requests confirmation

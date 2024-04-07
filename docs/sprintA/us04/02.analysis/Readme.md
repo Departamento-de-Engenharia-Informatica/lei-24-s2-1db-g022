@@ -1,4 +1,4 @@
-# US04 - As an HRM, I want to assign one or more skills to a collaborator.
+# US04 - Assign Skills.
 
 ## 2. Analysis
 

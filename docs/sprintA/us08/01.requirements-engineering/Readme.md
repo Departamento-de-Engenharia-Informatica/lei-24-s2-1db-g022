@@ -1,4 +1,4 @@
-# US08 - As an FM, I want to list the vehicles needing the check-up.
+# US08 - List vehicles.
 
 
 ## 1. Requirements Engineering
@@ -35,7 +35,7 @@ The list must clearly identify the vehicles through: plate number, brand, model 
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The list must contain all vehicles that have already exceeded the number of km required for the inspection or those that are close to it.
-* **AC2:** The list must clearly identify the vehicles through: plate number, brand, model and the that justified the checkup need.
+* **AC2:** The list must clearly identify the vehicles through: licence plate , brand, model and the that justified the checkup need.
 * **AC3:** All required fields must be filled in.
 
 ### 1.4. Found out Dependencies
@@ -45,14 +45,13 @@ The list must clearly identify the vehicles through: plate number, brand, model 
 ### 1.5 Input and Output Data
 
 **Input Data:**
-
+n/a
 * Typed data:
-    * vehicle
-    * Current Km
-    * Maintenance/Check-up Frequency
+n/a
 
 **Output Data:**
 
+* Vehicles list
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
