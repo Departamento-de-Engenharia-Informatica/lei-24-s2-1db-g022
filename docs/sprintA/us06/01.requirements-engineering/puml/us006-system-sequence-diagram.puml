@@ -9,6 +9,7 @@ autonumber
 
 actor "Vehicle and Equipment Fleet Manager (VFM)" as VFM
 participant ":System" as System
+
     activate VFM
     VFM -> System : asks to register a vehicle
     activate System
@@ -29,5 +30,4 @@ participant ":System" as System
     System --> VFM : displays operation success
     deactivate System
 
-    deactivate VFM
 @enduml
