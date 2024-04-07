@@ -16,7 +16,7 @@ participant ":System" as System
     System --> HRM : requests data (name)
     deactivate System
 
-    HRM -> System : Types necessary data
+    HRM -> System : types necessary data
     activate System
 
     System --> HRM : shows all data and requests confirmation
