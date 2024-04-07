@@ -78,7 +78,7 @@ By definition a set can´t have duplicates. Assuring no duplicates is not a busi
 
 * **AC1:** All required fields must be filled in.
 * **AC2:** Special characters or numbers should not be allowed in the job name.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC3:** When creating a job with an existing name, the system must reject such operation and the user must be able to modify its name.
 
 ### 1.4. Found out Dependencies
 

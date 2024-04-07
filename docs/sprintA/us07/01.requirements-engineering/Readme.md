@@ -7,10 +7,10 @@
 
 US07 - As a Vehicle and Equipment Fleet Manager, I want to register a vehicle’s check-up.
 
-### 1.2. Customer Specifications and Clarifications 
+### 1.2. Customer Specifications and Clarifications
 
 **From the specifications document:**
->Skills can only be registered by a Human Resources Manager (VFM).
+>Vehicle check-up can only be registered by a Human Resources Manager (VFM).
 
 **From the client clarifications:**
 
@@ -21,7 +21,7 @@ US07 - As a Vehicle and Equipment Fleet Manager, I want to register a vehicle’
 > **Question:** Which attributes will you need for the vehicle's check-up?
 >
 > **Answer:** Plate number, date, kms at checkup.
- 
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
@@ -37,9 +37,9 @@ US07 - As a Vehicle and Equipment Fleet Manager, I want to register a vehicle’
 **Input Data:**
 
 * Typed data:
-    * a plate number
-    * a date
-    * the km at checkup
+  * a license plate
+  * a date
+  * the km at checkup
 
 **Output Data:**
 
@@ -47,7 +47,7 @@ US07 - As a Vehicle and Equipment Fleet Manager, I want to register a vehicle’
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![System Sequence Diagram](svg/us07-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram](svg/us07-system-sequence-diagram.svg)
 
 ### 1.7 Other Relevant Remarks
 

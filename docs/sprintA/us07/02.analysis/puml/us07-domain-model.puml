@@ -6,7 +6,7 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-title Domain Model - US06 Register a vehicle
+title Domain Model - US07 Register a vehicle check-up
 
 class Collaborator {
     name
@@ -35,6 +35,12 @@ class Vehicle{
     licensePlate
 }
 
+class CheckUp{
+    date
+    km
+}
+
 Collaborator <|- VehicleFleetManager
-VehicleFleetManager "1" -- "1..*" Vehicle : Registers >
+VehicleFleetManager "1" -- "1..*" CheckUp : Registers >
+Vehicle "1" - "*" CheckUp : Has >
 @enduml

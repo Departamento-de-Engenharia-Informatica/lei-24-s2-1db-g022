@@ -1,10 +1,10 @@
-# US04 - As an HRM, I want to assign one or more skills to a collaborator.
+# US04 - Assign Skills.
 
 ## 2. Analysis
 
 ### 2.1. Relevant Domain Model Excerpt 
 
-![Domain Model](svg/us006-domain-model.svg)
+![Domain Model](svg/us04-domain-model.svg)
 
 ### 2.2. Other Remarks
 

@@ -10,6 +10,7 @@ autonumber
 actor "Vehicle and Equipment Fleet Manager (VFM)" as VFM
 participant ":System" as System
 
+    activate VFM
     VFM -> System : asks to register a vehicle
     activate System
 
@@ -17,7 +18,7 @@ participant ":System" as System
     System --> VFM : requests data (Brand, Model, Type, Tare, Gross Weight, Current Km, \nRegister Date, Acquisition Date, Maintenance/Checkup Frequency, License Plate)
     deactivate System
 
-    VFM -> System : sends requested data
+    VFM -> System : types requested data
     activate System
 
     System --> VFM : shows all data and asks for confirmation
