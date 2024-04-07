@@ -21,27 +21,23 @@ documentation; consistency and standards._
 
 **Help and documentation:**
 
-* The team must use Javadocs to generate useful documentation for Java Code.
 * The application and all the documents support the English language.
-
-## Reliability
-
-_Refers to the integrity, compliance and interoperability of the software. The requirements to be considered are: frequency and severity of failure, possibility of recovery, possibility of prediction, accuracy, average time between failures._
-
-* The software should be secure and protect confidential information.
 
 ## Performance
 
 _Evaluates the performance requirements of the software, namely: response time, start-up time, recovery time, memory consumption, CPU usage, load capacity and application availability._
 
+**Response Time**
+
 * All activities must have a quick response from the system.
-* The program ought to use little memory and CPU.
 
 ## Supportability
 
 _The supportability requirements gathers several characteristics, such as:
 testability, adaptability, maintainability, compatibility,
 configurability, installability, scalability and more._
+
+**Adaptability**
 
 The team must adopt:
 
@@ -67,5 +63,12 @@ _Specifies or constraints the system design process. Examples may include: progr
 
 **Development Tools:**
 
+* The team must use Javadocs to generate useful documentation for Java Code.
 * The unit should be implemented using the JUnit 5 framework.
 * The JaCoCo plugin should be used to generate the coverage report.
+
+## Implementation Constraints
+
+**Resource limits**
+
+* The program ought to use little memory and CPU.
