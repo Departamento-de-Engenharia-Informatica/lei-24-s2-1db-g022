@@ -1,0 +1,46 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+title Domain Model - US07 Register a vehicle check-up
+
+class Collaborator {
+    name
+    dateOfBirth
+    admissionDate
+    address
+    phoneNumber
+    email
+    cc
+    cardNumber
+}
+
+class VehicleFleetManager {
+}
+
+class Vehicle{
+    brand
+    model
+    type
+    tare
+    grossWeight
+    currentKm
+    registerDate
+    acquisitionDate
+    checkupFrequency
+    licensePlate
+}
+
+class CheckUp{
+    date
+    km
+}
+
+Collaborator <|- VehicleFleetManager
+VehicleFleetManager "1" -- "1..*" CheckUp : Registers >
+Vehicle "1" - "*" CheckUp : Has >
+@enduml
