@@ -9,14 +9,14 @@ autonumber
 
 actor "Human Resource Manager (HRM)" as HRM
 participant ":System" as System
-
+    activate HRM
     HRM -> System : asks to create a new job
     activate System
 
     System --> HRM : requests data (name)
     deactivate System
 
-    HRM -> System : gives necessary data
+    HRM -> System : Types necessary data
     activate System
 
     System --> HRM : shows all data and requests confirmation

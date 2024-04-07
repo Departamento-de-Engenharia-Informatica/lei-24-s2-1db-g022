@@ -48,8 +48,8 @@ To identify domain conceptual classes, start by making a list of candidate conce
 * (HRM) Human Resources Manager
 * (VFM) Vehicle and Equipment Fleet Manager
 * Collaborator
-* Green Spaces Manager
-* Green Spaces User
+* (GSM) Green Spaces Manager
+* (GSU) Green Spaces User
 
 
 ---
@@ -138,24 +138,29 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 An association is a relationship between instances of objects that indicates a relevant connection and that is worth of remembering, or it is derivable from the List of Common Associations:
 
-
-
-| Concept (A) 	        | Association        | Concept (B)      |  
-|-----------------------|:------------------:|-----------------:|
-|Collaborator           |   Has	             |    Job           |
-|Collaborator  	        |   Drives    	     |    Vehicle       |
-|Collaborator  	        |   Has   	         |    Skill         |
-|Team  	                |   Contains  	     |    Collaborator  |
-|HumanResourceManager  	|   Registers    	 |    Job           |
-|HumanResourceManager   |   Registers    	 |    Collaborator  |     
-|HumanResourceManager  	|   Registers    	 |    Skill         |
-|VehicleFleetManager  	|   Registers  	     |    Vehicle       |
-|Vehicle  	            |   Does   	         |    CheckUp       |
-|HumanResourceManager  	|   Generalization   |    Collaborator  |
-|VehicleFleetManager    |   Generalization   |    Collaborator  |
-
-
-
+| Concept (A) 	             |    Association    |  Concept (B) |  
+|---------------------------|:-----------------:|-------------:|
+| Collaborator              |       Has	        |          Job |
+| Collaborator  	           | Drives/Uses    	  |      Vehicle |
+| Collaborator  	           |      Has   	      |        Skill |
+| Team  	                   |    Contains  	    | Collaborator |
+| Team  	                   |  Carries Out  	   |       Agenda |
+| Agenda  	                 |  Consists of  	   |         Task |
+| HumanResourceManager      |     Registers     |          Job |
+| HumanResourceManager      |     Registers     | Collaborator |     
+| HumanResourceManager      |     Registers     |        Skill |
+| HumanResourceManager      |     Generates     |         Team |
+| HumanResourceManager      |  Generalization   | Collaborator |
+| VehicleFleetManager       | Registers/Manages |      Vehicle |
+| VehicleFleetManager       |     Registers     |      CheckUp |
+| VehicleFleetManager       |  Generalization   | Collaborator |
+| Vehicle                   |       Does        |      CheckUp |
+| Green Spaces Manager(GSM) |      Manages      | Green Spaces |
+| Green Spaces User(GSU)    |       Uses        | Green Spaces |
+| Green Spaces              |  Generalization   |         Park |
+| Green Spaces              |  Generalization   |       Garden |
+| Park                      |     Contains      |       Garden |
+| Park                      |        Has        |     TypePark |
 
 ## Domain Model
 

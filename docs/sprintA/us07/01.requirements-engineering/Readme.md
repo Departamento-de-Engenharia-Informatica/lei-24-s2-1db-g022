@@ -10,7 +10,7 @@ US07 - As a Vehicle and Equipment Fleet Manager, I want to register a vehicle’
 ### 1.2. Customer Specifications and Clarifications
 
 **From the specifications document:**
->Skills can only be registered by a Human Resources Manager (VFM).
+>Vehicle check-up can only be registered by a Human Resources Manager (VFM).
 
 **From the client clarifications:**
 
@@ -47,7 +47,7 @@ US07 - As a Vehicle and Equipment Fleet Manager, I want to register a vehicle’
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![System Sequence Diagram](svg/us07-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram](svg/us07-system-sequence-diagram.svg)
 
 ### 1.7 Other Relevant Remarks
 

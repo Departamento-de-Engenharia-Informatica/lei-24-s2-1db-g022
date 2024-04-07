@@ -21,15 +21,24 @@ class Collaborator {
 
 }
 class VehicleFleetManager {
-
 }
+
 class HumanResourceManager {
+}
 
+class GreenSpaceManager{
+}
 
+class GreenSpaceUser{
 }
 
 class Team{
+}
 
+class Agenda{
+}
+
+class Task{
 }
 
 class Vehicle{
@@ -58,17 +67,53 @@ class Job{
     name
 }
 
+class Park{
+}
+
+class GreenSpace{
+}
+
+class Garden{
+}
+
+class TypePark{}
+
+
+GreenSpace <|- Park
+GreenSpace <|-- Garden
+Park "1..*" -- "1" TypePark : has >
+Park "0..1" -- "1..*" Garden : contain >
+
+
 
 Collaborator  <|--  HumanResourceManager
 Collaborator <|- VehicleFleetManager
-HumanResourceManager "1" -- "*" Collaborator : Registers >
-Collaborator "0..1" -- "*" Vehicle : drives >
-Collaborator "*" -- "1" Team : Contains <
+Collaborator <|--- GreenSpaceManager
+Collaborator <|-- GreenSpaceUser
+
+HumanResourceManager "1" --- "1..*" Collaborator : registers >
+HumanResourceManager "1" - "1..*" Job : registers >
+HumanResourceManager "1" -- "1..*" Skill : registers >
+HumanResourceManager "1" -- "1..*" Team : generate >
+
+
+Collaborator "0..1" -- "*" Vehicle : drives/use >
+Collaborator "1..*" ---- "1" Team : Contains <
+
+Team "1" -- "1" Agenda : carries out >
+
+Agenda "1" -- "*" Task : consists of >
+
 Vehicle "1" -- "*" CheckUp :  does >
-HumanResourceManager "1" -- "1..*" Skill : Registers >
+
 Skill "1..*" -- "*" Collaborator : has <
+
 Job "1" -- "1..*" Collaborator : has <
-HumanResourceManager "*" - "1..*" Job : Registers >
-VehicleFleetManager "1" -- "1..*" Vehicle : Registers >
+
+VehicleFleetManager "1" -- "1..*" Vehicle : registers/managing >
+VehicleFleetManager "1" -- "1..*" CheckUp : registers >
+
+GreenSpaceManager "1..*" -- "*" GreenSpace :  managing >
+GreenSpaceUser "*" -- "1..*" GreenSpace :  use >
 
 @enduml

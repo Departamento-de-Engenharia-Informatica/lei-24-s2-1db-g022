@@ -10,7 +10,7 @@ US03 - As a Human Resource Manager, I want to register a collaborator with a job
 
 *From the specifications document:*
 
->Skills can only be registered by a Human Resources Manager (HRM).
+>Collaborator can only be registered by a Human Resources Manager (HRM).
 
 *From the client clarifications:*
 

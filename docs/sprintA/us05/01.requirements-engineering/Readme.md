@@ -66,8 +66,9 @@ As a HRM, I want to generate a team proposal automatically.
 
 * **AC1:** The maximum team size and the set of skills need to be supplied by the HRM.
 * **AC2:** The number of collaborators(Min and Max) must be an integer and positive above zero.
-* **AC3:** The number Max size of collaborators must be an integer and positive above a Min size.
+* **AC3:** The number Max size of collaborators must be an integer and positive above or equals a Min size.
 * **AC4:** The skills number size must be an integer and positive above a zero.
+* **AC5:** All required fields must be filled in.
 
 ### 1.4. Found out Dependencies
 
@@ -83,7 +84,7 @@ As a HRM, I want to generate a team proposal automatically.
     * a team max size;
     * a team min size;
     * a number skills size.
-    * list of skills
+    * a name skills.
 
 **Output Data:**
 
@@ -92,7 +93,7 @@ As a HRM, I want to generate a team proposal automatically.
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![System Sequence Diagram - Alternative One](svg/us05-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us05-system-sequence-diagram.svg)
 
 
 ### 1.7 Other Relevant Remarks
