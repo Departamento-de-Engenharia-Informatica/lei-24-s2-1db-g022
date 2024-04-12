@@ -64,7 +64,7 @@ As a HRM, I want to generate a team proposal automatically.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The maximum team size and the set of skills need to be supplied by the HRM.
+* **AC1:** The minimum and maximum team size and the set of skills need to be supplied by the HRM.
 * **AC2:** The number of collaborators(Min and Max) must be an integer and positive above zero.
 * **AC3:** The number Max size of collaborators must be an integer and positive above or equals a Min size.
 * **AC4:** The skills number size must be an integer and positive above a zero.
