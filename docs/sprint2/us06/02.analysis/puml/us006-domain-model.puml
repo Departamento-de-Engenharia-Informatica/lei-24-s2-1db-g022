@@ -1,0 +1,40 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+title Domain Model - US06 Register a vehicle
+
+class Collaborator {
+    name
+    dateOfBirth
+    admissionDate
+    address
+    phoneNumber
+    email
+    cc
+    cardNumber
+}
+
+class VehicleFleetManager {
+}
+
+class Vehicle{
+    brand
+    model
+    type
+    tare
+    grossWeight
+    currentKm
+    registerDate
+    acquisitionDate
+    checkupFrequency
+    licensePlate
+}
+
+Collaborator <|- VehicleFleetManager
+VehicleFleetManager "1" -- "1..*" Vehicle : Registers >
+@enduml
