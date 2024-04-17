@@ -1,0 +1,53 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class Skill {
+    - String name
+
+    + Skill(name)
+}
+
+class Collaborator {
+    -String name
+    -Date dateOfBirth
+    -Date admissionDate
+    -String address
+    -int phoneNumber
+    -String email
+    -int cc
+    -int cardNumber
+
+    - addSkill(skill)
+    - validateSkill(skill)
+    + Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, cardNumber)
+    + registerSkill(name)
+'  +saveTask(task)
+}
+
+class RegisterSkillController {
+    + RegisterSkillController()
+    + registerSkill(name)
+}
+
+class RegisterSkillUI {
+}
+
+
+RegisterSkillUI .> RegisterSkillController
+
+RegisterSkillController ..> "1" Collaborator : collaborator
+Collaborator "1" --> "*" Skill : skills
+Collaborator  <|--  HumanResourceManager
+
+HumanResourceManager <--  Skill: createdBy
+
+
+@enduml

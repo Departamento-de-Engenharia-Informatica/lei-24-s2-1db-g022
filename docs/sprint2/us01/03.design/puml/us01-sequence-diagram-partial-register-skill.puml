@@ -1,0 +1,33 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant "collaborator\n:Collaborator" as CL
+participant "skill\n:Skill" as SKILL
+
+autonumber 8
+-> CL: registerSkill(name)
+
+autonumber 8.1
+activate CL
+    group Register Skill
+
+        CL -> SKILL**: register(name)
+        CL -> CL: addSkill (skill)
+
+        activate CL
+            CL -> CL: validateSkill(skill)
+                activate CL
+                    CL --> CL
+                deactivate CL
+
+                CL--> CL
+            deactivate CL
+        end
+
+        autonumber 9
+        <-- CL :SKILL
+deactivate CL
+
+@enduml
