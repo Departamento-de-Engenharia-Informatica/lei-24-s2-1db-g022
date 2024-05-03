@@ -29,13 +29,21 @@ class Collaborator {
     -String name
     -Date dateOfBirth
     -Date admissionDate
-    -String address
+    -Address address
     -int phoneNumber
     -String email
     -int cc
     -int cardNumber
 
     + Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, cardNumber)
+}
+
+class Address{
+    -String streetName
+    -String postCode
+    -int doorNumber
+
+    +Address(streetName, postCode, doorNumber)
 }
 
 class HumanResourcesManager {
@@ -49,21 +57,23 @@ class Repositories {
 }
 
 class jobRepository {
+    - ArrayList Job
 
     - addJob(job)
     - validateJob(job)
-    + registerJob(name)
+    + createJob(name)
 }
 
 RegisterJobController .> Repositories : repositories
 RegisterJobUI .> RegisterJobController
 Repositories -> Repositories : instance
-Repositories -> "1" jobRepository
+Repositories --> "1" jobRepository : jobRepository
 jobRepository "1" --> "*" Job : job
 Collaborator  <|--  HumanResourcesManager
 RegisterJobController ..> "1" HumanResourcesManager : HumanResourcesManager
 HumanResourcesManager <--  Job: createdBy
 Collaborator "1" --> "*" Job : jobs
+Address "1" --> "*" Collaborator : address
 
 
 @enduml
