@@ -13,13 +13,19 @@ class Collaborator {
     name
     dateOfBirth
     admissionDate
-    address
     phoneNumber
     email
     cc
     cardNumber
 
 }
+
+class Address {
+    streetName
+    postCode
+    doorNumber
+}
+
 class VehicleFleetManager {
 }
 
@@ -32,27 +38,42 @@ class GreenSpaceManager{
 class GreenSpaceUser{
 }
 
-class Team{
-}
+class QualityAssessmentManager{}
 
-class Agenda{
-}
+class Team{}
+
+class Agenda{}
+
+class ToDoList{}
 
 class Task{
+    titleTask
+    description
+    duration
+    status
+    startDate
+    endDate
 }
 
 class Vehicle{
-    brand
-    model
-    type
-    tare
-    grossWeight
     currentKm
     registerDate
     acquisitionDate
     checkupFrequency
     licensePlate
 }
+
+class Brand{
+    name
+}
+
+class Model{
+    name
+    type
+    tare
+    grossWeight
+}
+
 
 class CheckUp{
     date
@@ -67,53 +88,127 @@ class Job{
     name
 }
 
-class Park{
+class MediumPark{
 }
 
 class GreenSpace{
+    name
+    dimension
 }
 
-class Garden{
+class Garden{}
+
+class LargePark{}
+
+class PlantMaterial{
+    name
 }
 
-class TypePark{}
+class Tree{}
+
+class UrbanFurniture{
+    name
+}
+
+class Bench{}
+
+class InfraStructure{
+    name
+}
+
+class IrrigationSystem{}
+
+class Pipe{
+    distance
+}
+
+class WaterPoint{
+    designation
+}
+
+class Service{
+    name
+}
+
+class Machine{
+    type
+}
+
+class Equipment{
+    name
+}
 
 
-GreenSpace <|- Park
+VehicleFleetManager "1" - "1..*" Machine :  manages >
+VehicleFleetManager "1" - "1..*" Equipment :  manages >
+
+
+Vehicle "1..*" - "1..*" Task :  needed to carry out >
+Vehicle "1..*" --- "1..*" Machine :  transports >
+Vehicle "1..*" -- "1..*" Equipment :  transports >
+
+'Adicionar no glossario o ToDoList
+ToDoList "1" --- "1..*" Task : includes >
+
+
+IrrigationSystem "1" -- "1..*" Pipe : contains >
+Pipe "1..*" -- "2" WaterPoint : contains >
+
+
+InfraStructure <|- IrrigationSystem
+Garden "1" ---- "0..1" IrrigationSystem : has >
+MediumPark "1..*" -- "*" InfraStructure : includes >
+LargePark "1..*" --- "1..*" InfraStructure : includes >
+LargePark "1..*" -- "*" Service : includes >
+
+Task "1..*" -- "1..*" GreenSpace :  Carried out in  >
+PlantMaterial <|- Tree
+Garden "1..*" -- "*" Tree : possess >
+
+UrbanFurniture <|- Bench
+Garden "1..*" --- "*" Bench : possess >
+
+
+Collaborator "1..*" -- "1" Address : lives >
+
+Vehicle "1..*" -- "1" Brand : has >
+Brand "1" -- "1..*" Model : has >
+
+GreenSpace <|- MediumPark
 GreenSpace <|-- Garden
-Park "1..*" -- "1" TypePark : has >
-Park "0..1" -- "1..*" Garden : contain >
+GreenSpace <|-- LargePark
+MediumPark "0..1" -- "1..*" Garden : contains >
+LargePark "0..1" - "1..*" Garden : contains >
 
 
-
+Collaborator  <|--  QualityAssessmentManager
 Collaborator  <|--  HumanResourceManager
 Collaborator <|- VehicleFleetManager
 Collaborator <|--- GreenSpaceManager
-Collaborator <|-- GreenSpaceUser
 
-HumanResourceManager "1" --- "1..*" Collaborator : registers >
+HumanResourceManager "1" -- "1..*" Collaborator : registers >
 HumanResourceManager "1" - "1..*" Job : registers >
 HumanResourceManager "1" -- "1..*" Skill : registers >
-HumanResourceManager "1" -- "1..*" Team : generate >
+HumanResourceManager "1" -- "1..*" Team : defines >
 
 
-Collaborator "0..1" -- "*" Vehicle : drives/use >
+Collaborator "*" -- "*" Vehicle : drives/uses >
 Collaborator "1..*" ---- "1" Team : Contains <
 
 Team "1" -- "1" Agenda : carries out >
 
-Agenda "1" -- "*" Task : consists of >
+Agenda "1" -- "*" Task : defines >
 
 Vehicle "1" -- "*" CheckUp :  does >
 
-Skill "1..*" -- "*" Collaborator : has <
+Skill "*" -- "*" Collaborator : has <
 
 Job "1" -- "1..*" Collaborator : has <
 
-VehicleFleetManager "1" -- "1..*" Vehicle : registers/managing >
+VehicleFleetManager "1" -- "1..*" Vehicle : registers/manages >
 VehicleFleetManager "1" -- "1..*" CheckUp : registers >
 
-GreenSpaceManager "1..*" -- "*" GreenSpace :  managing >
-GreenSpaceUser "*" -- "1..*" GreenSpace :  use >
+GreenSpaceManager "1..*" -- "*" GreenSpace :  manages >
+GreenSpaceUser "*" -- "1..*" GreenSpace :  uses >
 
 @enduml

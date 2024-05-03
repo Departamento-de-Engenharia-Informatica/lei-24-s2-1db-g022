@@ -1,10 +1,13 @@
 # OO Analysis
 
-The construction process of the domain model is based on the client specifications, especially the nouns (for _concepts_) and verbs (for _relations_) used.
+The construction process of the domain model is based on the client specifications, especially the nouns (for
+_concepts_) and verbs (for _relations_) used.
 
 ## Rationale to identify domain conceptual classes
-To identify domain conceptual classes, start by making a list of candidate conceptual classes inspired by the list of categories suggested in the book "Applying UML and Patterns: An Introduction to Object-Oriented Analysis and Design and Iterative Development".
 
+To identify domain conceptual classes, start by making a list of candidate conceptual classes inspired by the list of
+categories suggested in the book "Applying UML and Patterns: An Introduction to Object-Oriented Analysis and Design and
+Iterative Development".
 
 ### _Conceptual Class Category List_
 
@@ -39,8 +42,6 @@ To identify domain conceptual classes, start by making a list of candidate conce
 * Job
 * Vehicles
 
-
-
 ---  
 
 **Roles of People or Organizations**
@@ -50,7 +51,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 * Collaborator
 * (GSM) Green Spaces Manager
 * (GSU) Green Spaces User
-
+* (QAM) Software Quality Assessment Team Manag
 
 ---
 
@@ -59,13 +60,12 @@ To identify domain conceptual classes, start by making a list of candidate conce
 * Garden
 * Medium-sized park
 * Large-sized par
-  
 
 ---
 
 **Noteworthy Events**
 
-* 
+*
 
 ---
 
@@ -77,13 +77,13 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Descriptions of Things**
 
-* 
+*
 
 ---
 
 **Catalogs**
 
-* 
+*
 
 ---
 
@@ -113,17 +113,18 @@ To identify domain conceptual classes, start by making a list of candidate conce
 * (HRM) Human Resources Manager
 * (VFM) Vehicle and Equipment Fleet Manager
 * Collaborator
+
 ---
 
 **Records of finance, work, contracts, legal matters**
 
-* 
+*
 
 ---
 
 **Financial Instruments**
 
-* 
+*
 
 ---
 
@@ -133,34 +134,66 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 ---
 
-
 ## Rationale to identify associations between conceptual classes
 
-An association is a relationship between instances of objects that indicates a relevant connection and that is worth of remembering, or it is derivable from the List of Common Associations:
+An association is a relationship between instances of objects that indicates a relevant connection and that is worth of
+remembering, or it is derivable from the List of Common Associations:
 
-| Concept (A) 	             |    Association    |  Concept (B) |  
-|---------------------------|:-----------------:|-------------:|
-| Collaborator              |       Has	        |          Job |
-| Collaborator  	           | Drives/Uses    	  |      Vehicle |
-| Collaborator  	           |      Has   	      |        Skill |
-| Team  	                   |    Contains  	    | Collaborator |
-| Team  	                   |  Carries Out  	   |       Agenda |
-| Agenda  	                 |  Consists of  	   |         Task |
-| HumanResourceManager      |     Registers     |          Job |
-| HumanResourceManager      |     Registers     | Collaborator |     
-| HumanResourceManager      |     Registers     |        Skill |
-| HumanResourceManager      |     Generates     |         Team |
-| HumanResourceManager      |  Generalization   | Collaborator |
-| VehicleFleetManager       | Registers/Manages |      Vehicle |
-| VehicleFleetManager       |     Registers     |      CheckUp |
-| VehicleFleetManager       |  Generalization   | Collaborator |
-| Vehicle                   |       Does        |      CheckUp |
-| Green Spaces Manager(GSM) |      Manages      | Green Spaces |
-| Green Spaces User(GSU)    |       Uses        | Green Spaces |
-| Green Spaces              |  Generalization   |         Park |
-| Green Spaces              |  Generalization   |       Garden |
-| Park                      |     Contains      |       Garden |
-| Park                      |        Has        |     TypePark |
+| Concept (A) 	             |     Association     |              Concept (B) |
+|---------------------------|:-------------------:|-------------------------:|
+| Collaborator              |        Has	         |                      Job |
+| Collaborator  	           |  Drives/Uses    	   |                  Vehicle |
+| Collaborator  	           |       Has   	       |                    Skill |
+| Team  	                   |     Contains  	     |             Collaborator |
+| Team  	                   |   Carries Out  	    |                   Agenda |
+| Agenda  	                 |      defines 	      |                     Task |
+| HumanResourceManager      |      Registers      |                      Job |
+| HumanResourceManager      |      Registers      |             Collaborator |     
+| HumanResourceManager      |      Registers      |                    Skill |
+| HumanResourceManager      |       Defines       |                     Team |
+| HumanResourceManager      |   Generalization    |             Collaborator |
+| VehicleFleetManager       |       Manages       |                  Machine |
+| VehicleFleetManager       |       Manages       |                Equipment |
+| VehicleFleetManager       |  Registers/Manages  |                  Vehicle |
+| VehicleFleetManager       |      Registers      |                  CheckUp |
+| VehicleFleetManager       |   Generalization    |             Collaborator |
+| Vehicle                   |        Does         |                  CheckUp |
+| Vehicle                   | Needed to carry out |                     Task |
+| Vehicle                   |     Transports      |                  Machine |
+| Vehicle                   |     Transports      |                Equipment |
+| Green Spaces Manager(GSM) |       Manages       |             Green Spaces |
+| Green Spaces User(GSU)    |        Uses         |             Green Spaces |
+| Green Spaces              |   Generalization    |                   Garden |
+| Park                      |      Contains       |                   Garden |
+| ToDoList                  |      Includes       |                     Task |
+| IrrigationSystem          |      Contains       |                     Pipe |
+| Pipe                      |      Contains       |               WaterPoint |
+| InfraStructure            |   Generalization    |         IrrigationSystem |
+| Garden                    |         Has         |         IrrigationSystem |
+| MediumPark                |      Includes       |           InfraStructure |
+| LargePark                 |      Includes       |           InfraStructure |
+| LargePark                 |      Includes       |                  Service |
+| Task                      |   Carried out in    |               GreenSpace |
+| PlantMaterial             |   Generalization    |                     Tree |
+| Garden                    |       Possess       |                     Tree |
+| UrbanFurniture            |   Generalization    |                    Bench |
+| Garden                    |       Possess       |                    Bench |
+| Collaborator              |        Lives        |                  Address |
+| Vehicle                   |         Has         |                    Brand |
+| Brand                     |         Has         |                    Model |
+| GreenSpace                |   Generalization    |               MediumPark |
+| GreenSpace                |   Generalization    |                LargePark |
+| MediumPark                |      Contains       |                   Garden |
+| LargePark                 |      Contains       |                   Garden |
+| Collaborator              |   Generalization    | QualityAssessmentManager |
+| Collaborator              |   Generalization    |     HumanResourceManager |
+| Collaborator              |   Generalization    |      VehicleFleetManager |
+| Collaborator              |   Generalization    |        GreenSpaceManager |
+| MediumPark                |      Contains       |                   Garden |
+| MediumPark                |      Contains       |                   Garden |
+| MediumPark                |      Contains       |                   Garden |
+| MediumPark                |      Contains       |                   Garden |
+| MediumPark                |      Contains       |                   Garden |
 
 ## Domain Model
 
