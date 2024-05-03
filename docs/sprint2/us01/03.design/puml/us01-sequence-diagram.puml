@@ -1,5 +1,3 @@
-/'Perguntar ao stor sobre o employee e a organization'/
-
 @startuml
 skinparam monochrome true
 skinparam packageStyle rectangle
@@ -13,8 +11,10 @@ autonumber
 actor "Human Resources Manager (HRM)" as HRM
 participant ":RegisterSkillUI" as UI
 participant ":RegisterSkillController" as CTRL
-participant "Collaborator" as CL
-
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant ":SkillRepository" as SR
+participant "skill\n:Skill" as SKILL
 
 activate HRM
 
@@ -32,33 +32,54 @@ activate HRM
 
     deactivate UI
 
-
         HRM -> UI : confirms and submits data
 
     activate UI
 
-        UI -> CTRL** : create
          UI -> CTRL: registerSkill(name)
         activate CTRL
 
+        CTRL -> RepositorySingleton : getInstance()
 
+            activate RepositorySingleton
 
-                CTRL -> CL : registerSkill(name)
+                RepositorySingleton --> CTRL : repositories
+            deactivate RepositorySingleton
 
-            activate CL
+            CTRL -> PLAT : getSkillRepository()
+            activate PLAT
 
-                ref over CL
-                    Register Skill
-                end
+            PLAT --> CTRL: skillRepository
+            deactivate PLAT
 
-            CL --> CTRL : skill
+        CTRL -> SR : registerSkill(name)
 
-            deactivate CL
+        activate SR
 
-            CTRL --> UI: skill
-        deactivate CTRL
+            SR -> SKILL**: create(name)
+                activate SKILL
+                        SKILL -> SKILL: validateSkill(skill)
+                    SKILL --> SR : skill
+                    deactivate SKILL
+                    SR -> SR : addSkill (skill)
 
-        UI --> HRM : displays operation success
+                    activate SR
+                    SR -> SR : validateSkill(skill)
+                        activate SR
+                            SR --> SR : true/false
+                        deactivate
+                            SR --> SR : true/false
+
+deactivate SR
+
+            SR --> CTRL : skill
+
+            deactivate SR
+
+            CTRL --> UI : skill
+      deactivate CTRL
+
+      UI --> HRM : displays operation success
     deactivate UI
 deactivate HRM
 @enduml

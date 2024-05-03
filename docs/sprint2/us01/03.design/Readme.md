@@ -10,43 +10,39 @@ _**Note that SSD - Alternative One is adopted.**_
 |:---------------|:----------------------------------------------|:------------------------|:--------------------------------------------------------------------------------------------------------------|
 | Step 1  		     | 	... interacting with the actor?              | RegisterSkillUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
 | 			  		        | 	... coordinating the US?                     | RegisterSkillController | Controller                                                                                                    |
-| 			  		        | 	... instantiating a new Skill?               | Collaborator            | Creator (Rule 1,2): in the DM Collaborator has a Skill.                                                       |
-| 			  		        | ... knowing the user using the system?        | UserSession             | IE: cf. A&A component documentation.                                                                          |
-| 			  		        | 							                                       | Collaborator            | IE: knows its own data (e.g. name,dateOfBirth,admissionDate,address,phoneNumber,email,cc,cardNumber)          |
-| Step 2  		     | 							                                       |                         |                                                                                                               |
-| Step 3  		     | 	...saving the inputted data?                 | Skill                   | IE: object created in step 1 has its own data.                                                                |
-| Step 4  		     | 							                                       |                         |                                                                                                               |              
-| Step 5  		     | 	... validating all data (local validation)?  | Skill                   | IE: owns its data.                                                                                            | 
-| 			  		        | 	... validating all data (global validation)? | Collaborator            | IE: knows all its skill.                                                                                      | 
-| 			  		        | 	... saving the created Skill?                | Collaborator            | IE: owns all its skill.                                                                                       | 
-| Step 6  		     | 	... informing operation success?             | RegisterSkillUI         | IE: is responsible for user interactions.                                                                     | 
+| 			  		        | 	... instantiating a new Skill?               | SkillRepository         | Pure Fabrication: they form a collection of objects that do not “belong” to any domain object/class.          |
+| 			  		        | 							                                       | SkillRepository         | IE: knows/has its own Skill                                                                                   |
+| 			  		        | 							                                       | Skill                   | IE: knows its own data (e.g. name)                                                                            |
+| Step 2  		     | 	...saving the inputted data?                 | Skill                   | IE: object created in step 1 has its own data.                                                                |
+| Step 3  		     | 	... validating all data (local validation)?  | Skill                   | IE: owns its data.                                                                                            | 
+| 			  		        | 	... validating all data (global validation)? | SkillRepository         | IE: knows all its skills.                                                                                     | 
+| 			  		        | 	... saving the created task?                 | SkillRepository         | IE: owns all its skills.                                                                                      | 
+| Step 4  		     | 	... informing operation success?             | RegisterSkillUI         | IE: is responsible for user interactions.                                                                     | 
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Collaborator
 * Skill
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
 * RegisterSkillUI
 * RegisterSkillController
+* SkillRepository
 
 
 ## 3.2. Sequence Diagram (SD)
 
-### Diagrams
+### Full Diagram
 
-The following diagram shows the same sequence of interactions between the classes involved in the realization of this user story, but it is split in partial diagrams to better illustrate the interactions between the classes.
+This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-It uses Interaction Occurrence (a.k.a. Interaction Use).
+![Sequence Diagram - Full](svg/us01-sequence-diagram.svg)
 
-![Sequence Diagram - split](svg/us01-sequence-diagram.svg)
+### Split Diagrams
 
-**Register Skill**
-
-![Sequence Diagram - Partial - Register Skill](svg/us01-sequence-diagram-partial-register-skill.svg)
+n/a
 
 ## 3.3. Class Diagram (CD)
 

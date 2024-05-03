@@ -13,26 +13,11 @@ class Skill {
     - String name
 
     + Skill(name)
-}
-
-class Collaborator {
-    -String name
-    -Date dateOfBirth
-    -Date admissionDate
-    -String address
-    -int phoneNumber
-    -String email
-    -int cc
-    -int cardNumber
-
-    - addSkill(skill)
-    - validateSkill(skill)
-    + Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, cardNumber)
-    + registerSkill(name)
-'  +saveTask(task)
+    - validateSkill(Skill)
 }
 
 class RegisterSkillController {
+
     + RegisterSkillController()
     + registerSkill(name)
 }
@@ -40,14 +25,55 @@ class RegisterSkillController {
 class RegisterSkillUI {
 }
 
+class Collaborator {
+    -String name
+    -Date dateOfBirth
+    -Date admissionDate
+    -Address address
+    -int phoneNumber
+    -String email
+    -int cc
+    -int cardNumber
 
+    + Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, cardNumber)
+}
+
+class Address{
+    -String streetName
+    -String postCode
+    -int doorNumber
+
+    +Address(streetName, postCode, doorNumber)
+}
+
+class HumanResourcesManager {
+}
+
+class Repositories {
+
+    - Repositories()
+    + getInstance() : Repositories
+    + getSkillRepository()
+}
+
+class skillRepository {
+    - ArrayList Skill
+
+    - addSkill(Skill)
+    - validateSkill(Skill)
+    + createSkill(name)
+}
+
+RegisterSkillController .> Repositories : repositories
 RegisterSkillUI .> RegisterSkillController
-
-RegisterSkillController ..> "1" Collaborator : collaborator
-Collaborator "1" --> "*" Skill : skills
-Collaborator  <|--  HumanResourceManager
-
-HumanResourceManager <--  Skill: createdBy
+Repositories -> Repositories : instance
+Repositories --> "1" skillRepository : skillRepository
+skillRepository "1" --> "*" Skill : Skill
+Collaborator  <|--  HumanResourcesManager
+RegisterSkillController ..> "1" HumanResourcesManager : HumanResourcesManager
+HumanResourcesManager <--  Skill: createdBy
+Collaborator "*" --> "*" Skill : skills
+Address "1" --> "*" Collaborator : address
 
 
 @enduml
