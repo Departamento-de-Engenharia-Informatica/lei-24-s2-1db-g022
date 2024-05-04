@@ -56,6 +56,9 @@ class Task{
 }
 
 class Vehicle{
+    type
+    tare
+    grossWeight
     currentKm
     registerDate
     acquisitionDate
@@ -69,9 +72,6 @@ class Brand{
 
 class Model{
     name
-    type
-    tare
-    grossWeight
 }
 
 
