@@ -11,20 +11,20 @@ skinparam classAttributeIconSize 0
 
 class Brand {
     - String name
-    - Arraylist Model model
+    - List <Model> model
 
-    + Brand(name)
-    + createModel(modelName)
     - addModel(model)
     - validateBrand(brand)
     - validateModel(model)
+    + Brand(name)
+    + registerModel(modelName)
 }
 
 class Model {
     - String name
 
-    + Model(name)
     - validateModel(model)
+    + Model(name)
 }
 
 class Vehicle {
@@ -39,15 +39,13 @@ class Vehicle {
     - int checkupFrequency
     - String licensePlate
 
-    + Vehicle(brand,model,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
     - validateVehicle(vehicle)
+    + Vehicle(brand,model,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
 }
 
 class RegisterVehicleController {
 
     + RegisterVehicleController()
-    - registerBrand(brandName)
-    - registerModel(modelName)
     + registerVehicle(brandName,modelName,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
 }
 
@@ -79,19 +77,19 @@ class Repositories {
 }
 
 class vehicleRepository {
-    - ArrayList Vehicle vehicle
+    - List<Vehicle> vehicle
 
     - addVehicle(vehicle)
     - validateVehicle(vehicle)
-    + createVehicle(brand,model,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
+    + registerVehicle(brand,model,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
 }
 
 class brandRepository {
-    - ArrayList Brand brand
+    - List<Brand> brand
 
     - addBrand(brand)
     - validateBrand(brand)
-    + createBrand(brandName)
+    + registerBrand(brandName)
 }
 
 RegisterVehicleController .> Repositories : repositories
