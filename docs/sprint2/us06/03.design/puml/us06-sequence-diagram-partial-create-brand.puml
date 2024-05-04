@@ -1,0 +1,51 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":CreateTaskController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "brandRepository:\nBrandRepository" as BR
+participant "brand:\nBrand" as Brand
+
+autonumber 11
+-> CTRL: brand
+
+autonumber 11.1
+activate CTRL
+    group Create Brand
+
+        CTRL -> BR : registerBrand(brand)
+
+        activate BR
+
+            BR -> Brand**: create(name)
+
+            activate Brand
+
+                Brand -> Brand: validateVehicle(vehicle)
+                Brand --> BR : brand
+
+            deactivate Brand
+
+        BR -> BR: addBrand (brand)
+
+        activate BR
+            BR -> BR: validateBrand(brand)
+            activate BR
+                BR --> BR : true/false
+            deactivate BR
+
+            BR --> BR : true/false
+
+            BR -> CTRL : brand
+        deactivate BR
+    end
+
+    autonumber 12
+    <-- BR : brand
+deactivate BR
+
+
+@enduml
