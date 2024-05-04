@@ -1,0 +1,64 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":RegisterVehicleController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "brandRepository:\nBrandRepository" as BR
+participant "brand:\nBrand" as Brand
+
+autonumber 11
+-> CTRL: createBrand(brandName)
+
+autonumber 11.1
+activate CTRL
+    group Create Brand Object
+
+    CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getBrandRepository()
+            activate PLAT
+
+                PLAT --> CTRL : brandRepository
+            deactivate PLAT
+
+        CTRL -> BR : registerBrand(brandName)
+
+        activate BR
+
+            BR -> Brand**: create(name)
+
+            activate Brand
+
+                Brand -> Brand: validateBrand(brand)
+                Brand --> BR : brand
+
+            deactivate Brand
+
+        BR -> BR: addBrand(brand)
+
+        activate BR
+            BR -> BR: validateBrand(brand)
+            activate BR
+                BR --> BR : true/false
+            deactivate BR
+
+            BR --> BR : true/false
+        deactivate BR
+
+            BR -> CTRL : brand
+        deactivate BR
+    end
+
+    autonumber 12
+    <-- BR : brand
+deactivate BR
+
+
+@enduml

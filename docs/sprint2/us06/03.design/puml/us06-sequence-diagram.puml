@@ -1,0 +1,93 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Vehicle and Equipment Fleet Manager (VFM)" as VFM
+participant ":RegisterVehicleUI" as UI
+participant ":RegisterVehicleController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "vehicleRepository\n:VehicleRepository" as VR
+
+activate VFM
+
+        VFM -> UI : asks to register a new job
+    activate UI
+
+        UI --> VFM : requests data (brandName,modelName,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
+    deactivate UI
+
+        VFM->UI: type data (brandName,modelName,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
+
+    activate UI
+
+        UI --> VFM : displays the data and requests confirmation
+
+    deactivate UI
+
+        VFM -> UI : confirms and submits data
+            activate UI
+
+        UI -> CTRL : registerVehicle(brandName,modelName,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
+
+            activate CTRL
+
+        CTRL -> RepositorySingleton : getInstance()
+                        activate RepositorySingleton
+
+                            RepositorySingleton --> CTRL: repositories
+                        deactivate RepositorySingleton
+
+                        CTRL -> PLAT: getVehicleRepository()
+                        activate PLAT
+
+                        PLAT --> CTRL: vehicleRepository
+                        deactivate PLAT
+
+             CTRL -> CTRL : createBrand(brandName)
+            activate CTRL
+
+                ref over CTRL
+                    Create Brand Object
+
+                end ref
+
+                CTRL --> CTRL : brand
+            deactivate CTRL
+
+            CTRL -> CTRL : createModel(brand,modelName)
+            activate CTRL
+
+                ref over CTRL
+                    Create model Object
+
+                end ref
+                CTRL --> CTRL : model
+            deactivate CTRL
+
+
+                CTRL -> VR : registerVehicle(brand,model,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
+
+            activate VR
+
+                        ref over VR
+                            Create Vehicle
+
+                        end ref
+            VR --> CTRL : vehicle
+
+            deactivate VR
+
+            CTRL --> UI: vehicle
+        deactivate CTRL
+
+        UI --> VFM : displays operation success
+    deactivate UI
+
+deactivate VFM
+
+@enduml

@@ -1,0 +1,43 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant "vehicleRepository\n:VehicleRepository" as VR
+participant "vehicle:\nVehicle" as Vehicle
+
+autonumber 15
+-> VR: registerVehicle(brand,model,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
+
+autonumber 15.1
+activate VR
+    group Create Vehicle
+
+            VR -> Vehicle**: create(brand,model,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
+
+            activate Vehicle
+
+                Vehicle -> Vehicle: validateVehicle(vehicle)
+                Vehicle --> VR : vehicle
+
+            deactivate Vehicle
+
+        VR -> VR: addVehicle(vehicle)
+
+        activate VR
+            VR -> VR: validateVehicle(vehicle)
+            activate VR
+                VR --> VR : true/false
+            deactivate VR
+
+            VR --> VR : true/false
+
+        deactivate VR
+    end
+
+    autonumber 16
+    <-- VR : vehicle
+deactivate VR
+
+
+@enduml
