@@ -9,10 +9,10 @@ participant "repositories\n:Repositories" as PLAT
 participant "brandRepository:\nBrandRepository" as BR
 participant "brand:\nBrand" as Brand
 
-autonumber 11
+autonumber 7
 -> CTRL: createBrand(brandName)
 
-autonumber 11.1
+autonumber 7.1
 activate CTRL
     group Create Brand Object
 
@@ -56,7 +56,7 @@ activate CTRL
         deactivate BR
     end
 
-    autonumber 12
+    autonumber 8
     <-- BR : brand
 deactivate BR
 

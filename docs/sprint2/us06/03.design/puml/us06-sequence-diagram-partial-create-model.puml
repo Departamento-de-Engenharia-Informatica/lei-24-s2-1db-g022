@@ -9,10 +9,10 @@ participant "repositories\n:Repositories" as PLAT
 participant "brand:\nBrand" as Brand
 participant "model:\nModel" as Model
 
-autonumber 13
+autonumber 9
 -> CTRL: createModel(brand,modelName)
 
-autonumber 13.1
+autonumber 9.1
 activate CTRL
     group Create Model Object
 
@@ -44,7 +44,7 @@ activate CTRL
         deactivate Brand
     end
 
-    autonumber 14
+    autonumber 10
     <-- Brand : model
 deactivate Brand
 

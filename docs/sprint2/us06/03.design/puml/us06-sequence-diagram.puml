@@ -36,18 +36,6 @@ activate VFM
 
             activate CTRL
 
-        CTRL -> RepositorySingleton : getInstance()
-                        activate RepositorySingleton
-
-                            RepositorySingleton --> CTRL: repositories
-                        deactivate RepositorySingleton
-
-                        CTRL -> PLAT: getVehicleRepository()
-                        activate PLAT
-
-                        PLAT --> CTRL: vehicleRepository
-                        deactivate PLAT
-
              CTRL -> CTRL : createBrand(brandName)
             activate CTRL
 
@@ -68,6 +56,19 @@ activate VFM
                 end ref
                 CTRL --> CTRL : model
             deactivate CTRL
+
+                    CTRL -> RepositorySingleton : getInstance()
+                                    activate RepositorySingleton
+
+                                        RepositorySingleton --> CTRL: repositories
+                                    deactivate RepositorySingleton
+
+                                    CTRL -> PLAT: getVehicleRepository()
+                                    activate PLAT
+
+                                    PLAT --> CTRL: vehicleRepository
+                                    deactivate PLAT
+
 
 
                 CTRL -> VR : registerVehicle(brand,model,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
