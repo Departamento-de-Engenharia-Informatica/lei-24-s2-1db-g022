@@ -45,8 +45,8 @@ activate CTRL
     end
 
     autonumber 10
-    <-- Brand : model
-deactivate Brand
+    <-- CTRL : model
+deactivate CTRL
 
 
 @enduml

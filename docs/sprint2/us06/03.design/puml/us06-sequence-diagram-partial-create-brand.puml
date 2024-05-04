@@ -57,8 +57,8 @@ activate CTRL
     end
 
     autonumber 8
-    <-- BR : brand
-deactivate BR
+    <-- CTRL : brand
+deactivate CTRL
 
 
 @enduml
