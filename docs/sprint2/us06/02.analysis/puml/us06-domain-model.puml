@@ -12,7 +12,6 @@ class Collaborator {
     name
     dateOfBirth
     admissionDate
-    address
     phoneNumber
     email
     cc
@@ -22,9 +21,15 @@ class Collaborator {
 class VehicleFleetManager {
 }
 
-class Vehicle{
-    brand
-    model
+class Brand {
+     name
+}
+
+class Model {
+     name
+}
+
+class Vehicle {
     type
     tare
     grossWeight
@@ -36,5 +41,9 @@ class Vehicle{
 }
 
 Collaborator <|- VehicleFleetManager
-VehicleFleetManager "1" -- "1..*" Vehicle : Registers >
+VehicleFleetManager "1" -- "1..*" Vehicle : registers/manages >
+Brand "1" --  "1..*" Model : has >
+Brand "1" -- "1..*" Vehicle : has <
+Vehicle "1..*" - "1" Model : has >
+
 @enduml

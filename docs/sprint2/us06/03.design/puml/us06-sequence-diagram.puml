@@ -18,10 +18,10 @@ activate VFM
         VFM -> UI : asks to register a new job
     activate UI
 
-        UI --> VFM : requests data (brand,model,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
+        UI --> VFM : requests data (brandName,modelName,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
     deactivate UI
 
-        VFM->UI: type data (brand,model,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
+        VFM->UI: type data (brandName,modelName,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
 
     activate UI
 
@@ -32,7 +32,7 @@ activate VFM
         VFM -> UI : confirms and submits data
             activate UI
 
-        UI -> CTRL : registerVehicle(brand,model,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
+        UI -> CTRL : registerVehicle(brandName,modelName,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
 
             activate CTRL
 
@@ -48,22 +48,22 @@ activate VFM
                         PLAT --> CTRL: vehicleRepository
                         deactivate PLAT
 
-             CTRL -> CTRL : brand
+             CTRL -> CTRL : createBrand(brandName)
             activate CTRL
 
                 ref over CTRL
-                    Create Vehicle Brand
+                    Create Brand Object
 
                 end ref
 
                 CTRL --> CTRL : brand
             deactivate CTRL
 
-            CTRL -> CTRL : model
+            CTRL -> CTRL : createModel(brand,modelName)
             activate CTRL
 
                 ref over CTRL
-                    Create Brand Model
+                    Create model Object
 
                 end ref
                 CTRL --> CTRL : model
@@ -72,7 +72,6 @@ activate VFM
 
                 CTRL -> VR : registerVehicle(brand,model,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
 
-            deactivate CTRL
             activate VR
 
                         ref over VR

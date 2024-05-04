@@ -57,7 +57,7 @@ class Repositories {
 }
 
 class jobRepository {
-    - ArrayList Job
+    - ArrayList Job job
 
     - addJob(job)
     - validateJob(job)
@@ -68,11 +68,11 @@ RegisterJobController .> Repositories : repositories
 RegisterJobUI .> RegisterJobController
 Repositories -> Repositories : instance
 Repositories --> "1" jobRepository : jobRepository
-jobRepository "1" --> "*" Job : job
+jobRepository --> "*" Job : job
 Collaborator  <|--  HumanResourcesManager
 RegisterJobController ..> "1" HumanResourcesManager : HumanResourcesManager
 HumanResourcesManager <--  Job: createdBy
-Collaborator "1" --> "*" Job : jobs
+Collaborator "1..*" --> "1" Job : jobs
 Address "1" --> "*" Collaborator : address
 
 

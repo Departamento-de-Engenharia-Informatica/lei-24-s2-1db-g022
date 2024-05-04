@@ -3,20 +3,32 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-participant ":CreateTaskController" as CTRL
+participant ":RegisterVehicleController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "brandRepository:\nBrandRepository" as BR
 participant "brand:\nBrand" as Brand
 
 autonumber 11
--> CTRL: brand
+-> CTRL: createBrand(brandName)
 
 autonumber 11.1
 activate CTRL
-    group Create Brand
+    group Create Brand Object
 
-        CTRL -> BR : registerBrand(brand)
+    CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getBrandRepository()
+            activate PLAT
+
+                PLAT --> CTRL : brandRepository
+            deactivate PLAT
+
+        CTRL -> BR : registerBrand(brandName)
 
         activate BR
 
@@ -24,12 +36,12 @@ activate CTRL
 
             activate Brand
 
-                Brand -> Brand: validateVehicle(vehicle)
+                Brand -> Brand: validateBrand(brand)
                 Brand --> BR : brand
 
             deactivate Brand
 
-        BR -> BR: addBrand (brand)
+        BR -> BR: addBrand(brand)
 
         activate BR
             BR -> BR: validateBrand(brand)
@@ -38,6 +50,7 @@ activate CTRL
             deactivate BR
 
             BR --> BR : true/false
+        deactivate BR
 
             BR -> CTRL : brand
         deactivate BR

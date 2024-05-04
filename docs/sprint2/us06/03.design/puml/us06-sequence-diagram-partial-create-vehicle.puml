@@ -3,32 +3,41 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-participant "organization\n:Organization" as ORG
-participant "task\n:Task" as TAREFA
+participant "vehicleRepository\n:VehicleRepository" as VR
+participant "vehicle:\nVehicle" as Vehicle
 
-autonumber 16
--> ORG: createTask(reference, description,\ninformalDescription, technicalDescription,\nduration, cost, taskCategory, employee )
+autonumber 15
+-> VR: registerVehicle(brand,model,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
 
-autonumber 16.1
-activate ORG
-    group Create Task
+autonumber 15.1
+activate VR
+    group Create Vehicle
 
-        ORG -> TAREFA**: create(reference, description,\ninformalDescription, technicalDescription,\nduration, cost, taskCategory, employee)
-        ORG -> ORG: addTask (task)
+            VR -> Vehicle**: create(brand,model,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
 
-        activate ORG
-            ORG -> ORG: validateTask(task)
-            activate ORG
-                ORG --> ORG
-            deactivate ORG
+            activate Vehicle
 
-            ORG --> ORG
-        deactivate ORG
+                Vehicle -> Vehicle: validateVehicle(vehicle)
+                Vehicle --> VR : vehicle
+
+            deactivate Vehicle
+
+        VR -> VR: addVehicle(vehicle)
+
+        activate VR
+            VR -> VR: validateVehicle(vehicle)
+            activate VR
+                VR --> VR : true/false
+            deactivate VR
+
+            VR --> VR : true/false
+
+        deactivate VR
     end
 
-    autonumber 17
-    <-- ORG : task
-deactivate ORG
+    autonumber 16
+    <-- VR : vehicle
+deactivate VR
 
 
 @enduml

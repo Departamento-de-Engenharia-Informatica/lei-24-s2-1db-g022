@@ -3,70 +3,50 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-
-
-'hide footbox
-participant ":CreateTaskController" as CTRL
-participant ":ApplicationSession" as _APP
-participant "appSession\n:ApplicationSession" as APP
-participant "currentSession\n:UserSession" as SESSAO
+participant ":RegisterVehicleController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
-participant "organization\n:Organization" as ORG
+participant "brand:\nBrand" as Brand
+participant "model:\nModel" as Model
 
-autonumber 14
--> CTRL : getEmployeeFromSession()
-autonumber 14.1
+autonumber 13
+-> CTRL: createModel(brand,modelName)
+
+autonumber 13.1
 activate CTRL
+    group Create Model Object
 
-    group Get Employee
-        CTRL -> _APP: getInstance()
-        activate _APP
-            _APP -> CTRL: appSession
-        deactivate _APP
+        CTRL -> Brand : registerModel(modelName)
 
-        CTRL -> APP: getCurrentSession()
-        activate APP
+        activate Brand
 
-            APP --> CTRL: currentSession
-        deactivate APP
+            Brand -> Model**: create(name)
 
-        CTRL -> SESSAO: email = getUserEmail()
-        activate SESSAO
+            activate Model
 
-            SESSAO --> CTRL: email
-        deactivate SESSAO
+                Model -> Model: validateModel(model)
+                Model --> Brand : model
 
-        CTRL -> PLAT: getOrganizationRepository()
-        activate PLAT
+            deactivate Model
 
-            PLAT --> CTRL: organizationRepository
-        deactivate PLAT
+        Brand -> Brand: addModel(model)
 
-        CTRL -> OrganizationRepository: getOrganizationByUserEmail(email)
-        activate OrganizationRepository
+        activate Brand
+            Brand -> Brand: validateModel(model)
+            activate Brand
+                Brand --> Brand : true/false
+            deactivate Brand
 
-            loop [for each organization
-                OrganizationRepository -> ORG : anyEmployeeHasEmail(email)
-                activate ORG
+            Brand --> Brand : true/false
+        deactivate Brand
 
-                     ORG --> OrganizationRepository : true/false
-                deactivate ORG
-            end
-
-            OrganizationRepository --> CTRL : organization
-
-        deactivate OrganizationRepository
-
-        CTRL -> ORG: getEmployeeByEmail(email)
-        activate ORG
-
-            ORG --> CTRL : employee
-        deactivate ORG
+            Brand -> CTRL : model
+        deactivate Brand
     end
-    autonumber 15
-    <-- CTRL : employee
-deactivate CTRL
+
+    autonumber 14
+    <-- Brand : model
+deactivate Brand
+
 
 @enduml
