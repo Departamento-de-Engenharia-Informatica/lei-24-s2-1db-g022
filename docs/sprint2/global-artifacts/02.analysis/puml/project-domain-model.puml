@@ -146,7 +146,7 @@ VehicleFleetManager "1" - "1..*" Equipment :  manages >
 Vehicle "1..*" - "1..*" Task :  needed to carry out >
 Vehicle "1..*" --- "1..*" Machine :  transports >
 Vehicle "1..*" -- "1..*" Equipment :  transports >
-Vehicle "*" -- "1" Model :  has >
+Vehicle "1..*" -- "1" Model :  has >
 
 'Adicionar no glossario o ToDoList
 ToDoList "1" --- "1..*" Task : includes >
@@ -172,7 +172,7 @@ Garden "1..*" --- "*" Bench : possess >
 
 Collaborator "1..*" -- "1" Address : lives >
 
-Vehicle "*" -- "1" Brand : has >
+Vehicle "1..*" -- "1" Brand : has >
 Brand "1" -- "1..*" Model : has >
 
 GreenSpace <|- MediumPark
