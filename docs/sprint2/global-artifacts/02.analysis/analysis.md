@@ -19,6 +19,9 @@ Iterative Development".
 * Collaborator
 * Team
 * Check-up
+* Pipe
+* WaterPoint
+* IrrigationSystem
 
 ---
 
@@ -26,6 +29,8 @@ Iterative Development".
 
 * Skills
 * Vehicles
+* WaterPoint
+* Pipe
 
 ---
 
@@ -46,12 +51,12 @@ Iterative Development".
 
 **Roles of People or Organizations**
 
+* Collaborator
 * (HRM) Human Resources Manager
 * (VFM) Vehicle and Equipment Fleet Manager
-* Collaborator
 * (GSM) Green Spaces Manager
 * (GSU) Green Spaces User
-* (QAM) Software Quality Assessment Team Manag
+* (QAM) Software Quality Assessment Team Manager
 
 ---
 
@@ -71,7 +76,13 @@ Iterative Development".
 
 **Physical Objects**
 
-* Vehicles/GreenSpace/Tools/Equipments
+* Vehicles
+* Machines
+* Equipments
+* UrbanFurniture
+* PlantMaterial
+* InfraStructure
+
 
 ---
 
@@ -89,16 +100,23 @@ Iterative Development".
 
 **Containers**
 
-* GreenSpaces
+* GreenSpace
+* Agenda
+* ToDoList
+* Team
+* Collaborator
 
 ---
 
 **Elements of Containers**
 
-* Infrastructures
+* Infrastructure
 * Wooded garden area
 * Equipment
-* Services
+* Service
+* Task
+* Collaborator
+* Skill
 
 ---
 
@@ -110,9 +128,7 @@ Iterative Development".
 
 **Other External/Collaborating Systems**
 
-* (HRM) Human Resources Manager
-* (VFM) Vehicle and Equipment Fleet Manager
-* Collaborator
+* Authentication System
 
 ---
 
@@ -130,6 +146,8 @@ Iterative Development".
 
 **Documents mentioned/used to perform some work/**
 
+* Agenda
+* ToDoList
 * Check-up
 
 ---
@@ -144,6 +162,11 @@ remembering, or it is derivable from the List of Common Associations:
 | Collaborator              |        Has	         |                      Job |
 | Collaborator  	           |  Drives/Uses    	   |                  Vehicle |
 | Collaborator  	           |       Has   	       |                    Skill |
+| Collaborator              |   Generalization    | QualityAssessmentManager |
+| Collaborator              |   Generalization    |     HumanResourceManager |
+| Collaborator              |   Generalization    |      VehicleFleetManager |
+| Collaborator              |   Generalization    |        GreenSpaceManager |
+| Collaborator              |        Lives        |                  Address |
 | Team  	                   |     Contains  	     |             Collaborator |
 | Team  	                   |   Carries Out  	    |                   Agenda |
 | Agenda  	                 |      defines 	      |                     Task |
@@ -151,49 +174,37 @@ remembering, or it is derivable from the List of Common Associations:
 | HumanResourceManager      |      Registers      |             Collaborator |     
 | HumanResourceManager      |      Registers      |                    Skill |
 | HumanResourceManager      |       Defines       |                     Team |
-| HumanResourceManager      |   Generalization    |             Collaborator |
 | VehicleFleetManager       |       Manages       |                  Machine |
 | VehicleFleetManager       |       Manages       |                Equipment |
 | VehicleFleetManager       |  Registers/Manages  |                  Vehicle |
 | VehicleFleetManager       |      Registers      |                  CheckUp |
-| VehicleFleetManager       |   Generalization    |             Collaborator |
 | Vehicle                   |        Does         |                  CheckUp |
 | Vehicle                   | Needed to carry out |                     Task |
 | Vehicle                   |     Transports      |                  Machine |
 | Vehicle                   |     Transports      |                Equipment |
+| Vehicle                   |         Has         |                    Brand |
+| Vehicle                   |         Has         |                    Model |
 | Green Spaces Manager(GSM) |       Manages       |             Green Spaces |
 | Green Spaces User(GSU)    |        Uses         |             Green Spaces |
-| Green Spaces              |   Generalization    |                   Garden |
-| Park                      |      Contains       |                   Garden |
+| Green Space               |   Generalization    |                   Garden |
+| Green Space               |   Generalization    |               MediumPark |
+| Green Space               |   Generalization    |                LargePark |
 | ToDoList                  |      Includes       |                     Task |
 | IrrigationSystem          |      Contains       |                     Pipe |
 | Pipe                      |      Contains       |               WaterPoint |
 | InfraStructure            |   Generalization    |         IrrigationSystem |
 | Garden                    |         Has         |         IrrigationSystem |
+| Garden                    |       Possess       |                     Tree |
+| Garden                    |       Possess       |                    Bench |
 | MediumPark                |      Includes       |           InfraStructure |
+| MediumPark                |      Contains       |                   Garden |
 | LargePark                 |      Includes       |           InfraStructure |
 | LargePark                 |      Includes       |                  Service |
+| LargePark                 |      Contains       |                   Garden |
 | Task                      |   Carried out in    |               GreenSpace |
 | PlantMaterial             |   Generalization    |                     Tree |
-| Garden                    |       Possess       |                     Tree |
 | UrbanFurniture            |   Generalization    |                    Bench |
-| Garden                    |       Possess       |                    Bench |
-| Collaborator              |        Lives        |                  Address |
-| Vehicle                   |         Has         |                    Brand |
 | Brand                     |         Has         |                    Model |
-| GreenSpace                |   Generalization    |               MediumPark |
-| GreenSpace                |   Generalization    |                LargePark |
-| MediumPark                |      Contains       |                   Garden |
-| LargePark                 |      Contains       |                   Garden |
-| Collaborator              |   Generalization    | QualityAssessmentManager |
-| Collaborator              |   Generalization    |     HumanResourceManager |
-| Collaborator              |   Generalization    |      VehicleFleetManager |
-| Collaborator              |   Generalization    |        GreenSpaceManager |
-| MediumPark                |      Contains       |                   Garden |
-| MediumPark                |      Contains       |                   Garden |
-| MediumPark                |      Contains       |                   Garden |
-| MediumPark                |      Contains       |                   Garden |
-| MediumPark                |      Contains       |                   Garden |
 
 ## Domain Model
 
