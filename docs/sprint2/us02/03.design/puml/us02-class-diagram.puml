@@ -10,16 +10,16 @@ skinparam classAttributeIconSize 0
 'left to right direction
 
 class Job {
-    - String name
+    -String name
 
-    + Job(name)
-    - validateJob(job)
+    -validateJob(job)
+    +Job(name)
 }
 
 class RegisterJobController {
 
-    + RegisterJobController()
-    + registerJob(name)
+    +RegisterJobController()
+    +registerJob(name)
 }
 
 class RegisterJobUI {
@@ -27,6 +27,8 @@ class RegisterJobUI {
 
 class Collaborator {
     -String name
+    -List<Skill> skill
+    -Job job
     -Date dateOfBirth
     -Date admissionDate
     -Address address
@@ -35,15 +37,7 @@ class Collaborator {
     -int cc
     -int cardNumber
 
-    + Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, cardNumber)
-}
-
-class Address{
-    -String streetName
-    -String postCode
-    -int doorNumber
-
-    +Address(streetName, postCode, doorNumber)
+    +Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, cardNumber)
 }
 
 class HumanResourcesManager {
@@ -51,29 +45,33 @@ class HumanResourcesManager {
 
 class Repositories {
 
-    - Repositories()
-    + getInstance() : Repositories
-    + getJobRepository()
+    -Repositories()
+    +getInstance() : Repositories
+    +getJobRepository()
 }
 
 class jobRepository {
-    - ArrayList Job job
+    -List<Job> job
 
-    - addJob(job)
-    - validateJob(job)
-    + createJob(name)
+    -addJob(job)
+    -validateJob(job)
+    +createJob(name)
 }
 
 RegisterJobController .> Repositories : repositories
-RegisterJobUI .> RegisterJobController
-Repositories -> Repositories : instance
-Repositories --> "1" jobRepository : jobRepository
-jobRepository --> "*" Job : job
-Collaborator  <|--  HumanResourcesManager
-RegisterJobController ..> "1" HumanResourcesManager : HumanResourcesManager
-HumanResourcesManager <--  Job: createdBy
-Collaborator "1..*" --> "1" Job : jobs
-Address "1" --> "*" Collaborator : address
+RegisterJobController ..> "1" Job : job
+RegisterJobController ..> "1" jobRepository : jobRepository
 
+RegisterJobUI .> RegisterJobController
+
+Repositories -> Repositories : instance
+Repositories --> "1" jobRepository
+
+jobRepository --> "*" Job : job
+
+Collaborator  <|--  HumanResourcesManager
+Collaborator "1..*" --> "1" Job : jobs
+
+HumanResourcesManager <--  Job: createdBy
 
 @enduml

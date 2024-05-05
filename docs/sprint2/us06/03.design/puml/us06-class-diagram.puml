@@ -10,43 +10,45 @@ skinparam classAttributeIconSize 0
 'left to right direction
 
 class Brand {
-    - String name
-    - List <Model> model
+    -String name
+    -List <Model> model
 
-    - addModel(model)
-    - validateBrand(brand)
-    - validateModel(model)
-    + Brand(name)
-    + registerModel(modelName)
+    -addModel(model)
+    -validateBrand(brand)
+    -validateModel(model)
+    +Brand(name)
+    +registerModel(modelName)
 }
 
 class Model {
-    - String name
+    -String name
 
-    - validateModel(model)
-    + Model(name)
+    -validateModel(model)
+    +Model(name)
 }
 
 class Vehicle {
-    - Brand brand
-    - Model model
-    - String type
-    - float tare
-    - float grossWeight
-    - int currentKm
-    - Date registerDate
-    - Date acquisitionDate
-    - int checkupFrequency
-    - String licensePlate
+    -Brand brand
+    -Model model
+    -String type
+    -float tare
+    -float grossWeight
+    -int currentKm
+    -Date registerDate
+    -Date acquisitionDate
+    -int checkupFrequency
+    -String licensePlate
 
-    - validateVehicle(vehicle)
-    + Vehicle(brand,model,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
+    -validateVehicle(vehicle)
+    +Vehicle(brand,model,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
 }
 
 class RegisterVehicleController {
 
-    + RegisterVehicleController()
-    + registerVehicle(brandName,modelName,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
+    -createBrand(brandName)
+    -createModel(modelName)
+    +RegisterVehicleController()
+    +registerVehicle(brandName,modelName,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
 }
 
 class RegisterVehicleUI {
@@ -54,6 +56,8 @@ class RegisterVehicleUI {
 
 class Collaborator {
     -String name
+    -List <Skill> skill
+    -Job job
     -Date dateOfBirth
     -Date admissionDate
     -Address address
@@ -62,7 +66,7 @@ class Collaborator {
     -int cc
     -int cardNumber
 
-    + Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, cardNumber)
+    +Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, cardNumber)
 }
 
 class VehicleFleetManager {
@@ -70,42 +74,52 @@ class VehicleFleetManager {
 
 class Repositories {
 
-    - Repositories()
-    + getInstance() : Repositories
-    + getVehicleRepository()
-    + getBrandRepository()
+    -Repositories()
+    +getInstance() : Repositories
+    +getVehicleRepository()
+    +getBrandRepository()
 }
 
 class vehicleRepository {
-    - List<Vehicle> vehicle
+    -List<Vehicle> vehicle
 
-    - addVehicle(vehicle)
-    - validateVehicle(vehicle)
-    + registerVehicle(brand,model,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
+    -addVehicle(vehicle)
+    -validateVehicle(vehicle)
+    +registerVehicle(brand,model,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
 }
 
 class brandRepository {
-    - List<Brand> brand
+    -List<Brand> brand
 
-    - addBrand(brand)
-    - validateBrand(brand)
-    + registerBrand(brandName)
+    -addBrand(brand)
+    -validateBrand(brand)
+    +registerBrand(brandName)
 }
 
 RegisterVehicleController .> Repositories : repositories
+RegisterVehicleController .> "1" vehicleRepository : vehicleRepository
+RegisterVehicleController .> "1" brandRepository : brandRepository
+RegisterVehicleController ..> "1" Brand : brand
+RegisterVehicleController ..> "1" Model : model
+
 RegisterVehicleUI .> RegisterVehicleController
+
 Repositories -> Repositories : instance
-Repositories --> "1" vehicleRepository : vehicleRepository
-Repositories --> "1" brandRepository : brandRepository
-vehicleRepository ---> "*" Vehicle : vehicle
-brandRepository --> "*" Brand : brand
+Repositories --> "1" vehicleRepository
+Repositories --> "1" brandRepository
+
+vehicleRepository ---> "*" Vehicle
+
+brandRepository --> "*" Brand
+
 Collaborator  <|--  VehicleFleetManager
-RegisterVehicleController ..> "1" VehicleFleetManager : VehicleFleetManager
-VehicleFleetManager <--  Vehicle: createdBy
-Collaborator "*" --> "*" Vehicle : drives
+Collaborator "*" -> "*" Vehicle : drives
+
+VehicleFleetManager <-  Vehicle: createdBy
+
 Brand "1" --> "1..*" Model : model
 Brand "1" --> "1..*" Vehicle : has
-Vehicle "1..*" -> "1" Model : has
 
+Vehicle "1..*" -> "1" Model : has
 
 @enduml
