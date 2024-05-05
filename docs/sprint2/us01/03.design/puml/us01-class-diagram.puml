@@ -12,8 +12,8 @@ skinparam classAttributeIconSize 0
 class Skill {
     - String name
 
-    + Skill(name)
     - validateSkill(Skill)
+    + Skill(name)
 }
 
 class RegisterSkillController {
@@ -27,6 +27,8 @@ class RegisterSkillUI {
 
 class Collaborator {
     -String name
+    -List<Skill> skill
+    -Job job
     -Date dateOfBirth
     -Date admissionDate
     -Address address
@@ -36,14 +38,6 @@ class Collaborator {
     -int cardNumber
 
     + Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, cardNumber)
-}
-
-class Address{
-    -String streetName
-    -String postCode
-    -int doorNumber
-
-    +Address(streetName, postCode, doorNumber)
 }
 
 class HumanResourcesManager {
@@ -57,7 +51,7 @@ class Repositories {
 }
 
 class skillRepository {
-    - ArrayList Skill
+    - List <Skill> skill
 
     - addSkill(Skill)
     - validateSkill(Skill)
@@ -68,12 +62,10 @@ RegisterSkillController .> Repositories : repositories
 RegisterSkillUI .> RegisterSkillController
 Repositories -> Repositories : instance
 Repositories --> "1" skillRepository : skillRepository
-skillRepository "1" --> "*" Skill : Skill
+skillRepository "1" --> "*" Skill : skill
 Collaborator  <|--  HumanResourcesManager
-RegisterSkillController ..> "1" HumanResourcesManager : HumanResourcesManager
+RegisterSkillController ..> "1" Skill : skill
 HumanResourcesManager <--  Skill: createdBy
 Collaborator "*" --> "*" Skill : skills
-Address "1" --> "*" Collaborator : address
-
 
 @enduml

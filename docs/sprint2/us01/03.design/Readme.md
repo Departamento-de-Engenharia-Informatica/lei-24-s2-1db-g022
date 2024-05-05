@@ -4,8 +4,6 @@
 
 ### 3.1. Rationale
 
-_**Note that SSD - Alternative One is adopted.**_
-
 | Interaction ID | Question: Which class is responsible for...   | Answer                  | Justification (with patterns)                                                                                 |
 |:---------------|:----------------------------------------------|:------------------------|:--------------------------------------------------------------------------------------------------------------|
 | Step 1  		     | 	... interacting with the actor?              | RegisterSkillUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
@@ -13,11 +11,13 @@ _**Note that SSD - Alternative One is adopted.**_
 | 			  		        | 	... instantiating a new Skill?               | SkillRepository         | Pure Fabrication: they form a collection of objects that do not “belong” to any domain object/class.          |
 | 			  		        | 							                                       | SkillRepository         | IE: knows/has its own Skill                                                                                   |
 | 			  		        | 							                                       | Skill                   | IE: knows its own data (e.g. name)                                                                            |
-| Step 2  		     | 	...saving the inputted data?                 | Skill                   | IE: object created in step 1 has its own data.                                                                |
-| Step 3  		     | 	... validating all data (local validation)?  | Skill                   | IE: owns its data.                                                                                            | 
+| Step 2         |                                               |                         |                                                                                                               |
+| Step 3  		     | 	...saving the inputted data?                 | Skill                   | IE: object created in step 1 has its own data.                                                                |
+| Step 4         |                                               |                         |                                                                                                               |
+| Step 5  		     | 	...  all data (local validation)?            | Skill                   | IE: owns its data.                                                                                            | 
 | 			  		        | 	... validating all data (global validation)? | SkillRepository         | IE: knows all its skills.                                                                                     | 
-| 			  		        | 	... saving the created task?                 | SkillRepository         | IE: owns all its skills.                                                                                      | 
-| Step 4  		     | 	... informing operation success?             | RegisterSkillUI         | IE: is responsible for user interactions.                                                                     | 
+| 			  		        | 	... saving the created Skill?                | SkillRepository         | IE: owns all its skills.                                                                                      | 
+| Step 6  		     | 	... informing operation success?             | RegisterSkillUI         | IE: is responsible for user interactions.                                                                     | 
 
 ### Systematization ##
 

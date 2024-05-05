@@ -1,51 +1,56 @@
-# US05 - As a HRM, I want to generate a team proposal automatically.
+# US05 - Generate Team.
 
 ## 3. Design - User Story Realization 
 
 ### 3.1. Rationale
 
-_**Note that SSD - Alternative One is adopted.**_
-
-| Interaction ID | Question: Which class is responsible for... | Answer               | Justification (with patterns)                                                                                 |
-|:-------------  |:--------------------- |:---------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		 |	... interacting with the actor? | CreateTaskUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		 |	... coordinating the US? | CreateTaskController | Controller                                                                                                    |
-| 			  		 |	... instantiating a new Task? | Organization         | Creator (Rule 1): in the DM Organization has a Task.                                                          |
-| 			  		 | ... knowing the user using the system?  | UserSession          | IE: cf. A&A component documentation.                                                                          |
-| 			  		 |							 | Organization         | IE: knows/has its own Employees                                                                               |
-| 			  		 |							 | Employee             | IE: knows its own data (e.g. email)                                                                           |
-| Step 2  		 |							 |                      |                                                                                                               |
-| Step 3  		 |	...saving the inputted data? | Task                 | IE: object created in step 1 has its own data.                                                                |
-| Step 4  		 |	...knowing the task categories to show? | System               | IE: Task Categories are defined by the Administrators.                                                        |
-| Step 5  		 |	... saving the selected category? | Task                 | IE: object created in step 1 is classified in one Category.                                                   |
-| Step 6  		 |							 |                      |                                                                                                               |              
-| Step 7  		 |	... validating all data (local validation)? | Task                 | IE: owns its data.                                                                                            | 
-| 			  		 |	... validating all data (global validation)? | Organization         | IE: knows all its tasks.                                                                                      | 
-| 			  		 |	... saving the created task? | Organization         | IE: owns all its tasks.                                                                                       | 
-| Step 8  		 |	... informing operation success?| CreateTaskUI         | IE: is responsible for user interactions.                                                                     | 
+| Interaction ID | Question: Which class is responsible for...         | Answer                 | Justification (with patterns)                                                                                 |
+|:---------------|:----------------------------------------------------|:-----------------------|:--------------------------------------------------------------------------------------------------------------|
+| Step 1  		     | 	... interacting with the actor?                    | GenerateTeamUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| 			  		        | 	... coordinating the US?                           | GenerateTeamController | Controller                                                                                                    |
+| 			  		        | 	... instantiating a new Team?                      | TeamRepository         | Pure Fabrication: they form a collection of objects that do not “belong” to any domain object/class.          |
+| 			  		        | 							                                             | TeamRepository         | IE: knows/has its own Team                                                                                    |
+| 			  		        | 							                                             | Team                   | IE: knows its own data (e.g. Collaborators)                                                                   |
+| 			  		        | 							                                             | CollaboratorRepository | IE: knows/has its own Collaborator                                                                            |
+| 			  		        | 							                                             | Collaborator           | IE: knows its own data (e.g. name,...)                                                                        |
+| 			  		        | 							                                             | SkillRepository        | IE: knows/has its own Skill                                                                                   |
+| 			  		        | 							                                             | Skill                  | IE: knows/has its own data (e.g name)                                                                         |
+| Step 2         |                                                     |                        |
+| Step 3         |                                                     |                        |
+| Step 4         |                                                     |                        |
+| Step 5  		     | 	... validating all Skill data (global validation)? | SkillRepository        | IE: knows all its skills.                                                                                     |
+| Step 6  		     | 							                                             |                        |                                                                                                               |              
+| Step 7  		     | 	... validating all Team data (global validation)?  | Team                   | IE: knows all its team.                                                                                       | 
+| Step 8  		     | 	... show teams proposals?                          | GenerateTeamUI         | IE: is responsible for user interactions.                                                                     | 
+| Step 9  		     | 	... save input choice?                             | Team                   | IE: Object created in step 1 has its own data.                                                                | 
+| 			  		        | 	... saving the created team?                       | TeamRepository         | IE: owns all the teams.                                                                                       | 
+| Step 10        | ... informing operation success?                    | GenerateTeamUI         | IE: is responsible for user interactions.                                                                     |
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Organization
-* Task
+* Team
+* Skill
+* Collaborator
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
-* CreateTaskUI  
-* CreateTaskController
+* GenerateTeamUI
+* GenerateTeamController
+* TeamRepository
+* SkillRepository
+* CollaboratorRepository
 
 
 ## 3.2. Sequence Diagram (SD)
 
-_**Note that SSD - Alternative Two is adopted.**_
 
 ### Full Diagram
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us006-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us05-sequence-diagram.svg)
 
 ### Split Diagrams
 
@@ -53,24 +58,18 @@ The following diagram shows the same sequence of interactions between the classe
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![Sequence Diagram - split](svg/us006-sequence-diagram-split.svg)
+**Has Skill By Name**
 
-**Get Task Category List Partial SD**
+![Sequence Diagram - Partial - Has Skill By Name](svg/us05-sequence-diagram-partial-has-skill-by-name.svg)
 
-![Sequence Diagram - Partial - Get Task Category List](svg/us006-sequence-diagram-partial-get-task-category-list.svg)
+**Get Collaborator By Skill**
 
-**Get Task Category Object**
+![Sequence Diagram - Partial - Get Collaborator By Skill](svg/us05-sequence-diagram-partial-get-collaborator-by-skill.svg)
 
-![Sequence Diagram - Partial - Get Task Category Object](svg/us006-sequence-diagram-partial-get-task-category.svg)
+**Register Proposal Team**
 
-**Get Employee**
-
-![Sequence Diagram - Partial - Get Employee](svg/us006-sequence-diagram-partial-get-employee.svg)
-
-**Create Task**
-
-![Sequence Diagram - Partial - Create Task](svg/us006-sequence-diagram-partial-create-task.svg)
+![Sequence Diagram - Partial - Register Proposal Team](svg/us05-sequence-diagram-partial-register-proposal-team.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us006-class-diagram.svg)
+![Class Diagram](svg/us05-class-diagram.svg)
