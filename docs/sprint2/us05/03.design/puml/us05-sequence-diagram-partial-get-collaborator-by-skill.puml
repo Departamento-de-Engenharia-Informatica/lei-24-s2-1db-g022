@@ -1,0 +1,43 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":GenerateTeamController" as CRL
+participant ":Repositories" as REP
+participant "repositories\n:Repositories" as PLAT
+
+autonumber 11
+--> CRL: getCollaboratorBySkill(skillList)
+
+autonumber 11.1
+
+activate CRL
+group Get Collaborator By Skill
+
+CRL -> REP : getInstance()
+activate REP
+
+REP --> CRL : repositories
+
+deactivate REP
+
+CRL -> PLAT : getCollaboratorRepository()
+activate PLAT
+
+PLAT --> CRL : collaboratorRepository
+
+deactivate PLAT
+
+CRL -> CollaboratorRepository : getCollaboratorBySkill(skillList)
+activate CollaboratorRepository
+CollaboratorRepository--> CRL : collaboratorList
+deactivate CollaboratorRepository
+
+end
+autonumber 12
+
+<--CRL : collaboratorList
+deactivate CRL
+
+@enduml

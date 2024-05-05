@@ -32,10 +32,10 @@ class Skill{
 
 Collaborator  <|--  HumanResourceManager
 
-HumanResourceManager "1" -- "1..*" Team : generate >
+HumanResourceManager "1" -- "1..*" Team : defines >
 
 Collaborator "1..*" ---- "1" Team : Contains <
 
-Skill "1..*" -- "*" Collaborator : has <
+Skill "*" -- "*" Collaborator : has <
 
 @enduml
