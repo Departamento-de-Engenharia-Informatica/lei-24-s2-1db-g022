@@ -1,8 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
-import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
-
 /**
  * @author Group22
  */
@@ -11,6 +8,7 @@ public class Repositories {
     private static Repositories instance;
     private final AuthenticationRepository authenticationRepository;
     private final JobRepository jobRepository;
+    private final SkillRepository skillRepository;
 
     /**
      * Constructs a Repositories object with default repositories.
@@ -19,6 +17,7 @@ public class Repositories {
 
         authenticationRepository = new AuthenticationRepository();
         jobRepository = new JobRepository();
+        skillRepository = new SkillRepository();
     }
 
     /**
@@ -52,4 +51,14 @@ public class Repositories {
     public JobRepository getJobRepository() {
         return jobRepository;
     }
+
+    /**
+     * Retrieves the skill repository.
+     *
+     * @return the skill repository
+     */
+    public SkillRepository getSkillRepository() {
+        return skillRepository;
+    }
+
 }

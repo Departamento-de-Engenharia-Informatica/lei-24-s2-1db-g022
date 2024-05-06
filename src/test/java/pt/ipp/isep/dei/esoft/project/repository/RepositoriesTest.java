@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import org.junit.jupiter.api.Test;
-import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -29,5 +28,14 @@ public class RepositoriesTest {
     void testGetJobRepository() {
         Repositories instance = Repositories.getInstance();
         assertNotNull(instance.getJobRepository());
+    }
+
+    /**
+     * Tests if the getSkillRepository method returns a non-null instance of SkillRepository.
+     */
+    @Test
+    void testGetSkillRepository() {
+        Repositories instance = Repositories.getInstance();
+        assertNotNull(instance.getSkillRepository());
     }
 }

@@ -4,6 +4,7 @@ import pt.ipp.isep.dei.esoft.project.application.controller.authorization.Authen
 import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+import pt.ipp.isep.dei.esoft.project.repository.SkillRepository;
 
 /**
  * The Bootstrap class initializes the application by adding initial data such as users and jobs.
@@ -19,6 +20,7 @@ public class Bootstrap implements Runnable {
     public void run() {
         addUsers();
         addJobs();
+        addSkills();
     }
 
     /**
@@ -33,6 +35,17 @@ public class Bootstrap implements Runnable {
     }
 
     /**
+     * Adds predefined skills to the skill repository.
+     */
+    private void addSkills() {
+        SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
+        skillRepository.createSkill("Podador");
+        skillRepository.createSkill("Condutor de veiculos pesados");
+        skillRepository.createSkill("Aplicador de fito farmacos");
+        skillRepository.createSkill("Light Vehicle Driving Licence");
+    }
+
+    /**
      * Adds predefined users with their roles to the authentication repository.
      */
     private void addUsers() {
@@ -42,7 +55,11 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserRole(AuthenticationController.ROLE_HRM, AuthenticationController.ROLE_HRM);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_EMPLOYEE, AuthenticationController.ROLE_EMPLOYEE);
 
-        authenticationRepository.addUserWithRole("Main Administrator", "admin@musgosublime.pt", "admin", AuthenticationController.ROLE_ADMIN);
+        authenticationRepository.addUserWithRole("Main Administrator", "1191330@isep.ipp.pt", "admin", AuthenticationController.ROLE_ADMIN);
+        authenticationRepository.addUserWithRole("Main Administrator", "1170499@isep.ipp.pt", "admin", AuthenticationController.ROLE_ADMIN);
+        authenticationRepository.addUserWithRole("Main Administrator", "1191337@isep.ipp.pt", "admin", AuthenticationController.ROLE_ADMIN);
+        authenticationRepository.addUserWithRole("Main Administrator", "1200356@isep.ipp.pt", "admin", AuthenticationController.ROLE_ADMIN);
+
         authenticationRepository.addUserWithRole("Human Resource Manager", "hrm@musgosublime.pt", "hrm", AuthenticationController.ROLE_HRM);
         authenticationRepository.addUserWithRole("Vehicle and Equipment Fleet Manager", "vfm@musgosublime.pt", "vfm", AuthenticationController.ROLE_VFM);
         authenticationRepository.addUserWithRole("Employee", "employee@musgosublime.pt", "pwd", AuthenticationController.ROLE_EMPLOYEE);
