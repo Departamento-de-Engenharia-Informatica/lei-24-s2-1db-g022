@@ -50,7 +50,7 @@ class Repositories {
     +getJobRepository()
 }
 
-class jobRepository {
+class JobRepository {
     -List<Job> job
 
     -addJob(job)
@@ -59,15 +59,15 @@ class jobRepository {
 }
 
 RegisterJobController .> Repositories : repositories
-RegisterJobController ..> "1" Job : job
-RegisterJobController ..> "1" jobRepository : jobRepository
+RegisterJobController ..> "1" Job
+RegisterJobController ..> "1" JobRepository
 
 RegisterJobUI .> RegisterJobController
 
 Repositories -> Repositories : instance
-Repositories --> "1" jobRepository
+Repositories --> "1" JobRepository : jobRepository
 
-jobRepository --> "*" Job : job
+JobRepository --> "*" Job : job
 
 Collaborator  <|--  HumanResourcesManager
 Collaborator "1..*" --> "1" Job : jobs

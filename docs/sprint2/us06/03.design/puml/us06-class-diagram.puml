@@ -80,7 +80,7 @@ class Repositories {
     +getBrandRepository()
 }
 
-class vehicleRepository {
+class VehicleRepository {
     -List<Vehicle> vehicle
 
     -addVehicle(vehicle)
@@ -88,7 +88,7 @@ class vehicleRepository {
     +registerVehicle(brand,model,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
 }
 
-class brandRepository {
+class BrandRepository {
     -List<Brand> brand
 
     -addBrand(brand)
@@ -97,27 +97,27 @@ class brandRepository {
 }
 
 RegisterVehicleController .> Repositories : repositories
-RegisterVehicleController .> "1" vehicleRepository : vehicleRepository
-RegisterVehicleController .> "1" brandRepository : brandRepository
-RegisterVehicleController ..> "1" Brand : brand
-RegisterVehicleController ..> "1" Model : model
+RegisterVehicleController .> "1" VehicleRepository
+RegisterVehicleController .> "1" BrandRepository
+RegisterVehicleController ..> "1" Brand
+RegisterVehicleController ..> "1" Model
 
 RegisterVehicleUI .> RegisterVehicleController
 
 Repositories -> Repositories : instance
-Repositories --> "1" vehicleRepository
-Repositories --> "1" brandRepository
+Repositories --> "1" VehicleRepository : vehicleRepository
+Repositories --> "1" BrandRepository : brandRepository
 
-vehicleRepository ---> "*" Vehicle
+VehicleRepository ---> "*" Vehicle
 
-brandRepository --> "*" Brand
+BrandRepository --> "*" Brand
 
 Collaborator  <|--  VehicleFleetManager
 Collaborator "*" -> "*" Vehicle : drives
 
 VehicleFleetManager <-  Vehicle: createdBy
 
-Brand "1" --> "1..*" Model : model
+Brand "1" --> "1..*" Model : models
 Brand "1" --> "1..*" Vehicle : has
 
 Vehicle "1..*" -> "1" Model : has

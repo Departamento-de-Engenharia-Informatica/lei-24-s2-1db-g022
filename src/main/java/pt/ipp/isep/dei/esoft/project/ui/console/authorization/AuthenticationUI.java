@@ -44,6 +44,12 @@ public class AuthenticationUI implements Runnable {
         this.logout();
     }
 
+    /**
+     * Retrieves a list of menu items based on user roles.
+     * This method creates menu items corresponding to different user roles and their associated UIs.
+     *
+     * @return A list of menu items based on user roles.
+     */
     private List<MenuItem> getMenuItemForRoles() {
         List<MenuItem> rolesUI = new ArrayList<>();
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_ADMIN, new AdminUI()));

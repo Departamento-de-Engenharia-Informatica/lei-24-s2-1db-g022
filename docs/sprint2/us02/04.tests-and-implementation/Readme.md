@@ -2,69 +2,59 @@
 
 ## 4. Tests 
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+**Test 1:** Check that it is not possible to create an instance of the Job class with null values - AC1. 
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
+		public void ensureJobIsNotNull() {
+		Job instance = new Job(null);
 	}
 	
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+**Test 2:** Check that it is not possible to create an instance of the Job class with special caracters or numbers - AC2. 
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
+		public void testJobHasNumbers() {
 		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
+		Job instance = new Job("Empreteiro1");
 	}
-
-_It is also recommended to organize this content by subsections._ 
-
 
 ## 5. Construction (Implementation)
 
-### Class CreateTaskController 
+### Class RegisterJobController 
 
 ```java
-public Task createTask(String reference, String description, String informalDescription, String technicalDescription,
-                       Integer duration, Double cost, String taskCategoryDescription) {
-
-	TaskCategory taskCategory = getTaskCategoryByDescription(taskCategoryDescription);
-
-	Employee employee = getEmployeeFromSession();
-	Organization organization = getOrganizationRepository().getOrganizationByEmployee(employee);
-
-	newTask = organization.createTask(reference, description, informalDescription, technicalDescription, duration,
-                                      cost,taskCategory, employee);
-    
-	return newTask;
-}
+    public Optional<Job> registerJob(String name){
+        Optional<Job> newJob = Optional.empty();
+        newJob = getJobRepository().createJob(name);
+        return newJob;
+        }
 ```
 
-### Class Organization
+### Class JobRepository
 
 ```java
-public Optional<Task> createTask(String reference, String description, String informalDescription,
-                                 String technicalDescription, Integer duration, Double cost, TaskCategory taskCategory,
-                                 Employee employee) {
-    
-    Task task = new Task(reference, description, informalDescription, technicalDescription, duration, cost,
-                         taskCategory, employee);
+    public Optional<Job> createJob(String name) {
 
-    addTask(task);
-        
-    return task;
-}
+        // When a Job is added, it should fail if the Job already exists in the list of Jobs.
+        // In order to not return null if the operation fails, we use the Optional class.
+        Optional<Job> optionalJob = Optional.empty();
+
+        Job job = new Job(name);
+
+        if (addJob(job)) {
+
+        optionalJob = Optional.of(job);
+        }
+        return optionalJob;
+        }
 ```
 
 
 ## 6. Integration and Demo 
 
-* A new option on the Employee menu options was added.
+* A new option on the HRM menu options was added.
 
-* For demo purposes some tasks are bootstrapped while system starts.
-
+* For demo purposes some jobs are bootstrapped while system starts.
 
 ## 7. Observations
 

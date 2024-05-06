@@ -1,6 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
-
 import pt.ipp.isep.dei.esoft.project.ui.console.ShowTextUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
@@ -8,13 +7,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The VfmUI class represents the user interface for Vehicle and Equipment Fleet Managers.
+ * It provides functionality for displaying and interacting with VFM menu options.
+ * Instances of this class are runnable.
+ *
  * @author Group22
  */
-
 public class VfmUI implements Runnable {
+
+    /**
+     * Constructs a VfmUI object.
+     */
     public VfmUI() {
     }
 
+    /**
+     * Runs the Vehicle and Equipment Fleet Manager user interface.
+     * Displays menu options and handles user input.
+     */
     public void run() {
         List<MenuItem> options = new ArrayList<MenuItem>();
         options.add(new MenuItem("Option 1", new ShowTextUI("You have chosen Option 1.")));

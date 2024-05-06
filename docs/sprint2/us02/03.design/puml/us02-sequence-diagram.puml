@@ -12,7 +12,7 @@ participant ":RegisterJobUI" as UI
 participant ":RegisterJobController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant ":jobRepository" as JR
+participant "jobRepository\n:JobRepository" as JR
 participant "job\n:Job" as JOB
 
 activate HRM
