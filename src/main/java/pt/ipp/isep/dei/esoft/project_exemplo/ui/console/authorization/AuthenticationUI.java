@@ -1,11 +1,9 @@
-package pt.ipp.isep.dei.esoft.project.ui.console.authorization;
+package pt.ipp.isep.dei.esoft.project_exemplo.ui.console.authorization;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
-import pt.ipp.isep.dei.esoft.project.ui.console.menu.AdminUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.menu.HrmUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.menu.MenuItem;
-import pt.ipp.isep.dei.esoft.project.ui.console.menu.VfmUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
+import pt.ipp.isep.dei.esoft.project_exemplo.application.controller.authorization.AuthenticationController;
+import pt.ipp.isep.dei.esoft.project_exemplo.ui.console.menu.AdminUI;
+import pt.ipp.isep.dei.esoft.project_exemplo.ui.console.menu.MenuItem;
+import pt.ipp.isep.dei.esoft.project_exemplo.ui.console.utils.Utils;
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
 import java.util.ArrayList;
@@ -14,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @author Group22
+ * @author Paulo Maio pam@isep.ipp.pt
  */
 
 public class AuthenticationUI implements Runnable {
@@ -47,13 +45,10 @@ public class AuthenticationUI implements Runnable {
     private List<MenuItem> getMenuItemForRoles() {
         List<MenuItem> rolesUI = new ArrayList<>();
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_ADMIN, new AdminUI()));
-        rolesUI.add(new MenuItem(AuthenticationController.ROLE_HRM, new HrmUI()));
-        rolesUI.add(new MenuItem(AuthenticationController.ROLE_VFM, new VfmUI()));
+
         //TODO: Complete with other user roles and related RoleUI
         return rolesUI;
     }
-
-
 
     private boolean doLogin() {
         System.out.println("\n\n--- LOGIN UI ---------------------------");

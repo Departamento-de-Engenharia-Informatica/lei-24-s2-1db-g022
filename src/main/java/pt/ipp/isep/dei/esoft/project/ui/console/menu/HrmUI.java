@@ -11,8 +11,8 @@ import java.util.List;
  * @author Group22
  */
 
-public class AdminUI implements Runnable {
-    public AdminUI() {
+public class HrmUI implements Runnable {
+    public HrmUI() {
     }
 
     public void run() {
@@ -23,7 +23,7 @@ public class AdminUI implements Runnable {
 
         int option = 0;
         do {
-            option = Utils.showAndSelectIndex(options, "\n\n--- ADMIN MENU -------------------------");
+            option = Utils.showAndSelectIndex(options, "\n\n--- Human Resources Manager MENU -------------------------");
 
             if ((option >= 0) && (option < options.size())) {
                 options.get(option).run();

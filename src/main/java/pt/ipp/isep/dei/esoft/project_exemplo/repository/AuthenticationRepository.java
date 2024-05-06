@@ -1,11 +1,8 @@
-package pt.ipp.isep.dei.esoft.project.repository;
+package pt.ipp.isep.dei.esoft.project_exemplo.repository;
 
 import pt.isep.lei.esoft.auth.AuthFacade;
 import pt.isep.lei.esoft.auth.UserSession;
 
-/**
- * @author Group22
- */
 public class AuthenticationRepository {
     private final AuthFacade authenticationFacade;
 

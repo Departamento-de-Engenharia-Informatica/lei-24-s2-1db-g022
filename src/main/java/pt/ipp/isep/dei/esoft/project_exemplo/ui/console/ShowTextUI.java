@@ -1,9 +1,9 @@
-package pt.ipp.isep.dei.esoft.project.ui.console;
+package pt.ipp.isep.dei.esoft.project_exemplo.ui.console;
 
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * @author Group22
+ * @author Paulo Maio pam@isep.ipp.pt
  */
 public class ShowTextUI implements Runnable {
 
