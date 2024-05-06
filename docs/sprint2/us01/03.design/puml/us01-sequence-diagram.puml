@@ -13,7 +13,7 @@ participant ":RegisterSkillUI" as UI
 participant ":RegisterSkillController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant ":SkillRepository" as SR
+participant "skillRepository\n:SkillRepository" as SR
 participant "skill\n:Skill" as SKILL
 
 activate HRM

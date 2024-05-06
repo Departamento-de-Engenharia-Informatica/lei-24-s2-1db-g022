@@ -50,7 +50,7 @@ class Repositories {
     + getSkillRepository()
 }
 
-class skillRepository {
+class SkillRepository {
     - List <Skill> skill
 
     - addSkill(Skill)
@@ -61,11 +61,13 @@ class skillRepository {
 RegisterSkillController .> Repositories : repositories
 RegisterSkillUI .> RegisterSkillController
 Repositories -> Repositories : instance
-Repositories --> "1" skillRepository : skillRepository
-skillRepository "1" --> "*" Skill : skill
+Repositories --> "1" SkillRepository : SkillRepository
+SkillRepository "1" --> "*" Skill : skill
 Collaborator  <|--  HumanResourcesManager
-RegisterSkillController ..> "1" Skill : skill
+RegisterSkillController ..> Skill
+RegisterSkillController ..> SkillRepository
+
 HumanResourcesManager <--  Skill: createdBy
-Collaborator "*" --> "*" Skill : skills
+Collaborator "*" --> "*" Skill : has
 
 @enduml

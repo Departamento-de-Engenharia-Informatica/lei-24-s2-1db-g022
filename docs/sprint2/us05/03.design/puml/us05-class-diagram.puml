@@ -84,11 +84,11 @@ Repositories --> "1" CollaboratorRepository
 TeamRepository ---> "*" Team : team
 CollaboratorRepository ---> "*" Collaborator : collaborator
 
-GenerateTeamController ...> TeamRepository : teamRepository
-GenerateTeamController ...> SkillRepository : skillRepository
-GenerateTeamController ...> CollaboratorRepository : collaborator
-GenerateTeamController .> Collaborator : collaborator
-GenerateTeamController .> Team : team
+GenerateTeamController ...> TeamRepository
+GenerateTeamController ...> SkillRepository
+GenerateTeamController ...> CollaboratorRepository
+GenerateTeamController .> Collaborator
+GenerateTeamController .> Team
 
 Collaborator  <|-- HumanResourcesManager
 

@@ -6,6 +6,7 @@ skinparam shadowing false
 participant ":GenerateTeamController" as CRL
 participant ":Repositories" as REP
 participant "repositories\n:Repositories" as PLAT
+participant "collaborator\n:Collaborator" as CL
 
 autonumber 11
 --> CRL: getCollaboratorBySkill(skillList)
@@ -29,10 +30,10 @@ PLAT --> CRL : collaboratorRepository
 
 deactivate PLAT
 
-CRL -> CollaboratorRepository : getCollaboratorBySkill(skillList)
-activate CollaboratorRepository
-CollaboratorRepository--> CRL : collaboratorList
-deactivate CollaboratorRepository
+CRL -> CL : getCollaboratorBySkill(skillList)
+activate CL
+CL--> CRL : collaboratorList
+deactivate CL
 
 end
 autonumber 12
