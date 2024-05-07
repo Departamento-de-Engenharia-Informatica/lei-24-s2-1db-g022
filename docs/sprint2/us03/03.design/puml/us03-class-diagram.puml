@@ -14,6 +14,8 @@ class RegisterCollaboratorController {
 
     + RegisterCollaboratorController()
     + registerCollaborator(name, birthdate, admission date, address, \nmobile, email, ID doc type, respective number, job name)
+    + getJobList()
+    + getJobByName(jobName)
 }
 
 class RegisterCollaboratorUI {
@@ -58,20 +60,32 @@ class CollaboratorRepository {
 
     - addCollaborator(collaborator)
     - validateCollaborator(collaborator)
-    + registerCollaborator(name, birthdate, admission date, address, \nmobile, email, ID doc type, respective number, job name)
+    + registerCollaborator(name, birthdate, admission date, address, \nmobile, email, ID doc type, respective number, job)
 }
+
+class Job {
+    -String name
+}
+
 Collaborator  <|---  HumanResourcesManager
+Collaborator  -> Job : has
 
 HumanResourcesManager <--  Collaborator: createdBy
 
 RegisterCollaboratorController .> Repositories : repositories
-RegisterCollaboratorController ..> JobRepository
-RegisterCollaboratorController ..> CollaboratorRepository
+RegisterCollaboratorController ..> "1" JobRepository
+RegisterCollaboratorController ..> "1" CollaboratorRepository
+RegisterCollaboratorController ..> Collaborator
+RegisterCollaboratorController ..> Job
 
 RegisterCollaboratorUI .> RegisterCollaboratorController
 
 Repositories -> Repositories : instance
+Repositories -> JobRepository : jobRepository
+Repositories --> CollaboratorRepository : collaboratorRepository
 
 CollaboratorRepository --> Collaborator
+
+Job <- JobRepository : job
 
 @enduml

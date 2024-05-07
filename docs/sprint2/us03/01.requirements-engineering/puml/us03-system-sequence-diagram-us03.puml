@@ -15,22 +15,22 @@ activate HRM
     HRM -> System : asks to register a new collaborator
     activate System
 
+    System --> HRM : shows job list and asks to type one
+    deactivate System
+
+    HRM -> System :  types a job
+    activate System
+
     System --> HRM : requests data (name, birthdate, admission date, address, \nmobile, email, ID doc type and respective number)
     deactivate System
 
     HRM -> System : types requested data
     activate System
 
-    System --> HRM : requests job (name)
+    System --> HRM : shows all data and requests confirmation
     deactivate System
 
-    HRM -> System :  types a job (name)
-    activate System
-
-    System --> HRM : shows all data and job confirmation
-    deactivate System
-
-    HRM -> System : confirms data and job
+    HRM -> System : confirms data
     activate System
 
     System --> HRM : displays operation success
