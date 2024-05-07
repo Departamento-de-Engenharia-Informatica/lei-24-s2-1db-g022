@@ -1,70 +1,60 @@
-# US01 - As a Human Resources Manager (HRM), I want to register skills that may be appointed to a collaborator.
+# US01 - Register a skill.
 
-## 4. Tests 
+## 4. Tests
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+**Test 1:** Check that it is not possible to create an instance of the Skill class with null values - AC1.
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
+		public void ensureSkillIsNotNull() {
+		Skill instance = new Skill(null);
 	}
-	
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+
+**Test 2:** Check that it is not possible to create an instance of the Skill class with special caracters or numbers - AC2.
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
+		public void testSkillHasNumbers() {
 		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
+		Skill instance = new Skill("Podador1");
 	}
-
-_It is also recommended to organize this content by subsections._ 
-
 
 ## 5. Construction (Implementation)
 
-### Class CreateTaskController 
+### Class RegisterSkillController
 
 ```java
-public Task createTask(String reference, String description, String informalDescription, String technicalDescription,
-                       Integer duration, Double cost, String taskCategoryDescription) {
-
-	TaskCategory taskCategory = getTaskCategoryByDescription(taskCategoryDescription);
-
-	Employee employee = getEmployeeFromSession();
-	Organization organization = getOrganizationRepository().getOrganizationByEmployee(employee);
-
-	newTask = organization.createTask(reference, description, informalDescription, technicalDescription, duration,
-                                      cost,taskCategory, employee);
-    
-	return newTask;
-}
+    public Optional<Skill> registerSkill(String name){
+        Optional<Skill> newSkill = Optional.empty();
+        newSkill = getSkillRepository().createSkill(name);
+        return newSkill;
+        }
 ```
 
-### Class Organization
+### Class SkillRepository
 
 ```java
-public Optional<Task> createTask(String reference, String description, String informalDescription,
-                                 String technicalDescription, Integer duration, Double cost, TaskCategory taskCategory,
-                                 Employee employee) {
-    
-    Task task = new Task(reference, description, informalDescription, technicalDescription, duration, cost,
-                         taskCategory, employee);
+    public Optional<Skill> createSkill(String name) {
 
-    addTask(task);
-        
-    return task;
-}
+        // When a Skill is added, it should fail if the Skill already exists in the list of Skills.
+        // In order to not return null if the operation fails, we use the Optional class.
+        Optional<Skill> optionalSkill = Optional.empty();
+
+        Skill skill = new Skill(name);
+
+        if (addSkill(skill)) {
+
+        optionalSkill = Optional.of(skill);
+        }
+        return optionalSkill;
+        }
 ```
 
 
-## 6. Integration and Demo 
+## 6. Integration and Demo
 
-* A new option on the Employee menu options was added.
+* A new option on the HRM menu options was added.
 
-* For demo purposes some tasks are bootstrapped while system starts.
-
+* For demo purposes some skills are bootstrapped while system starts.
 
 ## 7. Observations
 

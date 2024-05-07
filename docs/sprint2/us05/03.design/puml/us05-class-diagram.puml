@@ -1,0 +1,100 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class GenerateTeamController {
+    - getCollaboratorBySkill(skillList)
+    - createTeam(minSize,maxSize,collaboratorList,skillList)
+    + GenerateTeamController()
+    + hasSkillByName(skillName)
+    + generateTeams(minSize,maxSize,skillList)
+    + registerProposalTeam(team)
+}
+
+class Team {
+    - List<Collaborator> Collaborator
+    + Team(List<Collaborator>)
+    - validateVehicle(vehicle)
+}
+
+class GenerateTeamUI {
+}
+
+class Collaborator {
+    -String name
+    -List <Skill> skill
+    -Job job
+    -Date dateOfBirth
+    -Date admissionDate
+    -Address address
+    -int phoneNumber
+    -String email
+    -int cc
+    -int cardNumber
+
+    + Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, cardNumber)
+}
+
+class HumanResourcesManager {
+}
+
+class Repositories {
+
+    - Repositories()
+    + getInstance() : Repositories
+    + getTeamRepository()
+    + getCollaboratorRepository()
+    + getSkillRepository()
+}
+
+class TeamRepository {
+    - List <Team> team
+    - addTeam(team)
+    + registerProposalTeam(team)
+}
+
+class SkillRepository {
+    - List <Skill> skills
+    + hasSkillByName(skillName)
+}
+
+class CollaboratorRepository {
+    - List <Collaborator> collaborators
+    + getCollaboratorBySkill(skillList)
+}
+
+class HumanResourcesManager{}
+
+GenerateTeamController .> Repositories : repositories
+
+GenerateTeamUI .> GenerateTeamController
+Repositories -> Repositories : instance
+
+Repositories --> "1" TeamRepository
+Repositories --> "1" SkillRepository
+Repositories --> "1" CollaboratorRepository
+
+TeamRepository ---> "*" Team : team
+CollaboratorRepository ---> "*" Collaborator : collaborator
+
+GenerateTeamController ...> TeamRepository
+GenerateTeamController ...> SkillRepository
+GenerateTeamController ...> CollaboratorRepository
+GenerateTeamController .> Collaborator
+GenerateTeamController .> Team
+
+Collaborator  <|-- HumanResourcesManager
+
+HumanResourcesManager "1" --> "1..*" Team : defines
+Collaborator "1..*" --> "1" Team : contains
+
+
+
+@enduml

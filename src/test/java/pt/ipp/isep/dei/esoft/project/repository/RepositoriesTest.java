@@ -2,25 +2,40 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class RepositoriesTest {
+/**
+ * Contains unit tests for the Repositories class.
+ * Validates the functionality of the getInstance and getJobRepository methods.
+ *
+ * @author Group22
+ */
+public class RepositoriesTest {
 
+    /**
+     * Tests if the getInstance method returns a non-null instance of Repositories.
+     */
     @Test
     void testGetInstance() {
         Repositories instance = Repositories.getInstance();
         assertNotNull(instance);
     }
 
+    /**
+     * Tests if the getJobRepository method returns a non-null instance of JobRepository.
+     */
     @Test
-    void testGetOrganizationRepository() {
+    void testGetJobRepository() {
         Repositories instance = Repositories.getInstance();
-        assertNotNull(instance.getOrganizationRepository());
+        assertNotNull(instance.getJobRepository());
     }
 
+    /**
+     * Tests if the getSkillRepository method returns a non-null instance of SkillRepository.
+     */
     @Test
-    void testGetTaskCategoryRepository() {
+    void testGetSkillRepository() {
         Repositories instance = Repositories.getInstance();
-        assertNotNull(instance.getTaskCategoryRepository());
+        assertNotNull(instance.getSkillRepository());
     }
 }

@@ -7,11 +7,13 @@ import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 import java.util.List;
 
 /**
- * @author Paulo Maio pam@isep.ipp.pt
+ * @author Group22
  */
 public class AuthenticationController {
 
     public static final String ROLE_ADMIN = "ADMINISTRATOR";
+    public static final String ROLE_HRM = "HRM";
+    public static final String ROLE_VFM = "VFM";
     public static final String ROLE_EMPLOYEE = "EMPLOYEE";
 
     //private final ApplicationSession applicationSession;

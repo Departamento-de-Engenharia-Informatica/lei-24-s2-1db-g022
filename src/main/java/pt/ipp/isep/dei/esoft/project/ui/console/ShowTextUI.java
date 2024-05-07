@@ -3,7 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * @author Paulo Maio pam@isep.ipp.pt
+ * @author Group22
  */
 public class ShowTextUI implements Runnable {
 

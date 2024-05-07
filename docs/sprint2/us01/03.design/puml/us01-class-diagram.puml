@@ -1,0 +1,73 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class Skill {
+    - String name
+
+    - validateSkill(Skill)
+    + Skill(name)
+}
+
+class RegisterSkillController {
+
+    + RegisterSkillController()
+    + registerSkill(name)
+}
+
+class RegisterSkillUI {
+}
+
+class Collaborator {
+    -String name
+    -List<Skill> skill
+    -Job job
+    -Date dateOfBirth
+    -Date admissionDate
+    -Address address
+    -int phoneNumber
+    -String email
+    -int cc
+    -int cardNumber
+
+    + Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, cardNumber)
+}
+
+class HumanResourcesManager {
+}
+
+class Repositories {
+
+    - Repositories()
+    + getInstance() : Repositories
+    + getSkillRepository()
+}
+
+class SkillRepository {
+    - List <Skill> skill
+
+    - addSkill(Skill)
+    - validateSkill(Skill)
+    + createSkill(name)
+}
+
+RegisterSkillController .> Repositories : repositories
+RegisterSkillUI .> RegisterSkillController
+Repositories -> Repositories : instance
+Repositories --> "1" SkillRepository : SkillRepository
+SkillRepository "1" --> "*" Skill : skill
+Collaborator  <|--  HumanResourcesManager
+RegisterSkillController ..> Skill
+RegisterSkillController ..> SkillRepository
+
+HumanResourcesManager <--  Skill: createdBy
+Collaborator "*" --> "*" Skill : has
+
+@enduml

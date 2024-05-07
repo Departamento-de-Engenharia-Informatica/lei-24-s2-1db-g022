@@ -1,0 +1,48 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":GenerateTeamController" as CRL
+participant ":Repositories" as REP
+participant "repositories\n:Repositories" as PLAT
+participant "skillRepository:\nSkillRepository" as SkillRepository
+
+autonumber 6
+--> CRL: hasSkillByName(skillName)
+
+autonumber 6.1
+
+activate CRL
+group Has Skill By Name
+
+CRL -> REP : getInstance()
+activate REP
+
+    REP --> CRL : repositories
+
+deactivate REP
+
+CRL -> PLAT : getSkillRepository()
+
+activate PLAT
+
+    PLAT --> CRL : skillRepository
+
+deactivate PLAT
+
+CRL -> SkillRepository : hasSkillByName(skillName)
+
+activate SkillRepository
+
+   SkillRepository --> CRL : true/false
+
+deactivate SkillRepository
+end
+
+autonumber 7
+<--CRL : true/false
+deactivate CRL
+
+
+@enduml

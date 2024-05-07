@@ -15,7 +15,6 @@ class Collaborator {
     name
     dateOfBirth
     admissionDate
-    address
     phoneNumber
     email
     cc

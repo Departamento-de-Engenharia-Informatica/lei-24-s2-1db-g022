@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.application.session;
 
+import pt.ipp.isep.dei.esoft.project.application.session.UserSession;
 import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
@@ -8,6 +9,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * @author Group22
+ */
 public class ApplicationSession {
     private final AuthenticationRepository authenticationRepository;
     private static final String CONFIGURATION_FILENAME = "src/main/resources/config.properties";
@@ -18,7 +22,7 @@ public class ApplicationSession {
         Properties props = getProperties();
     }
 
-    public UserSession getCurrentSession() {
+    public pt.ipp.isep.dei.esoft.project.application.session.UserSession getCurrentSession() {
         pt.isep.lei.esoft.auth.UserSession userSession = this.authenticationRepository.getCurrentUserSession();
         return new UserSession(userSession);
     }

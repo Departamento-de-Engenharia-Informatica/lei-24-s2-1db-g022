@@ -4,6 +4,9 @@ import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
 import java.util.List;
 
+/**
+ * @author Group22
+ */
 public class UserSession {
 
     private pt.isep.lei.esoft.auth.UserSession userSession;

@@ -1,0 +1,125 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class Brand {
+    -String name
+    -List <Model> model
+
+    -addModel(model)
+    -validateBrand(brand)
+    -validateModel(model)
+    +Brand(name)
+    +registerModel(modelName)
+}
+
+class Model {
+    -String name
+
+    -validateModel(model)
+    +Model(name)
+}
+
+class Vehicle {
+    -Brand brand
+    -Model model
+    -String type
+    -float tare
+    -float grossWeight
+    -int currentKm
+    -Date registerDate
+    -Date acquisitionDate
+    -int checkupFrequency
+    -String licensePlate
+
+    -validateVehicle(vehicle)
+    +Vehicle(brand,model,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
+}
+
+class RegisterVehicleController {
+
+    -createBrand(brandName)
+    -createModel(modelName)
+    +RegisterVehicleController()
+    +registerVehicle(brandName,modelName,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
+}
+
+class RegisterVehicleUI {
+}
+
+class Collaborator {
+    -String name
+    -List <Skill> skill
+    -Job job
+    -Date dateOfBirth
+    -Date admissionDate
+    -Address address
+    -int phoneNumber
+    -String email
+    -int cc
+    -int cardNumber
+
+    +Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, cardNumber)
+}
+
+class VehicleFleetManager {
+}
+
+class Repositories {
+
+    -Repositories()
+    +getInstance() : Repositories
+    +getVehicleRepository()
+    +getBrandRepository()
+}
+
+class VehicleRepository {
+    -List<Vehicle> vehicle
+
+    -addVehicle(vehicle)
+    -validateVehicle(vehicle)
+    +registerVehicle(brand,model,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
+}
+
+class BrandRepository {
+    -List<Brand> brand
+
+    -addBrand(brand)
+    -validateBrand(brand)
+    +registerBrand(brandName)
+}
+
+RegisterVehicleController .> Repositories : repositories
+RegisterVehicleController .> "1" VehicleRepository
+RegisterVehicleController .> "1" BrandRepository
+RegisterVehicleController ..> "1" Brand
+RegisterVehicleController ..> "1" Model
+
+RegisterVehicleUI .> RegisterVehicleController
+
+Repositories -> Repositories : instance
+Repositories --> "1" VehicleRepository : vehicleRepository
+Repositories --> "1" BrandRepository : brandRepository
+
+VehicleRepository ---> "*" Vehicle
+
+BrandRepository --> "*" Brand
+
+Collaborator  <|--  VehicleFleetManager
+Collaborator "*" -> "*" Vehicle : drives
+
+VehicleFleetManager <-  Vehicle: createdBy
+
+Brand "1" --> "1..*" Model : models
+Brand "1" --> "1..*" Vehicle : has
+
+Vehicle "1..*" -> "1" Model : has
+
+@enduml

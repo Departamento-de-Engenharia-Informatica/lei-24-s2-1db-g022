@@ -74,6 +74,25 @@ By definition a set can´t have duplicates. Assuring no duplicates is not a busi
 > **Answer:**
 >the UX/UI is up to dev teams.
 
+> **Question:**
+>
+>1. Should we add a description or anything atribute for the Job registration?
+>2. The id of Job is generated authomatically by the system?
+>3. I guess a job can be asign to a collaborator if he has the skills require for this job. How do we manage this relation. Does he HRM do it manually, or should we have an atribute in job specifiying the skills needed.
+>4. Do the job has to be register before registering a collaborator?
+>5. When we register a team, the collaborators has to have a job?
+>6. What do you want to see as an output?
+
+>
+> **Answer:**
+>
+>1. not need to, job is just a name;
+>2. don't know what is job id, job is just a name;
+>3. no; a colaborator is hired for a job and can have skills or not;
+>4. a colaborator is hired for a (valid) job;
+>5. see 3 and 4;
+>6. the UX/UI is to be decided by dev team.
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
