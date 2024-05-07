@@ -1,0 +1,44 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class ApplicationSession
+{
+    + static getInstance()
+    + getCurrentSession()
+}
+
+class UserSession
+{
+    + getUserEmail()
+}
+
+class Collaborator {
+    - String name
+    - Date dateOfBirth
+    - Date admissionDate
+    - String address
+    - int phoneNumber
+    - String email
+    - int cc
+    - int cardNumber
+}
+
+class Job {
+    - String name
+}
+
+class HumanResourceManager {
+}
+
+Collaborator  <|---  HumanResourceManager
+HumanResourceManager "1" -- "1..*" Collaborator : Registers >
+Collaborator "1..*" - "1" Job : Has >
+@enduml
