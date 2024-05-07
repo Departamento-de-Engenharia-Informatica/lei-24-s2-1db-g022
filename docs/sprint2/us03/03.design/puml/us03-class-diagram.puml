@@ -9,36 +9,69 @@ skinparam classAttributeIconSize 0
 
 'left to right direction
 
-class ApplicationSession
-{
-    + static getInstance()
-    + getCurrentSession()
+
+class RegisterCollaboratorController {
+
+    + RegisterCollaboratorController()
+    + registerCollaborator(name, birthdate, admission date, address, \nmobile, email, ID doc type, respective number, job name)
 }
 
-class UserSession
-{
-    + getUserEmail()
+class RegisterCollaboratorUI {
 }
 
 class Collaborator {
-    - String name
-    - Date dateOfBirth
-    - Date admissionDate
-    - String address
-    - int phoneNumber
-    - String email
-    - int cc
-    - int cardNumber
+    -String name
+    -List<Skill> skill
+    -Job job
+    -Date dateOfBirth
+    -Date admissionDate
+    -Address address
+    -int phoneNumber
+    -String email
+    -int cc
+    -int cardNumber
+
+    - validateCollaborator(collaborator)
+    + Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, cardNumber)
 }
 
-class Job {
-    - String name
+class HumanResourcesManager {
 }
 
-class HumanResourceManager {
+class Repositories {
+
+    - Repositories()
+    + getInstance() : Repositories
+    + getJobRepository()
+    + getCollaboratorRepository()
 }
 
-Collaborator  <|---  HumanResourceManager
-HumanResourceManager "1" -- "1..*" Collaborator : Registers >
-Collaborator "1..*" - "1" Job : Has >
+class JobRepository {
+    - List <Job> job
+
+    + getJobList()
+    + getJobByName(jobName)
+}
+
+class CollaboratorRepository {
+    - List <Collaborator> collaborator
+
+    - addCollaborator(collaborator)
+    - validateCollaborator(collaborator)
+    + registerCollaborator(name, birthdate, admission date, address, \nmobile, email, ID doc type, respective number, job name)
+}
+Collaborator  <|---  HumanResourcesManager
+
+HumanResourcesManager <--  Collaborator: createdBy
+
+RegisterCollaboratorController .> Repositories : repositories
+RegisterCollaboratorController ..> JobRepository
+RegisterCollaboratorController ..> CollaboratorRepository
+
+RegisterCollaboratorUI .> RegisterCollaboratorController
+
+Repositories -> Repositories : instance
+
+CollaboratorRepository --> Collaborator
+
 @enduml

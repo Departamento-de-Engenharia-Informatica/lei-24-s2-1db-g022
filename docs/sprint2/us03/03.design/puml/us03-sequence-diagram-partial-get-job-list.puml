@@ -27,7 +27,7 @@ activate CTRL
         PLAT -> CTRL : jobRepository
         deactivate PLAT
 
-        CTRL -> JobRepository : getJobList
+        CTRL -> JobRepository : getJobList()
         activate JobRepository
 
         JobRepository --> CTRL : jobList

@@ -1,0 +1,46 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+
+participant "collaboratorRepository:\nCollaboratorRepository" as CollaboratorRepository
+participant "collaborator:\nCollaborator" as Collaborator
+
+autonumber 17
+-> CollaboratorRepository : registerCollaborator(name, birthdate, \nadmission date, address, mobile, \nemail, ID doc type, respective number, job)
+
+
+autonumber 17.1
+
+activate CollaboratorRepository
+    group Create Collaborator
+CollaboratorRepository -> Collaborator**: create(name, birthdate, \nadmission date, address, mobile, \nemail, ID doc type, respective number, job)
+
+            activate Collaborator
+
+                Collaborator -> Collaborator: validateCollaborator(collaborator)
+                Collaborator --> CollaboratorRepository : collaborator
+
+            deactivate Collaborator
+
+        CollaboratorRepository -> CollaboratorRepository: addCollaborator(collaborator)
+
+        activate CollaboratorRepository
+            CollaboratorRepository -> CollaboratorRepository: validateCollaborator(collaborator)
+            activate CollaboratorRepository
+
+                CollaboratorRepository --> CollaboratorRepository : true/false
+            deactivate CollaboratorRepository
+
+            CollaboratorRepository --> CollaboratorRepository : true/false
+
+        deactivate CollaboratorRepository
+    end group
+
+    autonumber 18
+<-- CollaboratorRepository : collaborator
+
+
+
+@enduml

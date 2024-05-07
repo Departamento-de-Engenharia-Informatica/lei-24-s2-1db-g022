@@ -46,7 +46,7 @@ activate HRM
         HRM -> UI : confirms data
         activate UI
 
-        UI -> CTRL : createCollaborator(name, birthdate, \nadmission date, address, mobile, \nemail, ID doc type, respective number, \njob name)
+        UI -> CTRL : registerCollaborator(name, birthdate, \nadmission date, address, mobile, \nemail, ID doc type, respective number, \njob name)
         activate CTRL
 
 
