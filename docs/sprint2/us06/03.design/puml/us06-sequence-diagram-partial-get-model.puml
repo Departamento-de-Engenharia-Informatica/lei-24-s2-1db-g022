@@ -7,28 +7,20 @@ participant ":RegisterVehicleController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "brand:\nBrand" as Brand
-participant "model:\nModel" as Model
 
 autonumber 9
--> CTRL: createModel(brand,modelName)
+-> CTRL: getModel(brand,modelName)
 
 autonumber 9.1
 activate CTRL
-    group Create Model Object
+    group Get Model Object
 
         CTRL -> Brand : hasModelByName(modelName)
 
         activate Brand
 
-            Brand -> Model**: create(name)
+            Brand --> CTRL : true/false
 
-            activate Model
-
-                Model --> Brand : model
-
-            deactivate Model
-
-            Brand -> CTRL : model
         deactivate Brand
     end
 

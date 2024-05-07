@@ -15,7 +15,7 @@ class Brand {
 
     +Brand(name)
     +addModel(model)
-    +hasModeByName(modelName)
+    +hasModelByName(modelName)
 }
 
 class Model {
@@ -44,8 +44,8 @@ class Vehicle {
 class RegisterVehicleController {
 
     +RegisterVehicleController()
-    -createBrand(brandName)
-    -createModel(modelName)
+    -getBrand(brandName)
+    -getModel(brand,modelName)
     +registerVehicle(brandName,modelName,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
 }
 

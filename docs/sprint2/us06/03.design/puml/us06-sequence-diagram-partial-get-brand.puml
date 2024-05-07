@@ -7,14 +7,13 @@ participant ":RegisterVehicleController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "brandRepository:\nBrandRepository" as BR
-participant "brand:\nBrand" as Brand
 
 autonumber 7
--> CTRL: createBrand(brandName)
+-> CTRL: getBrand(brandName)
 
 autonumber 7.1
 activate CTRL
-    group Create Brand Object
+    group Get Brand Object
 
     CTRL -> RepositorySingleton : getInstance()
             activate RepositorySingleton
@@ -32,15 +31,7 @@ activate CTRL
 
         activate BR
 
-            BR -> Brand**: create(name)
-
-            activate Brand
-
-                Brand --> BR : brand
-
-            deactivate Brand
-
-            BR -> CTRL : brand
+            BR -> CTRL : true/false
         deactivate BR
     end
 
