@@ -13,17 +13,14 @@ class Brand {
     -String name
     -List <Model> model
 
-    -addModel(model)
-    -validateBrand(brand)
-    -validateModel(model)
     +Brand(name)
-    +registerModel(modelName)
+    +addModel(model)
+    +hasModeByName(modelName)
 }
 
 class Model {
     -String name
 
-    -validateModel(model)
     +Model(name)
 }
 
@@ -38,16 +35,17 @@ class Vehicle {
     -Date acquisitionDate
     -int checkupFrequency
     -String licensePlate
+    -List<CheckUp> checkUpList;
 
-    -validateVehicle(vehicle)
     +Vehicle(brand,model,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
+    -validateVehicle(vehicle)
 }
 
 class RegisterVehicleController {
 
+    +RegisterVehicleController()
     -createBrand(brandName)
     -createModel(modelName)
-    +RegisterVehicleController()
     +registerVehicle(brandName,modelName,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
 }
 
@@ -91,9 +89,8 @@ class VehicleRepository {
 class BrandRepository {
     -List<Brand> brand
 
-    -addBrand(brand)
-    -validateBrand(brand)
-    +registerBrand(brandName)
+    +addBrand(brand)
+    +hasBrandByName(brandName)
 }
 
 RegisterVehicleController .> Repositories : repositories
@@ -117,7 +114,7 @@ Collaborator "*" -> "*" Vehicle : drives
 
 VehicleFleetManager <-  Vehicle: createdBy
 
-Brand "1" --> "1..*" Model : models
+Brand "1" --> "1..*" Model : has
 Brand "1" --> "1..*" Vehicle : has
 
 Vehicle "1..*" -> "1" Model : has

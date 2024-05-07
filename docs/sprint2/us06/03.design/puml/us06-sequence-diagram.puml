@@ -15,7 +15,7 @@ participant "vehicleRepository\n:VehicleRepository" as VR
 
 activate VFM
 
-        VFM -> UI : asks to register a new job
+        VFM -> UI : asks to register a new vehicle
     activate UI
 
         UI --> VFM : requests data (brandName,modelName,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)

@@ -16,7 +16,7 @@ autonumber 9.1
 activate CTRL
     group Create Model Object
 
-        CTRL -> Brand : registerModel(modelName)
+        CTRL -> Brand : hasModelByName(modelName)
 
         activate Brand
 
@@ -24,21 +24,9 @@ activate CTRL
 
             activate Model
 
-                Model -> Model: validateModel(model)
                 Model --> Brand : model
 
             deactivate Model
-
-        Brand -> Brand: addModel(model)
-
-        activate Brand
-            Brand -> Brand: validateModel(model)
-            activate Brand
-                Brand --> Brand : true/false
-            deactivate Brand
-
-            Brand --> Brand : true/false
-        deactivate Brand
 
             Brand -> CTRL : model
         deactivate Brand

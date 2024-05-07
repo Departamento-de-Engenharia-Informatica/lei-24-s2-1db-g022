@@ -28,7 +28,7 @@ activate CTRL
                 PLAT --> CTRL : brandRepository
             deactivate PLAT
 
-        CTRL -> BR : registerBrand(brandName)
+        CTRL -> BR : hasBrandByName(brandName)
 
         activate BR
 
@@ -36,21 +36,9 @@ activate CTRL
 
             activate Brand
 
-                Brand -> Brand: validateBrand(brand)
                 Brand --> BR : brand
 
             deactivate Brand
-
-        BR -> BR: addBrand(brand)
-
-        activate BR
-            BR -> BR: validateBrand(brand)
-            activate BR
-                BR --> BR : true/false
-            deactivate BR
-
-            BR --> BR : true/false
-        deactivate BR
 
             BR -> CTRL : brand
         deactivate BR
