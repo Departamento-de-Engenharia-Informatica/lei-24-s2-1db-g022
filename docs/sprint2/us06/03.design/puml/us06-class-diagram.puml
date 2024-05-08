@@ -37,16 +37,15 @@ class Vehicle {
     -String licensePlate
     -List<CheckUp> checkUpList;
 
-    +Vehicle(brand,model,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
+    +Vehicle(type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate,brand,model)
     -validateVehicle(vehicle)
 }
 
 class RegisterVehicleController {
 
     +RegisterVehicleController()
-    -getBrand(brandName)
-    -getModel(brand,modelName)
-    +registerVehicle(brandName,modelName,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
+    -getBrand(brandName,modelName)
+    +registerVehicle(type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate,brandName,modelName)
 }
 
 class RegisterVehicleUI {
@@ -83,13 +82,14 @@ class VehicleRepository {
 
     -addVehicle(vehicle)
     -validateVehicle(vehicle)
-    +registerVehicle(brand,model,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
+    +registerVehicle(type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate,brand,model)
 }
 
 class BrandRepository {
     -List<Brand> brand
 
     +addBrand(brand)
+    +getBrandByModelName(modelName)
     +hasBrandByName(brandName)
 }
 

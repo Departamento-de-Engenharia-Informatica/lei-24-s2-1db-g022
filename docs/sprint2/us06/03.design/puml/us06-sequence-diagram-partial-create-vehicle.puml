@@ -6,10 +6,10 @@ skinparam shadowing false
 participant "vehicleRepository\n:VehicleRepository" as VR
 participant "vehicle:\nVehicle" as Vehicle
 
-autonumber 15
+autonumber 13
 -> VR: registerVehicle(brand,model,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
 
-autonumber 15.1
+autonumber 13.1
 activate VR
     group Create Vehicle
 
@@ -35,7 +35,7 @@ activate VR
         deactivate VR
     end
 
-    autonumber 16
+    autonumber 14
     <-- VR : vehicle
 deactivate VR
 

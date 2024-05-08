@@ -7,9 +7,10 @@ participant ":RegisterVehicleController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "brandRepository:\nBrandRepository" as BR
+participant "brand:\nBrand" as Brand
 
 autonumber 7
--> CTRL: getBrand(brandName)
+-> CTRL: getBrand(brandName,modelName)
 
 autonumber 7.1
 activate CTRL
@@ -32,6 +33,20 @@ activate CTRL
         activate BR
 
             BR -> CTRL : true/false
+        deactivate BR
+
+        CTRL -> BR : getBrandByModelName(modelName)
+
+        activate BR
+
+        BR -> Brand : hasModelByName(modelName)
+
+        activate Brand
+
+        Brand --> BR : true/false
+        deactivate Brand
+
+        BR --> CTRL : brand
         deactivate BR
     end
 

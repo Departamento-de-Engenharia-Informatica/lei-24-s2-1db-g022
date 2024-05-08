@@ -54,4 +54,13 @@ public class CheckUp {
                 ", km=" + km +
                 '}';
     }
+
+    /**
+     * Clones the checkup.
+     *
+     * @return A clone of the current checkup instance.
+     */
+    public CheckUp clone() {
+        return new CheckUp(this.date, this.km);
+    }
 }

@@ -64,10 +64,6 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - Partial - Get Brand](svg/us06-sequence-diagram-partial-get-brand.svg)
 
-**Get Model**
-
-![Sequence Diagram - Partial - Get Model](svg/us06-sequence-diagram-partial-get-model.svg)
-
 **Create Vehicle**
 
 ![Sequence Diagram - Partial - Create Vehicle](svg/us06-sequence-diagram-partial-create-vehicle.svg)

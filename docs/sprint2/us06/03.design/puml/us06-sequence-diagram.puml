@@ -36,7 +36,7 @@ activate VFM
 
             activate CTRL
 
-             CTRL -> CTRL : getBrand(brandName)
+             CTRL -> CTRL : getBrand(brandName,modelName)
             activate CTRL
 
                 ref over CTRL
@@ -45,16 +45,6 @@ activate VFM
                 end ref
 
                 CTRL --> CTRL : brand
-            deactivate CTRL
-
-            CTRL -> CTRL : getModel(brand,modelName)
-            activate CTRL
-
-                ref over CTRL
-                    Get Model Object
-
-                end ref
-                CTRL --> CTRL : model
             deactivate CTRL
 
                     CTRL -> RepositorySingleton : getInstance()
@@ -71,7 +61,7 @@ activate VFM
 
 
 
-                CTRL -> VR : registerVehicle(brand,model,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
+                CTRL -> VR : registerVehicle(type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate,brandName,modelName)
 
             activate VR
 

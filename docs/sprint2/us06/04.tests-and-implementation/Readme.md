@@ -1,70 +1,88 @@
-# US06 - As an FM, I wish to register a vehicle including Brand, Model, Type, Tare, GrossWeight, Current Km, Register Date, Acquisition Date, Maintenance/Checkup Frequency (in Kms)
+# US06 - Register a vehicle.
 
 ## 4. Tests 
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+**Test 1:** Check that it is not possible to create an instance of the Vehicle class with null values. 
 
 	@Test(expected = IllegalArgumentException.class)
 		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
+		Vehicle instance = new Vehicle(null, 0, 0, 0, null, null, 0, null, null, null);
 	}
 	
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+**Test 2:** Check that it is not possible to create an instance of the Vehicle class with a duplicate License Plate - AC2. 
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
-		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
+	@Test(expected = true)
+		public void testEqualsDifferentLicensePlate() {
+        Vehicle vehicle = new Vehicle("SUV",1000,750,1500000, Date.valueOf("1999-5-5"),Date.valueOf("2024-5-5"),100000,"00-00-AA",new Brand("BMW"), new Model("XM"));
+        Vehicle vehicle1 = new Vehicle("SUV",1000,750,1500000, Date.valueOf("1999-5-5"),Date.valueOf("2024-5-5"),100000,"00-00-AX",new Brand("BMW"), new Model("XM"));
+
+        assertNotEquals(vehicle, vehicle1);
 	}
 
-_It is also recommended to organize this content by subsections._ 
+**Test 3:** Check that it is not possible to create an instance of the Vehicle class with a wrong License Plate format- AC3.
 
+	@Test(expected = IllegalArgumentException.class)
+		public void testVehicleLicensePlate() {
+		
+		Vehicle instance = new Vehicle("SUV",1000,750,1500000, Date.valueOf("1999-5-5"),Date.valueOf("2024-5-5"),100000,"AA-00-AA",new Brand("BMW"), new Model("XM");
+	}
 
 ## 5. Construction (Implementation)
 
-### Class CreateTaskController 
+### Class RegisterVehicleController 
 
 ```java
-public Task createTask(String reference, String description, String informalDescription, String technicalDescription,
-                       Integer duration, Double cost, String taskCategoryDescription) {
+    private Optional<Brand> getBrand(String brandName, String modelName) {
+        Optional<Brand> brand = Optional.empty();
 
-	TaskCategory taskCategory = getTaskCategoryByDescription(taskCategoryDescription);
+        if (getBrandRepository().hasBrandByName(brandName)) {
+        brand = getBrandRepository().getBrandByModelName(modelName);
 
-	Employee employee = getEmployeeFromSession();
-	Organization organization = getOrganizationRepository().getOrganizationByEmployee(employee);
+        }
+        return brand;
+    }
 
-	newTask = organization.createTask(reference, description, informalDescription, technicalDescription, duration,
-                                      cost,taskCategory, employee);
-    
-	return newTask;
-}
+    public Optional<Vehicle> registerVehicle(String type, float tare, float grossWeight, int currentKm, Date registerDate, Date acquisitionDate, int checkUpFrequency, String licensePlate, String brandName, String modelName) {
+        Optional<Vehicle> newVehicle = Optional.empty();
+        Optional<Brand> brand = Optional.empty();
+
+        brand = getBrand(brandName, modelName);
+
+        if (brand.isPresent()) {
+
+        Optional<Model> model = Optional.empty();
+
+        newVehicle = getVehicleRepository().createVehicle(type, tare, grossWeight, currentKm, registerDate, acquisitionDate, checkUpFrequency, licensePlate, new Brand(brandName), new Model(modelName));
+        }
+        return newVehicle;
+    }
 ```
 
-### Class Organization
+### Class VehicleRepository
 
 ```java
-public Optional<Task> createTask(String reference, String description, String informalDescription,
-                                 String technicalDescription, Integer duration, Double cost, TaskCategory taskCategory,
-                                 Employee employee) {
-    
-    Task task = new Task(reference, description, informalDescription, technicalDescription, duration, cost,
-                         taskCategory, employee);
+    public Optional<Vehicle> createVehicle(String type, float tare, float grossWeight, int currentKm, Date registerDate, Date acquisitionDate, int checkUpFrequency, String licensePlate, Brand brand, Model model) {
+        // When a Vehicle is added, it should fail if the Vehicle already exists in the list of Vehicles.
+        // In order to not return null if the operation fails, we use the Optional class.
+        Optional<Vehicle> optionalVehicle = Optional.empty();
 
-    addTask(task);
-        
-    return task;
-}
+        Vehicle vehicle = new Vehicle(type, tare, grossWeight, currentKm, registerDate, acquisitionDate, checkUpFrequency, licensePlate, brand, model);
+
+        if (addVehicle(vehicle)) {
+
+        optionalVehicle = Optional.of(vehicle);
+        }
+        return optionalVehicle;
+    }
 ```
 
 
 ## 6. Integration and Demo 
 
-* A new option on the Employee menu options was added.
+* A new option on the VFM menu options was added.
 
-* For demo purposes some tasks are bootstrapped while system starts.
-
+* For demo purposes some brands and models are bootstrapped while system starts.
 
 ## 7. Observations
 
