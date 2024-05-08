@@ -46,7 +46,7 @@ public class Bootstrap implements Runnable {
     }
 
     /**
-     * Adds predefined brands to the brands repository.
+     * Adds predefined brands and models to the brands repository.
      */
     private void addBrands() {
         BrandRepository brandRepository = Repositories.getInstance().getBrandRepository();

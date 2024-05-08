@@ -28,18 +28,19 @@ public class Vehicle {
     private Model model;
 
     /**
-     * Constructs a Vehicle object with the specified parameters.
+     * Constructs a Vehicle object with the specified attributes.
      *
-     * @param type             The type of the vehicle.
-     * @param tare             The tare weight of the vehicle.
-     * @param grossWeight      The gross weight of the vehicle.
-     * @param currentKm        The current mileage of the vehicle.
-     * @param registerDate     The registration date of the vehicle.
-     * @param acquisitionDate  The acquisition date of the vehicle.
+     * @param type            The type of the vehicle.
+     * @param tare            The tare weight of the vehicle.
+     * @param grossWeight     The gross weight of the vehicle.
+     * @param currentKm       The current kilometers driven by the vehicle.
+     * @param registerDate    The registration date of the vehicle.
+     * @param acquisitionDate The acquisition date of the vehicle.
      * @param checkUpFrequency The frequency of check-ups for the vehicle.
-     * @param licensePlate     The license plate number of the vehicle.
-     * @param brand            The brand of the vehicle.
-     * @param model            The model of the vehicle.
+     * @param licensePlate    The license plate of the vehicle.
+     * @param brand           The brand of the vehicle.
+     * @param model           The model of the vehicle.
+     * @throws IllegalArgumentException If any of the parameters are null or empty, or if the license plate format is incorrect.
      */
     public Vehicle(String type, float tare, float grossWeight, int currentKm, Date registerDate, Date acquisitionDate, int checkUpFrequency, String licensePlate, Brand brand, Model model) {
 
@@ -190,6 +191,13 @@ public class Vehicle {
         return checkUpList;
     }
 
+    /**
+     * Validates if the license plate format matches the expected format based on the registration date of the vehicle.
+     *
+     * @param registerDate The registration date of the vehicle.
+     * @param licensePlate The license plate of the vehicle to validate.
+     * @return True if the license plate format matches the expected format, false otherwise.
+     */
     private boolean validateVehicle(Date registerDate, String licensePlate) {
 
         int ano = registerDate.getYear();
@@ -218,15 +226,33 @@ public class Vehicle {
         }
     }
 
+    /**
+     * Validates if the license plate of this vehicle matches the license plate of another vehicle.
+     *
+     * @param vehicleObj The other vehicle object to compare the license plates with.
+     * @return True if the license plates match, false otherwise.
+     */
     public boolean validateVehicleLicense(Vehicle vehicleObj){
 
         return this.getLicensePlate().equals(vehicleObj.getLicensePlate());
     }
 
+    /**
+     * Validates if a float value is not negative and not equal to zero.
+     *
+     * @param value The float value to validate.
+     * @return True if the float value is not negative and not equal to zero, false otherwise.
+     */
     private boolean validateNullFloat(float value) {
         return !(value < 0) && value != 0.0f;
     }
 
+    /**
+     * Validates if a string value is not null and not empty.
+     *
+     * @param value The string value to validate.
+     * @return True if the string value is not null and not empty, false otherwise.
+     */
     private boolean validateNullInt(int value) {
         return !(value <= 0);
     }
@@ -235,6 +261,12 @@ public class Vehicle {
         return !(value == null) && !(value.isEmpty());
     }
 
+    /**
+     * Validates if a date value is not null.
+     *
+     * @param value The date value to validate.
+     * @return True if the date value is not null, false otherwise.
+     */
     private boolean validateNullDate(Date value) {
         return !(value == null);
     }
@@ -261,6 +293,12 @@ public class Vehicle {
                 '}';
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this vehicle.
+     *
+     * @param o The reference object with which to compare.
+     * @return True if this vehicle is the same as the object argument, false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -269,6 +307,11 @@ public class Vehicle {
         return Float.compare(tare, vehicle.tare) == 0 && Float.compare(grossWeight, vehicle.grossWeight) == 0 && currentKm == vehicle.currentKm && checkUpFrequency == vehicle.checkUpFrequency && Objects.equals(type, vehicle.type) && Objects.equals(registerDate, vehicle.registerDate) && Objects.equals(acquisitionDate, vehicle.acquisitionDate) && Objects.equals(licensePlate, vehicle.licensePlate) && Objects.equals(brand, vehicle.brand) && Objects.equals(checkUpList, vehicle.checkUpList) && Objects.equals(model, vehicle.model);
     }
 
+    /**
+     * Returns a string representation of the vehicle.
+     *
+     * @return A string representation of the vehicle.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(type, tare, grossWeight, currentKm, registerDate, acquisitionDate, checkUpFrequency, licensePlate, brand, checkUpList, model);
@@ -279,8 +322,6 @@ public class Vehicle {
      *
      * @return A clone of the current vehicle instance.
      */
-
-
     public Vehicle clone() {
 
         Vehicle clone = new Vehicle(this.type, this.tare,this.grossWeight, this.currentKm, this.registerDate, this.acquisitionDate, this.checkUpFrequency, this.licensePlate, this.brand, this.model);

@@ -34,7 +34,9 @@ public class RegisterJobUI implements Runnable {
     }
 
     /**
-     * Executes the user interface, prompting the user to input a job name and submitting the data.
+     * Executes the user interface for registering a job.
+     * Prompts the user to input job details, displays the entered data,
+     * and prompts for confirmation before submitting the data to create the job.
      */
     @Override
     public void run() {

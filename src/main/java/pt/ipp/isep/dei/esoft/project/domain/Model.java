@@ -58,6 +58,12 @@ public class Model {
         return new Model(this.name);
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this model.
+     *
+     * @param o The reference object with which to compare.
+     * @return True if this model is the same as the object argument, false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -66,6 +72,11 @@ public class Model {
         return Objects.equals(name, model.name);
     }
 
+    /**
+     * Returns a hash code value for the model.
+     *
+     * @return A hash code value for this model.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(name);

@@ -50,6 +50,12 @@ public class BrandRepository {
         return !brandList.contains(brand);
     }
 
+    /**
+     * Checks if a brand with the given name exists in the brand list.
+     *
+     * @param brandName The name of the brand to check for existence.
+     * @return True if a brand with the given name exists, false otherwise.
+     */
     public boolean hasBrandByName(String brandName) {
         
         Brand brand = new Brand (brandName);
@@ -57,6 +63,12 @@ public class BrandRepository {
         return brandList.contains(brand);
     }
 
+    /**
+     * Retrieves a brand by the name of one of its models, if available.
+     *
+     * @param modelName The name of the model associated with the brand.
+     * @return An Optional containing the Brand object if found, otherwise empty.
+     */
     public Optional<Brand> getBrandByModelName(String modelName){
 
         Optional<Brand> brand = Optional.empty();

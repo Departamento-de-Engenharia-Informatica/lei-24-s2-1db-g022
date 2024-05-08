@@ -47,7 +47,10 @@ public class RegisterVehicleUI implements Runnable {
     }
 
     /**
-     * Executes the user interface, prompting the user to input a vehicle name and submitting the data.
+     * Executes the vehicle registration process.
+     * Prompts the user to input vehicle details and confirms the data before submission.
+     * If the data is confirmed, it submits the data to create the vehicle.
+     * If an error occurs during data entry, it throws a runtime exception.
      */
     @Override
     public void run() {
@@ -71,6 +74,14 @@ public class RegisterVehicleUI implements Runnable {
         }
     }
 
+    /**
+     * Prompts the user to confirm whether the entered data is correct or not.
+     * Displays a message asking the user to input 'Y' or 'N' for confirmation.
+     * Reads the user's input from the console and returns true if 'Y' or 'y' is entered,
+     * indicating that the data is confirmed, and false otherwise.
+     *
+     * @return True if the user confirms the entered data, false otherwise.
+     */
     private boolean confirmationData() {
         Scanner input = new Scanner(System.in);
         System.out.println("\n\n--- Confirm Data[Y/N]: ");
@@ -79,6 +90,11 @@ public class RegisterVehicleUI implements Runnable {
         return res.equals("Y") || res.equals("y");
     }
 
+    /**
+     * Displays the collected information about the vehicle entered by the user.
+     * Prints out the brand name, model name, type, tare, gross weight, current km,
+     * register date, acquisition date, check-up frequency, and license plate.
+     */
     private void displayData() {
         System.out.println("\n\n--- Display Information ------------------------");
         System.out.printf("\nBrand: %s",brandName);
@@ -115,7 +131,11 @@ public class RegisterVehicleUI implements Runnable {
     }
 
     /**
-     * Requests the vehicle type from the user.
+     * Requests the necessary information about the vehicle from the user.
+     * Collects the brand name, model name, type, tare, gross weight, current km,
+     * register date, acquisition date, check-up frequency, and license plate.
+     *
+     * @throws ParseException if there is an error parsing the input dates.
      */
     private void requestData() throws ParseException {
         brandName = requestBrandName();

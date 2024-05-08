@@ -62,7 +62,12 @@ public class Brand {
         modelList.add(model);
     }
 
-
+    /**
+     * Checks if a model with the given name exists in the model list.
+     *
+     * @param modelName The name of the model to check for existence.
+     * @return True if a model with the given name exists, false otherwise.
+     */
     public boolean hasModelByName(String modelName) {
 
         Model model = new Model (modelName);
@@ -100,6 +105,12 @@ public class Brand {
         return clone;
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this brand.
+     *
+     * @param o The reference object with which to compare.
+     * @return True if this brand is the same as the object argument, false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -108,6 +119,11 @@ public class Brand {
         return Objects.equals(name, brand.name);
     }
 
+    /**
+     * Returns a hash code value for the brand.
+     *
+     * @return A hash code value for this brand.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(name);

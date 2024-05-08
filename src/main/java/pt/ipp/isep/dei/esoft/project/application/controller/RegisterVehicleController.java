@@ -67,6 +67,13 @@ public class RegisterVehicleController {
         return brandRepository;
     }
 
+    /**
+     * Retrieves a brand by its name along with a specific model, if available.
+     *
+     * @param brandName The name of the brand.
+     * @param modelName The name of the model associated with the brand.
+     * @return An Optional containing the Brand object if found, otherwise empty.
+     */
     private Optional<Brand> getBrand(String brandName, String modelName) {
         Optional<Brand> brand = Optional.empty();
 
