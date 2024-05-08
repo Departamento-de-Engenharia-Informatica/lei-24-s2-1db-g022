@@ -44,9 +44,25 @@ public class RegisterJobUI implements Runnable {
 
         while (!register){
             requestData();
+            displayData();
 
-            register = submitData();
+            if(confirmationData()){
+                register = submitData();
+            }
         }
+    }
+
+    private boolean confirmationData() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("\n\n--- Confirm Data[Y/N]: ");
+        String res = input.nextLine();
+
+        return res.equals("Y") || res.equals("y");
+    }
+
+    private void displayData() {
+        System.out.println("\n\n--- Display Information ------------------------");
+        System.out.printf("\nJob Name: %s",jobName);
     }
 
     /**
