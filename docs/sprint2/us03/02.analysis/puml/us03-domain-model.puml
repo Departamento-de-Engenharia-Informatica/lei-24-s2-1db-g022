@@ -26,8 +26,16 @@ class Job{
     name
 }
 
+class Address{
+    streetName
+    postCode
+    doorNumber
+}
+
 Collaborator  <|---  HumanResourceManager
 HumanResourceManager "1" --- "1..*" Collaborator : Registers >
 Collaborator "1..*" - "1" Job : Has >
+Address "1" - "1..*" Collaborator : < lives
+
 
 @enduml

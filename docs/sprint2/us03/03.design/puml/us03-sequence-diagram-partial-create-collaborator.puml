@@ -7,11 +7,11 @@ skinparam shadowing false
 participant "collaboratorRepository:\nCollaboratorRepository" as CollaboratorRepository
 participant "collaborator:\nCollaborator" as Collaborator
 
-autonumber 17
+autonumber 19
 -> CollaboratorRepository : registerCollaborator(name, birthdate, \nadmission date, address, mobile, \nemail, ID doc type, respective number, job)
 
 
-autonumber 17.1
+autonumber 19.1
 
 activate CollaboratorRepository
     group Create Collaborator
@@ -38,7 +38,7 @@ CollaboratorRepository -> Collaborator**: create(name, birthdate, \nadmission da
         deactivate CollaboratorRepository
     end group
 
-    autonumber 18
+    autonumber 20
 <-- CollaboratorRepository : collaborator
 
 

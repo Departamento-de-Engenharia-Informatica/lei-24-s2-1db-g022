@@ -42,5 +42,5 @@ class CheckUp{
 
 Collaborator <|- VehicleFleetManager
 VehicleFleetManager "1" -- "1..*" CheckUp : Registers >
-Vehicle "1" - "*" CheckUp : Has >
+Vehicle "1" - "*" CheckUp : Does >
 @enduml
