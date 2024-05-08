@@ -14,6 +14,7 @@ class RegisterCollaboratorController {
 
     + RegisterCollaboratorController()
     + registerCollaborator(name, birthdate, admission date, address, \nmobile, email, ID doc type, respective number, job name)
+    + registerAddress(streetName, postCode, doorNumber)
     + getJobList()
     + getJobByName(jobName)
 }
@@ -37,6 +38,15 @@ class Collaborator {
     + Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, cardNumber)
 }
 
+class Address {
+    -String streetName
+    -int postCode
+    -int doorNumber
+
+    +Address(streetName, postCode, doorNumber)
+    -validateAddress(address)
+}
+
 class HumanResourcesManager {
 }
 
@@ -46,6 +56,7 @@ class Repositories {
     + getInstance() : Repositories
     + getJobRepository()
     + getCollaboratorRepository()
+    + getAddressRepository()
 }
 
 class JobRepository {
@@ -53,6 +64,15 @@ class JobRepository {
 
     + getJobList()
     + getJobByName(jobName)
+}
+
+class AddressRepository {
+    - List <Job> job
+
+    + getJobList()
+    + getJobByName(jobName)
+    -addAddress(address)
+    -validateAddress(address)
 }
 
 class CollaboratorRepository {
@@ -69,23 +89,29 @@ class Job {
 
 Collaborator  <|---  HumanResourcesManager
 Collaborator  -> Job : has
+Collaborator "*" --> "1" Address : lives
 
 HumanResourcesManager <--  Collaborator: createdBy
 
 RegisterCollaboratorController .> Repositories : repositories
 RegisterCollaboratorController ..> "1" JobRepository
-RegisterCollaboratorController ..> "1" CollaboratorRepository
+RegisterCollaboratorController ...> "1" CollaboratorRepository
+RegisterCollaboratorController ..> "1" AddressRepository
 RegisterCollaboratorController ..> Collaborator
 RegisterCollaboratorController ..> Job
+RegisterCollaboratorController ..> Address
 
 RegisterCollaboratorUI .> RegisterCollaboratorController
 
 Repositories -> Repositories : instance
 Repositories -> JobRepository : jobRepository
+Repositories -> AddressRepository : addressRepository
 Repositories --> CollaboratorRepository : collaboratorRepository
 
 CollaboratorRepository --> Collaborator
 
 Job <- JobRepository : job
+
+AddressRepository -> Address : address
 
 @enduml

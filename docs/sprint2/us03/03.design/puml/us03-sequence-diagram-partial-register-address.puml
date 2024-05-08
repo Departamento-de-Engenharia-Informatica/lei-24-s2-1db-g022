@@ -1,0 +1,61 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant ":RegisterCollaboratorController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "addressRepository:\nAddressRepository" as AddressRepository
+
+autonumber 13
+-> CTRL : registerAddress(streetName, postCode, doorNumber)
+autonumber 13.1
+activate CTRL
+    group Register Address
+
+        CTRL -> RepositorySingleton : getInstance()
+        activate RepositorySingleton
+
+        RepositorySingleton -> CTRL : repositories
+        deactivate RepositorySingleton
+
+        CTRL -> PLAT : getAddressRepository()
+        activate PLAT
+
+        PLAT -> CTRL : addressRepository
+        deactivate PLAT
+
+        CTRL -> AddressRepository : registerAddress(streetName, postCode, doorNumber)
+        activate AddressRepository
+
+            AddressRepository -> Address**: create(streetName, postCode, doorNumber)
+
+            activate Address
+
+                Address -> Address: validateAddress(address)
+                Address --> AddressRepository : address
+
+            deactivate Address
+
+        AddressRepository -> AddressRepository: addAddress(address)
+
+        activate AddressRepository
+            AddressRepository -> AddressRepository: validateAddress(address)
+            activate AddressRepository
+
+                AddressRepository --> AddressRepository : true/false
+            deactivate AddressRepository
+
+            AddressRepository --> AddressRepository : true/false
+
+        deactivate AddressRepository
+
+        AddressRepository --> CTRL : address
+        deactivate AddressRepository
+
+        end
+
+        autonumber 14
+        <-- CTRL : address
+        deactivate CTRL
+
+@enduml

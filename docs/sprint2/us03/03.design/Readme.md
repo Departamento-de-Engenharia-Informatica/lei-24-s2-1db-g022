@@ -27,6 +27,7 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
 * Collaborator
 * Job
+* Address
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
@@ -34,6 +35,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 * RegisterCollaboratorController
 * CollaboratorRepository
 * JobRepository
+* AddressRepository
 
 
 ## 3.2. Sequence Diagram (SD)
@@ -59,6 +61,10 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 **Get Job Object**
 
 ![Sequence Diagram - Partial - Get Job Object](svg/us03-sequence-diagram-partial-get-job-object.svg)
+
+**Register Address**
+
+![Sequence Diagram - Partial - Register Address](svg/us03-sequence-diagram-partial-register-address.svg)
 
 **Create Collaborator**
 

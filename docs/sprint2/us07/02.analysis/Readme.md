@@ -1,4 +1,4 @@
-# US07 - Register a vehicle’s check-up.
+# US07 - Register vehicle check-up.
 
 ## 2. Analysis
 

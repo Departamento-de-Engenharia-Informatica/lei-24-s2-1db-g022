@@ -1,4 +1,4 @@
-# US07 - Register a vehicle’s check-up. 
+# US07 - Register vehicle check-up. 
 
 [Requirements Engineering](01.requirements-engineering/Readme.md)
 
