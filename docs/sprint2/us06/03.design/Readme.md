@@ -60,13 +60,9 @@ The following diagram shows the same sequence of interactions between the classe
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-**Create Brand**
+**Get Brand**
 
-![Sequence Diagram - Partial - Create Brand](svg/us06-sequence-diagram-partial-create-brand.svg)
-
-**Create Model**
-
-![Sequence Diagram - Partial - Create Model](svg/us06-sequence-diagram-partial-create-model.svg)
+![Sequence Diagram - Partial - Get Brand](svg/us06-sequence-diagram-partial-get-brand.svg)
 
 **Create Vehicle**
 

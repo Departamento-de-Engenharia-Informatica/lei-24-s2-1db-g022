@@ -15,7 +15,7 @@ participant "vehicleRepository\n:VehicleRepository" as VR
 
 activate VFM
 
-        VFM -> UI : asks to register a new job
+        VFM -> UI : asks to register a new vehicle
     activate UI
 
         UI --> VFM : requests data (brandName,modelName,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
@@ -36,25 +36,15 @@ activate VFM
 
             activate CTRL
 
-             CTRL -> CTRL : createBrand(brandName)
+             CTRL -> CTRL : getBrand(brandName,modelName)
             activate CTRL
 
                 ref over CTRL
-                    Create Brand Object
+                    Get Brand Object
 
                 end ref
 
                 CTRL --> CTRL : brand
-            deactivate CTRL
-
-            CTRL -> CTRL : createModel(brand,modelName)
-            activate CTRL
-
-                ref over CTRL
-                    Create model Object
-
-                end ref
-                CTRL --> CTRL : model
             deactivate CTRL
 
                     CTRL -> RepositorySingleton : getInstance()
@@ -71,7 +61,7 @@ activate VFM
 
 
 
-                CTRL -> VR : registerVehicle(brand,model,type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate)
+                CTRL -> VR : registerVehicle(type,tare,grossWeight,currentKm,\nregisterDate,acquisitionDate,checkupFrequency,licensePlate,brandName,modelName)
 
             activate VR
 

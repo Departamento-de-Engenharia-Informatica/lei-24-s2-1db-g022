@@ -38,14 +38,6 @@ public class Job {
     }
 
     /**
-     * Sets the name of the job.
-     *
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * Validates if the job name contains only alphabetic characters.
      *
      * @param name The job name parameter.

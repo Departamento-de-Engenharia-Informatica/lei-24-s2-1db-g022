@@ -12,8 +12,8 @@ skinparam classAttributeIconSize 0
 class Job {
     -String name
 
-    -validateJob(job)
     +Job(name)
+    -validateJob(job)
 }
 
 class RegisterJobController {

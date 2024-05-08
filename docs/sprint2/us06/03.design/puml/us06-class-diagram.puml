@@ -13,17 +13,14 @@ class Brand {
     -String name
     -List <Model> model
 
-    -addModel(model)
-    -validateBrand(brand)
-    -validateModel(model)
     +Brand(name)
-    +registerModel(modelName)
+    +addModel(model)
+    +hasModelByName(modelName)
 }
 
 class Model {
     -String name
 
-    -validateModel(model)
     +Model(name)
 }
 
@@ -38,17 +35,17 @@ class Vehicle {
     -Date acquisitionDate
     -int checkupFrequency
     -String licensePlate
+    -List<CheckUp> checkUpList;
 
+    +Vehicle(type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate,brand,model)
     -validateVehicle(vehicle)
-    +Vehicle(brand,model,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
 }
 
 class RegisterVehicleController {
 
-    -createBrand(brandName)
-    -createModel(modelName)
     +RegisterVehicleController()
-    +registerVehicle(brandName,modelName,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
+    -getBrand(brandName,modelName)
+    +registerVehicle(type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate,brandName,modelName)
 }
 
 class RegisterVehicleUI {
@@ -85,15 +82,15 @@ class VehicleRepository {
 
     -addVehicle(vehicle)
     -validateVehicle(vehicle)
-    +registerVehicle(brand,model,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
+    +registerVehicle(type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate,brand,model)
 }
 
 class BrandRepository {
     -List<Brand> brand
 
-    -addBrand(brand)
-    -validateBrand(brand)
-    +registerBrand(brandName)
+    +addBrand(brand)
+    +getBrandByModelName(modelName)
+    +hasBrandByName(brandName)
 }
 
 RegisterVehicleController .> Repositories : repositories
@@ -117,7 +114,7 @@ Collaborator "*" -> "*" Vehicle : drives
 
 VehicleFleetManager <-  Vehicle: createdBy
 
-Brand "1" --> "1..*" Model : models
+Brand "1" --> "1..*" Model : has
 Brand "1" --> "1..*" Vehicle : has
 
 Vehicle "1..*" -> "1" Model : has

@@ -1,7 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+import java.util.regex.Pattern;
 
 /**
  * The Vehicle class represents a vehicle in the organization.
@@ -18,7 +21,7 @@ public class Vehicle {
     private int currentKm;
     private Date registerDate;
     private Date acquisitionDate;
-    private int checkupFrequency;
+    private int checkUpFrequency;
     private String licensePlate;
     private Brand brand;
     private List<CheckUp> checkUpList;
@@ -27,57 +30,65 @@ public class Vehicle {
     /**
      * Constructs a Vehicle object with the specified parameters.
      *
-     * @param type The type of the vehicle.
-     * @param tare The tare weight of the vehicle.
-     * @param grossWeight The gross weight of the vehicle.
-     * @param currentKm The current mileage of the vehicle.
-     * @param registerDate The registration date of the vehicle.
-     * @param acquisitionDate The acquisition date of the vehicle.
-     * @param checkupFrequency The frequency of check-ups for the vehicle.
-     * @param licensePlate The license plate number of the vehicle.
-     * @param brand The brand of the vehicle.
-     * @param model The model of the vehicle.
+     * @param type             The type of the vehicle.
+     * @param tare             The tare weight of the vehicle.
+     * @param grossWeight      The gross weight of the vehicle.
+     * @param currentKm        The current mileage of the vehicle.
+     * @param registerDate     The registration date of the vehicle.
+     * @param acquisitionDate  The acquisition date of the vehicle.
+     * @param checkUpFrequency The frequency of check-ups for the vehicle.
+     * @param licensePlate     The license plate number of the vehicle.
+     * @param brand            The brand of the vehicle.
+     * @param model            The model of the vehicle.
      */
-    public Vehicle(String type, float tare, float grossWeight, int currentKm, Date registerDate, Date acquisitionDate, int checkupFrequency, String licensePlate, Brand brand, Model model) {
-        this.type = type;
-        this.tare = tare;
-        this.grossWeight = grossWeight;
-        this.currentKm = currentKm;
-        this.registerDate = registerDate;
-        this.acquisitionDate = acquisitionDate;
-        this.checkupFrequency = checkupFrequency;
-        this.licensePlate = licensePlate;
-        this.brand = brand;
-        this.model = model;
-    }
+    public Vehicle(String type, float tare, float grossWeight, int currentKm, Date registerDate, Date acquisitionDate, int checkUpFrequency, String licensePlate, Brand brand, Model model) {
 
-    /**
-     * Constructs a Vehicle object with the specified parameters and a list of check-ups.
-     *
-     * @param type The type of the vehicle.
-     * @param tare The tare weight of the vehicle.
-     * @param grossWeight The gross weight of the vehicle.
-     * @param currentKm The current mileage of the vehicle.
-     * @param registerDate The registration date of the vehicle.
-     * @param acquisitionDate The acquisition date of the vehicle.
-     * @param checkupFrequency The frequency of check-ups for the vehicle.
-     * @param licensePlate The license plate number of the vehicle.
-     * @param brand The brand of the vehicle.
-     * @param checkUpList The list of check-ups for the vehicle.
-     * @param model The model of the vehicle.
-     */
-    public Vehicle(String type, float tare, float grossWeight, int currentKm, Date registerDate, Date acquisitionDate, int checkupFrequency, String licensePlate, Brand brand, List<CheckUp> checkUpList, Model model) {
-        this.type = type;
-        this.tare = tare;
-        this.grossWeight = grossWeight;
-        this.currentKm = currentKm;
-        this.registerDate = registerDate;
-        this.acquisitionDate = acquisitionDate;
-        this.checkupFrequency = checkupFrequency;
-        this.licensePlate = licensePlate;
+        if (validateNullFloat(tare) && validateNullFloat(grossWeight)) {
+
+            this.tare = tare;
+            this.grossWeight = grossWeight;
+        } else {
+
+            throw new IllegalArgumentException("Vehicle tare and grossweight cannot be null or empty.");
+        }
+
+        if (validateNullString(type) && validateNullString(licensePlate)) {
+
+            this.type = type;
+        } else {
+
+            throw new IllegalArgumentException("Vehicle type and licensePlate cannot be null or empty.");
+        }
+
+        if (validateNullInt(currentKm) && validateNullInt(checkUpFrequency)) {
+
+            this.currentKm = currentKm;
+            this.checkUpFrequency = checkUpFrequency;
+        } else {
+
+            throw new IllegalArgumentException("Vehicle currentKm and checkUpFrequency cannot be null or empty.");
+        }
+
+        if(validateNullDate(acquisitionDate) && validateNullDate(registerDate)){
+
+            this.acquisitionDate = acquisitionDate;
+            this.registerDate = registerDate;
+        }else{
+
+            throw new IllegalArgumentException("Vehicle acquisitionDate and registerDate cannot be null or empty.");
+        }
+
+        if(validateVehicle(registerDate, licensePlate)){
+
+            this.licensePlate = licensePlate;
+        }else{
+
+            throw new IllegalArgumentException("Incorrect Vehicle licensePlate format.");
+        }
+
         this.brand = brand;
-        this.checkUpList = checkUpList;
         this.model = model;
+        checkUpList = new ArrayList<>();
     }
 
     /**
@@ -139,8 +150,8 @@ public class Vehicle {
      *
      * @return The frequency of check-ups for the vehicle.
      */
-    public int getCheckupFrequency() {
-        return checkupFrequency;
+    public int getCheckUpFrequency() {
+        return checkUpFrequency;
     }
 
     /**
@@ -179,6 +190,55 @@ public class Vehicle {
         return checkUpList;
     }
 
+    private boolean validateVehicle(Date registerDate, String licensePlate) {
+
+        int ano = registerDate.getYear();
+        String regex1 = "\\d{2}-\\d{2}-[A-Z]{2}";
+        String regex2 = "\\d{2}-[A-Z]{2}-\\d{2}";
+        String regex3 = "[A-Z]{2}-\\d{2}-[A-Z]{2}";
+
+        if (ano >= 92 && ano < 105) {
+
+            Pattern pattern = Pattern.compile(regex1);
+
+            return pattern.matcher(licensePlate).matches();
+        } else if (ano >= 105 && ano < 120) {
+
+            Pattern pattern = Pattern.compile(regex2);
+
+            return pattern.matcher(licensePlate).matches();
+        } else if (ano >= 120) {
+
+            Pattern pattern = Pattern.compile(regex3);
+
+            return pattern.matcher(licensePlate).matches();
+        } else {
+
+            return false;
+        }
+    }
+
+    public boolean validateVehicleLicense(Vehicle vehicleObj){
+
+        return this.getLicensePlate().equals(vehicleObj.getLicensePlate());
+    }
+
+    private boolean validateNullFloat(float value) {
+        return !(value < 0) && value != 0.0f;
+    }
+
+    private boolean validateNullInt(int value) {
+        return !(value <= 0);
+    }
+
+    private boolean validateNullString(String value) {
+        return !(value == null) && !(value.isEmpty());
+    }
+
+    private boolean validateNullDate(Date value) {
+        return !(value == null);
+    }
+
     /**
      * Returns a string representation of the vehicle.
      *
@@ -193,11 +253,43 @@ public class Vehicle {
                 ", currentKm=" + currentKm +
                 ", registerDate=" + registerDate +
                 ", acquisitionDate=" + acquisitionDate +
-                ", checkupFrequency=" + checkupFrequency +
+                ", checkUpFrequency=" + checkUpFrequency +
                 ", licensePlate='" + licensePlate + '\'' +
                 ", brand=" + brand +
                 ", checkUpList=" + checkUpList +
                 ", model=" + model +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Vehicle)) return false;
+        Vehicle vehicle = (Vehicle) o;
+        return Float.compare(tare, vehicle.tare) == 0 && Float.compare(grossWeight, vehicle.grossWeight) == 0 && currentKm == vehicle.currentKm && checkUpFrequency == vehicle.checkUpFrequency && Objects.equals(type, vehicle.type) && Objects.equals(registerDate, vehicle.registerDate) && Objects.equals(acquisitionDate, vehicle.acquisitionDate) && Objects.equals(licensePlate, vehicle.licensePlate) && Objects.equals(brand, vehicle.brand) && Objects.equals(checkUpList, vehicle.checkUpList) && Objects.equals(model, vehicle.model);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, tare, grossWeight, currentKm, registerDate, acquisitionDate, checkUpFrequency, licensePlate, brand, checkUpList, model);
+    }
+
+    /**
+     * Clones the vehicle.
+     *
+     * @return A clone of the current vehicle instance.
+     */
+
+
+    public Vehicle clone() {
+
+        Vehicle clone = new Vehicle(this.type, this.tare,this.grossWeight, this.currentKm, this.registerDate, this.acquisitionDate, this.checkUpFrequency, this.licensePlate, this.brand, this.model);
+
+        for (CheckUp in : this.checkUpList) {
+
+            clone.checkUpList.add(in.clone());
+        }
+
+        return clone;
     }
 }

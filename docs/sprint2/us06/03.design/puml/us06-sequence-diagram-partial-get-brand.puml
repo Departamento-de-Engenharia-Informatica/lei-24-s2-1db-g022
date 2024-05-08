@@ -10,11 +10,11 @@ participant "brandRepository:\nBrandRepository" as BR
 participant "brand:\nBrand" as Brand
 
 autonumber 7
--> CTRL: createBrand(brandName)
+-> CTRL: getBrand(brandName,modelName)
 
 autonumber 7.1
 activate CTRL
-    group Create Brand Object
+    group Get Brand Object
 
     CTRL -> RepositorySingleton : getInstance()
             activate RepositorySingleton
@@ -28,31 +28,25 @@ activate CTRL
                 PLAT --> CTRL : brandRepository
             deactivate PLAT
 
-        CTRL -> BR : registerBrand(brandName)
+        CTRL -> BR : hasBrandByName(brandName)
 
         activate BR
 
-            BR -> Brand**: create(name)
-
-            activate Brand
-
-                Brand -> Brand: validateBrand(brand)
-                Brand --> BR : brand
-
-            deactivate Brand
-
-        BR -> BR: addBrand(brand)
-
-        activate BR
-            BR -> BR: validateBrand(brand)
-            activate BR
-                BR --> BR : true/false
-            deactivate BR
-
-            BR --> BR : true/false
+            BR -> CTRL : true/false
         deactivate BR
 
-            BR -> CTRL : brand
+        CTRL -> BR : getBrandByModelName(modelName)
+
+        activate BR
+
+        BR -> Brand : hasModelByName(modelName)
+
+        activate Brand
+
+        Brand --> BR : true/false
+        deactivate Brand
+
+        BR --> CTRL : brand
         deactivate BR
     end
 
