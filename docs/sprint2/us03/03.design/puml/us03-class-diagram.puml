@@ -29,13 +29,12 @@ class Collaborator {
     -Date dateOfBirth
     -Date admissionDate
     -Address address
-    -int phoneNumber
+    -String phoneNumber
     -String email
-    -int cc
-    -int cardNumber
+    -Document document
 
     - validateCollaborator(collaborator)
-    + Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, cardNumber)
+    + Collaborator(name, job, dateOfBirth, admissionDate, address, phoneNumber, email, document)
 }
 
 class Address {
@@ -81,10 +80,19 @@ class CollaboratorRepository {
     - addCollaborator(collaborator)
     - validateCollaborator(collaborator)
     + registerCollaborator(name, birthdate, admission date, address, \nmobile, email, ID doc type, respective number, job)
+    - registerDocument(docType, number)
 }
 
 class Job {
     -String name
+}
+
+class Document {
+    -String docType
+    -int number
+
+    +Document(docType, number)
+    -validate(docType, number)
 }
 
 Collaborator  <|---  HumanResourcesManager
@@ -100,6 +108,7 @@ RegisterCollaboratorController ..> "1" AddressRepository
 RegisterCollaboratorController ..> Collaborator
 RegisterCollaboratorController ..> Job
 RegisterCollaboratorController ..> Address
+RegisterCollaboratorController ..> Document
 
 RegisterCollaboratorUI .> RegisterCollaboratorController
 
@@ -109,9 +118,12 @@ Repositories -> AddressRepository : addressRepository
 Repositories --> CollaboratorRepository : collaboratorRepository
 
 CollaboratorRepository --> Collaborator
+CollaboratorRepository --> Document
 
 Job <- JobRepository : job
 
 AddressRepository -> Address : address
+
+Document "1" <- "1" Collaborator : has
 
 @enduml

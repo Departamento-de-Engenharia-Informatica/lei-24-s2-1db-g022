@@ -13,6 +13,8 @@ public class Repositories {
     private final SkillRepository skillRepository;
     private final BrandRepository brandRepository;
     private final VehicleRepository vehicleRepository;
+    private final CollaboratorRepository collaboratorRepository;
+    private final AddressRepository addressRepository;
 
     /**
      * Constructs a Repositories object with default repositories.
@@ -24,6 +26,8 @@ public class Repositories {
         skillRepository = new SkillRepository();
         brandRepository = new BrandRepository();
         vehicleRepository = new VehicleRepository();
+        collaboratorRepository = new CollaboratorRepository();
+        addressRepository = new AddressRepository();
     }
 
     /**
@@ -85,5 +89,17 @@ public class Repositories {
         return vehicleRepository;
     }
 
+    /**
+     * Retrieves the collaborator repository.
+     *
+     * @return the collaborator repository
+     */
+    public CollaboratorRepository getCollaboratorRepository() {
+        return collaboratorRepository;
+    }
+
+    public AddressRepository getAddressRepository() {
+        return addressRepository;
+    }
 
 }

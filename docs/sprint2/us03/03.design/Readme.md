@@ -66,7 +66,7 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - Partial - Register Address](svg/us03-sequence-diagram-partial-register-address.svg)
 
-**Create Collaborator**
+**Create Document Object and Collaborator**
 
 ![Sequence Diagram - Partial - Create Collaborator](svg/us03-sequence-diagram-partial-create-collaborator.svg)
 

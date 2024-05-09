@@ -15,11 +15,8 @@ class Collaborator {
     name
     dateOfBirth
     admissionDate
-    address
     phoneNumber
     email
-    cc
-    cardNumber
 }
 
 class Job{
@@ -32,10 +29,15 @@ class Address{
     doorNumber
 }
 
+class Document{
+    docType
+    number
+}
+
 Collaborator  <|---  HumanResourceManager
 HumanResourceManager "1" --- "1..*" Collaborator : Registers >
 Collaborator "1..*" - "1" Job : Has >
 Address "1" - "1..*" Collaborator : < lives
-
+Collaborator "1" - "1" Document : has >
 
 @enduml

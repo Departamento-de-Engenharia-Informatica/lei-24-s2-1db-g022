@@ -1,7 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * The Collaborator class represents a collaborator in an organization.
@@ -15,11 +17,10 @@ public class Collaborator {
     private String name;
     private Date dateOfBirth;
     private Date admissionDate;
-    private int phoneNumber;
+    private String phoneNumber;
     private String email;
-    private int cc;
-    private int cardNumber;
     private Address address;
+    private Document document;
     private Job job;
     private List<Skill> skillList;
 
@@ -28,6 +29,43 @@ public class Collaborator {
      * Constructs a Collaborator object with default values.
      */
     public Collaborator() {
+    }
+
+    public Collaborator(String name, Date dateOfBirth, Date admissionDate, String phoneNumber, String email, Address address, Document document, Job job) {
+
+
+
+
+        this.address = address;
+        this.document = document;
+        this.job = job;
+        this.skillList=new ArrayList<>();
+
+        if (validateNullDate(dateOfBirth) && validateNullDate(admissionDate)) {
+            this.dateOfBirth = dateOfBirth;
+            this.admissionDate = admissionDate;
+        } else {
+
+            throw new IllegalArgumentException("Collaborator date of birth or admission date cannot be null or empty.");
+        }
+
+        if (validateNullString(name)) {
+            this.name = name;
+        } else {
+            throw new IllegalArgumentException("Collaborator name, phone number and email cannot be null or empty.");
+        }
+
+        if(validateEmail(email) && validateNullString(email)){
+            this.email = email;
+        }else {
+            throw new IllegalArgumentException("Collaborator email cannot be null or empty or have an incorrect format.");
+        }
+
+        if (validateNullString(phoneNumber) && validatePhoneNumber(phoneNumber)){
+            this.phoneNumber = phoneNumber;
+        }else {
+            throw new IllegalArgumentException("Collaborator phone number cannot be null or empty or have an incorrect format.");
+        }
     }
 
     /**
@@ -62,8 +100,12 @@ public class Collaborator {
      *
      * @return The phone number of the collaborator.
      */
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public Document getDocument() {
+        return document;
     }
 
     /**
@@ -73,24 +115,6 @@ public class Collaborator {
      */
     public String getEmail() {
         return email;
-    }
-
-    /**
-     * Gets the identification card number of the collaborator.
-     *
-     * @return The identification card number of the collaborator.
-     */
-    public int getCc() {
-        return cc;
-    }
-
-    /**
-     * Gets the card number of the collaborator.
-     *
-     * @return The card number of the collaborator.
-     */
-    public int getCardNumber() {
-        return cardNumber;
     }
 
     /**
@@ -120,11 +144,6 @@ public class Collaborator {
         return skillList;
     }
 
-    /**
-     * Returns a string representation of the collaborator.
-     *
-     * @return A string representation of the collaborator.
-     */
     @Override
     public String toString() {
         return "Collaborator{" +
@@ -133,11 +152,50 @@ public class Collaborator {
                 ", admissionDate=" + admissionDate +
                 ", phoneNumber=" + phoneNumber +
                 ", email='" + email + '\'' +
-                ", cc=" + cc +
-                ", cardNumber=" + cardNumber +
                 ", address=" + address +
+                ", document=" + document +
                 ", job=" + job +
-                ", skill=" + skillList +
+                ", skillList=" + skillList +
                 '}';
+    }
+    private boolean validatePhoneNumber(String value){
+        String regex = "^\\+(?:[0-9] ?){6,14}[0-9]$";
+
+        Pattern pattern = Pattern.compile(regex);
+
+        return pattern.matcher(value).matches();
+    }
+
+    private boolean validateEmail(String value){
+        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+
+        Pattern pattern = Pattern.compile(regex);
+
+        return pattern.matcher(value).matches();
+    }
+
+    private boolean validateNullDate(Date value) {
+        return !(value == null);
+    }
+
+    private boolean validateNullString(String value) {
+        return !(value == null) && !(value.isEmpty());
+    }
+
+    /**
+     * Clones the brand.
+     *
+     * @return A clone of the current brand instance.
+     */
+    public Collaborator clone() {
+
+        Collaborator clone = new Collaborator(this.name,this.dateOfBirth,this.admissionDate,this.phoneNumber,this.email,this.address,this.document,this.job);
+
+        for (Skill in : this.skillList) {
+
+            clone.skillList.add(in.clone());
+        }
+
+        return clone;
     }
 }

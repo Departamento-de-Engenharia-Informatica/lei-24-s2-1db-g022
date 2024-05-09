@@ -64,4 +64,21 @@ public class JobRepository {
         }
         return optionalJob;
     }
+
+    public List<Job> getJobList(){
+        return List.copyOf(jobList);
+    }
+
+    public Job getJobByName(String jobName) {
+        Job newJob =new Job(jobName);
+        Job job=null;
+        if (jobList.contains(newJob)){
+            job = jobList.get(jobList.indexOf(newJob));
+        }
+        if(job == null){
+            throw new IllegalArgumentException(
+                    "Job requested for ["+jobName+"] does not exit.");
+        }
+        return job;
+    }
 }

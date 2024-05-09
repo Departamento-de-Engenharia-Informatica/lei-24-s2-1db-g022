@@ -6,16 +6,33 @@ skinparam shadowing false
 
 participant "collaboratorRepository:\nCollaboratorRepository" as CollaboratorRepository
 participant "collaborator:\nCollaborator" as Collaborator
+participant "document:\nDocument" as Doc
 
 autonumber 19
 -> CollaboratorRepository : registerCollaborator(name, birthdate, \nadmission date, address, mobile, \nemail, ID doc type, respective number, job)
 
 
 autonumber 19.1
-
 activate CollaboratorRepository
+
+CollaboratorRepository -> CollaboratorRepository : registerDocument(docType, number)
+activate CollaboratorRepository
+
+
     group Create Collaborator
-CollaboratorRepository -> Collaborator**: create(name, birthdate, \nadmission date, address, mobile, \nemail, ID doc type, respective number, job)
+    CollaboratorRepository -> Doc** : create(docType, number)
+    activate Doc
+
+    Doc -> Doc : validate(docType, number)
+
+    Doc -> CollaboratorRepository : document
+    deactivate Doc
+
+    CollaboratorRepository -> CollaboratorRepository : document
+    deactivate CollaboratorRepository
+
+
+CollaboratorRepository -> Collaborator**: create(name, birthdate, \nadmission date, address, mobile, \nemail, document, job)
 
             activate Collaborator
 
@@ -40,7 +57,5 @@ CollaboratorRepository -> Collaborator**: create(name, birthdate, \nadmission da
 
     autonumber 20
 <-- CollaboratorRepository : collaborator
-
-
 
 @enduml
