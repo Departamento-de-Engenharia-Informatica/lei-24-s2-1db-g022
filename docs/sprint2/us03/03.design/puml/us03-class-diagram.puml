@@ -80,7 +80,6 @@ class CollaboratorRepository {
     - addCollaborator(collaborator)
     - validateCollaborator(collaborator)
     + registerCollaborator(name, birthdate, admission date, address, \nmobile, email, ID doc type, respective number, job)
-    - registerDocument(docType, number)
 }
 
 class Job {
