@@ -16,7 +16,6 @@ class Collaborator {
     address
     phoneNumber
     email
-    cc
     cardNumber
 
 }

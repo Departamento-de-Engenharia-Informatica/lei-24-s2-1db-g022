@@ -22,10 +22,12 @@ class Collaborator {
     -String phoneNumber
     -String email
     -int taxpayer
-
-    + Collaborator(name,dateOfBirth, admissionDate,phoneNumber, email, taxpayer)
+    -Document document
+    -Adress adress
+    + Collaborator(name,adress,document,dateOfBirth, admissionDate,phoneNumber, email, taxpayer)
     +skillListAdd(Skill)
 }
+
 
 class VehicleFleetManager {
 }
