@@ -27,17 +27,18 @@ class RegisterJobUI {
 
 class Collaborator {
     -String name
-    -List<Skill> skill
+    -List<Skill> skillList
     -Job job
     -Date dateOfBirth
     -Date admissionDate
     -Address address
-    -int phoneNumber
+    -Document document
+    -String phoneNumber
     -String email
     -int cc
-    -int cardNumber
+    -int taxpayer
 
-    +Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, cardNumber)
+    + Collaborator(name, dateOfBirth, admissionDate, address,document, phoneNumber, email, cc, taxpayer)
 }
 
 class HumanResourcesManager {
