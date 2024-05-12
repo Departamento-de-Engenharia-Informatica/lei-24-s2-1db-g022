@@ -43,6 +43,7 @@ public class Vehicle {
      * @throws IllegalArgumentException If any of the parameters are null or empty, or if the license plate format is incorrect.
      */
     public Vehicle(String type, float tare, float grossWeight, int currentKm, Date registerDate, Date acquisitionDate, int checkUpFrequency, String licensePlate, Brand brand, Model model) {
+        this.checkUpList = new ArrayList<>();
 
         if (validateNullFloat(tare) && validateNullFloat(grossWeight)) {
 
@@ -225,6 +226,70 @@ public class Vehicle {
             return false;
         }
     }
+    /**
+     * Checks if a check-up is needed for the vehicle.
+     *
+     * This method determines whether a check-up is needed based on the vehicle's check-up history and frequency.
+     * If no check-ups are recorded, or if the current date is after the calculated next check-up date,
+     * a check-up is considered needed.
+     *
+     * @return True if a check-up is needed, false otherwise.
+     */
+    public boolean isCheckUpNeeded() {
+        if (checkUpList.isEmpty()) {
+            // If there are no check-ups recorded, assume maintenance is needed
+            return true;
+        } else {
+            // Get the last check-up date
+            Date lastCheckUpDate = checkUpList.get(checkUpList.size() - 1).getDate();
+            // Calculate the next check-up date based on the check-up frequency
+            Date nextCheckUpDate = calculateNextCheckUpDate(lastCheckUpDate, checkUpFrequency);
+            // If the current date is after the next check-up date, maintenance is needed
+            return new Date().after(nextCheckUpDate);
+        }
+    }
+    /**
+     * Retrieves the mileage of the last check-up or the current mileage if no check-ups are recorded.
+     *
+     * This method returns the mileage of the last recorded check-up if available. If no check-ups are recorded,
+     * it returns the current mileage of the vehicle.
+     *
+     * @return The mileage of the last check-up or the current mileage if no check-ups are recorded.
+     */
+    public int getLastCheckupMileage() {
+        if (!checkUpList.isEmpty()) {
+            // If there are check-ups recorded, return the mileage of the last check-up
+            return checkUpList.get(checkUpList.size() - 1).getKm();
+        } else {
+            // If there are no check-ups recorded, return the current mileage
+            return currentKm;
+        }
+    }
+
+    /**
+     * Calculates the next check-up mileage based on the last check-up mileage and the check-up frequency.
+     *
+     * @return The next check-up mileage.
+     */
+    public int getNextCheckupMileage() {
+        int lastCheckupKms = getLastCheckupMileage();
+        int freq = getCheckUpFrequency();
+        return lastCheckupKms + freq;
+    }
+    /**
+     * Calculates the next check-up date based on the last check-up date and the check-up frequency.
+     *
+     * @param lastCheckUpDate  The date of the last check-up.
+     * @param checkUpFrequency The frequency of check-ups.
+     * @return The date of the next check-up.
+     */
+    private Date calculateNextCheckUpDate(Date lastCheckUpDate, int checkUpFrequency) {
+        // Add the check-up frequency in milliseconds to the last check-up date
+        // to get the next check-up date
+        long nextCheckUpTime = lastCheckUpDate.getTime() + (checkUpFrequency * 24 * 60 * 60 * 1000L);
+        return new Date(nextCheckUpTime);
+    }
+
 
     /**
      * Validates if the license plate of this vehicle matches the license plate of another vehicle.

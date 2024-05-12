@@ -116,5 +116,20 @@ public class CollaboratorRepository {
 
         return newCollaboratorList;
     }
+
+    /**
+     * Retrieves a collaborator by ID.
+     *
+     * @param collaboratorName The ID of the collaborator to retrieve.
+     * @return An optional containing the collaborator with the specified ID, or empty if not found.
+     */
+    public Optional<Collaborator> getCollaboratorByName(String collaboratorName) {
+        for (Collaborator collaborator : collaboratorList) {
+            if (collaborator.getName().equals(collaboratorName)) {
+                return Optional.of(collaborator);
+            }
+        }
+        return Optional.empty();
+    }
 }
 

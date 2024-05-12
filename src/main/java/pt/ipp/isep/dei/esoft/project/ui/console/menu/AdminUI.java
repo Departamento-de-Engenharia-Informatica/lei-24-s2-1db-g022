@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
+import pt.ipp.isep.dei.esoft.project.application.controller.ListVehiclesNeedingCheckUpController;
 import pt.ipp.isep.dei.esoft.project.application.controller.TestAlgorithmUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
@@ -31,8 +32,10 @@ public class AdminUI implements Runnable {
         options.add(new MenuItem("US01 - Register Skill.", new RegisterSkillUI()));
         options.add(new MenuItem("US02 - Register Job.", new RegisterJobUI()));
         options.add(new MenuItem("US03 - Register Collaborator.", new RegisterCollaboratorUI()));
+        options.add(new MenuItem("US04 - Assign Skills to Collaborator.", new AssignSkillUI()));
         options.add(new MenuItem("US05 - Generate Team Proposal.", new GenerateTeamUI()));
         options.add(new MenuItem("US06 - Register Vehicle.", new RegisterVehicleUI()));
+        options.add(new MenuItem("US08 - List Vehicles Needing Check-Up.", new ListVehiclesNeedingCheckUpUI()));
         options.add(new MenuItem("US13 - Apply Algorithm.", new MinSpanTreeUI()));
         options.add(new MenuItem("US14 - Test Algorithm.", new TestAlgorithmUI()));
 

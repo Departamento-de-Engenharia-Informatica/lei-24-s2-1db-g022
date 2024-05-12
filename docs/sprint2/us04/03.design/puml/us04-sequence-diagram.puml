@@ -14,65 +14,71 @@ participant ":AssignSkillController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "skillRepository\n:SkillRepository" as SR
-participant "skill\n:Skill" as SKILL
+participant "collaboratorRepository\n:CollaboratorRepository" as CL
+participant "collaborator\n:Collaborator" as Collb
+
 
 activate HRM
 
-        HRM -> UI : asks to assign one or more skill
+        HRM -> UI : asks to assign one or more skill to a collaborator
     activate UI
+UI -> CTRL : getCollaboratorList(name)
+activate CTRL
 
-        UI --> HRM : requests data (name)
-    deactivate UI
+ref over CTRL
+Get Collaborator List
+end
 
-        HRM->UI: type data (name)
+deactivate Collb
 
-    activate UI
+CTRL--> UI : collaboratorList
+
+deactivate CTRL
+
+UI <-- HRM : show collaborator list and asks to select
+
+  UI -> CTRL :getSkillList()
+  activate CTRL
+  ref over CTRL
+  Get Skill List
+  end
+  CTRL -> UI : skillList
+
+  deactivate CTRL
+
+    loop skill number size
+HRM -> UI : chose one of collaborator to add skill, from collaboratorlist()
+HRM -> UI : types requested data
+end loop
+
+activate UI
+
+deactivate CTRL
+
+
+
+deactivate CTRL
+
+
 
         UI --> HRM : displays the data and requests confirmation
 
-    deactivate UI
+deactivate UI
 
         HRM -> UI : confirms and submits data
 
-    activate UI
+activate UI
 
-         UI -> CTRL: assignSkill(name)
+
+         UI -> CTRL: assignSkill(collaborator, skill)
+
         activate CTRL
+        ref over CTRL
+        Assign Skill Collaborator
+        end
 
-        CTRL -> RepositorySingleton : getInstance()
 
-            activate RepositorySingleton
-
-                RepositorySingleton --> CTRL : repositories
-            deactivate RepositorySingleton
-
-            CTRL -> PLAT : getSkillRepository()
-            activate PLAT
-
-            PLAT --> CTRL: skillRepository
-            deactivate PLAT
-
-        CTRL -> SR : assignSkill(name)
-
-        activate SR
-
-            SR -> SKILL**: get(name)
-                activate SKILL
-                        SKILL -> SKILL: validateSkill(skill)
-                    SKILL --> SR : skill
-                    deactivate SKILL
-                        activate SR
-                            SR --> SR : true/false
-                        deactivate
-                            SR --> SR : true/false
-
-deactivate SR
-
-            SR --> CTRL : skill
-
-            deactivate SR
-
-            CTRL --> UI : skill
+            CTRL --> UI : collaborator
       deactivate CTRL
 
       UI --> HRM : displays operation success

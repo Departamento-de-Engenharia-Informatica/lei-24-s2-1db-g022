@@ -11,7 +11,6 @@ skinparam classAttributeIconSize 0
 
 class Skill {
     - String name
-
     - validateSkill(Skill)
     + Skill(name)
 }
@@ -20,6 +19,10 @@ class AssignSkillController {
 
     + AssignSkillController()
     + assignSkill(name)
+    + AssignSkillCollaborator(collaborator,skill)
+    + getCollaboratorList(name)
+    + skillListAdd(skill)
+    + getSkillList(skillListName)
 }
 
 class AssignSkillUI {
@@ -27,17 +30,18 @@ class AssignSkillUI {
 
 class Collaborator {
     -String name
-    -List<Skill> skill
+    -List<Skill> skillList
     -Job job
     -Date dateOfBirth
     -Date admissionDate
     -Address address
-    -int phoneNumber
+    -String phoneNumber
     -String email
     -int cc
-    -int cardNumber
+    -int taxpayer
 
-    + Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, cardNumber)
+    + Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, taxpayer)
+    +skillListAdd(Skill)
 }
 
 class HumanResourcesManager {
@@ -52,15 +56,16 @@ class Repositories {
 
 class SkillRepository {
     - List <Skill> skill
-
-    - addSkill(Skill)
     - validateSkill(Skill)
-    + createSkill(name)
+    - skillListAdd(skill)
+    - getSkillList(skillListName)
+
 }
 
 AssignSkillController .> Repositories : repositories
 AssignSkillUI .> AssignSkillController
 Repositories -> Repositories : instance
+Repositories --> "1" CollaboratorRepository : CollaboratorRepository
 Repositories --> "1" SkillRepository : SkillRepository
 SkillRepository "1" --> "*" Skill : skill
 Collaborator  <|--  HumanResourcesManager
@@ -69,5 +74,12 @@ AssignSkillController ..> SkillRepository
 
 HumanResourcesManager <--  Skill: AssignBy
 Collaborator "*" --> "*" Skill : has
+Collaborator .> CollaboratorRepository : collaboratorRepository
+
+class CollaboratorRepository {
+
++getCollaboratorList(name)
++AssignSkillCollaborator(collaborator,skill)
+}
 
 @enduml

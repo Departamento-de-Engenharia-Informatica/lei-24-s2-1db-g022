@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Brand;
+import pt.ipp.isep.dei.esoft.project.domain.CheckUp;
 import pt.ipp.isep.dei.esoft.project.domain.Model;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
@@ -18,7 +19,7 @@ import java.util.Optional;
 public class VehicleRepository {
 
     private final List<Vehicle> vehicleList;
-
+    private List<CheckUp> checkUpList;
     /**
      * Constructs a VehicleRepository object.
      */
@@ -41,6 +42,10 @@ public class VehicleRepository {
         return success;
     }
 
+
+    public void addCheckUp(CheckUp checkUp) {
+        this.checkUpList.add(checkUp);
+    }
     /**
      * Validates if the vehicle is not already present in the repository.
      *
@@ -59,6 +64,8 @@ public class VehicleRepository {
 
         return !vehicleList.contains(vehicle);
     }
+
+
 
     /**
      * Creates a new vehicle with the specified name and adds it to the repository.
@@ -87,5 +94,23 @@ public class VehicleRepository {
             optionalVehicle = Optional.of(vehicle);
         }
         return optionalVehicle;
+    }
+    /**
+     * Retrieves a list of vehicles that are in need of a check-up.
+     *
+     * This method iterates through the list of vehicles in the repository and checks if each vehicle requires a check-up.
+     * A vehicle is considered to need a check-up if its check-up is overdue based on its check-up frequency and the current date.
+     * Vehicles needing check-up are added to a new list, which is then returned.
+     *
+     * @return A list containing vehicles that are in need of a check-up.
+     */
+    public List<Vehicle> getVehiclesNeedingCheckUp() {
+        List<Vehicle> vehiclesNeedingCheckUp = new ArrayList<>();
+        for (Vehicle vehicle : vehicleList) {
+            if (vehicle.isCheckUpNeeded()) {
+                vehiclesNeedingCheckUp.add(vehicle);
+            }
+        }
+        return vehiclesNeedingCheckUp;
     }
 }

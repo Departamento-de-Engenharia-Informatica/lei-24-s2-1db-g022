@@ -41,8 +41,16 @@ This diagram shows the full sequence of interactions between the classes involve
 ![Sequence Diagram - Full](svg/us04-sequence-diagram.svg)
 
 ### Split Diagrams
+3.2.1 Sequence diagram get_assignSkillCollaborator
 
-n/a
+![Sequence Diagram - get_AssignSkillCollaborator](svg/us04-sequence-diagram-get_AssignSkillCollaborator.svg)
+3.2.2 Sequence diagram get_collaboratorList
+![Sequence Diagram - get_collaboratorList](svg/us04-sequence-diagram-get_collaboratorList.svg)
+
+3.2.3 Sequence diagram get_skillList
+![Sequence Diagram - get_skillList](svg/us04-sequence-diagram-get_skillList.svg)
+
+
 
 ## 3.3. Class Diagram (CD)
 
