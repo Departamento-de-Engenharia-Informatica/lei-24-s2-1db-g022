@@ -92,8 +92,8 @@ public class Bootstrap implements Runnable {
         Vehicle vehicle = new Vehicle("Pesado", 12, 1, 200, Date.valueOf("2021-01-10"), Date.valueOf("2021-01-11"), 500, "AA-00-AA", new Brand("BMW"), new Model("XM"));
         Vehicle vehicle2 = new Vehicle("Ligeiro", 12, 1, 200, Date.valueOf("2021-01-10"), Date.valueOf("2021-01-12"), 501, "BB-00-AA", new Brand("BMW"), new Model("XM"));
 
-        //vehicleRepo.addVehicleBootstrap(vehicle);
-        //vehicleRepo.addVehicleBootstrap(vehicle2);
+        vehicleRepo.addVehicleBootstrap(vehicle);
+        vehicleRepo.addVehicleBootstrap(vehicle2);
 
     }
     /**

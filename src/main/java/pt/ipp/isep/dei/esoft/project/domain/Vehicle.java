@@ -1,9 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -22,7 +19,7 @@ public class Vehicle {
     private Date registerDate;
     private Date acquisitionDate;
     private int checkUpFrequency;
-    private String licensePlate;
+    private final String licensePlate;
     private Brand brand;
     private List<CheckUp> checkUpList;
     private Model model;
@@ -90,6 +87,10 @@ public class Vehicle {
         this.brand = brand;
         this.model = model;
         checkUpList = new ArrayList<>();
+    }
+
+    public Vehicle(String licensePlate) {
+        this.licensePlate = licensePlate;
     }
 
     /**
@@ -234,7 +235,7 @@ public class Vehicle {
      */
     public boolean validateVehicleLicense(Vehicle vehicleObj){
 
-        return this.getLicensePlate().equals(vehicleObj.getLicensePlate());
+        return this.licensePlate.equals(vehicleObj.licensePlate);
     }
 
     /**
@@ -332,5 +333,29 @@ public class Vehicle {
         }
 
         return clone;
+    }
+
+    public boolean hasLicensePlateEquals(Vehicle newVeiVehicle) {
+        return this.licensePlate.equals(newVeiVehicle.licensePlate);
+    }
+
+    public Optional<CheckUp> regiterCheckUpByVehicle(Date checkUpDate, int checkUpCurrenteKms) {
+        Optional<CheckUp> checkUpOptional = Optional.empty();
+
+        CheckUp newCheckUp = new CheckUp(checkUpDate, checkUpCurrenteKms);
+
+
+        if (addCheckUp(newCheckUp)) {
+            checkUpOptional = Optional.of(newCheckUp);
+        }
+
+        return checkUpOptional;
+    }
+
+    private boolean addCheckUp(CheckUp newCheckUp) {
+        boolean success = false;
+        // A clone of the job is added to the list of jobs, to avoid side effects and outside manipulation.
+        success = checkUpList.add(newCheckUp.clone());
+        return success;
     }
 }

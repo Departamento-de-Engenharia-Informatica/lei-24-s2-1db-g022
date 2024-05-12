@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Brand;
+import pt.ipp.isep.dei.esoft.project.domain.CheckUp;
 import pt.ipp.isep.dei.esoft.project.domain.Model;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
@@ -87,5 +88,26 @@ public class VehicleRepository {
             optionalVehicle = Optional.of(vehicle);
         }
         return optionalVehicle;
+    }
+
+    public Vehicle getVehicleByPlate(String licensePlate) {
+        Vehicle newVeiVehicle = new Vehicle(licensePlate);
+        Vehicle vehicle = null;
+        for (Vehicle vehicleFor : vehicleList) {
+            if (vehicleFor.hasLicensePlateEquals(newVeiVehicle)) {
+                vehicle = vehicleFor;
+                break;
+            }
+        }
+
+        if (vehicle == null) {
+            throw new IllegalArgumentException(
+                    "Vehicle requested for [" + licensePlate + "] does not exit.");
+        }
+        return vehicle;
+    }
+
+    public void addVehicleBootstrap(Vehicle vehicle) {
+        vehicleList.add(vehicle);
     }
 }
