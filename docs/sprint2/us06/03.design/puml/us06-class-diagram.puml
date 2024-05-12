@@ -61,10 +61,9 @@ class Collaborator {
     -Document document
     -String phoneNumber
     -String email
-    -int cc
     -int taxpayer
 
-    + Collaborator(name, dateOfBirth, admissionDate, address,document, phoneNumber, email, cc, taxpayer)
+    + Collaborator(name, dateOfBirth, admissionDate, address, document, phoneNumber, email, taxpayer)
 }
 
 class VehicleFleetManager {
