@@ -1,0 +1,97 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+
+class Collaborator {
+    -String name
+    -List<Skill> skill
+    -Job job
+    -Date dateOfBirth
+    -Date admissionDate
+    -Address address
+    -int phoneNumber
+    -String email
+    -int cc
+    -int cardNumber
+
+    + Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, cardNumber)
+}
+
+class VehicleFleetManager {
+}
+
+class Vehicle {
+    -List <CheckUp> checkUpsList
+    -Brand brand
+    -Model model
+    -String type
+    -float tare
+    -float grossWeight
+    -int currentKm
+    -Date registerDate
+    -Date acquisitionDate
+    -int checkupFrequency
+    -String licensePlate
+
+    + Vehicle(brand,model,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
+    + CheckUpByVehicle(date, kms)
+    - vehicleCheckUp(checkUp)
+    - validation(checkUp)
+}
+
+class CheckUp {
+    -String licensePlate
+    -Date date
+    -int kms
+
+    + checkUp(date, kms)
+    - validation(checkUp)
+}
+
+class VehicleRepository {
+    - List <Vehicle> vehicleList
+    + getVehicleByPlate(licensePlate)
+}
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getVehicleRepository()
+}
+
+class ListVehiclesNeedingCheckUpController {
+    + ListVehiclesNeedingCheckUpController()
+    + listVehiclesNeedingCheckUp(licensePlate, date, kms)
+}
+
+class ListVehiclesNeedingCheckUpUI {
+}
+
+Collaborator <|- VehicleFleetManager
+
+ListVehiclesNeedingCheckUpUI .> ListVehiclesNeedingCheckUpController
+
+ListVehiclesNeedingCheckUpController .> Repositories
+ListVehiclesNeedingCheckUpController ..> VehicleRepository
+ListVehiclesNeedingCheckUpController ..> Vehicle
+ListVehiclesNeedingCheckUpController ..> CheckUp
+
+
+Repositories -> Repositories : instance
+Repositories --> VehicleRepository : vehicleRepository
+
+VehicleRepository -> Vehicle : vehicle
+
+Vehicle "1" -> "*" CheckUp : checkUps
+
+VehicleFleetManager --> CheckUp : does
+
+@enduml
