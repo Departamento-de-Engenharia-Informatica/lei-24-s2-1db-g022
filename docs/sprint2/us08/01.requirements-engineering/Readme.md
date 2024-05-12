@@ -32,6 +32,20 @@ a) If it currently has 33600 (exceeded) or
 b) 33480 (there is a difference minor than 5% of the number of kms of the checkup frequency).
 The list must clearly identify the vehicles through: plate number, brand, model and the that justified the checkup need.
 
+> **Question:** Dear client, we asked during class if it would be needed to have filters when creating the check up list but we didn't receive a very clear answer on what these filters entail. Like something along the lines of the vehicle type or the closeness to the next check up? Thank you.
+>
+> **Answer:** Development teams are free to define aspects related to UX/UI.
+
+> **Question:** US08
+> 
+>1- Are there any specific criteria for determining which vehicles need check-up?
+> 
+>2- Should the list include all vehicles or only those assigned to a specific location?
+>
+> **Answer:** us08
+>1. yes; previously answered;
+>2. all
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The list must contain all vehicles that have already exceeded the number of km required for the inspection or those that are close to it.
