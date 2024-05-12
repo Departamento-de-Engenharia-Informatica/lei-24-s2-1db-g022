@@ -28,19 +28,23 @@ class AssignSkillController {
 class AssignSkillUI {
 }
 
+class Document{
+    docType
+    number
+}
+
 class Collaborator {
     -String name
     -List<Skill> skillList
     -Job job
     -Date dateOfBirth
     -Date admissionDate
-    -Address address
     -String phoneNumber
     -String email
-    -int cc
     -int taxpayer
-
-    + Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, taxpayer)
+    -Document document
+    -Adress adress
+    + Collaborator(name,adress,document,dateOfBirth, admissionDate,phoneNumber, email, taxpayer)
     +skillListAdd(Skill)
 }
 
@@ -62,6 +66,12 @@ class SkillRepository {
 
 }
 
+class CollaboratorRepository {
+
++getCollaboratorList(name)
++AssignSkillCollaborator(collaborator,skill)
+}
+
 AssignSkillController .> Repositories : repositories
 AssignSkillUI .> AssignSkillController
 Repositories -> Repositories : instance
@@ -75,11 +85,8 @@ AssignSkillController ..> SkillRepository
 HumanResourcesManager <--  Skill: AssignBy
 Collaborator "*" --> "*" Skill : has
 Collaborator .> CollaboratorRepository : collaboratorRepository
+Collaborator "1" --> "1" Document : has
 
-class CollaboratorRepository {
 
-+getCollaboratorList(name)
-+AssignSkillCollaborator(collaborator,skill)
-}
 
 @enduml
