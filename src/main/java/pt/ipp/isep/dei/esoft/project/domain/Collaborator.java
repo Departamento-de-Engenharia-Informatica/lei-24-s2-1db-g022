@@ -272,6 +272,4 @@ public class Collaborator {
     public String toString() {
         return "Collaborator{" + "name='" + name + '\'' + ", dateOfBirth=" + dateOfBirth + ", admissionDate=" + admissionDate + ", phoneNumber=" + phoneNumber + ", email='" + email + '\'' + ", address=" + address + ", document=" + document + ", job=" + job + ", skillList=" + skillList + '}';
     }
-
-
 }

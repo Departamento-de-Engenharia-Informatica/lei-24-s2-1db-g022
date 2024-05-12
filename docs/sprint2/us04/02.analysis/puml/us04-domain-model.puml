@@ -26,6 +26,16 @@ class HumanResourceManager {
 
 }
 
+class Document{
+    docType
+    number
+}
+
+class Address {
+    streetName
+    postCode
+    doorNumber
+}
 
 
 
@@ -35,7 +45,8 @@ class Skill{
 
 
 
-
+Collaborator "1" - "1" Document : has >
+Collaborator "1..*" -- "1" Address : lives >
 Collaborator  <|-  HumanResourceManager
 HumanResourceManager "1" -- "1..*" Skill : Registers >
 Skill "1..*" -- "*" Collaborator : has <

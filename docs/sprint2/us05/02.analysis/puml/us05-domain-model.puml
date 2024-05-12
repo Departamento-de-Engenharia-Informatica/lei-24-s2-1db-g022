@@ -12,12 +12,19 @@ class Collaborator {
     name
     dateOfBirth
     admissionDate
-    address
     phoneNumber
-    email
-    cc
     cardNumber
+}
 
+class Document{
+    docType
+    number
+}
+
+class Address {
+    streetName
+    postCode
+    doorNumber
 }
 
 class HumanResourceManager {
@@ -29,6 +36,11 @@ class Team{
 class Skill{
     name
 }
+
+Collaborator "1" - "1" Document : has >
+
+Collaborator "1..*" -- "1" Address : lives >
+
 
 Collaborator  <|--  HumanResourceManager
 

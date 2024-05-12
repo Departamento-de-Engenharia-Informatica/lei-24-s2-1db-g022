@@ -33,6 +33,7 @@ public class TeamRepository {
      */
     public List<Team> generateProposalTeam(int minSize, int maxSizeTeam, List<Skill> skillList, List<Collaborator> collaboratorList) {
         List<Team> teamListProposal = new ArrayList<>();
+        removeCollaboratorsHasTeam(collaboratorList);
         while (collaboratorList.size() >= minSize) {
             List<Collaborator> idealCollaboratorList = new ArrayList<>();
             int i = 0;
@@ -55,6 +56,17 @@ public class TeamRepository {
         }
 
         return teamListProposal;
+    }
+
+    /**
+     * Removes collaborators from the provided list if they are associated with any team in the team list.
+     *
+     * @param collaboratorList The list of collaborators to check and remove from.
+     */
+    private void removeCollaboratorsHasTeam(List<Collaborator> collaboratorList) {
+        for (Team team : teamList) {
+            collaboratorList.removeIf(team::collaboratorHasTeam);
+        }
     }
 
     /**

@@ -22,6 +22,7 @@ Iterative Development".
 * Pipe
 * WaterPoint
 * IrrigationSystem
+* Document
 
 ---
 
@@ -46,6 +47,7 @@ Iterative Development".
 * Skills
 * Job
 * Vehicles
+* Document
 
 ---  
 
@@ -167,6 +169,7 @@ remembering, or it is derivable from the List of Common Associations:
 | Collaborator              |   Generalization    |      VehicleFleetManager |
 | Collaborator              |   Generalization    |        GreenSpaceManager |
 | Collaborator              |        Lives        |                  Address |
+| Collaborator              |         Has         |                 Document |
 | Team  	                   |     Contains  	     |             Collaborator |
 | Team  	                   |   Carries Out  	    |                   Agenda |
 | Agenda  	                 |      defines 	      |                     Task |

@@ -19,6 +19,17 @@ class Collaborator {
     email
 }
 
+class Document{
+    docType
+    number
+}
+
+class Address {
+    streetName
+    postCode
+    doorNumber
+}
+
 class Job{
     name
 }
@@ -35,6 +46,7 @@ class Document{
 }
 
 Collaborator  <|---  HumanResourceManager
+
 HumanResourceManager "1" --- "1..*" Collaborator : Registers >
 Collaborator "1..*" - "1" Job : Has >
 Address "1" - "1..*" Collaborator : < lives

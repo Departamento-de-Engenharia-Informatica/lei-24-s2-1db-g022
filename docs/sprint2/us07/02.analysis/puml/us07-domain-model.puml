@@ -12,19 +12,25 @@ class Collaborator {
     name
     dateOfBirth
     admissionDate
-    address
     phoneNumber
     email
-    cc
-    cardNumber
+}
+
+class Document{
+    docType
+    number
+}
+
+class Address {
+    streetName
+    postCode
+    doorNumber
 }
 
 class VehicleFleetManager {
 }
 
 class Vehicle{
-    brand
-    model
     type
     tare
     grossWeight
@@ -35,12 +41,29 @@ class Vehicle{
     licensePlate
 }
 
+class Brand{
+    name
+}
+
+class Model{
+    name
+}
+
 class CheckUp{
     date
     km
 }
+Collaborator "1" - "1" Document : has >
 
+Collaborator "1..*" -- "1" Address : lives >
 Collaborator <|- VehicleFleetManager
+
 VehicleFleetManager "1" -- "1..*" CheckUp : Registers >
 Vehicle "1" - "*" CheckUp : Does >
+
+Vehicle "1..*" -- "1" Brand : has >
+Brand "1" -- "1..*" Model : has >
+
+Vehicle "1..*" -- "1" Model :  has >
+
 @enduml

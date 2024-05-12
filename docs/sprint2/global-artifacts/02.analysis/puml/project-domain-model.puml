@@ -14,10 +14,13 @@ class Collaborator {
     dateOfBirth
     admissionDate
     phoneNumber
+    taxpayer
     email
-    cc
-    cardNumber
+}
 
+class Document{
+    docType
+    number
 }
 
 class Address {
@@ -196,7 +199,7 @@ HumanResourceManager "1" -- "1..*" Team : defines >
 Collaborator "*" -- "*" Vehicle : drives/uses >
 Collaborator "1..*" ---- "1" Team : Contains <
 
-Team "1" -- "1" Agenda : carries out >
+Team "1..*" -- "1" Agenda : carries out >
 
 Agenda "1" -- "*" Task : defines >
 
@@ -211,5 +214,7 @@ VehicleFleetManager "1" -- "1..*" CheckUp : registers >
 
 GreenSpaceManager "1..*" -- "*" GreenSpace :  manages >
 GreenSpaceUser "*" -- "1..*" GreenSpace :  uses >
+
+Collaborator "1" - "1" Document : has >
 
 @enduml

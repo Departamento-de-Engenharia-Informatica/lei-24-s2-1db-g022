@@ -1,0 +1,73 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+title UI Sequence Diagram (SSD) - US08 - List all vehicles needing check-up
+'hide footbox
+actor "Vehicle and Fleet Manager" as VFM
+participant ":ListVehiclesNeedingCheckUpUI" as UI
+participant ":ListVehiclesNeedingCheckUpController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "vehicleRepository:\nVehicleRepository" as VehicleRepository
+participant "vehicle:\nVehicle" as Vehicle
+participant "CheckUp" as CheckUp
+
+activate VFM
+
+                VFM -> UI : asks to list all vehicles needing check-up
+                activate UI
+
+                UI -> CTRL : listVehiclesNeedingCheckUp(licensePlate, date, kms)
+                activate CTRL
+
+                CTRL -> RepositorySingleton :getInstance()
+                activate RepositorySingleton
+
+                RepositorySingleton --> CTRL : repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getVehicleRepository()
+                activate PLAT
+
+                PLAT --> CTRL : vehicleRepository
+                deactivate PLAT
+
+                CTRL -> VehicleRepository : getVehicleByPlate(licensePlate)
+                activate VehicleRepository
+
+                VehicleRepository --> CTRL : vehicle
+                deactivate VehicleRepository
+
+                CTRL -> Vehicle : CheckUpByVehicle(date, kms)
+                activate Vehicle
+
+                Vehicle -> CheckUp** : get(date, kms)
+                activate CheckUp
+
+                CheckUp -> CheckUp : validation(checkUp)
+                activate CheckUp
+
+                CheckUp -->CheckUp : true/false
+                deactivate CheckUp
+
+                CheckUp -> Vehicle : checkUp
+                deactivate CheckUp
+
+
+                Vehicle --> CTRL : checkUp
+                deactivate Vehicle
+
+                CTRL -> UI : checkUp
+
+                deactivate CTRL
+
+                UI --> VFM : show vehicles needing check-up
+                deactivate UI
+
+
+deactivate VFM
+
+@enduml
