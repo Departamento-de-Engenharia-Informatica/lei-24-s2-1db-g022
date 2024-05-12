@@ -1,8 +1,13 @@
-package pt.ipp.isep.dei.esoft.project.application.controller;
+package pt.ipp.isep.dei.esoft.project.ui.console;
 
+import pt.ipp.isep.dei.esoft.project.application.controller.MinSpanTreeController;
+import pt.ipp.isep.dei.esoft.project.application.controller.TestAlgorithmController;
 import pt.ipp.isep.dei.esoft.project.domain.Pipe;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +33,7 @@ public class TestAlgorithmUI implements Runnable {
     @Override
     public void run() {
         System.out.println("\n\n--- Analysing Algorithm ------------------------");
-        String outputDirectoryName = "US14\\Results";
+        String outputDirectoryName = "MDISC\\US14\\Results";
 
         // Define the range for input file numbers
         int numFiles = 30;
@@ -39,7 +44,7 @@ public class TestAlgorithmUI implements Runnable {
         // Run the algorithm for each input file
         for (int i = 0; i < numFiles; i++) {
 
-            String inputFile = "US14\\us14_" + (i + 1) + ".csv";
+            String inputFile = "MDISC\\US14\\us14_" + (i + 1) + ".csv";
             long startTime = System.nanoTime();
 
             Pipe[] pipes = getController1().importRoutesFromCSV(inputFile);

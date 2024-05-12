@@ -1,9 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.TestAlgorithmUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.MinSpanTreeUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.RegisterVehicleUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.ShowTextUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.TestAlgorithmUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.ArrayList;
