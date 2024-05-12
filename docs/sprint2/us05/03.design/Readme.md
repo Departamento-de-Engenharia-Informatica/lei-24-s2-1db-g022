@@ -58,13 +58,22 @@ The following diagram shows the same sequence of interactions between the classe
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-**Has Skill By Name**
+**Get Skill List**
 
-![Sequence Diagram - Partial - Has Skill By Name](svg/us05-sequence-diagram-partial-has-skill-by-name.svg)
+![Sequence Diagram - Partial - Get Skill List](svg/us05-sequence-diagram-partial-get-skill-list.svg)
+
+**Get All Skill by Name**
+
+![Sequence Diagram - Partial - Get All Skill by Name](svg/us05-sequence-diagram-partial-get-all-skills-by-name.svg)
+
 
 **Get Collaborator By Skill**
 
 ![Sequence Diagram - Partial - Get Collaborator By Skill](svg/us05-sequence-diagram-partial-get-collaborator-by-skill.svg)
+
+**Generate Team Proposal List**
+
+![Sequence Diagram - Partial - Generate Team Proposal List](svg/us05-sequence-diagram-partial-generate-team.svg)
 
 **Register Proposal Team**
 

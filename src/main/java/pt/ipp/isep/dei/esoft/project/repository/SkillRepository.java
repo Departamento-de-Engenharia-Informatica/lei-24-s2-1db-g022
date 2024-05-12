@@ -64,4 +64,35 @@ public class SkillRepository {
         }
         return optionalSkill;
     }
+
+    /**
+     * Retrieves an unmodifiable list of all skills.
+     *
+     * @return An unmodifiable list of all skills.
+     */
+    public List<Skill> getSkillList() {
+        return List.copyOf(skillList);
+    }
+
+    /**
+     * Retrieves a skill by its name.
+     *
+     * @param skillName The name of the skill to retrieve.
+     * @return The skill with the specified name.
+     * @throws IllegalArgumentException if the skill with the given name does not exist.
+     */
+    public Skill getSkillByName(String skillName) {
+        Skill newSkill = new Skill(skillName);
+        Skill skill = null;
+
+        if (skillList.contains(newSkill)) {
+            skill = skillList.get(skillList.indexOf(newSkill));
+        }
+
+        if (skill == null) {
+            throw new IllegalArgumentException(
+                    "Skill requested for [" + skillName + "] does not exist.");
+        }
+        return skill;
+    }
 }

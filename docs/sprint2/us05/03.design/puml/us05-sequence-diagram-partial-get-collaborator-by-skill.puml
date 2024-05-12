@@ -6,12 +6,14 @@ skinparam shadowing false
 participant ":GenerateTeamController" as CRL
 participant ":Repositories" as REP
 participant "repositories\n:Repositories" as PLAT
-participant "collaborator\n:Collaborator" as CL
+participant "collaboratorRepository\n:CollaboratorRepository" as CL
+participant "collaborator\n:Collaborator" as Collaborator
 
-autonumber 11
---> CRL: getCollaboratorBySkill(skillList)
 
-autonumber 11.1
+autonumber 13
+--> CRL: getCollaboratorsBySkill(skillList)
+
+autonumber 13.1
 
 activate CRL
 group Get Collaborator By Skill
@@ -30,13 +32,23 @@ PLAT --> CRL : collaboratorRepository
 
 deactivate PLAT
 
-CRL -> CL : getCollaboratorBySkill(skillList)
+CRL -> CL : getCollaboratorsBySkill(skillList)
 activate CL
+loop skillList
+
+CL -> Collaborator : hasCollaboratorSkill(skill)
+activate Collaborator
+
+
+Collaborator -> CL : true/false
+end
+deactivate Collaborator
 CL--> CRL : collaboratorList
+
 deactivate CL
 
 end
-autonumber 12
+autonumber 14
 
 <--CRL : collaboratorList
 deactivate CRL

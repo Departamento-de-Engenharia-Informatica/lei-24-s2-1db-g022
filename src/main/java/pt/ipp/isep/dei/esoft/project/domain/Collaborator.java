@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
@@ -22,24 +23,26 @@ public class Collaborator {
     private Address address;
     private Document document;
     private Job job;
-    private List<Skill> skillList;
-
+    private final List<Skill> skillList;
 
     /**
-     * Constructs a Collaborator object with default values.
+     * Constructs a Collaborator object with the specified attributes.
+     *
+     * @param name          The name of the collaborator.
+     * @param dateOfBirth   The date of birth of the collaborator.
+     * @param admissionDate The admission date of the collaborator.
+     * @param phoneNumber   The phone number of the collaborator.
+     * @param email         The email address of the collaborator.
+     * @param address       The address of the collaborator.
+     * @param document      The document of the collaborator.
+     * @param job           The job position of the collaborator.
+     * @throws IllegalArgumentException if any of the parameters are invalid or null.
      */
-    public Collaborator() {
-    }
-
     public Collaborator(String name, Date dateOfBirth, Date admissionDate, String phoneNumber, String email, Address address, Document document, Job job) {
-
-
-
 
         this.address = address;
         this.document = document;
         this.job = job;
-        this.skillList=new ArrayList<>();
 
         if (validateNullDate(dateOfBirth) && validateNullDate(admissionDate)) {
             this.dateOfBirth = dateOfBirth;
@@ -55,18 +58,21 @@ public class Collaborator {
             throw new IllegalArgumentException("Collaborator name, phone number and email cannot be null or empty.");
         }
 
-        if(validateEmail(email) && validateNullString(email)){
+        if (validateEmail(email) && validateNullString(email)) {
             this.email = email;
-        }else {
+        } else {
             throw new IllegalArgumentException("Collaborator email cannot be null or empty or have an incorrect format.");
         }
 
-        if (validateNullString(phoneNumber) && validatePhoneNumber(phoneNumber)){
+        if (validateNullString(phoneNumber) && validatePhoneNumber(phoneNumber)) {
             this.phoneNumber = phoneNumber;
-        }else {
+        } else {
             throw new IllegalArgumentException("Collaborator phone number cannot be null or empty or have an incorrect format.");
         }
+
+        this.skillList = new ArrayList<>();
     }
+
 
     /**
      * Gets the name of the collaborator.
@@ -135,29 +141,22 @@ public class Collaborator {
         return job;
     }
 
+
     /**
      * Gets the list of skills of the collaborator.
      *
      * @return The list of skills of the collaborator.
      */
-    public List<Skill> getSkill() {
-        return skillList;
+    public List<Skill> getSkillList() {
+        return List.copyOf(skillList);
     }
 
-    @Override
-    public String toString() {
-        return "Collaborator{" +
-                "name='" + name + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", admissionDate=" + admissionDate +
-                ", phoneNumber=" + phoneNumber +
-                ", email='" + email + '\'' +
-                ", address=" + address +
-                ", document=" + document +
-                ", job=" + job +
-                ", skillList=" + skillList +
-                '}';
-    }
+    /**
+     * Validates if the provided phone number matches the expected format.
+     *
+     * @param value The phone number to validate.
+     * @return True if the phone number matches the format, false otherwise.
+     */
     private boolean validatePhoneNumber(String value){
         String regex = "^\\+(?:[0-9] ?){6,14}[0-9]$";
 
@@ -166,6 +165,12 @@ public class Collaborator {
         return pattern.matcher(value).matches();
     }
 
+    /**
+     * Validates if the provided email address matches the expected format.
+     *
+     * @param value The email address to validate.
+     * @return True if the email address matches the format, false otherwise.
+     */
     private boolean validateEmail(String value){
         String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
@@ -174,10 +179,22 @@ public class Collaborator {
         return pattern.matcher(value).matches();
     }
 
+    /**
+     * Validates if the provided date is not null.
+     *
+     * @param value The date to validate.
+     * @return True if the date is not null, false otherwise.
+     */
     private boolean validateNullDate(Date value) {
         return !(value == null);
     }
 
+    /**
+     * Validates if the provided string is not null or empty.
+     *
+     * @param value The string to validate.
+     * @return True if the string is not null or empty, false otherwise.
+     */
     private boolean validateNullString(String value) {
         return !(value == null) && !(value.isEmpty());
     }
@@ -185,17 +202,76 @@ public class Collaborator {
     /**
      * Clones the brand.
      *
-     * @return A clone of the current brand instance.
+     * @return A clone of the current collaborator instance.
      */
     public Collaborator clone() {
 
-        Collaborator clone = new Collaborator(this.name,this.dateOfBirth,this.admissionDate,this.phoneNumber,this.email,this.address,this.document,this.job);
+        Collaborator clone = new Collaborator(this.name, this.dateOfBirth, this.admissionDate, this.phoneNumber, this.email, this.address, this.document, this.job);
 
         for (Skill in : this.skillList) {
-
             clone.skillList.add(in.clone());
         }
 
         return clone;
     }
+
+    /**
+     * Adds a skill to the collaborator's skill list during bootstrapping.
+     *
+     * @param skill The skill to be added.
+     */
+    public void addSkillCollaboratorBootStrap(Skill skill) {
+        skillList.add(skill);
+    }
+
+    /**
+     * Checks if the collaborator has a specific skill.
+     *
+     * @param newSkill The skill to check.
+     * @return True if the collaborator has the skill, false otherwise.
+     */
+    public boolean hasCollaboratorSkill(Skill newSkill) {
+        for (Skill skill : skillList) {
+            if (skill.equals(newSkill)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if this collaborator is equal to another object.
+     *
+     * @param object The object to compare with.
+     * @return True if the objects are equal, false otherwise.
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Collaborator)) return false;
+        Collaborator that = (Collaborator) object;
+        return Objects.equals(name, that.name) && Objects.equals(dateOfBirth, that.dateOfBirth) && Objects.equals(admissionDate, that.admissionDate) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(email, that.email) && Objects.equals(address, that.address) && Objects.equals(document, that.document) && Objects.equals(job, that.job) && Objects.equals(skillList, that.skillList);
+    }
+
+    /**
+     * Generates a hash code value for the collaborator.
+     *
+     * @return A hash code value for the collaborator.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, dateOfBirth, admissionDate, phoneNumber, email, address, document, job, skillList);
+    }
+
+    /**
+     * Returns a string representation of the collaborator.
+     *
+     * @return A string representation of the collaborator.
+     */
+    @Override
+    public String toString() {
+        return "Collaborator{" + "name='" + name + '\'' + ", dateOfBirth=" + dateOfBirth + ", admissionDate=" + admissionDate + ", phoneNumber=" + phoneNumber + ", email='" + email + '\'' + ", address=" + address + ", document=" + document + ", job=" + job + ", skillList=" + skillList + '}';
+    }
+
+
 }

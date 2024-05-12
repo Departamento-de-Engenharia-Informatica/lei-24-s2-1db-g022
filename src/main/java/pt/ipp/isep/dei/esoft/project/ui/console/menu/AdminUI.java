@@ -30,6 +30,7 @@ public class AdminUI implements Runnable {
         options.add(new MenuItem("US01 - Register Skill.", new RegisterSkillUI()));
         options.add(new MenuItem("US02 - Register Job.", new RegisterJobUI()));
         options.add(new MenuItem("US03 - Register Collaborator.", new RegisterCollaboratorUI()));
+        options.add(new MenuItem("US05 - Generate Team Proposal.", new GenerateTeamUI()));
         options.add(new MenuItem("US06 - Register Vehicle.", new RegisterVehicleUI()));
 
         int option = 0;

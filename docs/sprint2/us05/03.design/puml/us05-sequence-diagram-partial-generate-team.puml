@@ -1,0 +1,80 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":GenerateTeamController" as CRL
+participant ":Repositories" as REP
+participant "repositories\n:Repositories" as PLAT
+participant "teamRepository:\nTeamRepository" as TeamRepository
+participant "team\n:Team" as TEAM
+
+
+autonumber 15
+--> CRL: generateProposalTeamList(minSizeTeam,maxSizeTeam,skillList,collaboratorList)
+
+autonumber 15.1
+
+activate CRL
+group Generate Team Proposal List
+
+CRL -> REP : getInstance()
+activate REP
+
+REP --> CRL : repositories
+
+deactivate REP
+
+CRL -> PLAT : getTeamRepository()
+activate PLAT
+
+PLAT --> CRL : teamRepository
+
+deactivate PLAT
+
+
+CRL -> TeamRepository : generateProposalTeamList (maxSizeTeam,skillList,collaboratorList)
+activate TeamRepository
+
+loop CollaboratorList.size() >= minSize
+loop idealCollaboratorList.size() < maxSize
+
+TeamRepository -> TeamRepository : addIdealCollaboratorList(idealCollaboratorList,colaborator)
+
+activate TeamRepository
+
+TeamRepository --> TeamRepository : true/false
+deactivate TeamRepository
+
+
+end
+TeamRepository ->TEAM**: create(idealCollaboratorList)
+
+activate TEAM
+
+TEAM --> TeamRepository : team
+deactivate TEAM
+TeamRepository -> TeamRepository : addListTeamProposal(teamListProposal,team)
+activate TeamRepository
+TeamRepository --> TeamRepository : true/false
+deactivate TeamRepository
+
+TeamRepository -> TeamRepository : removeCollaboratorList(collaboratorList,team)
+activate TeamRepository
+
+TeamRepository --> TeamRepository : true/false
+deactivate TeamRepository
+end
+TeamRepository --> CRL : teamList
+
+deactivate TeamRepository
+
+
+
+end
+autonumber 16
+
+<--CRL : teamListProposal
+deactivate CRL
+
+@enduml
