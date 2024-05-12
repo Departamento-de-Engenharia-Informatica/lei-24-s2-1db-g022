@@ -10,109 +10,127 @@ autonumber
 actor "Human Resources Manager (HRM)" as HRM
 participant ":GenerateTeamUI" as UI
 participant ":GenerateTeamController" as CRL
-participant "team\n:Team" as TEAM
-
 
 activate HRM
-    'Interações com UI
-            HRM -> UI : asks to generate a new proposals teams
-    activate UI
+'Interações com UI
+HRM -> UI : asks to generate a new proposals teams
+activate UI
 
-            UI --> HRM : requests data (team max size,team min size, skills number size)
-    deactivate UI
+UI --> HRM : requests data (team max size,team min size, skills number size)
 
-            HRM -> UI : types requested data
-    activate UI
-        loop skill number size
+deactivate UI
 
-            UI --> HRM : requests data (skillName)
+HRM -> UI : types requested data
+activate UI
 
-    deactivate UI
+UI -> CRL :getSkillList()
+activate CRL
 
-            HRM -> UI : insert a skill name
+ref over CRL
+Get Skill List
+end
 
-    activate UI
+CRL -> UI : skillList
 
-            UI -> CRL : hasSkillByName(skillName)
-            ref over CRL
-                has Skill By Name
-            end ref
-
-            activate CRL
+deactivate CRL
+loop skill number size
 
 
-                   CRL --> UI : true/false
+UI --> HRM : shows skill list and ask to select one
 
-            deactivate CRL
+deactivate UI
 
-    end loop
+HRM -> UI : type a skill name
 
+activate UI
 
 
 
-            UI --> HRM : shows all data and requests confirmation
-    deactivate UI
-
-            HRM -> UI : confirms data
-    activate UI
-
-            UI -> CRL : generateTeams(minSize,maxSize,skillList)
-
-            activate CRL
-
-                CRL -> CRL : getCollaboratorBySkill(skillList)
-
-                ref over CRL
-                    Get Collaborator By Skill
-                end ref
-                                activate CRL
-
-                                CRL --> CRL : collaboratorList
-
-                                deactivate CRL
-
-                                'Generate Teams Method
-
-                               loop Proposal Team List
-
-                               CRL -> TEAM** : create(minSize,maxSize,collaboratorList,skillList)
-                               activate TEAM
-                                   TEAM ->TEAM : validateTeam(team)
-
-                                   TEAM --> CRL : team
-
-                               deactivate TEAM
-                               end
-                                CRL --> UI : teamsList
-
-                            deactivate CRL
-
-
-            deactivate CRL
-
-            UI --> HRM : shows the list of the team's proposals and asks you to choose one of them
-
-    deactivate UI
-
-            HRM -> UI : choose one of the proposals and confirms
-
-
-    activate UI
-
-            UI -> CRL : registerProposalTeam(team)
-
-            ref over CRL
-                Register Proposal Team
-            end ref
-
-            activate CRL
+end loop
 
 
 
-                CRL--> UI : team
-            deactivate CRL
 
-            UI --> HRM : displays operation success
+UI --> HRM : shows all data and requests confirmation
+deactivate UI
 
-    deactivate UI
+HRM -> UI : confirms data
+activate UI
+
+UI -> CRL : generateProposalTeams(minSize,maxSize,skillList)
+
+activate CRL
+
+CRL -> CRL : getAllSkillsByName(skillListNames)
+
+ref over CRL
+Get All Skills By Name
+end
+
+activate CRL
+
+CRL --> CRL : skillList
+
+
+
+deactivate CRL
+
+CRL -> CRL : getCollaboratorsBySkill(skillList)
+
+ref over CRL
+Get Collaborators By Skill
+end ref
+activate CRL
+
+CRL --> CRL : collaboratorList
+
+deactivate CRL
+
+'Generate Teams Method
+
+
+CRL -> CRL : generateProposalTeamList(minSize,maxSize,skillList,collaboratorList)
+ref over CRL
+Generate Proposal Team List
+end
+activate CRL
+
+CRL --> CRL : teamListProposal
+
+deactivate CRL
+
+
+
+CRL --> UI : teamListProposal
+
+deactivate CRL
+
+
+deactivate CRL
+
+UI --> HRM : shows the list of the team's proposals and asks you to choose one of them
+
+deactivate UI
+
+HRM -> UI : choose one of the proposals and confirms
+
+
+activate UI
+
+UI -> CRL : registerProposalTeam(team)
+
+ref over CRL
+Register Proposal Team
+end ref
+
+activate CRL
+
+
+
+CRL--> UI : team
+deactivate CRL
+
+UI --> HRM : displays operation success
+
+deactivate UI
 @enduml

@@ -1,7 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
-
 /**
  * @author Group22
  */
@@ -10,11 +8,12 @@ public class Repositories {
     private static Repositories instance;
     private final AuthenticationRepository authenticationRepository;
     private final JobRepository jobRepository;
+    private final CollaboratorRepository collaboratorRepository;
     private final SkillRepository skillRepository;
     private final BrandRepository brandRepository;
     private final VehicleRepository vehicleRepository;
-    private final CollaboratorRepository collaboratorRepository;
     private final AddressRepository addressRepository;
+    private final TeamRepository teamRepository;
 
     /**
      * Constructs a Repositories object with default repositories.
@@ -26,8 +25,10 @@ public class Repositories {
         skillRepository = new SkillRepository();
         brandRepository = new BrandRepository();
         vehicleRepository = new VehicleRepository();
-        collaboratorRepository = new CollaboratorRepository();
         addressRepository = new AddressRepository();
+        collaboratorRepository = new CollaboratorRepository();
+        teamRepository = new TeamRepository();
+
     }
 
     /**
@@ -61,6 +62,16 @@ public class Repositories {
     public JobRepository getJobRepository() {
         return jobRepository;
     }
+
+    /**
+     * Retrieves the team repository.
+     *
+     * @return the team repository
+     */
+    public TeamRepository getTeamRepository() {
+        return teamRepository;
+    }
+
 
     /**
      * Retrieves the skill repository.
@@ -97,9 +108,12 @@ public class Repositories {
     public CollaboratorRepository getCollaboratorRepository() {
         return collaboratorRepository;
     }
-
+    /**
+     * Retrieves the address repository.
+     *
+     * @return the address repository
+     */
     public AddressRepository getAddressRepository() {
         return addressRepository;
     }
-
 }

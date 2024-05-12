@@ -1,9 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.ui;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
-import pt.ipp.isep.dei.esoft.project.domain.Brand;
-import pt.ipp.isep.dei.esoft.project.domain.Model;
+import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
+
+import java.sql.Date;
 
 /**
  * The Bootstrap class initializes the application by adding initial data such as users and jobs.
@@ -21,7 +22,41 @@ public class Bootstrap implements Runnable {
         addJobs();
         addSkills();
         addBrands();
+        addCollaborators();
     }
+
+    /**
+     * Adds sample collaborators to the collaborator repository for bootstrapping purposes.
+     */
+    private void addCollaborators() {
+        CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
+
+        // Create sample collaborators
+        Collaborator collaborator = new Collaborator("luigy", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988676", "luigy@luigy.pt", new Address("streeName", "1234-123", 1), new Document("Passport", 123321123), new Job("Jardineiro"));
+        Collaborator collaborator2 = new Collaborator("daniel", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988671", "daniel@daniel.pt", new Address("streeName", "1234-123", 1), new Document("Passport", 123321125), new Job("Calceteiro"));
+        Collaborator collaborator3 = new Collaborator("tomas", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988672", "tomas@tomas.pt", new Address("streeName", "1234-123", 1), new Document("Passport", 123321121), new Job("Calceteiro"));
+        Collaborator collaborator4 = new Collaborator("diogo", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988673", "diogo@diogo.pt", new Address("streeName", "1234-123", 1), new Document("Passport", 123321122), new Job("Calceteiro"));
+
+        // Add skills to collaborators
+        collaborator.addSkillCollaboratorBootStrap(new Skill("Podador"));
+        collaborator.addSkillCollaboratorBootStrap(new Skill("Condutor"));
+
+        collaborator2.addSkillCollaboratorBootStrap(new Skill("Podador"));
+        collaborator2.addSkillCollaboratorBootStrap(new Skill("Condutor"));
+
+        collaborator3.addSkillCollaboratorBootStrap(new Skill("Podador"));
+        collaborator3.addSkillCollaboratorBootStrap(new Skill("Condutor"));
+
+        collaborator4.addSkillCollaboratorBootStrap(new Skill("Podador"));
+        collaborator4.addSkillCollaboratorBootStrap(new Skill("Condutor"));
+
+        // Add collaborators to the repository
+        collaboratorRepository.addCollaboratorBootstrap(collaborator);
+        collaboratorRepository.addCollaboratorBootstrap(collaborator2);
+        collaboratorRepository.addCollaboratorBootstrap(collaborator3);
+        collaboratorRepository.addCollaboratorBootstrap(collaborator4);
+    }
+
 
     /**
      * Adds predefined jobs to the job repository.
@@ -40,9 +75,14 @@ public class Bootstrap implements Runnable {
     private void addSkills() {
         SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
         skillRepository.createSkill("Podador");
-        skillRepository.createSkill("Condutor de veiculos pesados");
+        skillRepository.createSkill("Condutor");
         skillRepository.createSkill("Aplicador de fito farmacos");
         skillRepository.createSkill("Light Vehicle Driving Licence");
+        skillRepository.createSkill("Illustrator");
+        skillRepository.createSkill("Photoshop");
+        skillRepository.createSkill("Java");
+        skillRepository.createSkill("Python");
+
     }
 
     /**

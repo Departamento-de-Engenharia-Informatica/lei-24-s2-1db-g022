@@ -87,23 +87,18 @@ public class Skill {
                 "name='" + name + '\'' +
                 '}';
     }
-
     /**
-     * Indicates whether some other object is "equal to" this skill.
+     * Indicates whether some other object is "equal to" this one.
      *
-     * @param o The reference object with which to compare.
-     * @return True if this skill is the same as the object argument, false otherwise.
+     * @param object The reference object with which to compare.
+     * @return True if this object is the same as the object argument, false otherwise.
      */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Skill)) {
-            return false;
-        }
-        Skill skill = (Skill) o;
-        return name.equals(skill.name);
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Skill)) return false;
+        Skill skill = (Skill) object;
+        return Objects.equals(name, skill.name);
     }
 
     /**

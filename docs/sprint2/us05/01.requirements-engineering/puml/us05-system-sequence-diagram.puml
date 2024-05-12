@@ -23,11 +23,11 @@ activate HRM
         loop skill number size > 0
         note left: This loop is needed to decrement the skillNumberSize to zero
 
-            System --> HRM : requests data (skill name)
+            System --> HRM : show skill list and asks to select one
 
     deactivate System
 
-            HRM -> System : insert a skills names
+            HRM -> System :select skill
     activate System
         end loop
 

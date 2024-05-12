@@ -21,6 +21,7 @@ public class Team {
         this.collaboratorList = collaboratorList;
     }
 
+
     /**
      * Gets the list of collaborators in the team.
      *

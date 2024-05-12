@@ -8,13 +8,13 @@ participant ":Repositories" as REP
 participant "repositories\n:Repositories" as PLAT
 participant "skillRepository:\nSkillRepository" as SkillRepository
 
-autonumber 6
---> CRL: hasSkillByName(skillName)
+autonumber 4
+--> CRL: getSkillList(skillName)
 
-autonumber 6.1
+autonumber 4.1
 
 activate CRL
-group Has Skill By Name
+group Get Skill List
 
 CRL -> REP : getInstance()
 activate REP
@@ -31,17 +31,17 @@ activate PLAT
 
 deactivate PLAT
 
-CRL -> SkillRepository : hasSkillByName(skillName)
+CRL -> SkillRepository : getSkillList()
 
 activate SkillRepository
 
-   SkillRepository --> CRL : true/false
+   SkillRepository --> CRL : skillList
 
 deactivate SkillRepository
 end
 
-autonumber 7
-<--CRL : true/false
+autonumber 5
+<--CRL : skillList
 deactivate CRL
 
 

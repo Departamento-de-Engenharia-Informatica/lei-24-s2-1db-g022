@@ -10,18 +10,18 @@ skinparam classAttributeIconSize 0
 'left to right direction
 
 class GenerateTeamController {
-    - getCollaboratorBySkill(skillList)
-    - createTeam(minSize,maxSize,collaboratorList,skillList)
     + GenerateTeamController()
-    + hasSkillByName(skillName)
-    + generateTeams(minSize,maxSize,skillList)
+    - getAllSkillsByName(skillListNames)
+    - getCollaboratorBySkill(skillList)
+    - generateProposalTeamList(minSize,maxSize,skillList,collaboratorList)
+    + getSkillList()
+    + generateProposalTeams(minSize,maxSize,skillList)
     + registerProposalTeam(team)
 }
 
 class Team {
-    - List<Collaborator> Collaborator
-    + Team(List<Collaborator>)
-    - validateVehicle(vehicle)
+    - List<Collaborator> collaboratorList
+    + Team(collaboratorList)
 }
 
 class GenerateTeamUI {
@@ -29,18 +29,19 @@ class GenerateTeamUI {
 
 class Collaborator {
     -String name
-    -List <Skill> skill
+    -List<Skill> skillList
     -Job job
     -Date dateOfBirth
     -Date admissionDate
     -Address address
-    -int phoneNumber
+    -String phoneNumber
     -String email
-    -int cc
-    -int cardNumber
+    -Document document
 
-    + Collaborator(name, dateOfBirth, admissionDate, address, phoneNumber, email, cc, cardNumber)
+    + Collaborator(name, job, dateOfBirth, admissionDate, address, phoneNumber, email, document)
+    + hasCollaboratorSkill(skill)
 }
+
 
 class HumanResourcesManager {
 }
@@ -55,19 +56,24 @@ class Repositories {
 }
 
 class TeamRepository {
-    - List <Team> team
+    - List <Team> teamList
     - addTeam(team)
+    - addListTeamProposal(teamListProposal,team)
+    - removeCollaboratorList(collaboratorList,team)
+    - addIdealCollaboratorList(idealCollaboratorList, collaborator)
     + registerProposalTeam(team)
+    + generateProposalTeamList(maxSize,skillList,collaboratorList)
 }
 
 class SkillRepository {
-    - List <Skill> skills
-    + hasSkillByName(skillName)
+    - List <Skill> skillList
+    + getSkillList()
+    + getSkillByName(skillName)
 }
 
 class CollaboratorRepository {
-    - List <Collaborator> collaborators
-    + getCollaboratorBySkill(skillList)
+    - List <Collaborator> collaboratorList
+    + getCollaboratorsBySkill(skillList)
 }
 
 class HumanResourcesManager{}
