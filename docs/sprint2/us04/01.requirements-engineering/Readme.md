@@ -25,6 +25,18 @@ As an HRM, I want to assign one or more skills to a collaborator.
 -There is no association, it totally depends of the CV of the collaborator.
 -That does not make sense
 -no.
+>
+> **Question:** US04
+
+>1- Can multiple skills be assigned to a collaborator simultaneously?
+
+>- Is there any limit to the number of skills that can be assigned to a collaborator?
+
+> **Answer:** us04
+> 
+>1.yes; already answered;
+> 
+>2.no
 
 
 ### 1.3. Acceptance Criteria
