@@ -1,4 +1,4 @@
-# US07 - As an FM, I wish to register a vehicle’s check-up.
+# US07 - Register a vehicle’s check-up.
 
 ## 4. Tests 
 

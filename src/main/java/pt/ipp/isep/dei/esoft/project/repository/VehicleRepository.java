@@ -20,6 +20,7 @@ public class VehicleRepository {
 
     private final List<Vehicle> vehicleList;
     private List<CheckUp> checkUpList;
+
     /**
      * Constructs a VehicleRepository object.
      */
@@ -46,6 +47,7 @@ public class VehicleRepository {
     public void addCheckUp(CheckUp checkUp) {
         this.checkUpList.add(checkUp);
     }
+
     /**
      * Validates if the vehicle is not already present in the repository.
      *
@@ -54,9 +56,9 @@ public class VehicleRepository {
      */
     private boolean validateVehicle(Vehicle vehicle) {
 
-        for (Vehicle vehicleCopy:vehicleList) {
+        for (Vehicle vehicleCopy : vehicleList) {
 
-            if(vehicle.validateVehicleLicense(vehicleCopy)){
+            if (vehicle.validateVehicleLicense(vehicleCopy)) {
 
                 return false;
             }
@@ -66,20 +68,19 @@ public class VehicleRepository {
     }
 
 
-
     /**
      * Creates a new vehicle with the specified name and adds it to the repository.
      *
-     * @param type The type of the vehicle.
-     * @param tare The tare of the vehicle.
-     * @param grossWeight The grossWeight of the vehicle.
-     * @param currentKm The currentKm of the vehicle.
-     * @param registerDate The registerDate of the vehicle.
-     * @param acquisitionDate The acquisitionDate of the vehicle.
+     * @param type             The type of the vehicle.
+     * @param tare             The tare of the vehicle.
+     * @param grossWeight      The grossWeight of the vehicle.
+     * @param currentKm        The currentKm of the vehicle.
+     * @param registerDate     The registerDate of the vehicle.
+     * @param acquisitionDate  The acquisitionDate of the vehicle.
      * @param checkUpFrequency The checkUpFrequency of the vehicle.
-     * @param licensePlate The licensePlate of the vehicle.
-     * @param brand The brand of the vehicle.
-     * @param model The model of the vehicle.
+     * @param licensePlate     The licensePlate of the vehicle.
+     * @param brand            The brand of the vehicle.
+     * @param model            The model of the vehicle.
      * @return An optional containing the created vehicle if successful, empty optional otherwise.
      */
     public Optional<Vehicle> createVehicle(String type, float tare, float grossWeight, int currentKm, Date registerDate, Date acquisitionDate, int checkUpFrequency, String licensePlate, Brand brand, Model model) {
@@ -95,9 +96,10 @@ public class VehicleRepository {
         }
         return optionalVehicle;
     }
+
     /**
      * Retrieves a list of vehicles that are in need of a check-up.
-     *
+     * <p>
      * This method iterates through the list of vehicles in the repository and checks if each vehicle requires a check-up.
      * A vehicle is considered to need a check-up if its check-up is overdue based on its check-up frequency and the current date.
      * Vehicles needing check-up are added to a new list, which is then returned.
@@ -113,4 +115,26 @@ public class VehicleRepository {
         }
         return vehiclesNeedingCheckUp;
     }
-}
+        public Vehicle getVehicleByPlate (String licensePlate){
+            Vehicle newVeiVehicle = new Vehicle(licensePlate);
+            Vehicle vehicle = null;
+            for (Vehicle vehicleFor : vehicleList) {
+                if (vehicleFor.hasLicensePlateEquals(newVeiVehicle)) {
+                    vehicle = vehicleFor;
+                    break;
+                }
+            }
+
+            if (vehicle == null) {
+                throw new IllegalArgumentException(
+                        "Vehicle requested for [" + licensePlate + "] does not exit.");
+            }
+            return vehicle;
+        }
+
+        public void addVehicleBootstrap (Vehicle vehicle){
+            vehicleList.add(vehicle);
+
+        }
+    }
+
