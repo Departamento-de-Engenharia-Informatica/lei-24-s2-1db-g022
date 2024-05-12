@@ -66,6 +66,8 @@ public class GenerateTeamUI implements Runnable {
                 //Display Teams Proposal
                 selectTeam = displayAndSelectTeamProposals();
                 submitDataTeamSelect();
+            } else {
+                System.out.println("It was not possible to generate proposals for teams with the requested requirements.");
             }
         }
     }

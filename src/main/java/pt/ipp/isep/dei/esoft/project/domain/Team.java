@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Team {
 
-    private List<Collaborator> collaboratorList;
+    private final List<Collaborator> collaboratorList;
 
     /**
      * Constructs a Team object with the specified list of collaborators.
@@ -41,5 +41,15 @@ public class Team {
         return "Team{" +
                 "collaboratorList=" + collaboratorList +
                 '}';
+    }
+
+    /**
+     * Checks if the provided collaborator is in the list of collaborators.
+     *
+     * @param collaborator The collaborator to check.
+     * @return True if the collaborator is in the list, otherwise false.
+     */
+    public boolean collaboratorHasTeam(Collaborator collaborator) {
+        return (collaboratorList.contains(collaborator));
     }
 }
