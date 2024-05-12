@@ -18,7 +18,7 @@ public class TeamRepositoryTest {
         TeamRepository teamRepository = new TeamRepository();
 
         List<Collaborator> collaboratorList = new ArrayList<>();
-        collaboratorList.add(new Collaborator("luigy", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988676", "luigy@luigy.pt", new Address("streeName", "1234-123", 1), new Document("Passport", 123321123), new Job("Jardineiro")));
+        collaboratorList.add(new Collaborator("luigy", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988676", "luigy@luigy.pt", new Address("streeName", "1234-123", 1),143214543, "Passport", 123321123, new Job("Jardineiro")));
         boolean result = teamRepository.registerProposalTeam(new Team(collaboratorList));
 
         assertTrue(result);

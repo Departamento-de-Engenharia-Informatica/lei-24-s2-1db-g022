@@ -18,9 +18,9 @@ public class Document {
         }
 
         if(validateNullInt(number) && validateDocNumber(number)){
-
+            this.number = number;
         }else{
-            throw new IllegalArgumentException("Document type cannot be null or empty or have an incorrect format.");
+            throw new IllegalArgumentException("Document Number cannot be null or empty or have an incorrect format.");
         }
     }
 
@@ -37,10 +37,10 @@ public class Document {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Document)) return false;
-        Document document = (Document) o;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Document)) return false;
+        Document document = (Document) object;
         return number == document.number && Objects.equals(docType, document.docType);
     }
 
@@ -72,5 +72,13 @@ public class Document {
 
     private boolean validateNullInt(int value) {
         return !(value <= 0);
+    }
+
+    public boolean duplicateNumber(Document document) {
+        return this.number == document.number;
+    }
+
+    public Document clone() {
+        return new Document(this.docType, this.number);
     }
 }

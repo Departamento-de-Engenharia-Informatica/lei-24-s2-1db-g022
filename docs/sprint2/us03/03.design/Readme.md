@@ -1,6 +1,6 @@
 # US03 - Register a collaborator.
 
-## 3. Design - User Story Realization 
+## 3. Design - User Story Realization
 
 ### 3.1. Rationale
 
@@ -23,15 +23,15 @@ _**Note that SSD - Alternative One is adopted.**_
 
 ### Systematization ##
 
-According to the taken rationale, the conceptual classes promoted to software classes are: 
+According to the taken rationale, the conceptual classes promoted to software classes are:
 
 * Collaborator
 * Job
 * Address
 
-Other software classes (i.e. Pure Fabrication) identified: 
+Other software classes (i.e. Pure Fabrication) identified:
 
-* RegisterCollaboratorUI  
+* RegisterCollaboratorUI
 * RegisterCollaboratorController
 * CollaboratorRepository
 * JobRepository
@@ -39,8 +39,6 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 
 ## 3.2. Sequence Diagram (SD)
-
-_**Note that SSD - Alternative Two is adopted.**_
 
 ### Full Diagram
 

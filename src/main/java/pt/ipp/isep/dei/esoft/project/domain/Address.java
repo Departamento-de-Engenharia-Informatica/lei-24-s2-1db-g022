@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
@@ -100,5 +101,18 @@ public class Address {
 
     private boolean validateNullInt(int value) {
         return !(value <= 0);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Address)) return false;
+        Address address = (Address) object;
+        return doorNumber == address.doorNumber && Objects.equals(streetName, address.streetName) && Objects.equals(postCode, address.postCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(streetName, postCode, doorNumber);
     }
 }

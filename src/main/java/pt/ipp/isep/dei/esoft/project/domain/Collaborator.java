@@ -23,6 +23,7 @@ public class Collaborator {
     private Address address;
     private Document document;
     private Job job;
+    private int taxpayer;
     private final List<Skill> skillList;
 
     /**
@@ -34,14 +35,12 @@ public class Collaborator {
      * @param phoneNumber   The phone number of the collaborator.
      * @param email         The email address of the collaborator.
      * @param address       The address of the collaborator.
-     * @param document      The document of the collaborator.
      * @param job           The job position of the collaborator.
      * @throws IllegalArgumentException if any of the parameters are invalid or null.
      */
-    public Collaborator(String name, Date dateOfBirth, Date admissionDate, String phoneNumber, String email, Address address, Document document, Job job) {
-
+    public Collaborator(String name, Date dateOfBirth, Date admissionDate, String phoneNumber, String email, Address address, int taxpayer, String docType, int number, Job job) {
+        this.document = new Document(docType, number);
         this.address = address;
-        this.document = document;
         this.job = job;
 
         if (validateNullDate(dateOfBirth) && validateNullDate(admissionDate)) {
@@ -52,10 +51,10 @@ public class Collaborator {
             throw new IllegalArgumentException("Collaborator date of birth or admission date cannot be null or empty.");
         }
 
-        if (validateNullString(name)) {
+        if (validateNullString(name) && validateName(name)) {
             this.name = name;
         } else {
-            throw new IllegalArgumentException("Collaborator name, phone number and email cannot be null or empty.");
+            throw new IllegalArgumentException("Collaborator name cannot be null or empty or numbers.");
         }
 
         if (validateEmail(email) && validateNullString(email)) {
@@ -68,6 +67,13 @@ public class Collaborator {
             this.phoneNumber = phoneNumber;
         } else {
             throw new IllegalArgumentException("Collaborator phone number cannot be null or empty or have an incorrect format.");
+        }
+
+        if (validateNullInt(taxpayer) && validateTaxPayer(taxpayer)) {
+            this.taxpayer = taxpayer;
+        } else {
+            throw new IllegalArgumentException("Collaborator TaxPayer cannot be null or empty or have an incorrect format.");
+
         }
 
         this.skillList = new ArrayList<>();
@@ -151,6 +157,19 @@ public class Collaborator {
         return List.copyOf(skillList);
     }
 
+    private boolean validateNullInt(int value) {
+        return !(value <= 0);
+    }
+
+    private boolean validateTaxPayer(int value) {
+        String regex = "\\b\\d{9}\\b";
+
+        Pattern pattern = Pattern.compile(regex);
+
+        String value2 = String.valueOf(value);
+
+        return pattern.matcher(value2).matches();
+    }
     /**
      * Validates if the provided phone number matches the expected format.
      *
@@ -164,6 +183,14 @@ public class Collaborator {
 
         return pattern.matcher(value).matches();
     }
+
+
+    private boolean validateName(String value) {
+        String regex = "^[a-zA-Z]{1,6}$"; // Matches up to six letters (upper or lower case)
+        Pattern pattern = Pattern.compile(regex);
+        return pattern.matcher(value).matches();
+    }
+
 
     /**
      * Validates if the provided email address matches the expected format.
@@ -206,7 +233,7 @@ public class Collaborator {
      */
     public Collaborator clone() {
 
-        Collaborator clone = new Collaborator(this.name, this.dateOfBirth, this.admissionDate, this.phoneNumber, this.email, this.address, this.document, this.job);
+        Collaborator clone = new Collaborator(this.name, this.dateOfBirth, this.admissionDate, this.phoneNumber, this.email, this.address, this.taxpayer, this.document.getDocType(), this.document.getNumber(), this.job);
 
         for (Skill in : this.skillList) {
             clone.skillList.add(in.clone());
@@ -242,15 +269,15 @@ public class Collaborator {
     /**
      * Checks if this collaborator is equal to another object.
      *
-     * @param object The object to compare with.
+     * @param o The object to compare with.
      * @return True if the objects are equal, false otherwise.
      */
     @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (!(object instanceof Collaborator)) return false;
-        Collaborator that = (Collaborator) object;
-        return Objects.equals(name, that.name) && Objects.equals(dateOfBirth, that.dateOfBirth) && Objects.equals(admissionDate, that.admissionDate) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(email, that.email) && Objects.equals(address, that.address) && Objects.equals(document, that.document) && Objects.equals(job, that.job) && Objects.equals(skillList, that.skillList);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Collaborator)) return false;
+        Collaborator that = (Collaborator) o;
+        return taxpayer == that.taxpayer && Objects.equals(name, that.name) && Objects.equals(dateOfBirth, that.dateOfBirth) && Objects.equals(admissionDate, that.admissionDate) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(email, that.email) && Objects.equals(address, that.address) && Objects.equals(document, that.document) && Objects.equals(job, that.job) && Objects.equals(skillList, that.skillList);
     }
 
     /**
@@ -260,7 +287,7 @@ public class Collaborator {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(name, dateOfBirth, admissionDate, phoneNumber, email, address, document, job, skillList);
+        return Objects.hash(name, dateOfBirth, admissionDate, phoneNumber, email, address, document, job, taxpayer, skillList);
     }
 
     /**
@@ -271,5 +298,18 @@ public class Collaborator {
     @Override
     public String toString() {
         return "Collaborator{" + "name='" + name + '\'' + ", dateOfBirth=" + dateOfBirth + ", admissionDate=" + admissionDate + ", phoneNumber=" + phoneNumber + ", email='" + email + '\'' + ", address=" + address + ", document=" + document + ", job=" + job + ", skillList=" + skillList + '}';
+    }
+
+
+    public boolean hasEqualsTaxNumber(Collaborator collaborator) {
+        return this.taxpayer == collaborator.taxpayer;
+    }
+
+    public boolean hasEqualsEmail(Collaborator collaborator) {
+        return this.email.equals(collaborator.email);
+    }
+
+    public boolean hasEqualsPhoneNumber(Collaborator collaborator) {
+        return this.phoneNumber.equals(collaborator.phoneNumber);
     }
 }

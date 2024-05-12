@@ -21,7 +21,7 @@ activate HRM
     HRM -> System :  types a job
     activate System
 
-    System --> HRM : requests data (name, birthdate, admission date, address(streetName, postCode, doorNumber), \nmobile, email, ID doc type and respective number)
+    System --> HRM : requests data (name, birthdate, admission date, address(streetName, postCode, doorNumber), \nmobile, email, taxpayer number,ID doc type and respective number)
     deactivate System
 
     HRM -> System : types requested data

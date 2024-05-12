@@ -9,32 +9,29 @@ participant "collaborator:\nCollaborator" as Collaborator
 participant "document:\nDocument" as Doc
 
 autonumber 19
--> CollaboratorRepository : registerCollaborator(name, birthdate, \nadmission date, address, mobile, \nemail, ID doc type, respective number, job)
+-> CollaboratorRepository : registerCollaborator(name, birthdate, \nadmission date, address, mobile, \nemail, taxpayerNumber, ID doc type, respective number, job)
 
 
 autonumber 19.1
 activate CollaboratorRepository
 
-CollaboratorRepository -> CollaboratorRepository : registerDocument(docType, number)
-activate CollaboratorRepository
+
 
 
     group Create Collaborator
-    CollaboratorRepository -> Doc** : create(docType, number)
+
+
+CollaboratorRepository -> Collaborator**: create(name, birthdate, \nadmission date, address, mobile, \nemail, taxpayerNumber, docType, number, job)
+
+            activate Collaborator
+
+ Collaborator -> Doc** : create(docType, number)
     activate Doc
 
     Doc -> Doc : validate(docType, number)
 
-    Doc -> CollaboratorRepository : document
+    Doc -> Collaborator : document
     deactivate Doc
-
-    CollaboratorRepository -> CollaboratorRepository : document
-    deactivate CollaboratorRepository
-
-
-CollaboratorRepository -> Collaborator**: create(name, birthdate, \nadmission date, address, mobile, \nemail, document, job)
-
-            activate Collaborator
 
                 Collaborator -> Collaborator: validateCollaborator(collaborator)
                 Collaborator --> CollaboratorRepository : collaborator

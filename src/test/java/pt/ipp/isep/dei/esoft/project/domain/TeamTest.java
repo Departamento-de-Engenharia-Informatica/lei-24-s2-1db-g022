@@ -2,7 +2,9 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -54,8 +56,11 @@ public class TeamTest {
      */
     @Test
     void testEqualsDifferentObject() {
+        Collaborator collaborator = new Collaborator("tomas", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988672", "tomas@tomas.pt", new Address("streeName", "1234-123", 1), 123643879, "Passport", 123321121, new Job("Calceteiro"));
+        List<Collaborator> collaboratorList = new ArrayList<>();
+        collaboratorList.add(collaborator);
         Team team = new Team(new ArrayList<>());
-        Team team1 = new Team(new ArrayList<>());
+        Team team1 = new Team(collaboratorList);
 
         assertNotEquals(team, team1);
     }
@@ -75,8 +80,11 @@ public class TeamTest {
      */
     @Test
     void testHashCodeDifferentObject() {
+        Collaborator collaborator = new Collaborator("tomas", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988672", "tomas@tomas.pt", new Address("streeName", "1234-123", 1), 123643879, "Passport", 123321121, new Job("Calceteiro"));
+        List<Collaborator> collaboratorList = new ArrayList<>();
+        collaboratorList.add(collaborator);
         Team team = new Team(new ArrayList<>());
-        Team team1 = new Team(new ArrayList<>());
+        Team team1 = new Team(collaboratorList);
 
         assertNotEquals(team.hashCode(), team1.hashCode());
     }

@@ -1,6 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.ipp.isep.dei.esoft.project.domain.Address;
+import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
+import pt.ipp.isep.dei.esoft.project.domain.Job;
+import pt.ipp.isep.dei.esoft.project.domain.Skill;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,18 +47,14 @@ public class CollaboratorRepository {
      * @param job           The job of the collaborator.
      * @return An Optional containing the registered collaborator if successful, empty otherwise.
      */
-    public Optional<Collaborator> registerCollaborator(String name, Date dateOfBirth, Date admissionDate, Address address, String phoneNumber, String email, String docType, int number, Job job) {
-        Optional<Document> optionalDocument = Optional.empty();
+    public Optional<Collaborator> registerCollaborator(String name, Date dateOfBirth, Date admissionDate, Address address, String phoneNumber, String email, int taxpayer, String docType, int number, Job job) {
         Optional<Collaborator> optionalCollaborator = Optional.empty();
 
-        optionalDocument = registerDocument(docType, number);
-
-        if (optionalDocument.isPresent()) {
-            Collaborator collaborator = new Collaborator(name, dateOfBirth, admissionDate, phoneNumber, email, address, optionalDocument.get(), job);
-            if (addCollaborator(collaborator)) {
-                optionalCollaborator = Optional.of(collaborator);
-            }
+        Collaborator collaborator = new Collaborator(name, dateOfBirth, admissionDate, phoneNumber, email, address, taxpayer, docType, number, job);
+        if (addCollaborator(collaborator)) {
+            optionalCollaborator = Optional.of(collaborator);
         }
+
 
         return optionalCollaborator;
     }
@@ -81,20 +80,12 @@ public class CollaboratorRepository {
      * @return True if the collaborator is not present, false otherwise.
      */
     private boolean validateCollaborator(Collaborator collaborator) {
+        for (Collaborator collaborator1 : collaboratorList) {
+            if (collaborator1.hasEqualsEmail(collaborator) || collaborator1.hasEqualsPhoneNumber(collaborator) || collaborator1.hasEqualsTaxNumber(collaborator) || collaborator1.getDocument().duplicateNumber(collaborator.getDocument())) {
+                return false;
+            }
+        }
         return !collaboratorList.contains(collaborator);
-    }
-
-    /**
-     * Registers a new document with the given document type and number.
-     *
-     * @param docType The type of the document.
-     * @param number  The number of the document.
-     * @return An Optional containing the newly registered document, or empty if the document creation fails.
-     */
-    private Optional<Document> registerDocument(String docType, int number) {
-        Optional<Document> newDocument = Optional.empty();
-        newDocument = Optional.of(new Document(docType, number));
-        return newDocument;
     }
 
     /**

@@ -13,10 +13,10 @@ skinparam classAttributeIconSize 0
 class RegisterCollaboratorController {
 
     + RegisterCollaboratorController()
-    + registerCollaborator(name, birthdate, admission date, address, \nmobile, email, ID doc type, respective number, job name)
-    + registerAddress(streetName, postCode, doorNumber)
+    + registerCollaborator(name, birthdate, admission date, address, \nmobile, email, taxpayer,ID doc type, respective number, job name)
+    - registerAddress(streetName, postCode, doorNumber)
+    - getJobByName(jobName)
     + getJobList()
-    + getJobByName(jobName)
 }
 
 class RegisterCollaboratorUI {
@@ -31,10 +31,11 @@ class Collaborator {
     -Address address
     -String phoneNumber
     -String email
+    -Int Taxpayer
     -Document document
 
     - validateCollaborator(collaborator)
-    + Collaborator(name, job, dateOfBirth, admissionDate, address, phoneNumber, email, document)
+    + Collaborator(name, job, dateOfBirth, admissionDate, address, phoneNumber, email, taxpayer,docType, number)
 }
 
 class Address {
@@ -79,8 +80,7 @@ class CollaboratorRepository {
 
     - addCollaborator(collaborator)
     - validateCollaborator(collaborator)
-    + registerCollaborator(name, birthdate, admission date, address, \nmobile, email, ID doc type, respective number, job)
-    - registerDocument(docType, number)
+    + registerCollaborator(name, birthdate, admission date, address, \nmobile, email, taxpayer,ID doc type, respective number, job)
 }
 
 class Job {
