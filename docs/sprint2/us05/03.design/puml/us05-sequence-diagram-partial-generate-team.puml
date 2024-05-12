@@ -36,6 +36,25 @@ deactivate PLAT
 CRL -> TeamRepository : generateProposalTeamList (maxSizeTeam,skillList,collaboratorList)
 activate TeamRepository
 
+
+TeamRepository -> TeamRepository : removeCollaboratorsHasTeam(collaboratorList)
+
+activate TeamRepository
+loop for each Team in TeamList[in Repository]
+
+TeamRepository -> TEAM : collaboratorHasTeam(collaborator)
+activate TEAM
+
+TEAM --> TeamRepository : true/false
+
+deactivate TEAM
+end
+TeamRepository --> TeamRepository
+
+deactivate TeamRepository
+
+
+
 loop CollaboratorList.size() >= minSize
 loop idealCollaboratorList.size() < maxSize
 
@@ -48,7 +67,7 @@ deactivate TeamRepository
 
 
 end
-TeamRepository ->TEAM**: create(idealCollaboratorList)
+TeamRepository ->TEAM: create(idealCollaboratorList)
 
 activate TEAM
 

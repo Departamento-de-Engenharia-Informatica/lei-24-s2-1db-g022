@@ -21,7 +21,9 @@ class GenerateTeamController {
 
 class Team {
     - List<Collaborator> collaboratorList
+    - collaboratorHasTeam(collaborator)
     + Team(collaboratorList)
+
 }
 
 class GenerateTeamUI {
@@ -61,6 +63,7 @@ class TeamRepository {
     - addListTeamProposal(teamListProposal,team)
     - removeCollaboratorList(collaboratorList,team)
     - addIdealCollaboratorList(idealCollaboratorList, collaborator)
+    - removeCollaboratorsHasTeam(collaboratorList)
     + registerProposalTeam(team)
     + generateProposalTeamList(maxSize,skillList,collaboratorList)
 }
