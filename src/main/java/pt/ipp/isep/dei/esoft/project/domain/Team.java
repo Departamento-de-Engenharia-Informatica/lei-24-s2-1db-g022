@@ -55,10 +55,10 @@ public class Team {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (!(object instanceof Team)) return false;
-        Team team = (Team) object;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Team)) return false;
+        Team team = (Team) o;
         return Objects.equals(collaboratorList, team.collaboratorList);
     }
 

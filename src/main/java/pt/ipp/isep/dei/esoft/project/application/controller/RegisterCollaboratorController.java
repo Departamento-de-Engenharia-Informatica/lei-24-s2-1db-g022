@@ -52,7 +52,7 @@ public class RegisterCollaboratorController {
     }
 
 
-    public Optional<Collaborator> registerCollaborator(String name, String jobName, Date dateOfBirth, Date admissionDate, String streetName, String postCode, int doorNumber, String phoneNumber, String email, String docType, int number){
+    public Optional<Collaborator> registerCollaborator(String name, String jobName, Date dateOfBirth, Date admissionDate, String streetName, String postCode, int doorNumber, String phoneNumber, String email, int taxpayer,String docType, int number){
         Optional<Address> newAddress;
 
         Optional<Collaborator> newCollaborator = Optional.empty();
@@ -62,7 +62,7 @@ public class RegisterCollaboratorController {
         newAddress = registerAddress(streetName,doorNumber,postCode);
 
         if(newAddress.isPresent()){
-            newCollaborator = getCollaboratorRepository().registerCollaborator(name,dateOfBirth,admissionDate,newAddress.get(),phoneNumber,email,docType,number,job);
+            newCollaborator = getCollaboratorRepository().registerCollaborator(name,dateOfBirth,admissionDate,newAddress.get(),phoneNumber,email,taxpayer,docType,number,job);
         }
 
         return newCollaborator;
@@ -74,9 +74,9 @@ public class RegisterCollaboratorController {
         return newAddress;
     }
 
-    //return the list of task categories
+    //return the list of Job List
     public List<Job> getJobList() {
-     JobRepository jobRepository = getJobRepository();
+        JobRepository jobRepository = getJobRepository();
         return jobRepository.getJobList();
     }
 

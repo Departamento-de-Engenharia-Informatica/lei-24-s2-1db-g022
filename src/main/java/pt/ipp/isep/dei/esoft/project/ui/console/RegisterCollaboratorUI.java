@@ -27,6 +27,7 @@ public class RegisterCollaboratorUI implements Runnable {
     private int collaboratorDoorNumber;
     private String collaboratorPhoneNumber;
     private String collaboratorEmail;
+    private int collaboratorTaxpayer;
     private String collaboratorDocType;
     private int collaboratorNumber;
 
@@ -92,6 +93,7 @@ public class RegisterCollaboratorUI implements Runnable {
         System.out.printf("\n Collaborator Door Number: %s", collaboratorDoorNumber);
         System.out.printf("\n Collaborator Phone Number: %s", collaboratorPhoneNumber);
         System.out.printf("\n Collaborator Email: %s", collaboratorEmail);
+        System.out.printf("\n Collaborator TaxPayer Number: %s", collaboratorTaxpayer);
         System.out.printf("\n Collaborator Document Type: %s", collaboratorDocType);
         System.out.printf("\n Collaborator Number: %s", collaboratorNumber);
     }
@@ -105,7 +107,7 @@ public class RegisterCollaboratorUI implements Runnable {
 
         boolean success = true;
 
-        Optional<Collaborator> collaborator = getController().registerCollaborator(collaboratorName, collaboratorJobName, collaboratorDateOfBirth, collaboratorAdmissionDate, collaboratorStreetName, collaboratorPostCode, collaboratorDoorNumber, collaboratorPhoneNumber, collaboratorEmail,collaboratorDocType, collaboratorNumber);
+        Optional<Collaborator> collaborator = getController().registerCollaborator(collaboratorName, collaboratorJobName, collaboratorDateOfBirth, collaboratorAdmissionDate, collaboratorStreetName, collaboratorPostCode, collaboratorDoorNumber, collaboratorPhoneNumber, collaboratorEmail, collaboratorTaxpayer, collaboratorDocType, collaboratorNumber);
 
         if (collaborator.isPresent()) {
             System.out.println("\ncollaborator successfully created!");
@@ -153,6 +155,7 @@ public class RegisterCollaboratorUI implements Runnable {
         collaboratorDoorNumber = requestCollaboratorDoorNumber();
         collaboratorPhoneNumber = requestCollaboratorPhoneNumber();
         collaboratorEmail = requestCollaboratorEmail();
+        collaboratorTaxpayer = requestCollaboratorTaxPayer();
         collaboratorDocType = requestCollaboratorDocType();
         collaboratorNumber = requestCollaboratorNumber();
     }
@@ -195,6 +198,12 @@ public class RegisterCollaboratorUI implements Runnable {
         Scanner input = new Scanner(System.in);
         System.out.println("Collaborator Post Code: ");
         return input.nextLine();
+    }
+
+    private int requestCollaboratorTaxPayer() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Collaborator TaxPayer: ");
+        return input.nextInt();
     }
 
     private int requestCollaboratorDoorNumber() {

@@ -9,7 +9,7 @@ participant "collaborator:\nCollaborator" as Collaborator
 participant "document:\nDocument" as Doc
 
 autonumber 19
--> CollaboratorRepository : registerCollaborator(name, birthdate, \nadmission date, address, mobile, \nemail, ID doc type, respective number, job)
+-> CollaboratorRepository : registerCollaborator(name, birthdate, \nadmission date, address, mobile, \nemail, taxpayerNumber, ID doc type, respective number, job)
 
 
 autonumber 19.1
@@ -21,7 +21,7 @@ activate CollaboratorRepository
     group Create Collaborator
 
 
-CollaboratorRepository -> Collaborator**: create(name, birthdate, \nadmission date, address, mobile, \nemail, docType, number, job)
+CollaboratorRepository -> Collaborator**: create(name, birthdate, \nadmission date, address, mobile, \nemail, taxpayerNumber, docType, number, job)
 
             activate Collaborator
 

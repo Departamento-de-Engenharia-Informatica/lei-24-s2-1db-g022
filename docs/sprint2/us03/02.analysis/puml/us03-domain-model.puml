@@ -17,17 +17,7 @@ class Collaborator {
     admissionDate
     phoneNumber
     email
-}
-
-class Document{
-    docType
-    number
-}
-
-class Address {
-    streetName
-    postCode
-    doorNumber
+    taxpayerNumber
 }
 
 class Job{
@@ -46,7 +36,6 @@ class Document{
 }
 
 Collaborator  <|---  HumanResourceManager
-
 HumanResourceManager "1" --- "1..*" Collaborator : Registers >
 Collaborator "1..*" - "1" Job : Has >
 Address "1" - "1..*" Collaborator : < lives
