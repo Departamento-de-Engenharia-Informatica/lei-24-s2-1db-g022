@@ -15,13 +15,9 @@ activate FM
     FM -> System : asks to list vehicles needing the check-up
     activate System
 
-        System --> FM : shows all data and requests confirmation
-    deactivate System
 
-    FM -> System : confirms data
-    activate System
 
-        System --> FM : displays operation success
+        System --> FM : show all vehicles needing the check-up
     deactivate System
 
 @enduml
