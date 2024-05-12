@@ -34,7 +34,7 @@ activate HRM
         HRM -> UI :  types a job
         activate UI
 
-        UI --> HRM : requests data (name, birthdate, admission date, address(streetName, postCode, doorNumber), \nmobile, email, document(docType, number))
+        UI --> HRM : requests data (name, birthdate, admission date, address(streetName, postCode, doorNumber), \nmobile, email, taxpayerNumber, document(docType, number))
         deactivate UI
 
         HRM -> UI : types requested data
@@ -46,7 +46,7 @@ activate HRM
         HRM -> UI : confirms data
         activate UI
 
-        UI -> CTRL : registerCollaborator(name, birthdate, \nadmission date, address(streetName, postCode, doorNumber), mobile, \nemail, document(docType, number), job name)
+        UI -> CTRL : registerCollaborator(name, birthdate, \nadmission date, address(streetName, postCode, doorNumber), mobile, \nemail, taxpayerNumber, document(docType, number), job name)
         activate CTRL
 
             CTRL -> CTRL : getJobByName(jobName)
@@ -78,7 +78,7 @@ activate HRM
                     PLAT -> CTRL : collaboratorRepository
                 deactivate PLAT
 
-                CTRL -> CollaboratorRepository : registerCollaborator(name, birthdate, \nadmission date, address, mobile, \nemail, document, job)
+                CTRL -> CollaboratorRepository : registerCollaborator(name, birthdate, \nadmission date, address, mobile, \nemail, taxpayerNumber, document, job)
                 activate CollaboratorRepository
 
                 ref over CollaboratorRepository

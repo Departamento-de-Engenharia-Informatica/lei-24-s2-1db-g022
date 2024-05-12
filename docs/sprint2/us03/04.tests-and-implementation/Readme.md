@@ -1,4 +1,4 @@
-# US03 - As an HRM, I want to register a collaborator with a job and fundamental characteristics.
+# US03 - Register a collaborator.
 
 ## 4. Tests 
 

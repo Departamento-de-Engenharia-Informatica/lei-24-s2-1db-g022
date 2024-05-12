@@ -23,6 +23,7 @@ public class Bootstrap implements Runnable {
         addSkills();
         addBrands();
         addCollaborators();
+        addVehicles();
     }
 
     /**
@@ -32,10 +33,10 @@ public class Bootstrap implements Runnable {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
 
         // Create sample collaborators
-        Collaborator collaborator = new Collaborator("luigy", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988676", "luigy@luigy.pt", new Address("streeName", "1234-123", 1), new Document("Passport", 123321123), new Job("Jardineiro"));
-        Collaborator collaborator2 = new Collaborator("daniel", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988671", "daniel@daniel.pt", new Address("streeName", "1234-123", 1), new Document("Passport", 123321125), new Job("Calceteiro"));
-        Collaborator collaborator3 = new Collaborator("tomas", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988672", "tomas@tomas.pt", new Address("streeName", "1234-123", 1), new Document("Passport", 123321121), new Job("Calceteiro"));
-        Collaborator collaborator4 = new Collaborator("diogo", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988673", "diogo@diogo.pt", new Address("streeName", "1234-123", 1), new Document("Passport", 123321122), new Job("Calceteiro"));
+        Collaborator collaborator = new Collaborator("luigy", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988676", "luigy@luigy.pt", new Address("streeName", "1234-123", 1), 123456789, "Passport", 123321123, new Job("Jardineiro"));
+        Collaborator collaborator2 = new Collaborator("daniel", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988671", "daniel@daniel.pt", new Address("streeName", "1234-123", 1), 123456780, "Passport", 123321125, new Job("Calceteiro"));
+        Collaborator collaborator3 = new Collaborator("tomas", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988672", "tomas@tomas.pt", new Address("streeName", "1234-123", 1), 123643879, "Passport", 123321121, new Job("Calceteiro"));
+        Collaborator collaborator4 = new Collaborator("diogo", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988673", "diogo@diogo.pt", new Address("streeName", "1234-123", 1), 675432564, "Passport", 123321122, new Job("Calceteiro"));
 
         // Add skills to collaborators
         collaborator.addSkillCollaboratorBootStrap(new Skill("Podador"));
@@ -85,6 +86,16 @@ public class Bootstrap implements Runnable {
 
     }
 
+    private void addVehicles() {
+        VehicleRepository vehicleRepo = Repositories.getInstance().getVehicleRepository();
+
+        Vehicle vehicle = new Vehicle("Pesado", 12, 1, 200, Date.valueOf("2021-01-10"), Date.valueOf("2021-01-11"), 500, "AA-00-AA", new Brand("BMW"), new Model("XM"));
+        Vehicle vehicle2 = new Vehicle("Ligeiro", 12, 1, 200, Date.valueOf("2021-01-10"), Date.valueOf("2021-01-12"), 501, "BB-00-AA", new Brand("BMW"), new Model("XM"));
+
+        //vehicleRepo.addVehicleBootstrap(vehicle);
+        //vehicleRepo.addVehicleBootstrap(vehicle2);
+
+    }
     /**
      * Adds predefined brands and models to the brands repository.
      */
@@ -120,8 +131,7 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserRole(AuthenticationController.ROLE_ADMIN, AuthenticationController.ROLE_ADMIN);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_VFM, AuthenticationController.ROLE_VFM);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_HRM, AuthenticationController.ROLE_HRM);
-        authenticationRepository.addUserRole(AuthenticationController.ROLE_GSM, AuthenticationController.ROLE_GSM);
-        authenticationRepository.addUserRole(AuthenticationController.ROLE_QAM, AuthenticationController.ROLE_QAM);
+
 
         authenticationRepository.addUserWithRole("Main Administrator", "1191330@isep.ipp.pt", "admin", AuthenticationController.ROLE_ADMIN);
         authenticationRepository.addUserWithRole("Main Administrator", "1170499@isep.ipp.pt", "admin", AuthenticationController.ROLE_ADMIN);
@@ -131,7 +141,6 @@ public class Bootstrap implements Runnable {
 
         authenticationRepository.addUserWithRole("Human Resource Manager", "hrm@musgosublime.pt", "hrm", AuthenticationController.ROLE_HRM);
         authenticationRepository.addUserWithRole("Vehicle and Equipment Fleet Manager", "vfm@musgosublime.pt", "vfm", AuthenticationController.ROLE_VFM);
-        authenticationRepository.addUserWithRole("Green Spaces Manager", "gsm@musgosublime.pt", "gsm", AuthenticationController.ROLE_GSM);
-        authenticationRepository.addUserWithRole("Software Quality Assessment Team Manager", "qam@musgosublime.pt", "qam", AuthenticationController.ROLE_QAM);
+
     }
 }
