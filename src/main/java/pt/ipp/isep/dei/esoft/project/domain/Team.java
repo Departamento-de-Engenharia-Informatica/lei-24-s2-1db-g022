@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The Team class represents a team of collaborators.
@@ -51,5 +52,25 @@ public class Team {
      */
     public boolean collaboratorHasTeam(Collaborator collaborator) {
         return (collaboratorList.contains(collaborator));
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Team)) return false;
+        Team team = (Team) object;
+        return Objects.equals(collaboratorList, team.collaboratorList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(collaboratorList);
+    }
+
+    public Team clone() {
+
+        Team clone = new Team(this.collaboratorList);
+
+        return clone;
     }
 }

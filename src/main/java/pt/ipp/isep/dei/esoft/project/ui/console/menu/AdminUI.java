@@ -1,5 +1,4 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
-
 import pt.ipp.isep.dei.esoft.project.application.controller.ListVehiclesNeedingCheckUpController;
 import pt.ipp.isep.dei.esoft.project.application.controller.TestAlgorithmUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.*;

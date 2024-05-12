@@ -54,6 +54,14 @@ public class RegisterJobUI implements Runnable {
         }
     }
 
+    /**
+     * Prompts the user to confirm whether the entered data is correct or not.
+     * Displays a message asking the user to input 'Y' or 'N' for confirmation.
+     * Reads the user's input from the console and returns true if 'Y' or 'y' is entered,
+     * indicating that the data is confirmed, and false otherwise.
+     *
+     * @return True if the user confirms the entered data, false otherwise.
+     */
     private boolean confirmationData() {
         Scanner input = new Scanner(System.in);
         System.out.println("\n\n--- Confirm Data[Y/N]: ");
@@ -62,6 +70,10 @@ public class RegisterJobUI implements Runnable {
         return res.equals("Y") || res.equals("y");
     }
 
+    /**
+     * Displays the collected information about the Job entered by the user.
+     * Prints out the job name.
+     */
     private void displayData() {
         System.out.println("\n\n--- Display Information ------------------------");
         System.out.printf("\nJob Name: %s",jobName);
