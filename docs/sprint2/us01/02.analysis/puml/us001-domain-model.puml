@@ -14,7 +14,8 @@ class Collaborator {
     dateOfBirth
     admissionDate
     phoneNumber
-    cardNumber
+    taxpayer
+    email
 }
 
 class Document{

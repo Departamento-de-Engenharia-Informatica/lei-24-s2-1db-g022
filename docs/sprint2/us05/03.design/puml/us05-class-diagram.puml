@@ -36,11 +36,13 @@ class Collaborator {
     -Date dateOfBirth
     -Date admissionDate
     -Address address
+    -Document document
     -String phoneNumber
     -String email
-    -Document document
+    -int cc
+    -int taxpayer
 
-    + Collaborator(name, job, dateOfBirth, admissionDate, address, phoneNumber, email, document)
+    + Collaborator(name, dateOfBirth, admissionDate, address,document, phoneNumber, email, cc, taxpayer)
     + hasCollaboratorSkill(skill)
 }
 
