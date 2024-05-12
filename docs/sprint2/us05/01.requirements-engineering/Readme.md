@@ -62,6 +62,45 @@ As a HRM, I want to generate a team proposal automatically.
 > **Answer:**
 > the ux/ui is up to the dev team.
 
+> **Question:**
+> Se, hipoteticamente, tivermos definidas as minSize e as maxSize da equipa como 3 e 5 respetivamente e ao verificar
+> quantos colaboradores têm as respetivas skills chegamos à conclusao que temos 6 colaboradores com as skills
+> necessárias,
+> como é suposto sabermos se precisamos de gerar uma team com 3, 4 ou 5 elementos e qual o elemento para deixar de
+> fora ?
+>
+> **Answer:**
+> Algumas palavras chave que podem ajudar:
+> Critérios (por exemplo, minimizar o número de elementos)
+> Ordenação (de acordo com os critérios escolhidos)
+> Algoritmos (apresentar propostas e interagir com o gestor de recursos humanos).
+
+> **Question:**
+> Cada equipa tem uma agenda para a semana? Ou a agenda é apenas para o parque (to-do list e doing-list and done-list)(
+> with dates etc...)? cada parque tem uma
+> The VFM assigned vehicles to the tasks? and equipment? Not the manager?
+> The green space manager have access to the all program ? HRM only collaborators skills and jobs ! VFM only equipment,
+> vehicles, machines!
+> Ao gerar uma equipa automaticamente se por exemplo uma das skills for condutor de ligeiro e existir 3 colaboradores
+> que cumprem isso qual o sistema vai introduzir mais depressa? Um que também cumpra outra skill pedida, ou escolhe qual?
+> De que forma ele escolhe colaboradores mais precisamente?
+> O maxSize da equipa pode ser menor que o número de Skills que são escolhidas?
+> De que forma faço verificação do maxSize?
+> O colaborador pode ter um Status? Tipo Activate e Not Activate? Eles nao se podem encontrar em mais do que duas
+> equipas? Se sim, o Status servirá para isso
+>
+> **Answer:**
+> Só existe uma agenda!
+> No entanto é razoavel permitir vistas diferentes sobre a agenda em função do parque ou da equipa.
+> De momento ainda não preciso atribuir viaturas e equipamentos às tarefas, este ponto será explicitado em breve.
+> De momento não existem restrições para a seriação de equipas pelo que pode escolher um qualquer algoritmo que produza
+> uma solução (caso exista) que satisfaça os requisitos; no caso de não existir deve reportar essa situação.
+> O maxSize é o número máximo de elementos das equipa e pode ser menor que o número de skills pretendido.
+> Não percebo a pergunta; não sei o que pretende validar.
+> Não sei o que seja um Status, foi referido em alguma passagem do enunciado?
+> Um colaborador não pode estar em mais do que uma equipa.
+> PS: neste contexto, o cliente é alguem que gere espaços verdes e não um professor de informática!
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The minimum and maximum team size and the set of skills need to be supplied by the HRM.
@@ -69,6 +108,8 @@ As a HRM, I want to generate a team proposal automatically.
 * **AC3:** The number Max size of collaborators must be an integer and positive above or equals a Min size.
 * **AC4:** The skills number size must be an integer and positive above a zero.
 * **AC5:** All required fields must be filled in.
+* **AC6:** An employee cannot be in more than one team.
+
 
 ### 1.4. Found out Dependencies
 
