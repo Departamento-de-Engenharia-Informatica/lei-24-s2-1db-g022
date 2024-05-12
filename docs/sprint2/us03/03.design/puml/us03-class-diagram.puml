@@ -29,13 +29,14 @@ class Collaborator {
     -Date dateOfBirth
     -Date admissionDate
     -Address address
+    -Document document
     -String phoneNumber
     -String email
-    -Int Taxpayer
-    -Document document
+    -int taxpayer
+
 
     - validateCollaborator(collaborator)
-    + Collaborator(name, job, dateOfBirth, admissionDate, address, phoneNumber, email, taxpayer,docType, number)
+    + Collaborator(name, job, dateOfBirth, admissionDate, address, document, phoneNumber, email, taxpayer)
 }
 
 class Address {
