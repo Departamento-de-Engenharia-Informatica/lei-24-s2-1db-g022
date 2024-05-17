@@ -1,0 +1,136 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US05 - Generate team
+
+autonumber
+
+actor "Human Resources Manager (HRM)" as HRM
+participant ":GenerateTeamUI" as UI
+participant ":GenerateTeamController" as CRL
+
+activate HRM
+'Interações com UI
+HRM -> UI : asks to generate a new proposals teams
+activate UI
+
+UI --> HRM : requests data (team max size,team min size, skills number size)
+
+deactivate UI
+
+HRM -> UI : types requested data
+activate UI
+
+UI -> CRL :getSkillList()
+activate CRL
+
+ref over CRL
+Get Skill List
+end
+
+CRL -> UI : skillList
+
+deactivate CRL
+loop skill number size
+
+
+UI --> HRM : shows skill list and ask to select one
+
+deactivate UI
+
+HRM -> UI : type a skill name
+
+activate UI
+
+
+
+end loop
+
+
+
+
+UI --> HRM : shows all data and requests confirmation
+deactivate UI
+
+HRM -> UI : confirms data
+activate UI
+
+UI -> CRL : generateProposalTeams(minSize,maxSize,skillList)
+
+activate CRL
+
+CRL -> CRL : getAllSkillsByName(skillListNames)
+
+ref over CRL
+Get All Skills By Name
+end
+
+activate CRL
+
+CRL --> CRL : skillList
+
+
+
+deactivate CRL
+
+CRL -> CRL : getCollaboratorsBySkill(skillList)
+
+ref over CRL
+Get Collaborators By Skill
+end ref
+activate CRL
+
+CRL --> CRL : collaboratorList
+
+deactivate CRL
+
+'Generate Teams Method
+
+
+CRL -> CRL : generateProposalTeamList(minSize,maxSize,skillList,collaboratorList)
+ref over CRL
+Generate Proposal Team List
+end
+activate CRL
+
+CRL --> CRL : teamListProposal
+
+deactivate CRL
+
+
+
+CRL --> UI : teamListProposal
+
+deactivate CRL
+
+
+deactivate CRL
+
+UI --> HRM : shows the list of the team's proposals and asks you to choose one of them
+
+deactivate UI
+
+HRM -> UI : choose one of the proposals and confirms
+
+
+activate UI
+
+UI -> CRL : registerProposalTeam(team)
+
+ref over CRL
+Register Proposal Team
+end ref
+
+activate CRL
+
+
+
+CRL--> UI : team
+deactivate CRL
+
+UI --> HRM : displays operation success
+
+deactivate UI
+@enduml

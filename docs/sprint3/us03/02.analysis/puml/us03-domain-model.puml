@@ -1,0 +1,44 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+title Domain Model - US03 Register a collaborator
+
+class HumanResourceManager {
+}
+
+class Collaborator {
+    name
+    dateOfBirth
+    admissionDate
+    phoneNumber
+    email
+    taxpayer
+}
+
+class Job{
+    name
+}
+
+class Address{
+    streetName
+    postCode
+    doorNumber
+}
+
+class Document{
+    docType
+    number
+}
+
+Collaborator  <|---  HumanResourceManager
+HumanResourceManager "1" --- "1..*" Collaborator : Registers >
+Collaborator "1..*" - "1" Job : Has >
+Address "1" - "1..*" Collaborator : < lives
+Collaborator "1" - "1" Document : has >
+
+@enduml

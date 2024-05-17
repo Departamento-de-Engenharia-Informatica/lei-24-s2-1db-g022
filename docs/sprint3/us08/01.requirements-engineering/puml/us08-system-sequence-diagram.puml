@@ -1,0 +1,23 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US08 List vehicles
+
+autonumber
+
+actor "Fleet Manager (FM)" as FM
+participant ":System" as System
+
+activate FM
+
+    FM -> System : asks to list vehicles needing the check-up
+    activate System
+
+
+
+        System --> FM : show all vehicles needing the check-up
+    deactivate System
+
+@enduml

@@ -1,0 +1,64 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+title Domain Model - US06 Register a vehicle
+
+class Collaborator {
+    name
+    dateOfBirth
+    admissionDate
+    phoneNumber
+    taxpayer
+    email
+}
+
+class Document{
+    docType
+    number
+}
+
+class Address {
+    streetName
+    postCode
+    doorNumber
+}
+
+class VehicleFleetManager {
+}
+
+class Brand {
+     name
+}
+
+class Model {
+     name
+}
+
+class Vehicle {
+    type
+    tare
+    grossWeight
+    currentKm
+    registerDate
+    acquisitionDate
+    checkupFrequency
+    licensePlate
+}
+
+Collaborator "1" - "1" Document : has >
+
+Collaborator "1..*" -- "1" Address : lives >
+
+Collaborator <|- VehicleFleetManager
+
+VehicleFleetManager "1" -- "1..*" Vehicle : registers/manages >
+Brand "1" --  "1..*" Model : has >
+Brand "1" -- "1..*" Vehicle : has <
+Vehicle "1..*" - "1" Model : has >
+
+@enduml

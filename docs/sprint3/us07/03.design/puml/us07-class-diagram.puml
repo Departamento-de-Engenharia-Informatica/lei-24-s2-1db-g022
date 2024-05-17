@@ -1,0 +1,97 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+
+class Collaborator {
+    -String name
+    -List<Skill> skillList
+    -Job job
+    -Date dateOfBirth
+    -Date admissionDate
+    -Address address
+    -Document document
+    -String phoneNumber
+    -String email
+    -int taxpayer
+
+    + Collaborator(name, dateOfBirth, admissionDate, address, document, phoneNumber, email, taxpayer)
+}
+
+class VehicleFleetManager {
+}
+
+class Vehicle {
+    -List <CheckUp> checkUpsList
+    -Brand brand
+    -Model model
+    -String type
+    -float tare
+    -float grossWeight
+    -int currentKm
+    -Date registerDate
+    -Date acquisitionDate
+    -int checkupFrequency
+    -String licensePlate
+
+    + Vehicle(brand,model,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
+    + registerCheckUpByVehicle(date, kms)
+    - addCheckUp(checkUp)
+    - validation(checkUp)
+}
+
+class CheckUp {
+    -String licensePlate
+    -Date date
+    -int kms
+
+    + checkUp(date, kms)
+    - validation(checkUp)
+}
+
+class VehicleRepository {
+    - List <Vehicle> vehicleList
+    + getVehicleByPlate(licensePlate)
+}
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getVehicleRepository()
+}
+
+class RegisterCheckUpController {
+    + RegisterCheckUpController()
+    + registerCheckUp(licensePlate, date, kms)
+}
+
+class RegisterCheckUpUI {
+}
+
+Collaborator <|- VehicleFleetManager
+
+RegisterCheckUpUI .> RegisterCheckUpController
+
+RegisterCheckUpController .> Repositories
+RegisterCheckUpController ..> VehicleRepository
+RegisterCheckUpController ..> Vehicle
+RegisterCheckUpController ..> CheckUp
+
+
+Repositories -> Repositories : instance
+Repositories --> VehicleRepository : vehicleRepository
+
+VehicleRepository -> Vehicle : vehicle
+
+Vehicle "1" -> "*" CheckUp : checkUps
+
+VehicleFleetManager --> CheckUp : does
+
+@enduml

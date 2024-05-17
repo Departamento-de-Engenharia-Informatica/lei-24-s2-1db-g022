@@ -1,0 +1,37 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+'skinparam shadowing false
+
+title Use Case Diagram
+
+left to right direction
+
+    actor "Human Resources Manager (HRM)" as HumanResourcesManager
+    actor "Vehicle And Equipment FleetManager (VFM)" as VehicleAndEquipmentFleetManager
+    actor Collaborator
+    actor "Green Spaces User (GSU)" as GreenSpacesUser
+    actor "Green Spaces Manager (GSM)" as GreenSpacesManager
+
+rectangle System {
+    usecase "UC01: Register Skills" as UC01
+    HumanResourcesManager --> UC01
+    usecase "UC02: Register Job" as UC02
+    HumanResourcesManager --> UC02
+    usecase "UC03: Register a Collaborator With Job" as UC03
+    HumanResourcesManager --> UC03
+    usecase "UC04: Assign Skills Collaborator" as UC04
+    HumanResourcesManager --> UC04
+    usecase "UC05: Generate a team" as UC05
+    HumanResourcesManager --> UC05
+    usecase "UC06: Register a vehicle" as UC06
+    VehicleAndEquipmentFleetManager --> UC06
+    usecase "UC07: Register a vehicle´s check-up." as UC07
+    VehicleAndEquipmentFleetManager --> UC07
+    usecase "UC08: List vehicles check-up." as UC08
+    VehicleAndEquipmentFleetManager --> UC08
+}
+
+
+
+@enduml

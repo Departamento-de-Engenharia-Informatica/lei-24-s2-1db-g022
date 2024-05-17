@@ -1,0 +1,48 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":GenerateTeamController" as CRL
+participant ":Repositories" as REP
+participant "repositories\n:Repositories" as PLAT
+participant "skillRepository:\nSkillRepository" as SkillRepository
+
+autonumber 4
+--> CRL: getSkillList(skillName)
+
+autonumber 4.1
+
+activate CRL
+group Get Skill List
+
+CRL -> REP : getInstance()
+activate REP
+
+    REP --> CRL : repositories
+
+deactivate REP
+
+CRL -> PLAT : getSkillRepository()
+
+activate PLAT
+
+    PLAT --> CRL : skillRepository
+
+deactivate PLAT
+
+CRL -> SkillRepository : getSkillList()
+
+activate SkillRepository
+
+   SkillRepository --> CRL : skillList
+
+deactivate SkillRepository
+end
+
+autonumber 5
+<--CRL : skillList
+deactivate CRL
+
+
+@enduml

@@ -1,0 +1,102 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class Document{
+    docType
+    number
+}
+class Collaborator {
+    -String name
+    -List<Skill> skillList
+    -Job job
+    -Date dateOfBirth
+    -Date admissionDate
+    -String phoneNumber
+    -String email
+    -int taxpayer
+    -Document document
+    -Adress adress
+    + Collaborator(name,adress,document,dateOfBirth, admissionDate,phoneNumber, email, taxpayer)
+    +skillListAdd(Skill)
+}
+
+
+class VehicleFleetManager {
+}
+
+class Vehicle {
+    -List <CheckUp> checkUpsList
+    -Brand brand
+    -Model model
+    -String type
+    -float tare
+    -float grossWeight
+    -int currentKm
+    -Date registerDate
+    -Date acquisitionDate
+    -int checkupFrequency
+    -String licensePlate
+
+    + Vehicle(brand,model,type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkupFrequency,licensePlate)
+    + CheckUpByVehicle(date, kms)
+    - vehicleCheckUp(checkUp)
+    - validation(checkUp)
+}
+
+class CheckUp {
+    -String licensePlate
+    -Date date
+    -int kms
+
+    + checkUp(date, kms)
+    - validation(checkUp)
+}
+
+class VehicleRepository {
+    - List <Vehicle> vehicleList
+    + getVehicleByPlate(licensePlate)
+}
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getVehicleRepository()
+}
+
+class ListVehiclesNeedingCheckUpController {
+    + ListVehiclesNeedingCheckUpController()
+    + listVehiclesNeedingCheckUp(licensePlate, date, kms)
+}
+
+class ListVehiclesNeedingCheckUpUI {
+}
+
+Collaborator <|- VehicleFleetManager
+Collaborator "1" --> "1" Document : has
+
+ListVehiclesNeedingCheckUpUI .> ListVehiclesNeedingCheckUpController
+
+ListVehiclesNeedingCheckUpController .> Repositories
+ListVehiclesNeedingCheckUpController ..> VehicleRepository
+ListVehiclesNeedingCheckUpController ..> Vehicle
+ListVehiclesNeedingCheckUpController ..> CheckUp
+
+
+Repositories -> Repositories : instance
+Repositories --> VehicleRepository : vehicleRepository
+
+VehicleRepository -> Vehicle : vehicle
+
+Vehicle "1" -> "*" CheckUp : checkUps
+
+VehicleFleetManager --> CheckUp : does
+
+@enduml

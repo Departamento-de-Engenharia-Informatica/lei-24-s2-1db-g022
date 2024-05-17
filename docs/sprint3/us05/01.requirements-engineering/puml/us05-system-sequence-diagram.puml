@@ -1,0 +1,50 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US05 - Generate team
+
+autonumber
+
+actor "Human Resources Manager (HRM)" as HRM
+participant ":System" as System
+
+activate HRM
+
+            HRM -> System : asks to generate a new proposals teams
+    activate System
+
+            System --> HRM : requests data (i.e. team max size,team min size, skills number size)
+    deactivate System
+
+            HRM -> System : types requested data
+    activate System
+        loop skill number size > 0
+        note left: This loop is needed to decrement the skillNumberSize to zero
+
+            System --> HRM : show skill list and asks to select one
+
+    deactivate System
+
+            HRM -> System :select skill
+    activate System
+        end loop
+
+            System --> HRM : shows all data and requests confirmation
+    deactivate System
+
+            HRM -> System : confirms data
+    activate System
+
+            System --> HRM : shows the list of the team's proposals and asks you to choose one of them
+
+    deactivate System
+
+            HRM -> System : choose one of the proposals and confirms
+    activate System
+
+            System --> HRM : displays operation success
+
+    deactivate System
+@enduml

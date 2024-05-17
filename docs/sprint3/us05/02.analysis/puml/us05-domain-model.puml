@@ -1,0 +1,54 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+title Domain Model
+
+class Collaborator {
+    name
+    dateOfBirth
+    admissionDate
+    phoneNumber
+    taxpayer
+    email
+}
+
+class Document{
+    docType
+    number
+}
+
+class Address {
+    streetName
+    postCode
+    doorNumber
+}
+
+class HumanResourceManager {
+}
+
+class Team{
+}
+
+class Skill{
+    name
+}
+
+Collaborator "1" - "1" Document : has >
+
+Collaborator "1..*" -- "1" Address : lives >
+
+
+Collaborator  <|--  HumanResourceManager
+
+HumanResourceManager "1" -- "1..*" Team : defines >
+
+Collaborator "1..*" ---- "1" Team : Contains <
+
+Skill "*" -- "*" Collaborator : has <
+
+@enduml

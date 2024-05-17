@@ -1,0 +1,51 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":AssignSkillController" as CRL
+participant ":Repositories" as REP
+participant "repositories\n:Repositories" as PLAT
+participant "collaboratorRepository\n:CollaboratorRepository" as CL
+participant "collaborator\n:Collaborator" as collb
+autonumber 11
+--> CRL: assignSkill(collaborator,skill)
+
+autonumber 11.1
+
+activate CRL
+group Assign Skill Collaborator
+
+CRL -> REP : getInstance()
+activate REP
+
+REP --> CRL : repositories
+
+deactivate REP
+
+CRL -> PLAT : getCollaboratorRepository()
+activate PLAT
+
+PLAT --> CRL : collaboratorRepository
+
+deactivate PLAT
+loop skillListName
+CRL -> CL : AssignSkillCollaborator(collaborator,skill)
+activate CL
+CL -> collb : skillListAdd(skill)
+activate collb
+
+collb -> CL : true/false
+deactivate collb
+
+CL -> CRL : true/false
+
+deactivate CL
+
+end
+autonumber 12
+
+<--CL : true/false
+deactivate CRL
+
+@enduml

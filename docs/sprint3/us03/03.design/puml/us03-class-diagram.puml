@@ -1,0 +1,130 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+
+class RegisterCollaboratorController {
+
+    + RegisterCollaboratorController()
+    + registerCollaborator(name, birthdate, admission date, address, \nmobile, email, taxpayer,ID doc type, respective number, job name)
+    - registerAddress(streetName, postCode, doorNumber)
+    - getJobByName(jobName)
+    + getJobList()
+}
+
+class RegisterCollaboratorUI {
+}
+
+class Collaborator {
+    -String name
+    -List<Skill> skill
+    -Job job
+    -Date dateOfBirth
+    -Date admissionDate
+    -Address address
+    -Document document
+    -String phoneNumber
+    -String email
+    -int taxpayer
+
+
+    - validateCollaborator(collaborator)
+    + Collaborator(name, job, dateOfBirth, admissionDate, address, document, phoneNumber, email, taxpayer)
+}
+
+class Address {
+    -String streetName
+    -int postCode
+    -int doorNumber
+
+    +Address(streetName, postCode, doorNumber)
+    -validateAddress(address)
+}
+
+class HumanResourcesManager {
+}
+
+class Repositories {
+
+    - Repositories()
+    + getInstance() : Repositories
+    + getJobRepository()
+    + getCollaboratorRepository()
+    + getAddressRepository()
+}
+
+class JobRepository {
+    - List <Job> job
+
+    + getJobList()
+    + getJobByName(jobName)
+}
+
+class AddressRepository {
+    - List <Job> job
+
+    + getJobList()
+    + getJobByName(jobName)
+    -addAddress(address)
+    -validateAddress(address)
+}
+
+class CollaboratorRepository {
+    - List <Collaborator> collaborator
+
+    - addCollaborator(collaborator)
+    - validateCollaborator(collaborator)
+    + registerCollaborator(name, birthdate, admission date, address, \nmobile, email, taxpayer,ID doc type, respective number, job)
+}
+
+class Job {
+    -String name
+}
+
+class Document {
+    -String docType
+    -int number
+
+    +Document(docType, number)
+    -validate(docType, number)
+}
+
+Collaborator  <|---  HumanResourcesManager
+Collaborator  -> Job : has
+Collaborator "*" --> "1" Address : lives
+
+HumanResourcesManager <--  Collaborator: createdBy
+
+RegisterCollaboratorController .> Repositories : repositories
+RegisterCollaboratorController ..> "1" JobRepository
+RegisterCollaboratorController ...> "1" CollaboratorRepository
+RegisterCollaboratorController ..> "1" AddressRepository
+RegisterCollaboratorController ..> Collaborator
+RegisterCollaboratorController ..> Job
+RegisterCollaboratorController ..> Address
+RegisterCollaboratorController ..> Document
+
+RegisterCollaboratorUI .> RegisterCollaboratorController
+
+Repositories -> Repositories : instance
+Repositories -> JobRepository : jobRepository
+Repositories -> AddressRepository : addressRepository
+Repositories --> CollaboratorRepository : collaboratorRepository
+
+CollaboratorRepository --> Collaborator
+CollaboratorRepository --> Document
+
+Job <- JobRepository : job
+
+AddressRepository -> Address : address
+
+Document "1" <- "1" Collaborator : has
+
+@enduml
