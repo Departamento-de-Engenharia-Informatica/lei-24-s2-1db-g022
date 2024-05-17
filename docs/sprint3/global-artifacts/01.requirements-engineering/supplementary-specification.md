@@ -56,6 +56,9 @@ _Specifies or constraints the system design process. Examples may include: progr
 **Reporting**
 * The JaCoCo plugin should be used to generate the coverage report.
 
+**Persistence**
+* The application ought to employ object serialization to guarantee the data persistence across two successive runs.
+
 ## Implementation Constraints
 
 **Implementation languages**
@@ -67,4 +70,7 @@ _Specifies or constraints the system design process. Examples may include: progr
 * Adopt recognized coding standards (e.g., CamelCase).
 * Use Javadoc to generate useful documentation for Java code.
 
+## Interface Constraints
 
+**Interface Requirements**
+* The application’s graphical interface is to be developed in JavaFX 11.

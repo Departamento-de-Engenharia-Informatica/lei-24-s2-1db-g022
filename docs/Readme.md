@@ -8,7 +8,7 @@ The teams consists of students identified in the following table.
 |----------------|---------------|
 | **1170499**    | Daniel Silva  |
 | **1191330**    | Luigy Lima    |
-| **1191337**    | Tomás Pereira |
+| **1191377**    | Tomás Pereira |
 | **1200356**    | Diogo Almeida |
 
 # 2. Task Distribution ###
