@@ -9,9 +9,8 @@ left to right direction
 
     actor "Human Resources Manager (HRM)" as HumanResourcesManager
     actor "Vehicle And Equipment FleetManager (VFM)" as VehicleAndEquipmentFleetManager
-    actor Collaborator
-    actor "Green Spaces User (GSU)" as GreenSpacesUser
     actor "Green Spaces Manager (GSM)" as GreenSpacesManager
+    actor Collaborator
 
 rectangle System {
     usecase "UC01: Register Skills" as UC01
@@ -26,12 +25,30 @@ rectangle System {
     HumanResourcesManager --> UC05
     usecase "UC06: Register a vehicle" as UC06
     VehicleAndEquipmentFleetManager --> UC06
-    usecase "UC07: Register a vehicle´s check-up." as UC07
+    usecase "UC07: Register a vehicle´s check-up" as UC07
     VehicleAndEquipmentFleetManager --> UC07
-    usecase "UC08: List vehicles check-up." as UC08
+    usecase "UC08: List vehicles check-up" as UC08
     VehicleAndEquipmentFleetManager --> UC08
+    usecase "UC20: Register a Green Space" as UC20
+    GreenSpacesManager -->  UC20
+    usecase "UC21: Add new entry to the To-Do-List" as UC21
+    GreenSpacesManager -->  UC21
+    usecase "UC22: Add new entry to the Agenda" as UC22
+    GreenSpacesManager -->  UC22
+    usecase "UC23: Assign Team to entry in the Agenda" as UC23
+    GreenSpacesManager -->  UC23
+    usecase "UC24: Postpone an entry in the Agenda" as UC24
+    GreenSpacesManager -->  UC24
+    usecase "UC25: Cancel an entry in the Agenda" as UC25
+    GreenSpacesManager -->  UC25
+    usecase "UC26: Assign Vehicles to an entry in the Agenda" as UC26
+    GreenSpacesManager -->  UC26
+    usecase "UC27: List all Green Spaces" as UC27
+    GreenSpacesManager -->  UC27
+    usecase "UC28: Consult the assigned tasks" as UC28
+    Collaborator -->  UC28
+    usecase "UC29: Record the completion of a task" as UC29
+    Collaborator -->  UC29
 }
-
-
 
 @enduml

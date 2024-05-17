@@ -11,13 +11,23 @@ However, be aware, this is a pedagogical simplification. On further projects and
 
 # Use Cases / User Stories
 
-| UC/US | Description                                       |                   
-|:------|:--------------------------------------------------|
-| US01  | [Register Skills](../../us01/Readme.md)           |
-| US02  | [Register Job](../../us02/Readme.md)              |
-| US03  | [Register a Collaborator](../../us03/Readme.md)   |
-| US04  | [Assign Skills](../../us04/Readme.md)             |
-| US05  | [Generate team](../../us05/Readme.md)             |
-| US06  | [Register vehicle](../../us06/Readme.md)          |
-| US07  | [Register vehicle check-up](../../us07/Readme.md) |        
-| US08  | [List vehicles](../../us08/Readme.md)             |
+| UC/US | Description                                                       |                   
+|:------|:------------------------------------------------------------------|
+| US01  | [Register Skills](../../us01/Readme.md)                           |
+| US02  | [Register Job](../../us02/Readme.md)                              |
+| US03  | [Register a Collaborator](../../us03/Readme.md)                   |
+| US04  | [Assign Skills](../../us04/Readme.md)                             |
+| US05  | [Generate team](../../us05/Readme.md)                             |
+| US06  | [Register vehicle](../../us06/Readme.md)                          |
+| US07  | [Register vehicle check-up](../../us07/Readme.md)                 |        
+| US08  | [List vehicles](../../us08/Readme.md)                             |
+| US20  | [Register a Green Space](../../us20/Readme.md)                    |
+| US21  | [Add new entry to the To-Do-List](../../us21/Readme.md)           |
+| US22  | [Add new entry to the Agenda](../../us22/Readme.md)               |
+| US23  | [Assign Team to entry in the Agenda](../../us23/Readme.md)        |
+| US24  | [Postpone an entry in the Agenda](../../us24/Readme.md)           |
+| US25  | [Cancel an entry in the Agenda](../../us25/Readme.md)             |
+| US26  | [Assign Vehicles to an entry in the Agenda](../../us26/Readme.md) |
+| US27  | [List all Green Spaces](../../us27/Readme.md)                     |
+| US28  | [Consult the assigned tasks](../../us28/Readme.md)                |
+| US29  | [Record the completion of a task](../../us29/Readme.md)           |
