@@ -98,6 +98,12 @@ respective area.
 >
 > **Answer:** No.
 
+> **Question:**  I would like to know between what ranges of hectares a green space is classified as garden, medium or
+> large, or if it is possible to register 2 green spaces with the same area but in different typology, depending on the
+> GSM it registers
+>
+> **Answer:** The classification is not automatic, it's up to GSM decide about it.
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
@@ -116,9 +122,9 @@ respective area.
 * Typed data:
     * a type green space (e.g Garden,Medium-size Park and Large-size Park);
     * a name
-    * a address
+    * a Local Name
     * a area
-  
+
 **Output Data:**
 
 * (In)Success of the operation

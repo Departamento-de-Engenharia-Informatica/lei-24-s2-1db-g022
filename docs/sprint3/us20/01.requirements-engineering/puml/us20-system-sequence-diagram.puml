@@ -21,7 +21,7 @@ activate GSM
     GSM->System: selects a type
     activate System
 
-        System --> GSM : request data(i.e name, address, area)
+        System --> GSM : request data(i.e name, localName, area)
 
     deactivate System
 
