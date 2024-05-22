@@ -8,7 +8,6 @@ hide methods
 
 title Domain Model
 
-
 class Collaborator {
     name
     dateOfBirth
@@ -140,10 +139,11 @@ class Equipment{
     name
 }
 
+class EmailService{
+}
 
 VehicleFleetManager "1" - "1..*" Machine :  manages >
 VehicleFleetManager "1" - "1..*" Equipment :  manages >
-
 
 Vehicle "1..*" - "1..*" Task :  needed to carry out >
 Vehicle "1..*" --- "1..*" Machine :  transports >
@@ -153,10 +153,8 @@ Vehicle "1..*" -- "1" Model :  has >
 'Adicionar no glossario o ToDoList
 Task "*" -- "1" ToDoList : includes <
 
-
 IrrigationSystem "1" -- "1..*" Pipe : contains >
 Pipe "1..*" -- "2" WaterPoint : contains >
-
 
 InfraStructure <|- IrrigationSystem
 Garden "1" ---- "0..1" IrrigationSystem : has >
@@ -171,7 +169,6 @@ Garden "1..*" -- "*" Tree : possess >
 UrbanFurniture <|- Bench
 Garden "1..*" --- "*" Bench : possess >
 
-
 Collaborator "1..*" --- "1" Address : lives >
 
 Vehicle "1..*" -- "1" Brand : has >
@@ -183,7 +180,6 @@ GreenSpace <|-- LargePark
 MediumPark "0..1" -- "1..*" Garden : contains >
 LargePark "0..1" - "1..*" Garden : contains >
 
-
 Collaborator  <|--  QualityAssessmentManager
 Collaborator  <|-  HumanResourceManager
 Collaborator <|- VehicleFleetManager
@@ -194,9 +190,10 @@ HumanResourceManager "1" - "1..*" Job : registers >
 HumanResourceManager "1" -- "1..*" Skill : registers >
 HumanResourceManager "1" -- "1..*" Team : defines >
 
-
 Collaborator "*" -- "*" Vehicle : drives/uses >
 Collaborator "1..*" ---- "1" Team : Contains <
+
+Team "*" -- "1" EmailService :  send email to all elements of <
 
 Team "1..*" -- "1" Agenda : carries out >
 

@@ -46,6 +46,10 @@ class Task{
     urgency
 }
 
+class EmailService{
+}
+
+
 Collaborator "1" - "1" Document : has >
 
 Collaborator "1..*" -- "1" Address : lives >
@@ -60,5 +64,8 @@ Team "1..*" - "*" Task : executes >
 
 Agenda "1" - "*" Task : contains >
 
+Team "*" -- "1" EmailService :  send email to all elements of <
+
+Collaborator "1..*" ---- "1" Team : Contains <
 
 @enduml
