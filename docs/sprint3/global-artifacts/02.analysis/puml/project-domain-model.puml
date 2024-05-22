@@ -94,9 +94,11 @@ class Job{
 class MediumPark{
 }
 
+'Verificar o localName
 class GreenSpace{
     name
-    dimension
+    localName
+    area
 }
 
 class Garden{}

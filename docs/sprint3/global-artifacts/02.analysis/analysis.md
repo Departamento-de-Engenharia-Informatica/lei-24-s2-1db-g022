@@ -85,7 +85,6 @@ Iterative Development".
 * PlantMaterial
 * InfraStructure
 
-
 ---
 
 **Descriptions of Things**
@@ -187,7 +186,7 @@ remembering, or it is derivable from the List of Common Associations:
 | Vehicle                   |     Transports      |                Equipment |
 | Vehicle                   |         Has         |                    Brand |
 | Vehicle                   |         Has         |                    Model |
-| Green Spaces Manager(GSM) |       Manages       |             Green Spaces |
+| Green Spaces Manager(GSM) |  Registers/Manages  |             Green Spaces |
 | Green Spaces User(GSU)    |        Uses         |             Green Spaces |
 | Green Space               |   Generalization    |                   Garden |
 | Green Space               |   Generalization    |               MediumPark |
