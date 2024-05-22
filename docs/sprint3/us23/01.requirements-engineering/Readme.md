@@ -10,7 +10,7 @@ As a GSM, I want to assign a Team to an entry in the Agenda.
 
 **From the specifications document:**
 
-> Skills can only be registered by a Human Resources Manager (HRM).
+> n/a
 
 **From the client clarifications:**
 

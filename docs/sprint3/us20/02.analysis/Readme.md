@@ -8,4 +8,4 @@
 
 ### 2.2. Other Remarks
 
-n/a
+* GreenSpace have one address with streetName and postCode

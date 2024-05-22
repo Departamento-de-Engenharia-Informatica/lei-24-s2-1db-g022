@@ -6,8 +6,7 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-title Domain Model
-
+title Domain Model - US27 List all Green Spaces
 
 class Collaborator {
     name
@@ -29,22 +28,24 @@ class Address {
     doorNumber
 }
 
-
-class HumanResourceManager {
+class GreenSpaceManager {
 }
 
-class Skill{
+class GreenSpace{
     name
+    area
+}
+
+class SortingAlgorithm {
 }
 
 Collaborator "1" - "1" Document : has >
-
 Collaborator "1..*" -- "1" Address : lives >
+Collaborator  <|--  GreenSpaceManager
 
-Collaborator  <|--  HumanResourceManager
+GreenSpaceManager "1" - "1..*" GreenSpace : manages >
 
-HumanResourceManager "1" -- "1..*" Skill : registers >
-
-
+GreenSpace "1" - "1" Address : is located in >
+GreenSpace "1" -- "1" SortingAlgorithm : makes use of >
 
 @enduml
