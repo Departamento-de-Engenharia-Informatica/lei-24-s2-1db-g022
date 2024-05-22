@@ -49,13 +49,11 @@ class Agenda{}
 
 class ToDoList{}
 
-class Task{
-    titleTask
+class Task {
     description
+    urgency
     duration
     status
-    startDate
-    endDate
 }
 
 class Vehicle{
@@ -153,7 +151,7 @@ Vehicle "1..*" -- "1..*" Equipment :  transports >
 Vehicle "1..*" -- "1" Model :  has >
 
 'Adicionar no glossario o ToDoList
-ToDoList "1" --- "1..*" Task : includes >
+Task "*" -- "1" ToDoList : includes <
 
 
 IrrigationSystem "1" -- "1..*" Pipe : contains >
@@ -174,12 +172,12 @@ UrbanFurniture <|- Bench
 Garden "1..*" --- "*" Bench : possess >
 
 
-Collaborator "1..*" -- "1" Address : lives >
+Collaborator "1..*" --- "1" Address : lives >
 
 Vehicle "1..*" -- "1" Brand : has >
 Brand "1" -- "1..*" Model : has >
 
-GreenSpace <|- MediumPark
+GreenSpace <|-- MediumPark
 GreenSpace <|-- Garden
 GreenSpace <|-- LargePark
 MediumPark "0..1" -- "1..*" Garden : contains >
@@ -187,7 +185,7 @@ LargePark "0..1" - "1..*" Garden : contains >
 
 
 Collaborator  <|--  QualityAssessmentManager
-Collaborator  <|--  HumanResourceManager
+Collaborator  <|-  HumanResourceManager
 Collaborator <|- VehicleFleetManager
 Collaborator <|--- GreenSpaceManager
 
@@ -202,13 +200,17 @@ Collaborator "1..*" ---- "1" Team : Contains <
 
 Team "1..*" -- "1" Agenda : carries out >
 
-Agenda "1" -- "*" Task : defines >
+Agenda "1" - "*" Task : contains >
 
 Vehicle "1" -- "*" CheckUp :  does >
+
+Team "1..*" --- "*" Task : executes >
 
 Skill "*" -- "*" Collaborator : has <
 
 Job "1" -- "1..*" Collaborator : has <
+
+GreenSpaceManager "1..*" --- "1" Agenda : Assign Team to an entry >
 
 VehicleFleetManager "1" -- "1..*" Vehicle : registers/manages >
 VehicleFleetManager "1" -- "1..*" CheckUp : registers >
@@ -219,5 +221,8 @@ GreenSpaceUser "*" -- "1..*" GreenSpace :  uses >
 Collaborator "1" - "1" Document : has >
 
 GreenSpace "1" -- "1" Address : is located in >
+
+GreenSpaceManager "1..*" -- "1" Task : creates >
+GreenSpaceManager "1..*" -- "1" ToDoList : inserts new entry >
 
 @enduml
