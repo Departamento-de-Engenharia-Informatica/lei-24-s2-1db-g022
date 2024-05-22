@@ -104,12 +104,24 @@ respective area.
 >
 > **Answer:** The classification is not automatic, it's up to GSM decide about it.
 
+> **Question:** Can two different green spaces have the same address?
+>
+> **Answer:** No.
+
+> **Question:** Boa tarde, se existem vários GSM quando um GSM cria um greenspace esse greenspace fica automaticamente
+> associado a ele ou deve existir um menu em que um "administrador" geral da empresa escolhe a que cada greenspace cada
+> GSM deve mandar?
+>
+> **Answer:** Não existem USs previstas para essa gestão.
+> Por uma questão de simplicidade podem assumir que o GSM que cria o GS fica como gestor desse mesmo GS.
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
 * **AC2:** Hectares must be an integer greater than zero.
-* **AC3:** When creating a Green Space with an existing name, the system must reject such operation and the user must be
-  able to modify the typed name.
+* **AC3:** When creating a Green Space with an existing name or address, the system must reject such operation and the
+  user must be
+  able to modify the typed name or address.
 
 ### 1.4. Found out Dependencies
 
@@ -122,7 +134,7 @@ respective area.
 * Typed data:
     * a type green space (e.g Garden,Medium-size Park and Large-size Park);
     * a name
-    * a Local Name
+    * a address(e.g streetName,postCode)
     * a area
 
 **Output Data:**
@@ -135,4 +147,5 @@ respective area.
 
 ### 1.7 Other Relevant Remarks
 
-* n/a
+* The GSM when creating the green space is associated with it
+* Area in Hectares
