@@ -18,7 +18,7 @@ activate GSM
         System --> GSM : shows list of green spaces associated to him\n and asks to select one
     deactivate System
 
-    GSM->System: choses one
+    GSM->System: chooses one
     activate System
 
         System --> GSM : shows list of selected green space tasks\n and asks to select one
@@ -26,7 +26,7 @@ activate GSM
     deactivate System
 
 
-    GSM -> System : choses one
+    GSM -> System : chooses one
     activate System
 
         System --> GSM : requests data (urgency,duration)
