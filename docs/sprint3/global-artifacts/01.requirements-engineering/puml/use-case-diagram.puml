@@ -37,18 +37,11 @@ rectangle System {
     GreenSpacesManager -->  UC22
     usecase "UC23: Assign Team to entry in the Agenda" as UC23
     GreenSpacesManager -->  UC23
-    usecase "UC24: Postpone an entry in the Agenda" as UC24
-    GreenSpacesManager -->  UC24
-    usecase "UC25: Cancel an entry in the Agenda" as UC25
-    GreenSpacesManager -->  UC25
-    usecase "UC26: Assign Vehicles to an entry in the Agenda" as UC26
-    GreenSpacesManager -->  UC26
     usecase "UC27: List all Green Spaces" as UC27
     GreenSpacesManager -->  UC27
     usecase "UC28: Consult the assigned tasks" as UC28
     Collaborator -->  UC28
-    usecase "UC29: Record the completion of a task" as UC29
-    Collaborator -->  UC29
+
 }
 
 @enduml
