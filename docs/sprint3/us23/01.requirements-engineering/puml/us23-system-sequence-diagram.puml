@@ -1,0 +1,41 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US23 - Assign Team to entry in the Agenda
+
+autonumber
+
+actor "Green Space Manager (GSM)" as GSM
+participant ":System" as System
+
+activate GSM
+
+    GSM -> System : asks to assign Team to entry in the Agenda
+    activate System
+
+        System --> GSM : shows list of entries and asks to select one
+    deactivate System
+
+    GSM->System: chooses one
+    activate System
+
+        System --> GSM : shows list of Teams and asks to select one
+
+    deactivate System
+
+
+    GSM -> System : chooses one
+    activate System
+
+        System --> GSM : displays the data and requests confirmation
+    deactivate System
+
+    GSM -> System : confirms data
+    activate System
+
+    System --> GSM : displays operation success
+    deactivate System
+
+@enduml

@@ -123,7 +123,7 @@ respective area.
     * a type green space (e.g Garden,Medium-size Park and Large-size Park);
     * a name
     * a Local Name
-    * a area
+    * an area
 
 **Output Data:**
 
