@@ -27,4 +27,3 @@ However, be aware, this is a pedagogical simplification. On further projects and
 | US23  | [Assign Team to entry in the Agenda](../../us23/Readme.md)        |
 | US27  | [List all Green Spaces](../../us27/Readme.md)                     |
 | US28  | [Consult the assigned tasks](../../us28/Readme.md)                |
-`
