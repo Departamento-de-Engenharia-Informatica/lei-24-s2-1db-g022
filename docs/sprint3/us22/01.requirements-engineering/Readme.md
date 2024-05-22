@@ -5,85 +5,67 @@
 
 ### 1.1. User Story Description
 
-As a Human Resources Manager (HRM), I want to register skills that a collaborator may have.
+As a Green Space Manager (GSM), I want to add a new entry in the Agenda
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
-> Skills can only be registered by a Human Resources Manager (HRM).
+> Agenda entries can only be registered by a Green Space Manager (GSM).
 
 **From the client clarifications:**
 
-> **Question:**  Which information can be introduced to create a new skill?
+> **Question:** Can I add an entry that has a time period that already have an existing entry in the Agenda?
 >
-> **Answer:** The skill name.
-
-
-> **Question:** Which are the skills accepted? Or should we enable the HRM to introduce anything as a skill?
->
-> **Answer:** All, it's up to HRM to decide. (special characters or algarisms should not be allowed in the skill name).
-
-> **Question:** Que criterios sao necessarios para registar uma skill?
->
-> **Answer:** o nome da skill, por exemplo:
-> podador
-> condutor de veiculos pesados
-> aplicador de fito-farmacos
-
-> **Question:** Quando é criado uma skill que ja existe o que sistema devera fazer?
->
-> **Answer:** Por definição não é possível ter valores duplicados num conjunto. A verificação de duplicados não é uma
-> regra de negócio é do nível tecnológico.
+> **Answer:** Yes, because:
+a) there are many parks to manage
+b) different tasks can be executed at same time in the same park.
 
 > **Question:**
->1. Do I need to add skills by writing them or can I just give a file with all of the skills?
->2. Does the HRM need to see the confirmation of the sucess of the operation and the skills added or just the sucess of
-    the operation?
->3. Is there any other possible outcome like if the HMR does not put the requested data, do I need to ask the user to to
-    register a diferent competence?
+When the GSM plans a task (that was previously in To-Do) into the Agenda, what aditional data/information does he need to input when planning?
+> 
+> **Answer:** The starting date for the task.
 >
-> **Answer:**
->1. Both are acceptable since the business the same the crucial difference resides in the UX.
->2. It will depend if you opt to insert one skil or a set of skils in a batch. Maybe some adaptation needed.
->3. This US is quite simple, atm a skill is simply a name.
+> Later the GSM will be able to add the Team and vehicles (if required).
 
-> **Question:**
->Dear client, which is the difference between collaborator and employ? And employ could have skills? HRM, VFM, GSM and GSU are employers?
+> **Question:** When a new entry is added to the ToDo list, the default status of that task will be "pending" or no status at all is considered on ToDo list?
+> 
+> Similarly, when a new entry is added to the Agenda, the status of that task will be, by default, set to "planned", right?
+> 
+> **Answer:** "Pending" as default for to-do list entries and "Planned" as default for Agenda entries, sounds good;
+
+> **Question:** Our team is unsure about what the exact inputs for the Green Space, To-Do List Entry, and Agenda entry exactly are. We understand that type (garden, medium-size, large-size), area, name, and address are required inputs for a Green Space (and if we are wrong in this, please correct us), but are there any other inputs that we are unaware of?
+> 
+> And when it comes to To-Do List entries, we identified a state (planned, postponed, completed, canceled), a green space, a title, and a description as inputs for a To-Do List entry. But are there any more? 
+> 
+> We also know that an Agenda entry has a target date, but is this target date supposed to be inputted upon transferring a task from the to-do list to the agenda, or is it supposed to be inputted upon creating the task in the to-do list?
+> 
+> Finally, during the last client meeting, we became aware that some tasks are meant to be reoccurring rather than occasional. Is this something that should be asked on creating the task in the to-do list? If so, what inputs should we expect from the user? The task's frequency in days?
+> 
+> **Answer:** Seems enough.
 >
-> **Answer:**
->Employee and collaborator are synonyms.
-
-> **Question:**
-> Should the system able the HRM to introduce multiple skills in one interaction before saving all of them?
->
-> **Answer:**
-> it's not required to do so.
-
-> **Question:**
-> The indentificator of the skill will be the name, or the system will generate authomatically and Id when the manager insert the name?
->
-> **Answer:**
-> A skill is just a name, can be a composition os words like "Light Vehicle Driving Licence".
-> I have no knowledge about systems IDs.
-
+> In the text you can find: the degree of urgency (High, Medium,and Low), and the approximate expected duration.
+> 
+> To-do list entries doesn't have dates!
+> 
+> For the current proof-of-concept there is no need to distinguish between recurring and occasional tasks.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** Special characters or numbers should not be allowed in the skill name.
-* **AC3:** When creating a skill with an existing name, the system must reject such operation and the user must be able to modify the typed name.
+* **AC1:** The new entry must be associated with a green space managed by the GSM.
+* **AC2:** The new entry must exist in the To-Do list.
+* **AC3:** All required fields must be filled in.
 
 ### 1.4. Found out Dependencies
 
-* n/a
+* There is a dependency on "US21 - Add new entry to the To-Do-List" as the new entry in the agenda must exist in the To-Do List.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * a skill name
+    * 
 
 **Output Data:**
 

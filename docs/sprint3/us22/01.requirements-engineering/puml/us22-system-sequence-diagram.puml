@@ -7,29 +7,29 @@ title System Sequence Diagram (SSD) - US01 - Register Skills
 
 autonumber
 
-actor "Human Resources Manager (HRM)" as HRM
+actor "Green Space Manager (GSM)" as GSM
 participant ":System" as System
 
-activate HRM
+activate GSM
 
-    HRM -> System : asks to register a new skill
+    GSM -> System : asks to register a new entry in the agenda
     activate System
 
-        System --> HRM : requests data (name)
+        System --> GSM : shows list of user associated Green spaces and asks to select one
     deactivate System
 
-    HRM->System: type data (name)
+    GSM->System: select
     activate System
 
-        System --> HRM : displays the data and requests confirmation
+        System --> GSM :
 
     deactivate System
 
 
-    HRM -> System : confirms data
+    GSM -> System :
     activate System
 
-        System --> HRM : displays operation success
+        System --> GSM :
     deactivate System
 
 @enduml
