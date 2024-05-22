@@ -1,0 +1,47 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US21 - Add new entry to the To-Do-List
+
+autonumber
+
+actor "Green Space Manager (GSM)" as GSM
+participant ":System" as System
+
+activate GSM
+
+    GSM -> System : asks to add new entry to the To-Do-List
+    activate System
+
+        System --> GSM : shows list of green spaces associated to him\n and asks to select one
+    deactivate System
+
+    GSM->System: choses one
+    activate System
+
+        System --> GSM : shows list of selected green space tasks\n and asks to select one
+
+    deactivate System
+
+
+    GSM -> System : choses one
+    activate System
+
+        System --> GSM : requests data (urgency,duration)
+    deactivate System
+
+    GSM -> System : types data (urgency,duration)
+    activate System
+
+        System --> GSM : displays the data and requests confirmation
+    deactivate System
+
+    GSM -> System : confirms data
+    activate System
+
+    System --> GSM : displays operation success
+    deactivate System
+
+@enduml
