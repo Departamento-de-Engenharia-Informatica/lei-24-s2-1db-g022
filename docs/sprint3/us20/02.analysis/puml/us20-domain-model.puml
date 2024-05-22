@@ -6,7 +6,7 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-title Partial Domain Model US20
+title Domain Model - US20 Register a Green Space
 
 
 class Collaborator {
@@ -20,7 +20,6 @@ class Collaborator {
 
 class GreenSpace {
     name
-    localName
     area
 }
 
@@ -55,9 +54,10 @@ Collaborator "1..*" -- "1" Address : lives >
 
 Collaborator  <|--  GreenSpacesManager
 
-GreenSpacesManager "1" -- "*" GreenSpace : register >
+GreenSpacesManager "1" -- "*" GreenSpace : register/manages >
+GreenSpace "1" -- "1" Address : is located in >
 
-GreenSpace <|-- Graden
+GreenSpace <|-- Garden
 GreenSpace <|-- MediumPark
 GreenSpace <|-- LargePark
 
