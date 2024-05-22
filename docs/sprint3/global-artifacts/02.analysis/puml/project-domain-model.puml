@@ -97,7 +97,6 @@ class MediumPark{
 'Verificar o localName
 class GreenSpace{
     name
-    localName
     area
 }
 
@@ -214,9 +213,11 @@ Job "1" -- "1..*" Collaborator : has <
 VehicleFleetManager "1" -- "1..*" Vehicle : registers/manages >
 VehicleFleetManager "1" -- "1..*" CheckUp : registers >
 
-GreenSpaceManager "1..*" -- "*" GreenSpace :  manages >
+GreenSpaceManager "1..*" -- "*" GreenSpace :  registers/manages >
 GreenSpaceUser "*" -- "1..*" GreenSpace :  uses >
 
 Collaborator "1" - "1" Document : has >
+
+GreenSpace "1" -- "1" Address : is located in >
 
 @enduml
