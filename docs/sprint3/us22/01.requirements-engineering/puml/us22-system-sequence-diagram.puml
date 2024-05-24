@@ -15,21 +15,31 @@ activate GSM
     GSM -> System : asks to register a new entry in the agenda
     activate System
 
-        System --> GSM : shows list of user associated Green spaces and asks to select one
+    System --> GSM : shows list of user associated Green spaces and asks to select one
     deactivate System
 
-    GSM->System: select 
+    GSM->System: selects green space
     activate System
 
-        System --> GSM :
-
+    System --> GSM : shows list of tasks and asks to select one
     deactivate System
 
-
-    GSM -> System :
+    GSM->System: selects task
     activate System
 
-        System --> GSM :
+    System --> GSM : requests data(startDate)
+    deactivate System
+
+    GSM -> System : types data(startDate)
+    activate System
+
+    System --> GSM : shows all data and asks to confirm
+    deactivate System
+
+    GSM -> System : confirms data
+    activate System
+
+    System --> GSM : displays operation success
     deactivate System
 
 @enduml

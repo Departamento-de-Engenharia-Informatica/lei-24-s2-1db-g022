@@ -8,7 +8,6 @@ hide methods
 
 title Domain Model
 
-
 class Collaborator {
     name
     dateOfBirth
@@ -29,21 +28,38 @@ class Address {
     doorNumber
 }
 
-
-class HumanResourceManager {
+class GreenSpaceManager {
 }
 
-class Skill{
-    name
+class ToDoList {
+}
+
+class Task {
+    description
+    urgency
+    duration
+    status
+
+}
+
+class Agenda {
+    startDate??
 }
 
 Collaborator "1" - "1" Document : has >
-
 Collaborator "1..*" -- "1" Address : lives >
+Collaborator  <|--  GreenSpaceManager
 
-Collaborator  <|--  HumanResourceManager
+GreenSpaceManager "1..*" -- "1" Task : creates >
+GreenSpaceManager "1" -- "1" Agenda
 
-HumanResourceManager "1" -- "1..*" Skill : registers >
+Task "*" -- "1" ToDoList : includes <
+
+Agenda "*" -- "1" ToDoList : asd
+
+Agenda "1" -- "1" Task : asd
+
+
 
 
 

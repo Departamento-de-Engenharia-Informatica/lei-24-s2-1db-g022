@@ -65,15 +65,16 @@ When the GSM plans a task (that was previously in To-Do) into the Agenda, what a
 **Input Data:**
 
 * Typed data:
-    * 
+    * a start date
 
 **Output Data:**
-
-* (In)Success of the operation
+  * a list of green spaces
+  * a list of tasks
+  * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![System Sequence Diagram - Alternative One](svg/us01-system-sequence-diagram.svg)
+![System Sequence Diagram](svg/us22-system-sequence-diagram.svg)
 
 
 ### 1.7 Other Relevant Remarks
