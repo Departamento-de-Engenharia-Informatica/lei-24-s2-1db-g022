@@ -1,0 +1,126 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UI Sequence Diagram (SSD) - US21 - Add new entry to the To-Do-List
+
+autonumber
+
+'hide footbox
+actor "Green Spaces Manager (GSM)" as GSM
+participant ":RegisterEntryToDoListUI" as UI
+participant ":RegisterEntryToDoListController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "greenSpaceRepository\n:GreenSpaceRepository" as GSR
+participant "taskRepository\n:TaskRepository" as TR
+
+activate GSM
+
+        GSM -> UI : asks to register a new entry in the to do list
+    activate UI
+
+        UI -> CTRL : getGreenSpaceManager()
+    activate CTRL
+
+        CTRL -> CTRL : getManagerFromSession()
+    activate CTRL
+
+        ref over CTRL
+            Get Manager
+        end ref
+
+        CTRL --> CTRL : manager
+    deactivate CTRL
+
+        CTRL -> RepositorySingleton : getInstance()
+    activate RepositorySingleton
+
+        RepositorySingleton --> CTRL : repositories
+    deactivate RepositorySingleton
+
+        CTRL -> PLAT : getGreenSpaceRepository()
+    activate PLAT
+
+        PLAT --> CTRL: greenSpaceRepository
+    deactivate PLAT
+
+        CTRL -> GSR : getGreenSpaceByManager(manager)
+    activate GSR
+
+        GSR --> CTRL : greenSpaceList
+    deactivate GSR
+
+        CTRL --> UI : greenSpaceList
+    deactivate CTRL
+
+        UI --> GSM : shows all the Green Spaces managed by the GSM \n and asks to select one
+    deactivate UI
+
+        GSM->UI: chooses one
+    activate UI
+
+        UI -> CTRL : getTask()
+    activate CTRL
+
+        CTRL -> RepositorySingleton : getInstance()
+    activate RepositorySingleton
+
+        RepositorySingleton --> CTRL : repositories
+    deactivate RepositorySingleton
+
+        CTRL -> PLAT : getTaskRepository()
+    activate PLAT
+
+        PLAT --> CTRL: taskRepository
+    deactivate PLAT
+
+        CTRL -> TR : getTask()
+    activate TR
+
+        TR --> CTRL : taskList
+    deactivate TR
+
+        CTRL --> UI : taskList
+    deactivate CTRL
+
+        UI --> GSM : shows all the tasks and asks to select one
+    deactivate UI
+
+        GSM -> UI : chooses one
+    activate UI
+
+        UI --> GSM : requests data
+    deactivate UI
+
+        GSM -> UI : types requested data (urgency,data)
+    activate UI
+
+        UI --> GSM : displays the data and requests confirmation
+    deactivate UI
+
+        GSM -> UI : confirms and submits data
+    activate UI
+
+        UI -> CTRL: registerEntryToDoList(greenSpaceName,taskDescription,urgency,data)
+    activate CTRL
+
+        CTRL -> GSR : registerEntryToDoList(greenSpaceName,taskDescription,urgency,data)
+    activate GSR
+
+        ref over GSR
+            Register Entry
+        end
+
+        GSR --> CTRL : toDoList
+    deactivate GSR
+
+        CTRL --> UI : toDoList
+    deactivate CTRL
+
+        UI --> GSM : displays operation success
+    deactivate UI
+
+deactivate GSM
+@enduml
