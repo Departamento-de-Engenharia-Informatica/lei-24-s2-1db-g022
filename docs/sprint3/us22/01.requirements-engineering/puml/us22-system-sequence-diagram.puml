@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - US01 - Register Skills
+title System Sequence Diagram (SSD) - US22 - Add new entry to the agenda.
 
 autonumber
 
@@ -18,7 +18,7 @@ activate GSM
         System --> GSM : shows list of user associated Green spaces and asks to select one
     deactivate System
 
-    GSM->System: select
+    GSM->System: select 
     activate System
 
         System --> GSM :
