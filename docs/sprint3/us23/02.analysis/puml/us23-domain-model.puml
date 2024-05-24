@@ -1,0 +1,71 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+title Domain Model - US23 Assign Team to entry in the Agenda
+
+
+class Collaborator {
+    name
+    dateOfBirth
+    admissionDate
+    phoneNumber
+    taxpayer
+    email
+}
+
+class Document{
+    docType
+    number
+}
+
+class Address {
+    streetName
+    postCode
+    doorNumber
+}
+
+
+class GreenSpaceManager {
+}
+
+class Team{
+}
+
+class Agenda{}
+
+
+class Task{
+    description
+    duration
+    status
+    urgency
+}
+
+class EmailService{
+}
+
+
+Collaborator "1" - "1" Document : has >
+
+Collaborator "1..*" -- "1" Address : lives >
+
+Collaborator  <|--  GreenSpaceManager
+
+GreenSpaceManager "1..*" -- "1" Agenda : Assign Team to an entry >
+
+Team "1..*" - "1" Agenda : carries out >
+
+Team "1..*" - "*" Task : executes >
+
+Agenda "1" - "*" Task : contains >
+
+Team "*" -- "1" EmailService :  send email to all elements of <
+
+Collaborator "1..*" ---- "1" Team : Contains <
+
+@enduml

@@ -1,0 +1,66 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+title Domain Model - US20 Register a Green Space
+
+
+class Collaborator {
+    name
+    dateOfBirth
+    admissionDate
+    phoneNumber
+    taxpayer
+    email
+}
+
+class GreenSpace {
+    name
+    area
+}
+
+class Document{
+    docType
+    number
+}
+
+class Address {
+    streetName
+    postCode
+    doorNumber
+}
+
+
+class GreenSpacesManager {
+}
+
+class Garden {
+}
+
+class MediumPark {
+}
+
+class LargePark {
+}
+
+
+Collaborator "1" - "1" Document : has >
+
+Collaborator "1..*" -- "1" Address : lives >
+
+Collaborator  <|--  GreenSpacesManager
+
+GreenSpacesManager "1" -- "*" GreenSpace : register/manages >
+GreenSpace "1" -- "1" Address : is located in >
+
+GreenSpace <|-- Garden
+GreenSpace <|-- MediumPark
+GreenSpace <|-- LargePark
+
+
+
+@enduml

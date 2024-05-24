@@ -1,4 +1,4 @@
-# Use Case Diagram (UCD)
+`# Use Case Diagram (UCD)
 
 **In the scope of this project, there is a direct relationship of _1 to 1_ between Use Cases (UC) and User Stories (US).**
 
@@ -25,9 +25,5 @@ However, be aware, this is a pedagogical simplification. On further projects and
 | US21  | [Add new entry to the To-Do-List](../../us21/Readme.md)           |
 | US22  | [Add new entry to the Agenda](../../us22/Readme.md)               |
 | US23  | [Assign Team to entry in the Agenda](../../us23/Readme.md)        |
-| US24  | [Postpone an entry in the Agenda](../../us24/Readme.md)           |
-| US25  | [Cancel an entry in the Agenda](../../us25/Readme.md)             |
-| US26  | [Assign Vehicles to an entry in the Agenda](../../us26/Readme.md) |
 | US27  | [List all Green Spaces](../../us27/Readme.md)                     |
 | US28  | [Consult the assigned tasks](../../us28/Readme.md)                |
-| US29  | [Record the completion of a task](../../us29/Readme.md)           |

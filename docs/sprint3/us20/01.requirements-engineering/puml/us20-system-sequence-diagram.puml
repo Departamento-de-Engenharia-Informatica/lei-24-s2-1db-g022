@@ -1,0 +1,41 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US20 - Register a Green Space
+
+autonumber
+
+actor "Green Space Manager (GSM)" as GSM
+participant ":System" as System
+
+activate GSM
+
+    GSM -> System : asks to register a Green Space
+    activate System
+
+        System --> GSM : shows type green space and ask to select one
+    deactivate System
+
+    GSM->System: selects a type
+    activate System
+
+        System --> GSM : request data(i.e name, address(streetName, postCode), area)
+
+    deactivate System
+
+
+    GSM -> System : types request data
+    activate System
+
+        System --> GSM : shows all data and requests confirmation
+    deactivate System
+
+    GSM -> System : confirms data
+    activate System
+
+    System --> GSM : display operation success
+    deactivate System
+
+@enduml
