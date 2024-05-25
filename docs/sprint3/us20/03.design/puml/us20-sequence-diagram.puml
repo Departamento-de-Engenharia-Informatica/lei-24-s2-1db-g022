@@ -1,0 +1,117 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UI Sequence Diagram (SSD) - US20 - Register a Green Space
+
+autonumber
+
+'hide footbox
+actor "Green Space Manager (GSM)" as GSM
+participant ":RegisterGreenSpaceUI" as UI
+participant ":RegisterGreenSpaceController" as CTRL
+participant "address\n:Address" as ADDRESS
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "greenSpaceRepository\n:GreenSpaceRepository" as GSR
+participant "greenSpace\n:GreenSpace" as GREENSPACE
+participant ":ApplicationSession" as _APP
+participant "appSession\n:ApplicationSession" as APP
+participant "currentSession\n:UserSession" as SESSAO
+
+activate GSM
+
+GSM -> UI : asks to register a new green Space
+
+activate UI
+
+UI --> GSM : shows type green space and ask to select one
+deactivate UI
+
+GSM->UI: selects a type
+
+activate UI
+
+UI --> GSM : request data(name,area,streetName,postCode)
+
+deactivate UI
+
+GSM -> UI : types request data
+
+activate UI
+
+UI --> GSM : display the data and request confirmation
+
+deactivate UI
+
+GSM -> UI : confirms and submits data
+
+activate UI
+
+UI -> CTRL: registerGreenSpace(name,area,streetName,postCode)
+activate CTRL
+
+CTRL -> ADDRESS**  : create(streetName,postCode)
+
+activate ADDRESS
+ADDRESS -> ADDRESS : validation(streetName,postCode)
+
+activate ADDRESS
+ADDRESS --> ADDRESS : true/false
+
+deactivate ADDRESS
+ADDRESS --> CTRL : Address
+deactivate ADDRESS
+
+CTRL -> RepositorySingleton : getInstance()
+
+activate RepositorySingleton
+
+RepositorySingleton --> CTRL : repositories
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getGreenSpaceRepository()
+activate PLAT
+
+PLAT --> CTRL: greenSpaceRepository
+
+deactivate PLAT
+
+CTRL -> GSR : registerGreenSpace(name,area,address)
+activate GSR
+
+GSR -> GREENSPACE** : create(name,area,address)
+activate GREENSPACE
+
+GREENSPACE -> GREENSPACE : validationGreenSpace(greeSpace)
+
+GREENSPACE -->  GSR : greenSpace
+
+deactivate GREENSPACE
+GSR-> GSR : addGreenSpace(greenSpace)
+
+activate GSR
+
+GSR -> GSR :  validationAllData(greenSpace)
+activate GSR
+
+GSR --> GSR : true/false
+deactivate GSR
+
+GSR --> GSR : true/false
+deactivate GSR
+
+GSR --> CTRL : greenSpace
+
+
+deactivate GSR
+
+
+CTRL --> UI : greenSpace
+deactivate CTRL
+
+UI --> GSM : displays operation success
+deactivate UI
+deactivate GSM
+@enduml

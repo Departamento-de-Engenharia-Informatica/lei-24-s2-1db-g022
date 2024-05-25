@@ -1,6 +1,6 @@
 # US01 - Register Skill.
 
-## 3. Design - User Story Realization 
+## 3. Design - User Story Realization
 
 ### 3.1. Rationale
 
@@ -21,16 +21,15 @@
 
 ### Systematization ##
 
-According to the taken rationale, the conceptual classes promoted to software classes are: 
+According to the taken rationale, the conceptual classes promoted to software classes are:
 
 * Skill
 
-Other software classes (i.e. Pure Fabrication) identified: 
+Other software classes (i.e. Pure Fabrication) identified:
 
 * RegisterSkillUI
 * RegisterSkillController
 * SkillRepository
-
 
 ## 3.2. Sequence Diagram (SD)
 

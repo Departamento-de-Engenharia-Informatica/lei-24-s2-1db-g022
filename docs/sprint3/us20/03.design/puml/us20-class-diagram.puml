@@ -9,20 +9,23 @@ skinparam classAttributeIconSize 0
 
 'left to right direction
 
-class Skill {
+class GreenSpace {
     - String name
+    - int area
+    - Address address
+    - Collaborator managerGSM
 
-    - validateSkill(Skill)
-    + Skill(name)
+    + GreenSpace(name,area,address)
+    - validationGreenSpace(Skill)
 }
 
-class RegisterSkillController {
+class RegisterGreenSpaceController {
 
     + RegisterSkillController()
     + registerSkill(name)
 }
 
-class RegisterSkillUI {
+class RegisterGreenSpaceUI {
 }
 
 class Collaborator {
@@ -40,22 +43,22 @@ class Collaborator {
     + Collaborator(name, dateOfBirth, admissionDate, address, document, phoneNumber, email, taxpayer)
 }
 
-class HumanResourcesManager {
+class GreenSpaceManager {
 }
 
 class Repositories {
 
     - Repositories()
     + getInstance() : Repositories
-    + getSkillRepository()
+    + getGreenSpaceRepository()
 }
 
-class SkillRepository {
-    - List <Skill> skillList
+class GreenSpaceRepository {
+    - List <GreenSpace> greenSpaceList
 
-    - addSkill(Skill)
-    - validateSkill(Skill)
-    + createSkill(name)
+    - addGreenSpace(greenSpace)
+    - validateAllGreenSpace(Skill)
+    + createGreenSpace(name,area,address)
 }
 
 RegisterSkillController .> Repositories : repositories
@@ -63,7 +66,7 @@ RegisterSkillUI .> RegisterSkillController
 Repositories -> Repositories : instance
 Repositories --> "1" SkillRepository : SkillRepository
 SkillRepository "1" --> "*" Skill : skill
-Collaborator  <|--  HumanResourcesManager
+Collaborator  <|--  GreenSpaceManager
 RegisterSkillController ..> Skill
 RegisterSkillController ..> SkillRepository
 
