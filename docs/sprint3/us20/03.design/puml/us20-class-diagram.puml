@@ -2,75 +2,170 @@
 'skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
-skinparam linetype polyline
-'skinparam linetype orto
+skinparam linetype orto
 
-skinparam classAttributeIconSize 0
+skinparam classAttributeIconSize "1"
+
+package "UI" <<Folder>> {
+    class RegisterGreenSpaceUI {
+    }
+}
+
+
+package "Controller" <<Folder>> {
+
+    class RegisterGreenSpaceController {
+        + RegisterGreenSpaceController(greenSpaceRepository, collaboratorRepository)
+        + registerGreenSpace(type,name,area,streetName,postCode)
+        - getGSMFromSession()
+
+    }
+
+}
 
 'left to right direction
+package "Domain" <<Folder>> {
 
-class GreenSpace {
-    - String name
-    - int area
-    - Address address
-    - Collaborator managerGSM
+    package "Domain.Application" <<Folder>> {
 
-    + GreenSpace(name,area,address)
-    - validationGreenSpace(Skill)
+        class ApplicationSession
+        {
+            + static getInstance()
+            + getCurrentSession()
+        }
+
+        class UserSession
+        {
+            + getUserEmail()
+        }
+    }
+
+    package "Domain.Model" <<Folder>> {
+
+        class GreenSpace {
+            - String name
+            - int area
+            - Address
+
+            + GreenSpace(name,area,streetName,postCode)
+            - validationGreenSpace()
+        }
+
+        class Collaborator {
+                -String name
+                -List<Skill> skill
+                -Job job
+                -Date dateOfBirth
+                -Date admissionDate
+                -Address address
+                -Document document
+                -String phoneNumber
+                -String email
+                -int taxpayer
+
+                + Collaborator(name, job, dateOfBirth, admissionDate, address, document, phoneNumber, email, taxpayer)
+        }
+
+        class Address {
+            -String streetName
+            -int postCode
+            -int doorNumber
+
+            +Address(streetName, postCode, doorNumber)
+            +Address(streetName, postCode)
+            -validateAddress(address)
+        }
+
+        class GreenSpaceManager {
+            - List<GreenSpace> managesGreenPlaceList
+
+            + GreenSpaceManager()
+            + addListManagerGreenSpace(GreenSpace)
+
+        }
+
+        class Garden{
+            + Garden(super)
+        }
+
+        class MediumPark{
+            + MediumPark(super)
+        }
+
+        class LargePark{
+            + LargePark(super)
+        }
+    }
+
+    package "Domain.Repository" <<Folder>> {
+
+        class Repositories {
+
+            - Repositories()
+            + getInstance() : Repositories
+            + getGreenSpaceRepository()
+            + getCollaboratorRepository()
+        }
+
+        class CollaboratorRepository {
+            - List <Collaborator> collaboratorList
+
+            + getCollaboratorByEmail(greenSpace)
+        }
+
+        class GreenSpaceRepository {
+            - List <GreenSpace> greenSpaceList
+
+            - addGreenSpace(greenSpace)
+            - validationAllGreenSpace(greenSpace)
+            + registerGreenSpace(name,area,streetName,postCode)
+        }
+    }
 }
 
-class RegisterGreenSpaceController {
-
-    + RegisterSkillController()
-    + registerSkill(name)
-}
-
-class RegisterGreenSpaceUI {
-}
-
-class Collaborator {
-    -String name
-    -List<Skill> skillList
-    -Job job
-    -Date dateOfBirth
-    -Date admissionDate
-    -Address address
-    -Document document
-    -String phoneNumber
-    -String email
-    -int taxpayer
-
-    + Collaborator(name, dateOfBirth, admissionDate, address, document, phoneNumber, email, taxpayer)
-}
-
-class GreenSpaceManager {
-}
-
-class Repositories {
-
-    - Repositories()
-    + getInstance() : Repositories
-    + getGreenSpaceRepository()
-}
-
-class GreenSpaceRepository {
-    - List <GreenSpace> greenSpaceList
-
-    - addGreenSpace(greenSpace)
-    - validateAllGreenSpace(Skill)
-    + createGreenSpace(name,area,address)
-}
-
-RegisterSkillController .> Repositories : repositories
-RegisterSkillUI .> RegisterSkillController
+'-------------------Instance-------------------
 Repositories -> Repositories : instance
-Repositories --> "1" SkillRepository : SkillRepository
-SkillRepository "1" --> "*" Skill : skill
-Collaborator  <|--  GreenSpaceManager
-RegisterSkillController ..> Skill
-RegisterSkillController ..> SkillRepository
+ApplicationSession -> ApplicationSession : instance
 
-HumanResourcesManager <--  Skill: createdBy
-Collaborator "*" --> "*" Skill : has
+'-------------------UI-------------------
+RegisterGreenSpaceUI ..> RegisterGreenSpaceController
+
+'-------------------Controller-------------------
+RegisterGreenSpaceController ...> Repositories : repositories
+RegisterGreenSpaceController ...> ApplicationSession
+RegisterGreenSpaceController ...> UserSession
+RegisterGreenSpaceController ...> GreenSpaceRepository
+RegisterGreenSpaceController ...> CollaboratorRepository
+RegisterGreenSpaceController ...> Collaborator
+RegisterGreenSpaceController ...> GreenSpace
+
+'-------------------ApplicationSession-------------------
+ApplicationSession --> "1" UserSession : userSession
+
+'-------------------Repositories-------------------
+Repositories --> "1" GreenSpaceRepository : GreenSpaceRepository
+Repositories --> "1" CollaboratorRepository : CollaboratorRepository
+
+'-------------------CollaboratorRepository-------------------
+CollaboratorRepository "1"  -> "*" Collaborator : collaborator
+
+'-------------------GreenSpaceRepository-------------------
+GreenSpaceRepository "1" -> "*" GreenSpace : greenSpace
+
+'-------------------Collaborator-------------------
+Collaborator <|-- GreenSpaceManager
+
+'-------------------Green Space Manager-------------------
+GreenSpaceManager <- "*" GreenSpace : register/manages
+
+'-------------------GreenSpace-------------------
+GreenSpace <|-- Garden
+GreenSpace <|-- MediumPark
+GreenSpace <|-- LargePark
+
+GreenSpace "1" *-- "1" Address : is located in
+
+
+
 
 @enduml
