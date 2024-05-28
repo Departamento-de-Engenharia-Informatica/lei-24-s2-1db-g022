@@ -58,9 +58,7 @@ Collaborator  <|--  GreenSpaceManager
 
 GreenSpaceManager "1..*" -- "1" Agenda : Assign Team to an entry >
 
-Team "1..*" - "1" Agenda : carries out >
-
-Team "1" -- "*" Task : executes >
+Team "1" -- "*" Task : carries out >
 
 Agenda "1" - "*" Task : contains >
 

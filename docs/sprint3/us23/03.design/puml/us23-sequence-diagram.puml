@@ -1,0 +1,247 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UI Sequence Diagram (SSD) - US01 - Register Teams
+
+autonumber
+
+'hide footbox
+actor "Green Space Manager (GSM)" as GSM
+participant ":AssignTeamAgendaUI" as UI
+participant ":AssignTeamAgendaController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "teamRepository\n:TeamRepository" as TR
+participant "agenda\n:Agenda" as AGENDA
+participant "task\n:Task" as TASK
+participant "greenSpace\n:GreenSpace" as GREENSPACE
+participant "greenSpaceManager\n:GreenSpaceManager" as GSMO
+
+
+activate GSM	
+
+GSM	 -> UI : asks to assign Team to entry in the Agenda
+
+activate UI
+
+UI -> CTRL : getAllTaskByGSM()
+
+activate CTRL
+
+CTRL -> CTRL : getGSMFromSession()
+
+activate CTRL
+
+ref over CTRL
+
+Get GreenSpaceManager
+
+end
+
+CTRL --> CTRL : greenSpaceManager
+
+deactivate CTRL
+
+CTRL -> CTRL : getAllGreenSpaceByGSM(greenSpaceManager)
+
+activate CTRL
+
+CTRL -> GSMO : getListGreenSpace()
+
+activate GSMO
+
+GSMO --> CTRL : List greenSpace
+
+deactivate GSMO
+
+CTRL --> CTRL : List greenSpace
+
+deactivate CTRL
+
+CTRL -> CTRL : getAllTaskByGreenSpace(listGreenSpace)
+
+activate CTRL
+
+CTRL -> RepositorySingleton : getInstance()
+
+activate RepositorySingleton
+
+RepositorySingleton --> CTRL : repositories
+
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getAgenda()
+
+activate PLAT
+
+PLAT --> CTRL: agenda
+
+deactivate PLAT
+
+CTRL -> AGENDA : getAllTaskByGreenSpace(listGreenSpace)
+
+activate AGENDA
+
+loop for each Task in listTask[in Agenda]
+
+AGENDA -> TASK : verifyGreenSpace(listGreenSpace)
+
+activate TASK
+
+loop for each GreenSpace in ListGreenSpace
+
+TASK -> GREENSPACE : equalsGreenSpace(greenSpace)
+
+activate GREENSPACE
+
+GREENSPACE --> TASK : true/false
+
+deactivate GREENSPACE
+
+end
+
+TASK -> AGENDA : true/false
+
+deactivate TASK
+
+AGENDA -> AGENDA : addListTaskByGreenSpace(task)
+
+activate AGENDA
+
+AGENDA --> AGENDA
+
+deactivate AGENDA
+
+end
+
+AGENDA --> CTRL : listTask
+
+deactivate AGENDA
+
+CTRL --> CTRL : listTask
+
+deactivate
+
+CTRL --> UI : listTask
+
+deactivate CTRL
+
+UI --> GSM	 : Show Task List and ask to select one
+deactivate UI
+
+GSM	->UI: type a task
+
+activate UI
+
+UI -> CTRL : getAllTeams()
+
+activate CTRL
+
+CTRL -> RepositorySingleton : getInstance()
+
+activate RepositorySingleton
+
+RepositorySingleton --> CTRL : repositories
+
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getTeamRepository()
+
+activate PLAT
+
+PLAT --> CTRL: teamRepository
+
+deactivate PLAT
+
+CTRL -> TR : getAllTeams()
+
+activate TR
+
+TR --> CTRL : listTeam
+
+deactivate TR
+
+CTRL --> UI : listTeam
+
+deactivate CTRL
+
+UI --> GSM	 : show the list of the teams and ask to choose one of them
+
+deactivate UI
+
+GSM	 -> UI : type a team
+
+activate UI
+
+UI --> GSM : show all data and request confirmation
+
+deactivate UI
+
+GSM -> UI : confirms data
+
+activate UI
+
+UI -> CTRL: assignTeamTask(team,task)
+
+activate CTRL
+
+CTRL -> RepositorySingleton : getInstance()
+
+activate RepositorySingleton
+
+RepositorySingleton --> CTRL : repositories
+
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getAgenda()
+
+activate PLAT
+
+PLAT --> CTRL: agenda
+
+deactivate PLAT
+
+CTRL -> AGENDA : assignTeamTask(team,task)
+
+activate AGENDA
+
+loop for each task in listTask[in Agenda]
+
+AGENDA -> TASK : equalsTask(task)
+
+activate TASK
+
+TASK --> AGENDA : true/false
+
+deactivate TASK
+
+alt equalsTask == true
+
+AGENDA -> TASK : updateTeam(team)
+
+activate TASK
+
+TASK --> AGENDA : true/false
+
+deactivate TASK
+
+end
+
+end
+
+AGENDA --> CTRL : true/false
+
+deactivate AGENDA
+
+CTRL --> UI : true/false
+
+deactivate CTRL
+
+UI --> GSM	 : displays operation success
+
+deactivate UI
+
+deactivate GSM
+@enduml
