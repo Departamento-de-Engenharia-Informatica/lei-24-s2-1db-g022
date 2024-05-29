@@ -1,0 +1,149 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+title Domain Model
+
+class Collaborator {
+    name
+    dateOfBirth
+    admissionDate
+    phoneNumber
+    taxpayer
+    email
+}
+
+class Document{
+    docType
+    number
+}
+
+class Address {
+    streetName
+    postCode
+    doorNumber
+}
+
+class VehicleFleetManager {
+}
+
+class HumanResourceManager {
+}
+
+class Brand {
+     name
+}
+
+class Model {
+     name
+}
+
+class Vehicle {
+    type
+    tare
+    grossWeight
+    currentKm
+    registerDate
+    acquisitionDate
+    checkupFrequency
+    licensePlate
+}
+
+class Skill{
+    name
+}
+
+class Job{
+    name
+}
+class Team{
+}
+
+class CheckUp{
+    date
+    km
+}
+
+class GreenSpacesManager {
+}
+
+class Garden {
+}
+
+class MediumPark {
+}
+
+class LargePark {
+}
+
+class ToDoList {
+}
+
+class Task {
+    description
+    urgency
+    duration
+    status
+}
+
+class Agenda{
+}
+'-------------Collaborator-------------
+
+
+Collaborator "1" - "1" Document : has >
+Collaborator "1..*" --- "1" Job : has >
+Collaborator  <|--  HumanResourceManager
+Collaborator <|-- VehicleFleetManager
+GreenSpacesManager  -|>  Collaborator
+Address "1" - "1..*" Collaborator : lives >
+Skill "*" ------- "*" Collaborator : has <
+Collaborator "1..*" ----- "1" Team : Contains <
+
+'-------------HumanResourceManager-------------
+HumanResourceManager "1" -- "1..*" Skill : registers >
+HumanResourceManager "1" -- "1..*" Job : registers >
+HumanResourceManager "1" --- "1..*" Collaborator : Registers >
+HumanResourceManager "1" -- "1..*" Team : defines >
+
+'-------------VehicleFleetManager-------------
+VehicleFleetManager "1" -- "1..*" Vehicle : registers/manages >
+VehicleFleetManager "1" -- "1..*" CheckUp : Registers >
+
+'-------------Brand-------------
+Brand "1" -  "1..*" Model : has >
+
+'-------------Vehicle-------------
+Vehicle "1..*" -- "1" Model : has >
+Vehicle "1" -- "*" CheckUp : does >
+Vehicle "1..*" -- "1" Brand : has >
+
+'-------------GreenSpacesManager-------------
+GreenSpacesManager "1" - "*" GreenSpace : register/manages >
+GreenSpacesManager "1..*" -- "1" Task : creates >
+GreenSpacesManager "1..*" - "1" ToDoList : inserts new entry >
+
+'-------------GreenSpace-------------
+GreenSpace "1" - "1" Address : is located in >
+GreenSpace <|-- Garden
+GreenSpace <|-- MediumPark
+GreenSpace <|-- LargePark
+
+Task "1..*" --- "1" GreenSpace :  Carried out in  >
+Task "*" -- "1" ToDoList : includes <
+
+
+GreenSpacesManager "1..*" - "1" Agenda : Assign Team to an entry >
+Team "1..*" --- "1" Agenda : carries out >
+Team "1" -- "*" Task : executes >
+Agenda "1" - "*" Task : contains >
+
+EmailService "1" - "*" Team :  send email to all elements of >
+
+GreenSpace "1" -- "1" SortingAlgorithm : makes use of >
+
+@enduml

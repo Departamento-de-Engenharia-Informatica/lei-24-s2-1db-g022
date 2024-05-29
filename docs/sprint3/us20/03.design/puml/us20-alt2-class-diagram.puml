@@ -1,0 +1,177 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype orto
+
+skinparam classAttributeIconSize "1"
+
+'left to right direction
+
+class ApplicationSession
+{
+    + static getInstance()
+    + getCurrentSession()
+}
+
+class UserSession
+{
+    + getUserEmail()
+}
+
+interface GreenSpace {
+
+    + getName()
+    + getArea()
+    + getAddress()
+
+}
+
+class Garden{
+    - String name
+    - int area
+    - Address
+
+    + Garden(name,area,streetName,postCode)
+    + getName()
+    + getArea()
+    + getAddress()
+    - validationGreenSpace()
+}
+
+class MediumPark{
+    - String name
+    - int area
+    - Address
+
+    + getName()
+    + getArea()
+    + getAddress()
+    + MediumPark(name,area,streetName,postCode)
+    - validationGreenSpace()
+}
+
+class LargePark{
+    - String name
+    - int area
+    - Address
+
+    + getName()
+    + getArea()
+    + getAddress()
+    + LargePark(name,area,streetName,postCode)
+    - validationGreenSpace()
+
+}
+
+class RegisterGreenSpaceController {
+    + RegisterGreenSpaceController(greenSpaceRepository, collaboratorRepository)
+    + registerGreenSpace(type,name,area,streetName,postCode)
+    - getGSMFromSession()
+
+}
+
+class RegisterGreenSpaceUI {
+}
+
+class Collaborator {
+    -String name
+    -List<Skill> skill
+    -Job job
+    -Date dateOfBirth
+    -Date admissionDate
+    -Address address
+    -Document document
+    -String phoneNumber
+    -String email
+    -int taxpayer
+
+    + Collaborator(name, job, dateOfBirth, admissionDate, address, document, phoneNumber, email, taxpayer)
+}
+
+class Address {
+    -String streetName
+    -int postCode
+    -int doorNumber
+
+    +Address(streetName, postCode, doorNumber)
+    +Address(streetName, postCode)
+    -validateAddress(address)
+}
+
+class GreenSpaceManager {
+    - List<GreenSpace> managesGreenPlaceList
+
+    + GreenSpaceManager()
+    + addListManagerGreenSpace(GreenSpace)
+
+}
+
+class Repositories {
+
+    - Repositories()
+    + getInstance() : Repositories
+    + getGreenSpaceRepository()
+    + getCollaboratorRepository()
+}
+
+class CollaboratorRepository {
+    - List <Collaborator> collaboratorList
+
+    + getCollaboratorByEmail(greenSpace)
+}
+
+class GreenSpaceRepository {
+    - List <GreenSpace> greenSpaceList
+
+    - addGreenSpace(greenSpace)
+    - validationAllGreenSpace(greenSpace)
+    + registerGreenSpace(name,area,streetName,postCode)
+}
+
+'-------------------Instance-------------------
+Repositories -> Repositories : instance
+ApplicationSession -> ApplicationSession : instance
+
+'-------------------UI-------------------
+RegisterGreenSpaceUI .> RegisterGreenSpaceController
+
+'-------------------Controller-------------------
+RegisterGreenSpaceController ..> Repositories : repositories
+RegisterGreenSpaceController ..> ApplicationSession
+RegisterGreenSpaceController ...> UserSession
+RegisterGreenSpaceController ...> GreenSpaceRepository
+RegisterGreenSpaceController ...> CollaboratorRepository
+RegisterGreenSpaceController ...> Collaborator
+RegisterGreenSpaceController ...> GreenSpace
+
+'-------------------ApplicationSession-------------------
+ApplicationSession ---> "1" UserSession : userSession
+
+'-------------------Repositories-------------------
+Repositories ---> "1" GreenSpaceRepository : GreenSpaceRepository
+Repositories ---> "1" CollaboratorRepository : CollaboratorRepository
+
+'-------------------CollaboratorRepository-------------------
+CollaboratorRepository "1"  --> "*" Collaborator : collaborator
+
+'-------------------GreenSpaceRepository-------------------
+GreenSpaceRepository "1" --> "*" GreenSpace : greenSpace
+
+'-------------------Collaborator-------------------
+Collaborator <|-- GreenSpaceManager
+
+'-------------------Green Space Manager-------------------
+GreenSpaceManager <- "*" GreenSpace : register/manages
+
+'-------------------GreenSpace-------------------
+GreenSpace <|-- Garden
+GreenSpace <|-- MediumPark
+GreenSpace <|-- LargePark
+
+GreenSpace "1" *- "1" Address : is located in
+
+
+
+
+@enduml

@@ -1,0 +1,69 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+participant ":RegisterGreenSpaceController" as CTRL
+participant ":ApplicationSession" as _APP
+participant "appSession\n:ApplicationSession" as APP
+participant "currentSession\n:UserSession" as SESSAO
+participant "repositories\n:Repositories" as REPO
+participant "collaboratorRepositories\n:CollaboratorRepositories" as COLREPO
+
+autonumber 9
+
+--> CTRL : getGSMFromSession()
+
+autonumber 9.1
+
+activate CTRL
+
+group Get GreenSpaceManager
+
+
+CTRL -> _APP : getInstance()
+
+activate _APP
+
+_APP --> CTRL : appSession
+
+deactivate _APP
+
+CTRL -> APP : getCurrentSession()
+
+activate APP
+
+APP --> CTRL : currentSession
+
+deactivate APP
+
+CTRL -> SESSAO : email = getUserEmail()
+
+activate SESSAO
+
+SESSAO --> CTRL : email
+
+deactivate SESSAO
+
+CTRL -> REPO : getCollaboratorRepository()
+
+activate REPO
+
+REPO --> CTRL : collaboratorReporitory
+
+deactivate REPO
+
+CTRL ->  COLREPO : getCollaboratorByEmail(email)
+
+activate COLREPO
+
+COLREPO --> CTRL : Collaborator
+
+deactivate COLREPO
+
+end
+autonumber 10
+
+<--CTRL : greenSpaceManager
+deactivate CTRL
+@enduml

@@ -60,11 +60,11 @@ GreenSpaceManager "1..*" -- "1" Agenda : Assign Team to an entry >
 
 Team "1..*" - "1" Agenda : carries out >
 
-Team "1..*" - "*" Task : executes >
+Team "1" -- "*" Task : executes >
 
 Agenda "1" - "*" Task : contains >
 
-Team "*" -- "1" EmailService :  send email to all elements of <
+EmailService "1" - "*" Team :  send email to all elements of >
 
 Collaborator "1..*" ---- "1" Team : Contains <
 
