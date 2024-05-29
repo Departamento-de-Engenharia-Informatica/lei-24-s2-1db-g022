@@ -21,18 +21,10 @@ activate GSM
     GSM->System: chooses one
     activate System
 
-        System --> GSM : shows list of selected green space tasks\n and asks to select one
-
+        System --> GSM : requests data (taskDescription,urgency,duration)
     deactivate System
 
-
-    GSM -> System : chooses one
-    activate System
-
-        System --> GSM : requests data (urgency,duration)
-    deactivate System
-
-    GSM -> System : types data (urgency,duration)
+    GSM -> System : types data (taskDescription,urgency,duration)
     activate System
 
         System --> GSM : displays the data and requests confirmation
