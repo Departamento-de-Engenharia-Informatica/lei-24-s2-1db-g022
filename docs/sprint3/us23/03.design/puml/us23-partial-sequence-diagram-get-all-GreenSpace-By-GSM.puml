@@ -1,0 +1,87 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":AssignTeamAgendaController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "agenda\n:Agenda" as AGENDA
+participant "task\n:Task" as TASK
+participant "greenSpace\n:GreenSpace" as GREENSPACE
+
+autonumber 9
+
+--> CTRL : getAllTaskByGreenSpace()
+
+autonumber 9.1
+
+activate CTRL
+
+group Get All Task By GreenSpace
+
+CTRL -> RepositorySingleton : getInstance()
+
+activate RepositorySingleton
+
+RepositorySingleton --> CTRL : repositories
+
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getAgenda()
+
+activate PLAT
+
+PLAT --> CTRL: agenda
+
+deactivate PLAT
+
+CTRL -> AGENDA : getAllTaskByGreenSpace(listGreenSpace)
+
+activate AGENDA
+
+loop for each Task in listTask[in Agenda]
+
+AGENDA -> TASK : verifyGreenSpace(listGreenSpace)
+
+activate TASK
+
+loop for each GreenSpace in ListGreenSpace
+
+TASK -> GREENSPACE : equalsGreenSpace(greenSpace)
+
+activate GREENSPACE
+
+GREENSPACE --> TASK : true/false
+
+deactivate GREENSPACE
+
+end
+
+TASK -> AGENDA : true/false
+
+deactivate TASK
+
+AGENDA -> AGENDA : addListTaskByGreenSpace(task)
+
+activate AGENDA
+
+AGENDA --> AGENDA
+
+deactivate AGENDA
+
+end
+
+AGENDA --> CTRL : listTask
+
+deactivate AGENDA
+
+end
+
+autonumber 10
+
+<--CTRL : listTask
+
+deactivate CTRL
+@enduml

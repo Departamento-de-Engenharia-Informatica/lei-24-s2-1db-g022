@@ -3,22 +3,19 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title UI Sequence Diagram (SSD) - US01 - Register Teams
+title UI Sequence Diagram (SSD) - US23 - Assign Team in Entries
 
 autonumber
 
 'hide footbox
 actor "Green Space Manager (GSM)" as GSM
+
 participant ":AssignTeamAgendaUI" as UI
 participant ":AssignTeamAgendaController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "teamRepository\n:TeamRepository" as TR
-participant "agenda\n:Agenda" as AGENDA
-participant "task\n:Task" as TASK
-participant "greenSpace\n:GreenSpace" as GREENSPACE
 participant "greenSpaceManager\n:GreenSpaceManager" as GSMO
-
 
 activate GSM	
 
@@ -64,61 +61,11 @@ CTRL -> CTRL : getAllTaskByGreenSpace(listGreenSpace)
 
 activate CTRL
 
-CTRL -> RepositorySingleton : getInstance()
+ref over CTRL
 
-activate RepositorySingleton
-
-RepositorySingleton --> CTRL : repositories
-
-deactivate RepositorySingleton
-
-CTRL -> PLAT : getAgenda()
-
-activate PLAT
-
-PLAT --> CTRL: agenda
-
-deactivate PLAT
-
-CTRL -> AGENDA : getAllTaskByGreenSpace(listGreenSpace)
-
-activate AGENDA
-
-loop for each Task in listTask[in Agenda]
-
-AGENDA -> TASK : verifyGreenSpace(listGreenSpace)
-
-activate TASK
-
-loop for each GreenSpace in ListGreenSpace
-
-TASK -> GREENSPACE : equalsGreenSpace(greenSpace)
-
-activate GREENSPACE
-
-GREENSPACE --> TASK : true/false
-
-deactivate GREENSPACE
+Get All Task By GreenSpace
 
 end
-
-TASK -> AGENDA : true/false
-
-deactivate TASK
-
-AGENDA -> AGENDA : addListTaskByGreenSpace(task)
-
-activate AGENDA
-
-AGENDA --> AGENDA
-
-deactivate AGENDA
-
-end
-
-AGENDA --> CTRL : listTask
-
-deactivate AGENDA
 
 CTRL --> CTRL : listTask
 
@@ -187,53 +134,11 @@ UI -> CTRL: assignTeamTask(team,task)
 
 activate CTRL
 
-CTRL -> RepositorySingleton : getInstance()
+ref over CTRL
 
-activate RepositorySingleton
-
-RepositorySingleton --> CTRL : repositories
-
-deactivate RepositorySingleton
-
-CTRL -> PLAT : getAgenda()
-
-activate PLAT
-
-PLAT --> CTRL: agenda
-
-deactivate PLAT
-
-CTRL -> AGENDA : assignTeamTask(team,task)
-
-activate AGENDA
-
-loop for each task in listTask[in Agenda]
-
-AGENDA -> TASK : equalsTask(task)
-
-activate TASK
-
-TASK --> AGENDA : true/false
-
-deactivate TASK
-
-alt equalsTask == true
-
-AGENDA -> TASK : updateTeam(team)
-
-activate TASK
-
-TASK --> AGENDA : true/false
-
-deactivate TASK
+Assign Team Task
 
 end
-
-end
-
-AGENDA --> CTRL : true/false
-
-deactivate AGENDA
 
 CTRL --> UI : true/false
 

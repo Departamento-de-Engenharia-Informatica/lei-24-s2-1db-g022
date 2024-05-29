@@ -46,7 +46,17 @@ This diagram shows the full sequence of interactions between the classes involve
 
 ### Split Diagrams
 
-n/a
+Get GSM
+
+![Sequence Diagram - Get Get GSM](svg/us23-partial-sequence-diagram-get-GSM.svg)
+
+Get All GreenSpace
+
+![Sequence Diagram - Get All GreenSpace](svg/us23-partial-sequence-diagram-get-all-GreenSpace-By-GSM.svg)
+
+Get Assign Team
+
+![Sequence Diagram - Get Assign Team](svg/us23-partial-sequence-diagram-assign-team.svg)
 
 ## 3.3. Class Diagram (CD)
 

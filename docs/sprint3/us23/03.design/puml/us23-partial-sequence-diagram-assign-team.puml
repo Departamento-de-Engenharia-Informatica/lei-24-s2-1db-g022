@@ -1,0 +1,78 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":AssignTeamAgendaController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "agenda\n:Agenda" as AGENDA
+participant "task\n:Task" as TASK
+
+autonumber 26
+
+--> CTRL : assignTeamTask(team,task)
+
+autonumber 26.1
+
+activate CTRL
+
+group Assign Team Task
+
+CTRL -> RepositorySingleton : getInstance()
+
+activate RepositorySingleton
+
+RepositorySingleton --> CTRL : repositories
+
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getAgenda()
+
+activate PLAT
+
+PLAT --> CTRL: agenda
+
+deactivate PLAT
+
+CTRL -> AGENDA : assignTeamTask(team,task)
+
+activate AGENDA
+
+loop for each task in listTask[in Agenda]
+
+AGENDA -> TASK : equalsTask(task)
+
+activate TASK
+
+TASK --> AGENDA : true/false
+
+deactivate TASK
+
+alt equalsTask == true
+
+AGENDA -> TASK : updateTeam(team)
+
+activate TASK
+
+TASK --> AGENDA : true/false
+
+deactivate TASK
+
+end
+
+end
+
+AGENDA --> CTRL : true/false
+
+deactivate AGENDA
+
+end
+
+autonumber 27
+
+<--CTRL : true/false
+
+deactivate CTRL
+@enduml
