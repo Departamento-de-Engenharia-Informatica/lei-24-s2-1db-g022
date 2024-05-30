@@ -1,0 +1,42 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant "toDoList\n:ToDoList" as TDL
+participant "task\n:Task" as TASK
+
+autonumber 21
+-> TDL: registerEntryToDoList(Task(taskDescription,urgency,duration,greenSpace))
+
+autonumber 21.1
+activate TDL
+    group Register Entry
+
+        TDL -> TASK**: create(taskDescription,urgency,duration,greenSpace)
+
+    activate TASK
+
+        TASK -> TASK: validateTask(task)
+        TASK --> TDL : task
+    deactivate TASK
+
+        TDL -> TDL: addTask(task)
+    activate TDL
+
+        TDL -> TDL: validateTask(task)
+    activate TDL
+
+        TDL --> TDL : true/false
+    deactivate TDL
+
+        TDL --> TDL : true/false
+    deactivate TDL
+    end
+
+    autonumber 22
+    <-- TDL : true/false
+deactivate TDL
+
+
+@enduml

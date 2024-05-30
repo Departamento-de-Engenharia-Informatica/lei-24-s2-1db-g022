@@ -1,0 +1,172 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype orto
+
+skinparam classAttributeIconSize "1"
+
+package "UI" <<Folder>> {
+    class RegisterEntryToDoListUI {
+    }
+}
+
+
+package "Controller" <<Folder>> {
+
+    class RegisterEntryToDoListController {
+        + RegisterEntryToDoListController(greenSpaceRepository, collaboratorRepository, toDoList)
+        + getGreenSpace()
+        + registerEntryToDoList(greenSpaceName,taskDescription,urgency,duration)
+        - getGSMFromSession()
+    }
+
+}
+
+'left to right direction
+package "Domain" <<Folder>> {
+
+    package "Domain.Application" <<Folder>> {
+
+        class ApplicationSession
+        {
+            + static getInstance()
+            + getCurrentSession()
+        }
+
+        class UserSession
+        {
+            + getUserEmail()
+        }
+    }
+
+    package "Domain.Model" <<Folder>> {
+
+        class GreenSpace {
+            - String name
+            - int area
+            - Address
+
+            + GreenSpace(name,area,streetName,postCode)
+            - validationGreenSpace()
+        }
+
+        class Collaborator {
+                -String name
+                -List<Skill> skill
+                -Job job
+                -Date dateOfBirth
+                -Date admissionDate
+                -Address address
+                -Document document
+                -String phoneNumber
+                -String email
+                -int taxpayer
+
+                + Collaborator(name, job, dateOfBirth, admissionDate, address, document, phoneNumber, email, taxpayer)
+        }
+
+        class Task {
+            - String taskDescription
+            - String urgency
+            - int duration
+            - String status
+            - Team team
+            - GreenSpace greenSpace
+
+            + Task(taskDescription, urgency, duration,greenSpace)
+            - validateTask(task)
+        }
+
+        class GreenSpaceManager {
+            - List<GreenSpace> managesGreenPlaceList
+
+            + GreenSpaceManager()
+            + addListManagerGreenSpace(GreenSpace)
+            + getGreenSpace()
+        }
+
+        class ToDoList{
+            - List<Task> taskList
+
+            + ToDoList()
+            + registerEntryToDoList(taskDescription,urgency,duration,greenSpace)
+            - addListTask(task)
+            - validateToDoList(task)
+        }
+
+    }
+
+    package "Domain.Repository" <<Folder>> {
+
+        class Repositories {
+
+            - Repositories()
+            + getInstance() : Repositories
+            + getGreenSpaceRepository()
+            + getCollaboratorRepository()
+            + getToDoList()
+        }
+
+        class CollaboratorRepository {
+            - List <Collaborator> collaboratorList
+
+            + getCollaboratorByEmail(greenSpace)
+        }
+
+        class GreenSpaceRepository {
+            - List <GreenSpace> greenSpaceList
+
+            - addGreenSpace(greenSpace)
+            - validationAllGreenSpace(greenSpace)
+            + registerGreenSpace(name,area,streetName,postCode)
+            + getGreenSpaceByName(greenSpaceName)
+        }
+    }
+}
+
+'-------------------Instance-------------------
+Repositories -> Repositories : instance
+ApplicationSession -> ApplicationSession : instance
+
+'-------------------UI-------------------
+RegisterEntryToDoListUI ..> RegisterEntryToDoListController
+
+'-------------------Controller-------------------
+RegisterEntryToDoListController ...> Repositories : repositories
+RegisterEntryToDoListController ...> ApplicationSession
+RegisterEntryToDoListController ...> UserSession
+RegisterEntryToDoListController ...> GreenSpaceRepository
+RegisterEntryToDoListController ...> CollaboratorRepository
+RegisterEntryToDoListController ...> Collaborator
+RegisterEntryToDoListController ...> GreenSpace
+RegisterEntryToDoListController ...> ToDoList
+RegisterEntryToDoListController ...> Task
+
+'-------------------ApplicationSession-------------------
+ApplicationSession --> "1" UserSession : userSession
+
+'-------------------Repositories-------------------
+Repositories --> "1" GreenSpaceRepository : GreenSpaceRepository
+Repositories --> "1" CollaboratorRepository : CollaboratorRepository
+Repositories --> "1" ToDoList : ToDoList
+
+'-------------------CollaboratorRepository-------------------
+CollaboratorRepository "1"  -> "*" Collaborator : collaborator
+
+'-------------------GreenSpaceRepository-------------------
+GreenSpaceRepository "1" -> "*" GreenSpace : greenSpace
+
+'-------------------Collaborator-------------------
+Collaborator <|-- GreenSpaceManager
+
+'-------------------Green Space Manager-------------------
+GreenSpaceManager "1..*" <-- "1" ToDoList : registers entries
+
+'-------------------GreenSpace-------------------
+GreenSpace "1" <-- "1" Task : Carried out in
+
+'-------------------ToDoList-------------------
+ToDoList "1" --> "1" Task : includes
+
+@enduml

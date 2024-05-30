@@ -131,7 +131,8 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserRole(AuthenticationController.ROLE_ADMIN, AuthenticationController.ROLE_ADMIN);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_VFM, AuthenticationController.ROLE_VFM);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_HRM, AuthenticationController.ROLE_HRM);
-
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_GSM, AuthenticationController.ROLE_GSM);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_QAM, AuthenticationController.ROLE_QAM);
 
         authenticationRepository.addUserWithRole("Main Administrator", "1191330@isep.ipp.pt", "admin", AuthenticationController.ROLE_ADMIN);
         authenticationRepository.addUserWithRole("Main Administrator", "1170499@isep.ipp.pt", "admin", AuthenticationController.ROLE_ADMIN);
@@ -141,6 +142,7 @@ public class Bootstrap implements Runnable {
 
         authenticationRepository.addUserWithRole("Human Resource Manager", "hrm@musgosublime.pt", "hrm", AuthenticationController.ROLE_HRM);
         authenticationRepository.addUserWithRole("Vehicle and Equipment Fleet Manager", "vfm@musgosublime.pt", "vfm", AuthenticationController.ROLE_VFM);
-
+        authenticationRepository.addUserWithRole("Green Spaces Manager", "gsm@musgosublime.pt", "gsm", AuthenticationController.ROLE_GSM);
+        authenticationRepository.addUserWithRole("Software Quality Assessment Team Manager", "qam@musgosublime.pt", "qam", AuthenticationController.ROLE_QAM);
     }
 }
