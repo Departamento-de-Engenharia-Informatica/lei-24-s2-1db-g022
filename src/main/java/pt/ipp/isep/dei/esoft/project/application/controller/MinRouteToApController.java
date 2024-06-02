@@ -12,6 +12,23 @@ import java.util.List;
 
 public class MinRouteToApController {
 
+    protected String styleSheet =
+            "node {" +
+                    "   text-size: 11px;" +
+                    "   text-color: black;" +
+                    "   text-background-mode: plain;" +
+                    "   text-background-color: yellow;" +
+                    "   text-padding: 3px;" +
+                    "   text-alignment: under;" +
+                    "}" +
+                    "edge {" +
+                    "   text-size: 18px;" +
+                    "   text-color: red;" +
+                    "   text-style: bold;" +
+                    "   text-background-mode: rounded-box;" +
+                    "   text-background-color: white;" +
+                    "   text-padding: 3px;" +
+                    "}";
 
     /**
      * Imports signal point names from a CSV file and returns a list of SignalPoint objects.
@@ -232,6 +249,11 @@ public class MinRouteToApController {
             }
         }
 
+        // Apply styles to the graph
+        graph.addAttribute("ui.stylesheet", styleSheet);
+        graph.addAttribute("ui.quality");
+        graph.addAttribute("ui.antialias");
+
         // Configure the FileSinkImages
         FileSinkImages pic = new FileSinkImages();
         pic.setLayoutPolicy(FileSinkImages.LayoutPolicy.COMPUTED_FULLY_AT_NEW_IMAGE);
@@ -239,8 +261,10 @@ public class MinRouteToApController {
 
         // Write the graph to a file
         pic.writeAll(graph, filePath);
-
     }
+
+    // Define the stylesheet
+
 
     public void writeCSVToFile(String csvContent, String filePath) {
         String csvFilePath = filePath + File.separator + "output_subgraph.csv";
