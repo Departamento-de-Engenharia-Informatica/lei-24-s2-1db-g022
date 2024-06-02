@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.SingleGraph;
+import org.graphstream.stream.file.FileSinkImages;
 import pt.ipp.isep.dei.esoft.project.domain.Route;
 import pt.ipp.isep.dei.esoft.project.domain.SignalPoint;
 
@@ -205,8 +206,10 @@ public class MinRouteToApController {
         return total;
     }
 
-    public void visualizeGraph(List<Route> routes, String title, String FILE_PATH) throws InterruptedException {
+
+    public void visualizeGraph(List<Route> routes, String title, String FILE_PATH) throws IOException {
         Graph graph = new SingleGraph(title);
+
         for (Route route : routes) {
             if (route.getS1() == null || route.getS2() == null) {
                 // Skip processing this route if either endpoint is null
@@ -228,12 +231,15 @@ public class MinRouteToApController {
                 graph.addEdge(source + "-" + target, source, target).addAttribute("ui.label", String.valueOf(distance));
             }
         }
-        // Display the graph
-        graph.display();
-        Thread.sleep(2000); // Adds a 5-second delay to allow for complete rendering of the image
-        String csvFilePath = FILE_PATH + File.separator + title + ".png";
-        // Save the new screenshot
-        graph.addAttribute("ui.screenshot", csvFilePath);
+
+        // Configure the FileSinkImages
+        FileSinkImages pic = new FileSinkImages();
+        pic.setLayoutPolicy(FileSinkImages.LayoutPolicy.COMPUTED_FULLY_AT_NEW_IMAGE);
+        String filePath = FILE_PATH + File.separator + title + ".png";
+
+        // Write the graph to a file
+        pic.writeAll(graph, filePath);
+
     }
 
     public void writeCSVToFile(String csvContent, String filePath) {
@@ -263,5 +269,30 @@ public class MinRouteToApController {
         csvContent.append("Total Cost:").append(totalDistance(shortestPath));
 
         return csvContent.toString(); // Return the CSV content
+    }
+
+    public String generateAllSubgraphCSV(String content, List<Route> shortestPath) {
+
+        StringBuilder csvContent = new StringBuilder();
+        StringBuilder contentBuilder = new StringBuilder(content);
+
+        // Anexar arestas
+        for (int i = 0; i < shortestPath.size(); i++) {
+
+            if (i == shortestPath.size() - 1) {
+                contentBuilder.append(csvContent.append(shortestPath.get(i).getS1().getName()).append(",")
+                        .append(shortestPath.get(i).getS2().getName()).append(";"));
+                csvContent.delete(0, csvContent.length());
+            } else {
+                contentBuilder.append(csvContent.append(shortestPath.get(i).getS1().getName()).append(","));
+                csvContent.delete(0, csvContent.length());
+
+            }
+        }
+
+        // Anexar custo total e calcular o custo total
+        content = contentBuilder.append("Total Cost: ").append(totalDistance(shortestPath)).append("\n").toString();
+
+        return content;
     }
 }
