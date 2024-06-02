@@ -1,7 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import org.graphstream.graph.Graph;
-import org.graphstream.graph.implementations.SingleGraph;
 import pt.ipp.isep.dei.esoft.project.domain.Route;
 import pt.ipp.isep.dei.esoft.project.domain.SignalPoint;
 
@@ -9,8 +7,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MinRouteToApController {
-
+public class ShortestPathApController {
 
     /**
      * Imports signal point names from a CSV file and returns a list of SignalPoint objects.
@@ -37,7 +34,6 @@ public class MinRouteToApController {
         }
         return listaNomes;
     }
-
 
     /**
      * Imports routes from a CSV file, using a provided list of signal points, and returns a list of Route objects.
@@ -78,16 +74,15 @@ public class MinRouteToApController {
     }
 
     /**
-     * Finds the shortest path between a source point and a target point using Dijkstra's algorithm.
+     * Finds the shortest path from the source signal point to the nearest assembly point (AP) among the given signal points.
      *
-     * @param source       The source point.
-     * @param target       The target point.
-     * @param signalPoints A list of all available signal points.
-     * @param routes       A list of all possible routes between signal points.
-     * @return A list of Route objects representing the shortest path between the source and target points.
-     * If no path is found, an empty list will be returned.
+     * @param source          The source signal point from which the path is to be found.
+     * @param signalPoints    The list of signal points to consider.
+     * @param routes          The list of existing routes between signal points.
+     * @param isAssemblyPoint An array indicating whether each signal point is an assembly point.
+     * @return A list of Route objects representing the shortest path from the source point to the nearest assembly point.
      */
-    public List<Route> findShortestPath(SignalPoint source, SignalPoint target, List<SignalPoint> signalPoints, List<Route> routes) {
+    public List<Route> findShortestPathToNearestAP(SignalPoint source, List<SignalPoint> signalPoints, List<Route> routes, boolean[] isAssemblyPoint) {
         // Número total de pontos de sinalização
         int numPoints = signalPoints.size();
 
@@ -141,22 +136,14 @@ public class MinRouteToApController {
                         distances[toIndex] = newDist;
                         previous[toIndex] = closest; // Atualizar o predecessor
                     }
-                    // Verificar se o ponto atual é o destino da rota e se a origem não foi visitada ainda
-                } else if (toIndex == closest && !visited[fromIndex]) {
-                    // Calcular a nova distância
-                    int newDist = distances[closest] + route.getDistance();
-                    // Atualizar a distância se a nova distância for menor
-                    if (newDist < distances[fromIndex]) {
-                        distances[fromIndex] = newDist;
-                        previous[fromIndex] = closest; // Atualizar o predecessor
-                    }
                 }
             }
         }
 
-        // Reconstruir o caminho mais curto
+        // Reconstruir o caminho mais curto até o ponto de montagem mais próximo (AP)
         List<SignalPoint> path = new ArrayList<>();
-        for (int at = signalPoints.indexOf(target); at != -1; at = previous[at]) {
+        int nearestAPIndex = findNearestAssemblyPointIndex(signalPoints, distances, isAssemblyPoint);
+        for (int at = nearestAPIndex; at != -1; at = previous[at]) {
             path.add(0, signalPoints.get(at));
         }
 
@@ -170,19 +157,42 @@ public class MinRouteToApController {
     }
 
     /**
+     * Finds the index of the nearest assembly point to the given signal points based on their distances and whether they are assembly points.
+     *
+     * @param signalPoints    The list of signal points to consider.
+     * @param distances       An array containing the distances of each signal point from a source point.
+     * @param isAssemblyPoint An array indicating whether each signal point is an assembly point.
+     * @return The index of the nearest assembly point in the list of signal points, or -1 if no assembly point is found.
+     */
+    private int findNearestAssemblyPointIndex(List<SignalPoint> signalPoints, int[] distances, boolean[] isAssemblyPoint) {
+        int nearestAPIndex = -1;
+        int minDistance = Integer.MAX_VALUE;
+        for (int i = 0; i < signalPoints.size(); i++) {
+            if (isAssemblyPoint[i] && distances[i] < minDistance) {
+                minDistance = distances[i];
+                nearestAPIndex = i;
+            }
+        }
+        return nearestAPIndex;
+    }
+
+    /**
      * Constructs routes based on a list of signal points and existing routes.
      *
-     * @param signalPoints A list of signal points used to construct the routes.
-     * @param routes       A list of existing routes.
+     * @param signalPoints List of signal points used to construct the routes.
+     * @param routes       List of existing routes.
      * @return A list containing Route objects representing the constructed routes.
      */
     private List<Route> constructRoute(List<SignalPoint> signalPoints, List<Route> routes) {
         List<Route> newRoute = new ArrayList<>();
 
         for (int i = 0; i < signalPoints.size() - 1; i++) {
+            SignalPoint current = signalPoints.get(i);
+            SignalPoint next = signalPoints.get(i + 1);
             for (Route route : routes) {
-                if (route.equals(new Route(signalPoints.get(i), signalPoints.get(i + 1)))) {
-                    newRoute.add(new Route(route.getDistance(), signalPoints.get(i), signalPoints.get(i + 1)));
+                if ((route.getS1().equals(current) && route.getS2().equals(next)) || (route.getS1().equals(next) && route.getS2().equals(current))) {
+                    newRoute.add(new Route(route.getDistance(), current, next));
+                    break; // Found the corresponding route, so exit the loop
                 }
             }
         }
@@ -205,63 +215,52 @@ public class MinRouteToApController {
         return total;
     }
 
-    public void visualizeGraph(List<Route> routes, String title, String FILE_PATH) throws InterruptedException {
-        Graph graph = new SingleGraph(title);
-        for (Route route : routes) {
-            if (route.getS1() == null || route.getS2() == null) {
-                // Skip processing this route if either endpoint is null
-                continue;
-            }
-            String source = route.getS1().getName();
-            String target = route.getS2().getName();
-            int distance = route.getDistance(); // Get distance for the route
-            // Add nodes only if they don't already exist
-            if (graph.getNode(source) == null) {
-                graph.addNode(source).addAttribute("ui.label", source);
-            }
-            if (graph.getNode(target) == null) {
-                graph.addNode(target).addAttribute("ui.label", target);
-            }
-            // Check if the edge already exists
-            if (graph.getEdge(source + "-" + target) == null && graph.getEdge(target + "-" + source) == null) {
-                // Add edge only if it doesn't already exist
-                graph.addEdge(source + "-" + target, source, target).addAttribute("ui.label", String.valueOf(distance));
+    /**
+     * Generates a CSV representation of the shortest path and appends it to the provided content.
+     * The CSV content includes the edges of the shortest path and the total cost.
+     *
+     * @param content      The existing content to which the CSV representation will be appended.
+     * @param shortestPath The list of Route objects representing the shortest path.
+     * @return The updated content with the CSV representation of the shortest path appended.
+     */
+    public String generateSubgraphCSV(String content, List<Route> shortestPath) {
+
+        StringBuilder csvContent = new StringBuilder();
+        StringBuilder contentBuilder = new StringBuilder(content);
+
+        // Anexar arestas
+        for (int i = 0; i < shortestPath.size(); i++) {
+
+            if (i == shortestPath.size() - 1) {
+                contentBuilder.append(csvContent.append(shortestPath.get(i).getS1().getName()).append(",")
+                        .append(shortestPath.get(i).getS2().getName()).append(";"));
+                csvContent.delete(0, csvContent.length());
+            } else {
+                contentBuilder.append(csvContent.append(shortestPath.get(i).getS1().getName()).append(","));
+                csvContent.delete(0, csvContent.length());
+
             }
         }
-        // Display the graph
-        graph.display();
-        Thread.sleep(2000); // Adds a 5-second delay to allow for complete rendering of the image
-        String csvFilePath = FILE_PATH + File.separator + title + ".png";
-        // Save the new screenshot
-        graph.addAttribute("ui.screenshot", csvFilePath);
+
+        // Anexar custo total e calcular o custo total
+        content = contentBuilder.append("Total Cost: ").append(totalDistance(shortestPath)).append("\n").toString();
+
+        return content;
     }
 
+    /**
+     * Writes the given CSV content to a file at the specified file path.
+     *
+     * @param csvContent The CSV content to be written to the file.
+     * @param filePath   The path where the CSV file will be written.
+     */
     public void writeCSVToFile(String csvContent, String filePath) {
-        String csvFilePath = filePath + File.separator + "output_subgraph.csv";
+        String csvFilePath = filePath + File.separator + "us18_routes.csv";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFilePath))) {
             writer.write(csvContent);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public String generateSubgraphCSV(List<Route> shortestPath) {
-        StringBuilder csvContent = new StringBuilder();
-
-        // Append edges and calculate total cost
-        for (int i = 0; i < shortestPath.size(); i++) {
-            if (i == shortestPath.size() - 1) {
-                csvContent.append(shortestPath.get(i).getS1().getName()).append(",")
-                        .append(shortestPath.get(i).getS2().getName()).append(";");
-            } else {
-                csvContent.append(shortestPath.get(i).getS1().getName()).append(",");
-            }
-        }
-
-        // Append total cost
-        csvContent.append("Total Cost:").append(totalDistance(shortestPath));
-
-        return csvContent.toString(); // Return the CSV content
     }
 }

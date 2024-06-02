@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
 import pt.ipp.isep.dei.esoft.project.ui.console.MinRouteToApUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.MinSpanTreeUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.ShortestPathApUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class GsmUI implements Runnable {
         List<MenuItem> options = new ArrayList<MenuItem>();
         options.add(new MenuItem("US13 - Apply Algorithm.", new MinSpanTreeUI()));
         options.add(new MenuItem("US17 - Place sign to assembly point.", new MinRouteToApUI()));
-
+        options.add(new MenuItem("US18 - Place sign to evacuate to one of the several Assembly Points.", new ShortestPathApUI()));
 
         int option = 0;
         do {
