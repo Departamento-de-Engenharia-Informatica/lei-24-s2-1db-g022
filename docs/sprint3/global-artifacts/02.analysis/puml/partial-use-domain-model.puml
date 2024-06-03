@@ -13,19 +13,26 @@ class Collaborator {
     dateOfBirth
     admissionDate
     phoneNumber
-    taxpayer
+    taxpayerNumber
     email
 }
 
 class Document{
-    docType
     number
+}
+
+class DocumentType{
+    type
 }
 
 class Address {
     streetName
-    postCode
     doorNumber
+}
+
+class PostCode{
+    postCodeNumber
+    localization
 }
 
 class VehicleFleetManager {
@@ -40,16 +47,16 @@ class Brand {
 
 class Model {
      name
+     type
+     tare
+     grossWeight
+     checkupFrequencyKm
 }
 
 class Vehicle {
-    type
-    tare
-    grossWeight
     currentKm
     registerDate
     acquisitionDate
-    checkupFrequency
     licensePlate
 }
 
@@ -71,6 +78,11 @@ class CheckUp{
 class GreenSpacesManager {
 }
 
+class GreenSpace {
+    name
+    area
+}
+
 class Garden {
 }
 
@@ -83,25 +95,36 @@ class LargePark {
 class ToDoList {
 }
 
-class Task {
-    description
+class TaskToDoList{
+    status
     urgency
     duration
-    status
+}
+
+class TaskAgenda{
+    startDate
+    endDate
+}
+
+class Task {
+    description
 }
 
 class Agenda{
 }
+
+Address "1..*" -- "1" PostCode : has >
+
+Document "1..*" - "1" DocumentType : has >
+
 '-------------Collaborator-------------
-
-
 Collaborator "1" - "1" Document : has >
 Collaborator "1..*" --- "1" Job : has >
 Collaborator  <|--  HumanResourceManager
 Collaborator <|-- VehicleFleetManager
 GreenSpacesManager  -|>  Collaborator
 Address "1" - "1..*" Collaborator : lives >
-Skill "*" ------- "*" Collaborator : has <
+Skill "*" ---------- "*" Collaborator : has <
 Collaborator "1..*" ----- "1" Team : Contains <
 
 '-------------HumanResourceManager-------------
@@ -120,7 +143,6 @@ Brand "1" -  "1..*" Model : has >
 '-------------Vehicle-------------
 Vehicle "1..*" -- "1" Model : has >
 Vehicle "1" -- "*" CheckUp : does >
-Vehicle "1..*" -- "1" Brand : has >
 
 '-------------GreenSpacesManager-------------
 GreenSpacesManager "1" - "*" GreenSpace : register/manages >
@@ -133,17 +155,22 @@ GreenSpace <|-- Garden
 GreenSpace <|-- MediumPark
 GreenSpace <|-- LargePark
 
-Task "1..*" --- "1" GreenSpace :  Carried out in  >
+TaskAgenda "1..*" --- "1" GreenSpace :  Carried out in  >
+TaskToDoList "1..*" --- "1" GreenSpace :  Carried out in  >
+
 Task "*" -- "1" ToDoList : includes <
 
 
-GreenSpacesManager "1..*" - "1" Agenda : Assign Team to an entry >
-Team "1..*" --- "1" Agenda : carries out >
-Team "1" -- "*" Task : executes >
+GreenSpacesManager "1..*" - "1" TaskAgenda : Assign Team to an entry >
+Team "1" --- "*" TaskAgenda : executes by <
 Agenda "1" - "*" Task : contains >
 
-EmailService "1" - "*" Team :  send email to all elements of >
+EmailService "1" -- "*" Team :  send email to all elements of >
 
-GreenSpace "1" -- "1" SortingAlgorithm : makes use of >
+GreenSpace "*" -- "1" SortingAlgorithm : makes use of >
 
+(Task,ToDoList) .. TaskToDoList
+(Task,Agenda) .. TaskAgenda
+
+TaskAgenda - TaskToDoList : includes >
 @enduml

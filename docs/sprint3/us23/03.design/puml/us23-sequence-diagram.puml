@@ -1,0 +1,169 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UI Sequence Diagram (SSD) - US23 - Assign Team in Entries
+
+autonumber
+
+'hide footbox
+actor "Green Space Manager (GSM)" as GSM
+
+participant ":AssignTeamAgendaUI" as UI
+participant ":AssignTeamAgendaController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "teamRepository\n:TeamRepository" as TR
+participant "greenSpaceManager\n:GreenSpaceManager" as GSMO
+participant ":TeamMapper" as TEAMMP
+
+
+
+activate GSM	
+
+GSM	 -> UI : asks to assign Team to entry in the Agenda
+
+activate UI
+
+UI -> CTRL : getAllTaskByGSM()
+
+activate CTRL
+
+CTRL -> CTRL : getGSMFromSession()
+
+activate CTRL
+
+ref over CTRL
+
+Get GreenSpaceManager
+
+end
+
+CTRL --> CTRL : greenSpaceManager
+
+deactivate CTRL
+
+CTRL -> CTRL : getAllGreenSpaceByGSM(greenSpaceManager)
+
+activate CTRL
+
+CTRL -> GSMO : getListGreenSpace()
+
+activate GSMO
+
+GSMO --> CTRL : List greenSpace
+
+deactivate GSMO
+
+CTRL --> CTRL : List greenSpace
+
+deactivate CTRL
+
+CTRL -> CTRL : getAllTaskByGreenSpace(listGreenSpace)
+
+activate CTRL
+
+ref over CTRL
+
+Get All Task By GreenSpace
+
+end
+
+CTRL --> CTRL : listTask
+
+deactivate
+
+CTRL --> UI : listTask
+
+deactivate CTRL
+
+UI --> GSM	 : Show Task List and ask to select one
+deactivate UI
+
+GSM	->UI: choose a task
+
+activate UI
+
+UI -> CTRL : getAllTeams()
+
+activate CTRL
+
+CTRL -> RepositorySingleton : getInstance()
+
+activate RepositorySingleton
+
+RepositorySingleton --> CTRL : repositories
+
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getTeamRepository()
+
+activate PLAT
+
+PLAT --> CTRL: teamRepository
+
+deactivate PLAT
+
+CTRL -> TR : getAllTeams()
+
+activate TR
+
+TR --> CTRL : listTeam
+
+deactivate TR
+
+CTRL -> TEAMMP : toDTO(listTeam)
+
+activate TEAMMP
+
+ref over TEAMMP
+    SD_toDTO_List
+end
+
+TEAMMP --> CTRL : listTeamDto
+
+deactivate TEAMMP
+
+CTRL --> UI : listTeamDto
+
+
+
+deactivate CTRL
+
+UI --> GSM	 : show the list of the teams and ask to choose one of them
+
+deactivate UI
+
+GSM	 -> UI : type a team
+
+activate UI
+
+UI --> GSM : show all data and request confirmation
+
+deactivate UI
+
+GSM -> UI : confirms data
+
+activate UI
+
+UI -> CTRL: assignTeamTask(team,task)
+
+activate CTRL
+
+ref over CTRL
+
+Assign Team Task
+
+end
+
+CTRL --> UI : true/false
+
+deactivate CTRL
+
+UI --> GSM	 : displays operation success
+
+deactivate UI
+
+deactivate GSM
+@enduml
