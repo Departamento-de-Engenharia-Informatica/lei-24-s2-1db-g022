@@ -16,6 +16,9 @@ participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "teamRepository\n:TeamRepository" as TR
 participant "greenSpaceManager\n:GreenSpaceManager" as GSMO
+participant ":TeamMapper" as TEAMMP
+
+
 
 activate GSM	
 
@@ -78,7 +81,7 @@ deactivate CTRL
 UI --> GSM	 : Show Task List and ask to select one
 deactivate UI
 
-GSM	->UI: type a task
+GSM	->UI: choose a task
 
 activate UI
 
@@ -110,7 +113,21 @@ TR --> CTRL : listTeam
 
 deactivate TR
 
-CTRL --> UI : listTeam
+CTRL -> TEAMMP : toDTO(listTeam)
+
+activate TEAMMP
+
+ref over TEAMMP
+    SD_toDTO_List
+end
+
+TEAMMP --> CTRL : listTeamDto
+
+deactivate TEAMMP
+
+CTRL --> UI : listTeamDto
+
+
 
 deactivate CTRL
 

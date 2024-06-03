@@ -2,12 +2,127 @@
 'skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
-skinparam linetype polyline
-'skinparam linetype orto
+skinparam linetype orto
 
-skinparam classAttributeIconSize 0
+skinparam classAttributeIconSize "1"
 
 'left to right direction
 
+package "UI" <<Folder>> {
+    class AssignTeamAgendaUI {
+    }
+}
 
+package "Controller" <<Folder>> {
+
+    class AssignTeamAgendaController {
+        + AssignTeamAgendaController()
+        + getAllTaskByGSM()
+        + getAllTeams()
+        + assignTeamTask(team,task)
+        - getGSMFromSession()
+        - getAllGreenSpaceByGSM(greenSpaceManager)
+        - getAllTaskByGreenSpace(listGreenSpace)
+    }
+
+}
+
+'left to right direction
+package "Domain" <<Folder>> {
+
+    package "Domain.Application" <<Folder>> {
+
+        class ApplicationSession
+        {
+            + static getInstance()
+            + getCurrentSession()
+        }
+
+        class UserSession
+        {
+            + getUserEmail()
+        }
+    }
+
+    package "Domain.Model" <<Folder>> {
+
+            class TeamMapper{
+                + List<TeamDto> toDTO(List<Team>list)
+                + TeamDto toDTO(Team obj)
+            }
+
+            class TeamDto{
+                + List<String> collaboratorNameList
+                + TeamDto(team)
+            }
+
+            class Agenda{
+                - List<Task> taskList
+
+                + assignTeamTask(team,task)
+                + getAllTaskByGreenSpace(listGreenSpace)
+                - addListTaskByGreenSpace(task)
+            }
+
+            class Task {
+                - String taskDescription
+                - String urgency
+                - int duration
+                - String status
+                - Team team
+                - GreenSpace greenSpace
+
+                + updateTeam(team)
+                + verifyGreenSpace(listGreenSpace)
+
+            }
+
+            class Collaborator {
+                - String name
+                - List<Skill> skill
+                - Job job
+                - Date dateOfBirth
+                - Date admissionDate
+                - Address address
+                - Document document
+                - String phoneNumber
+                - String email
+                - int taxpayer
+
+                + Collaborator(name, job, dateOfBirth, admissionDate, address, document, phoneNumber, email, taxpayer)
+            }
+
+            class GreenSpaceManager {
+                - List<GreenSpace> managesGreenPlaceList
+
+                + getListGreenSpace()
+            }
+    }
+
+    package "Domain.Repository" <<Folder>> {
+
+        class Repositories {
+
+            - Repositories()
+            + getInstance() : Repositories
+            + getTeamRepository()
+            + getAgenda()
+            + getCollaboratorRepository()
+        }
+
+        class CollaboratorRepository {
+            - List <Collaborator> collaboratorList
+
+            + getCollaboratorByEmail(greenSpace)
+        }
+
+        class GreenSpaceRepository {
+            - List <GreenSpace> greenSpaceList
+
+            - addGreenSpace(greenSpace)
+            - validationAllGreenSpace(greenSpace)
+            + registerGreenSpace(name,area,streetName,postCode)
+        }
+    }
+}
 @enduml

@@ -9,6 +9,7 @@ participant "appSession\n:ApplicationSession" as APP
 participant "currentSession\n:UserSession" as SESSAO
 participant "repositories\n:Repositories" as REPO
 participant "collaboratorRepositories\n:CollaboratorRepositories" as COLREPO
+participant "collaborator\nCollaborator" as COL
 
 autonumber 3
 
@@ -55,6 +56,18 @@ deactivate REPO
 CTRL ->  COLREPO : getCollaboratorByEmail(email)
 
 activate COLREPO
+
+loop for collaborator in collaboratorRepository[in collaboratorList]
+
+COLREPO -> COL : hasEmail(email)
+
+activate COL
+
+COL --> COLREPO : true/false
+
+deactivate COL
+
+end
 
 COLREPO --> CTRL : Collaborator
 

@@ -25,8 +25,12 @@ class Document{
 
 class Address {
     streetName
-    postCode
     doorNumber
+}
+
+class PostCode{
+    postCodeNumber
+    localization
 }
 
 
@@ -36,19 +40,32 @@ class GreenSpaceManager {
 class Team{
 }
 
-class Agenda{}
-
-
-class Task{
-    description
-    duration
-    status
-    urgency
-}
-
 class EmailService{
 }
 
+class ToDoList {
+}
+
+class TaskToDoList{
+    status
+    urgency
+    duration
+}
+
+class TaskAgenda{
+    startDate
+    endDate
+}
+
+class Task {
+    description
+
+}
+
+class Agenda{
+}
+
+Address "1..*" -- "1" PostCode : has >
 
 Collaborator "1" - "1" Document : has >
 
@@ -56,9 +73,9 @@ Collaborator "1..*" -- "1" Address : lives >
 
 Collaborator  <|--  GreenSpaceManager
 
-GreenSpaceManager "1..*" -- "1" Agenda : Assign Team to an entry >
+GreenSpaceManager "1..*" - "1" TaskAgenda : Assign Team to an entry >
 
-Team "1" -- "*" Task : carries out >
+Team "1" --- "*" TaskAgenda : executes by <
 
 Agenda "1" - "*" Task : contains >
 
@@ -66,4 +83,10 @@ EmailService "1" - "*" Team :  send email to all elements of >
 
 Collaborator "1..*" ---- "1" Team : Contains <
 
+Task "*" - "1" ToDoList : includes <
+
+(Task,ToDoList) .. TaskToDoList
+(Task,Agenda) .. TaskAgenda
+
+TaskAgenda - TaskToDoList : includes >
 @enduml

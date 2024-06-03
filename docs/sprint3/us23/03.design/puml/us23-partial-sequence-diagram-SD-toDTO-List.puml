@@ -1,0 +1,64 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":TeamMapper" as TEAMMP
+participant "listTeam \n:List<Team>" as TEAMLIST
+participant "listTeamDto\n:List<TeamDto>" as LSTEAMDTO
+participant "objDto \n:TeamDto" as DTOTEAM
+
+autonumber 21
+
+--> TEAMMP : toDTO(listTeam)
+
+autonumber 21.1
+
+activate TEAMMP
+
+group To DTO List
+
+TEAMMP --> LSTEAMDTO** : create()
+
+loop for each object in listTeam
+
+TEAMMP -> TEAMLIST : obj = get(i)
+
+activate TEAMLIST
+
+TEAMLIST --> TEAMMP : team
+
+deactivate TEAMLIST
+
+TEAMMP -> TEAMMP : objDto = toDTO(obj)
+
+activate TEAMMP
+
+TEAMMP --> DTOTEAM** : create(obj)
+
+activate DTOTEAM
+
+DTOTEAM --> TEAMMP : objDto
+
+deactivate DTOTEAM
+
+deactivate TEAMMP
+
+TEAMMP -> LSTEAMDTO : add(objDto)
+
+activate LSTEAMDTO
+
+
+deactivate LSTEAMDTO
+
+end
+
+end
+
+autonumber 22
+
+<--TEAMMP : listTeamDto
+
+deactivate TEAMMP
+@enduml

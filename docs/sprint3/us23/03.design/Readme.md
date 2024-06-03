@@ -54,6 +54,10 @@ Get All GreenSpace
 
 ![Sequence Diagram - Get All GreenSpace](svg/us23-partial-sequence-diagram-get-all-GreenSpace-By-GSM.svg)
 
+DTO Team
+
+![Sequence Diagram - DTO Tean](svg/us23-partial-sequence-diagram-toDTO.svg)
+
 Get Assign Team
 
 ![Sequence Diagram - Get Assign Team](svg/us23-partial-sequence-diagram-assign-team.svg)

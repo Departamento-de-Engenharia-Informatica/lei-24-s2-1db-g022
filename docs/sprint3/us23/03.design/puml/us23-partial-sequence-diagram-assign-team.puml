@@ -8,13 +8,13 @@ participant ":AssignTeamAgendaController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "agenda\n:Agenda" as AGENDA
-participant "task\n:Task" as TASK
+participant "agendaTask\n:AgendaTask" as TASK
 
-autonumber 26
+autonumber 28
 
 --> CTRL : assignTeamTask(team,task)
 
-autonumber 26.1
+autonumber 28.1
 
 activate CTRL
 
@@ -70,7 +70,7 @@ deactivate AGENDA
 
 end
 
-autonumber 27
+autonumber 29
 
 <--CTRL : true/false
 
