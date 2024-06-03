@@ -17,17 +17,6 @@ class Collaborator {
     email
 }
 
-class Document{
-    docType
-    number
-}
-
-class Address {
-    streetName
-    postCode
-    doorNumber
-}
-
 class GreenSpaceManager {
 }
 
@@ -36,18 +25,22 @@ class ToDoList {
 
 class Task {
     description
-    urgency
-    duration
-    status
 }
 
-Collaborator "1" - "1" Document : has >
-Collaborator "1..*" -- "1" Address : lives >
+class TaskToDoList{
+    status
+    urgency
+    duration
+}
+
 Collaborator  <|--  GreenSpaceManager
 
-GreenSpaceManager "1..*" -- "1" Task : creates >
-GreenSpaceManager "1..*" - "1" ToDoList : inserts new entry >
+GreenSpaceManager "1..*" -- "1..*" Task : creates >
+GreenSpaceManager "1..*" - "1..*" TaskToDoList : inserts new entry >
+GreenSpaceManager "1" - "*" GreenSpace : register/manages >
 
 Task "*" -- "1" ToDoList : includes <
+(Task,ToDoList) .. TaskToDoList
+TaskToDoList "1..*" --- "1" GreenSpace :  Carried out in  >
 
 @enduml

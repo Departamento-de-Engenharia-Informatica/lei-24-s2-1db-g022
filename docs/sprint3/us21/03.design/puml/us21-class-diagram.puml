@@ -15,7 +15,7 @@ package "UI" <<Folder>> {
 package "Controller" <<Folder>> {
 
     class RegisterEntryToDoListController {
-        + RegisterEntryToDoListController(greenSpaceRepository, collaboratorRepository, toDoList)
+        + RegisterEntryToDoListController(greenSpaceRepository, collaboratorRepository, taskRepository, toDoList)
         + getGreenSpace()
         + registerEntryToDoList(greenSpaceName,taskDescription,urgency,duration)
         - getGSMFromSession()
@@ -42,18 +42,51 @@ package "Domain" <<Folder>> {
 
     package "Domain.Model" <<Folder>> {
 
-        class GreenSpace {
+        interface GreenSpace {
+            + getName()
+            + getArea()
+            + getAddress()
+            + hasName(greenSpaceName)
+        }
+
+        class Garden{
             - String name
             - int area
             - Address
 
-            + GreenSpace(name,area,streetName,postCode)
-            - validationGreenSpace()
+            + Garden(name,area,streetName,postCode)
+            + getName()
+            + getArea()
+            + getAddress()
+            + hasName(greenSpaceName)
+        }
+
+        class MediumPark{
+            - String name
+            - int area
+            - Address
+
+            + getName()
+            + getArea()
+            + getAddress()
+            + MediumPark(name,area,streetName,postCode)
+            + hasName(greenSpaceName)
+        }
+
+        class LargePark{
+            - String name
+            - int area
+            - Address
+
+            + getName()
+            + getArea()
+            + getAddress()
+            + LargePark(name,area,streetName,postCode)
+            + hasName(greenSpaceName)
         }
 
         class Collaborator {
                 -String name
-                -List<Skill> skill
                 -Job job
                 -Date dateOfBirth
                 -Date admissionDate
@@ -68,31 +101,35 @@ package "Domain" <<Folder>> {
 
         class Task {
             - String taskDescription
+
+            + Task(taskDescription)
+            + hasDescription(taskDescription)
+        }
+
+        class TaskToDoList {
+            - GreenSpace greenSpace
+            - Task task
             - String urgency
             - int duration
             - String status
-            - Team team
-            - GreenSpace greenSpace
 
-            + Task(taskDescription, urgency, duration,greenSpace)
-            - validateTask(task)
+            + TaskToDoList(greenSpace, task, urgency, duration)
+            - validateTaskToDoList();
         }
 
         class GreenSpaceManager {
             - List<GreenSpace> managesGreenPlaceList
 
             + GreenSpaceManager()
-            + addListManagerGreenSpace(GreenSpace)
             + getGreenSpace()
         }
 
         class ToDoList{
-            - List<Task> taskList
 
             + ToDoList()
-            + registerEntryToDoList(taskDescription,urgency,duration,greenSpace)
-            - addListTask(task)
-            - validateToDoList(task)
+            + registerEntryToDoList(greenSpace,task,urgency,duration)
+            - addListTaskToDoList(taskToDoList)
+            - validateToDoList()
         }
 
     }
@@ -105,22 +142,23 @@ package "Domain" <<Folder>> {
             + getInstance() : Repositories
             + getGreenSpaceRepository()
             + getCollaboratorRepository()
+            + getTaskRepository();
             + getToDoList()
         }
 
         class CollaboratorRepository {
-            - List <Collaborator> collaboratorList
 
             + getCollaboratorByEmail(greenSpace)
         }
 
         class GreenSpaceRepository {
-            - List <GreenSpace> greenSpaceList
 
-            - addGreenSpace(greenSpace)
-            - validationAllGreenSpace(greenSpace)
-            + registerGreenSpace(name,area,streetName,postCode)
             + getGreenSpaceByName(greenSpaceName)
+        }
+
+        class TaskRepository {
+
+            + getAllTaskDescriptions()
         }
     }
 }
@@ -138,18 +176,22 @@ RegisterEntryToDoListController ...> ApplicationSession
 RegisterEntryToDoListController ...> UserSession
 RegisterEntryToDoListController ...> GreenSpaceRepository
 RegisterEntryToDoListController ...> CollaboratorRepository
+RegisterEntryToDoListController ...> TaskRepository
 RegisterEntryToDoListController ...> Collaborator
 RegisterEntryToDoListController ...> GreenSpace
 RegisterEntryToDoListController ...> ToDoList
 RegisterEntryToDoListController ...> Task
+RegisterEntryToDoListController ...> TaskToDoList
+RegisterEntryToDoListController ...> GreenSpaceManager
 
 '-------------------ApplicationSession-------------------
 ApplicationSession --> "1" UserSession : userSession
 
 '-------------------Repositories-------------------
 Repositories --> "1" GreenSpaceRepository : GreenSpaceRepository
-Repositories --> "1" CollaboratorRepository : CollaboratorRepository
+Repositories ---> "1" CollaboratorRepository : CollaboratorRepository
 Repositories --> "1" ToDoList : ToDoList
+Repositories --> "1" TaskRepository : TaskRepository
 
 '-------------------CollaboratorRepository-------------------
 CollaboratorRepository "1"  -> "*" Collaborator : collaborator
@@ -157,16 +199,26 @@ CollaboratorRepository "1"  -> "*" Collaborator : collaborator
 '-------------------GreenSpaceRepository-------------------
 GreenSpaceRepository "1" -> "*" GreenSpace : greenSpace
 
+'-------------------TaskRepository-------------------
+TaskRepository "1" -> "*" Task : task
+
 '-------------------Collaborator-------------------
 Collaborator <|-- GreenSpaceManager
 
-'-------------------Green Space Manager-------------------
-GreenSpaceManager "1..*" <-- "1" ToDoList : registers entries
+'-------------------GreenSpaceManager-------------------
+GreenSpaceManager "1..*" <-- "1..*" TaskToDoList : created by
+GreenSpaceManager "1..*" <-- "1..*" GreenSpace : managed by
 
 '-------------------GreenSpace-------------------
-GreenSpace "1" <-- "1" Task : Carried out in
+GreenSpace <|-- Garden
+GreenSpace <|-- MediumPark
+GreenSpace <|-- LargePark
 
 '-------------------ToDoList-------------------
-ToDoList "1" --> "1" Task : includes
+ToDoList "1" --> "*" TaskToDoList : taskTdl
+
+'-------------------TaskToDoList-------------------
+TaskToDoList "1..*" --> "1" GreenSpace : greenSpace
+TaskToDoList "1..*" --> "1" Task : task
 
 @enduml

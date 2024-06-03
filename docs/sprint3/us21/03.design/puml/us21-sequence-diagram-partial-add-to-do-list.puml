@@ -4,27 +4,32 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 
 participant "toDoList\n:ToDoList" as TDL
-participant "task\n:Task" as TASK
+participant "taskTdl\n:TaskToDoList" as TTDL
 
-autonumber 21
--> TDL: registerEntryToDoList(Task(taskDescription,urgency,duration,greenSpace))
+autonumber 39
+-> TDL: registerEntryToDoList(greenSpace,task,urgency,duration)
 
-autonumber 21.1
+autonumber 39.1
 activate TDL
     group Register Entry
 
-        TDL -> TASK**: create(taskDescription,urgency,duration,greenSpace)
+        TDL -> TTDL**: create(greenSpace,task,urgency,duration)
 
-    activate TASK
+    activate TTDL
 
-        TASK -> TASK: validateTask(task)
-        TASK --> TDL : task
-    deactivate TASK
+        TTDL -> TTDL: validateTask()
+    activate TTDL
 
-        TDL -> TDL: addTask(task)
+        TTDL --> TTDL: true/false
+    deactivate TTDL
+
+        TTDL --> TDL : taskTdl
+    deactivate TTDL
+
+        TDL -> TDL: addTaskToDoList(taskTdl)
     activate TDL
 
-        TDL -> TDL: validateTask(task)
+        TDL -> TDL: validateTaskToDoList(taskTdl)
     activate TDL
 
         TDL --> TDL : true/false
@@ -34,7 +39,7 @@ activate TDL
     deactivate TDL
     end
 
-    autonumber 22
+    autonumber 40
     <-- TDL : true/false
 deactivate TDL
 
