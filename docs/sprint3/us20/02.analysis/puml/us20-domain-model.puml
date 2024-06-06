@@ -9,12 +9,17 @@ hide methods
 title Domain Model - US20 Register a Green Space
 
 
+
+class PostCode{
+    postCodeNumber
+    localization
+}
 class Collaborator {
     name
     dateOfBirth
     admissionDate
     phoneNumber
-    taxpayer
+    taxpayerNumber
     email
 }
 
@@ -24,16 +29,17 @@ class GreenSpace {
 }
 
 class Document{
-    docType
     number
 }
 
-class Address {
-    streetName
-    postCode
-    doorNumber
+class DocumentType{
+    type
 }
 
+class Address {
+    street
+    doorNumber
+}
 
 class GreenSpacesManager {
 }
@@ -61,6 +67,9 @@ GreenSpace <|-- Garden
 GreenSpace <|-- MediumPark
 GreenSpace <|-- LargePark
 
+Address "1..*" -- "1" PostCode : has >
+
+Document "1..*" - "1" DocumentType : has >
 
 
 @enduml

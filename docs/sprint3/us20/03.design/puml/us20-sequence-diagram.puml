@@ -17,6 +17,7 @@ participant "greenSpaceRepository\n:GreenSpaceRepository" as GSR
 participant "greenSpace\n:GreenSpace" as GREENSPACE
 participant "address\n:Address" as ADDRESS
 participant "greenSpaceManager\n:GreenSpaceManager" as GSMO
+participant "postCode\n:PostCode" as PSTCODE
 
 activate GSM
 
@@ -31,7 +32,7 @@ GSM->UI: selects a type
 
 activate UI
 
-UI --> GSM : request data(name,area,streetName,postCode)
+UI --> GSM : request data(name,area,streetName,postCodeNumber,localization)
 
 deactivate UI
 
@@ -47,7 +48,7 @@ GSM -> UI : confirms and submits data
 
 activate UI
 
-UI -> CTRL: registerGreenSpace(type,name,area,streetName,postCode)
+UI -> CTRL: registerGreenSpace(type,name,area,streetName,postCodeNumber,localization)
 
 activate CTRL
 
@@ -77,16 +78,33 @@ PLAT --> CTRL: greenSpaceRepository
 
 deactivate PLAT
 
-CTRL -> GSR : registerGreenSpace(name,area,Address(streetName,postCode))
+CTRL -> GSR : registerGreenSpace(name,area,Address(streetName, PostCode(postCodeNumber,localization)))
 activate GSR
 
-GSR -> GREENSPACE** : create(name,area,Address(streetName,postCode))
+GSR -> GREENSPACE** : create(name,area,Address(streetName, PostCode(postCodeNumber,localization)))
 activate GREENSPACE
 
-GREENSPACE -> ADDRESS**  : create(streetName,postCode)
+GREENSPACE -> ADDRESS**  : create(streetName,PostCode(postCodeNumber,localization))
 
 activate ADDRESS
-ADDRESS -> ADDRESS : validation(streetName,postCode)
+
+ADDRESS -> PSTCODE** : create(postCodeNumber,localization)
+
+activate PSTCODE
+
+PSTCODE -> PSTCODE : validation()
+
+activate PSTCODE
+
+PSTCODE --> PSTCODE : true/false
+
+deactivate PSTCODE
+
+PSTCODE --> ADDRESS : postCode
+
+deactivate PSTCODE
+
+ADDRESS -> ADDRESS : validation()
 
 activate ADDRESS
 ADDRESS --> ADDRESS : true/false
