@@ -5,9 +5,9 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 
 participant ":TeamMapper" as TEAMMP
-participant "listTeam \n:List<Team>" as TEAMLIST
+participant "listTeam\n:List<Team>" as TEAMLIST
 participant "listTeamDto\n:List<TeamDto>" as LSTEAMDTO
-participant "objDto \n:TeamDto" as DTOTEAM
+participant "objDto\n:TeamDto" as DTOTEAM
 
 autonumber 21
 
@@ -19,7 +19,7 @@ activate TEAMMP
 
 group To DTO List
 
-TEAMMP --> LSTEAMDTO** : create()
+TEAMMP --> LSTEAMDTO : create()
 
 loop for each object in listTeam
 
@@ -35,7 +35,7 @@ TEAMMP -> TEAMMP : objDto = toDTO(obj)
 
 activate TEAMMP
 
-TEAMMP --> DTOTEAM** : create(obj)
+TEAMMP --> DTOTEAM : create(obj)
 
 activate DTOTEAM
 
@@ -49,7 +49,6 @@ TEAMMP -> LSTEAMDTO : add(objDto)
 
 activate LSTEAMDTO
 
-
 deactivate LSTEAMDTO
 
 end
@@ -58,7 +57,7 @@ end
 
 autonumber 22
 
-<--TEAMMP : listTeamDto
+<-- TEAMMP : listTeamDto
 
 deactivate TEAMMP
 @enduml
