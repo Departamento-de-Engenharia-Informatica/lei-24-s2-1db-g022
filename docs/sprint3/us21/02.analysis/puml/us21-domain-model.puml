@@ -17,6 +17,24 @@ class Collaborator {
     email
 }
 
+class Document{
+    number
+}
+
+class DocumentType{
+    type
+}
+
+class Address {
+    street
+    doorNumber
+}
+
+class PostCode{
+    postCodeNumber
+    localization
+}
+
 class GreenSpaceManager {
 }
 
@@ -33,14 +51,40 @@ class TaskToDoList{
     duration
 }
 
+class GreenSpace {
+    name
+    area
+}
+
+class Garden {
+}
+
+class MediumPark {
+}
+
+class LargePark {
+}
+
+Collaborator "1" - "1" Document : has >
+Collaborator "1..*" -- "1" Address : lives >
 Collaborator  <|--  GreenSpaceManager
 
 GreenSpaceManager "1..*" -- "1..*" Task : creates >
 GreenSpaceManager "1..*" - "1..*" TaskToDoList : inserts new entry >
 GreenSpaceManager "1" - "*" GreenSpace : register/manages >
 
+GreenSpace <|-- Garden
+GreenSpace <|-- MediumPark
+GreenSpace <|-- LargePark
+GreenSpace "1" - "1" Address : is located in >
+
+Address "1..*" -- "1" PostCode : has >
+
+Document "1..*" - "1" DocumentType : has >
+
 Task "*" -- "1" ToDoList : includes <
 (Task,ToDoList) .. TaskToDoList
+
 TaskToDoList "1..*" --- "1" GreenSpace :  Carried out in  >
 
 @enduml

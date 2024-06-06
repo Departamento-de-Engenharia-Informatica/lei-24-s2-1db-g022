@@ -41,7 +41,7 @@ class Address {
     doorNumber
 }
 
-class GreenSpacesManager {
+class GreenSpaceManager {
 }
 
 class Garden {
@@ -58,9 +58,9 @@ Collaborator "1" - "1" Document : has >
 
 Collaborator "1..*" -- "1" Address : lives >
 
-Collaborator  <|--  GreenSpacesManager
+Collaborator  <|--  GreenSpaceManager
 
-GreenSpacesManager "1" -- "*" GreenSpace : register/manages >
+GreenSpaceManager "1" -- "*" GreenSpace : register/manages >
 GreenSpace "1" -- "1" Address : is located in >
 
 GreenSpace <|-- Garden

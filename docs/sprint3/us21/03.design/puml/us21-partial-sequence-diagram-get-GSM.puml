@@ -8,13 +8,14 @@ participant ":ApplicationSession" as _APP
 participant "appSession\n:ApplicationSession" as APP
 participant "currentSession\n:UserSession" as SESSAO
 participant "repositories\n:Repositories" as REPO
-participant "collaboratorRepositories\n:CollaboratorRepositories" as COLREPO
+participant "collaboratorRepository\n:CollaboratorRepository" as COLREPO
+participant "iColaborator\n:IColaborator" as ICOL
 
-autonumber 3
+autonumber 9
 
 --> CTRL : getGSMFromSession()
 
-autonumber 3.1
+autonumber 9.1
 
 activate CTRL
 
@@ -57,12 +58,24 @@ CTRL ->  COLREPO : getCollaboratorByEmail(email)
 
 activate COLREPO
 
-COLREPO --> CTRL : Collaborator
+loop for each collaborator in collaboratorList [in CollaboratorRepository]]
+
+COLREPO -> ICOL : hasEmail(email)
+
+activate ICOL
+
+ICOL --> COLREPO : true/false
+
+deactivate ICOL
+
+end
+
+COLREPO --> CTRL : collaborator
 
 deactivate COLREPO
 
 end
-autonumber 4
+autonumber 10
 
 <--CTRL : manager
 deactivate CTRL

@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title UI Sequence Diagram (SSD) - US21 - Add new entry to the To-Do-List
+title UI Sequence Diagram (SD) - US21 - Add new entry to the To-Do-List
 
 autonumber
 
@@ -14,12 +14,12 @@ participant ":RegisterEntryToDoListController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "manager\n:GreenSpaceManager" as GSMO
+participant "greenSpaces\nGreenSpaces" as GREENSPACES
 participant "taskRepository\n:TaskRepository" as TR
 participant "greenSpaceRepository\n:GreenSpaceRepository" as GSR
 participant "toDoList\n:ToDoList" as TDL
 participant "greenSpace\nGreenSpace" as GREENSPACE
 participant "task\nTask" as TASK
-
 
 activate GSM
 
@@ -39,11 +39,21 @@ activate GSM
         CTRL --> CTRL : manager
     deactivate CTRL
 
-
         CTRL -> GSMO : getGreenSpace()
     activate GSMO
 
+        GSMO -> GREENSPACES : getSortedGreenSpaces()
+    activate GREENSPACES
+
+        ref over GREENSPACES
+            Design in US27
+        end ref
+
+        GREENSPACES --> GSMO : greenSpaceList
+    deactivate GREENSPACES
+
         GSMO --> CTRL : greenSpaceList
+
     deactivate GSMO
 
         CTRL --> UI : greenSpaceList
