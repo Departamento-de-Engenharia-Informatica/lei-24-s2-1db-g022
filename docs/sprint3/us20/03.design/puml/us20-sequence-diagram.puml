@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title UI Sequence Diagram (SSD) - US20 - Register a Green Space
+title UI Sequence Diagram (SD) - US20 - Register a Green Space
 
 autonumber
 
@@ -14,11 +14,8 @@ participant ":RegisterGreenSpaceController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "greenSpaceRepository\n:GreenSpaceRepository" as GSR
-participant "greenSpace\n:GreenSpace" as GREENSPACE
-participant "address\n:Address" as ADDRESS
 participant "greenSpaceManager\n:GreenSpaceManager" as GSMO
-participant "postCode\n:PostCode" as PSTCODE
-
+participant "greenSpaces\n:GreenSpaces" as GRSPSC
 activate GSM
 
 GSM -> UI : asks to register a new green Space
@@ -78,60 +75,12 @@ PLAT --> CTRL: greenSpaceRepository
 
 deactivate PLAT
 
-CTRL -> GSR : registerGreenSpace(name,area,Address(streetName, PostCode(postCodeNumber,localization)))
+CTRL -> GSR : registerGreenSpace(name,area,streetName, postCodeNumber,localization)
 activate GSR
 
-GSR -> GREENSPACE** : create(name,area,Address(streetName, PostCode(postCodeNumber,localization)))
-activate GREENSPACE
-
-GREENSPACE -> ADDRESS**  : create(streetName,PostCode(postCodeNumber,localization))
-
-activate ADDRESS
-
-ADDRESS -> PSTCODE** : create(postCodeNumber,localization)
-
-activate PSTCODE
-
-PSTCODE -> PSTCODE : validation()
-
-activate PSTCODE
-
-PSTCODE --> PSTCODE : true/false
-
-deactivate PSTCODE
-
-PSTCODE --> ADDRESS : postCode
-
-deactivate PSTCODE
-
-ADDRESS -> ADDRESS : validation()
-
-activate ADDRESS
-ADDRESS --> ADDRESS : true/false
-
-deactivate ADDRESS
-
-ADDRESS --> GREENSPACE : Address
-deactivate ADDRESS
-
-GREENSPACE -> GREENSPACE : validationGreenSpace(greeSpace)
-
-GREENSPACE -->  GSR : greenSpace
-
-deactivate GREENSPACE
-
-GSR-> GSR : addGreenSpace(greenSpace)
-
-activate GSR
-
-GSR -> GSR :  validationAllData(greenSpace)
-activate GSR
-
-GSR --> GSR : true/false
-deactivate GSR
-
-GSR --> GSR : true/false
-deactivate GSR
+ref over GSR
+    Register GreenSpace
+end
 
 GSR --> CTRL : greenSpace
 deactivate GSR
@@ -139,6 +88,14 @@ deactivate GSR
 CTRL -> GSMO : addListManagerGreenSpace(greenSpace))
 
 activate GSMO
+
+GSMO -> GRSPSC : addListGreenSpaces(greenSpace)
+
+activate GRSPSC
+
+GRSPSC --> GSMO : true/false
+
+deactivate GRSPSC
 
 GSMO --> CTRL : true/false
 
