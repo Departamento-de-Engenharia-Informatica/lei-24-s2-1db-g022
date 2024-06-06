@@ -26,7 +26,7 @@ class DocumentType{
 }
 
 class Address {
-    streetName
+    street
     doorNumber
 }
 
@@ -149,26 +149,26 @@ GreenSpaceManager "1" - "*" GreenSpace : register/manages >
 GreenSpaceManager "1..*" -- "1..*" Task : creates >
 GreenSpaceManager "1..*" - "1..*" TaskToDoList : inserts new entry >
 GreenSpaceManager "1..*" - "1..*" TaskAgenda : inserts new entry >
+GreenSpaceManager "1..*" - "1" TaskAgenda : Assign Team to an entry >
 
 '-------------GreenSpace-------------
 GreenSpace "1" - "1" Address : is located in >
 GreenSpace <|-- Garden
 GreenSpace <|-- MediumPark
 GreenSpace <|-- LargePark
+GreenSpace "*" -- "1" SortingAlgorithm : makes use of >
 
+'-------------Task-------------
 TaskAgenda "1..*" --- "1" GreenSpace :  Carried out in  >
 TaskToDoList "1..*" --- "1" GreenSpace :  Carried out in  >
 
 Task "*" -- "1" ToDoList : includes <
 
-
-GreenSpaceManager "1..*" - "1" TaskAgenda : Assign Team to an entry >
 Team "1" --- "*" TaskAgenda : executes by <
 Agenda "1" - "*" Task : contains >
 
 EmailService "1" -- "*" Team :  send email to all elements of >
 
-GreenSpace "*" -- "1" SortingAlgorithm : makes use of >
 
 (Task,ToDoList) .. TaskToDoList
 (Task,Agenda) .. TaskAgenda

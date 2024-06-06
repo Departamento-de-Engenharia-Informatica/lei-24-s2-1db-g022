@@ -7,170 +7,202 @@ skinparam linetype orto
 skinparam classAttributeIconSize "1"
 
 'left to right direction
-
-class ApplicationSession
-{
-    + static getInstance()
-    + getCurrentSession()
+package "UI" <<Folder>> {
+    class RegisterGreenSpaceUI {
+    }
 }
 
-class UserSession
-{
-    + getUserEmail()
+package "Controller" <<Folder>> {
+    class RegisterGreenSpaceController {
+        + RegisterGreenSpaceController(greenSpaceRepository, collaboratorRepository)
+        + registerGreenSpace(type,name,area,streetName,postCodeNumber,localization)
+        - getGSMFromSession()
+
+    }
 }
+package "Domain" <<Folder>> {
 
-interface GreenSpace {
+    package "Domain.Application" <<Folder>> {
+        class ApplicationSession
+        {
+            + static getInstance()
+            + getCurrentSession()
+        }
 
-    + getName()
-    + getArea()
-    + getAddress()
+        class UserSession
+        {
+            + getUserEmail()
+        }
+    }
+
+    package "Domain.Model" <<Folder>> {
+        interface GreenSpace {
+
+            + getName()
+            + getArea()
+            + getAddress()
+
+        }
+
+        class GreenSpaces{
+            + addListGreenSpaces(greenSpace)
+        }
+
+        class Garden implements GreenSpace{
+            - String name
+            - int area
+            - Address
+
+            + Garden(name,area,streetName,postCodeNumber,localization)
+            + getName()
+            + getArea()
+            + getAddress()
+            - validationGreenSpace()
+        }
+
+        class MediumPark implements GreenSpace{
+            - String name
+            - int area
+            - Address
+
+            + getName()
+            + getArea()
+            + getAddress()
+            + MediumPark(name,area,streetName,postCodeNumber,localization)
+            - validationGreenSpace()
+        }
+
+        class LargePark implements GreenSpace{
+            - String name
+            - int area
+            - Address
+
+            + getName()
+            + getArea()
+            + getAddress()
+            + LargePark(name,area,streetName,postCodeNumber,localization)
+            - validationGreenSpace()
+
+        }
+
+        interface ICollaborator{
+            + getName()
+            + getListSkill()
+            + getJob()
+            + getDateOfBirth()
+            + getAdmissionDate()
+            + getAddress()
+            + getDocument()
+            + getPhoneNumber()
+            + getEmail()
+            + getTaxpayer()
+            + hasEmail(email)
+
+        }
+
+        class Document{
+            - int documentNumber
+        }
+
+        class DocumentType{
+            - String documentType
+        }
+
+        class GreenSpaceManager implements ICollaborator{
+            - String name
+            - Date dateOfBirth
+            - Date admissionDate
+            - String email
+            - int taxpayer
+            + addListManagerGreenSpace(GreenSpace)
+
+        }
+
+        class Address {
+            - String streetName
+            - int doorNumber
+
+            + Address(streetName, postCodeNumber,localization)
+            - validation()
+        }
+
+        class PostCode{
+            - String postCodeNumber
+            - String localization
+
+            + PostCode(postCodeNumber,localization)
+            - validation()
+        }
+    }
+
+    package "Domain.Repository" <<Folder>> {
+        class Repositories {
+
+            - Repositories()
+            + getInstance() : Repositories
+            + getGreenSpaceRepository()
+            + getCollaboratorRepository()
+        }
+
+        class CollaboratorRepository {
+            + getCollaboratorByEmail(email)
+        }
+
+        class GreenSpaceRepository {
+            - addGreenSpace(greenSpace)
+            - validationAllData(greenSpace)
+            + registerGreenSpace(name,area,streetName,postCodeNumber,localization)
+        }
+    }
 
 }
-
-class Garden{
-    - String name
-    - int area
-    - Address
-
-    + Garden(name,area,streetName,postCode)
-    + getName()
-    + getArea()
-    + getAddress()
-    - validationGreenSpace()
-}
-
-class MediumPark{
-    - String name
-    - int area
-    - Address
-
-    + getName()
-    + getArea()
-    + getAddress()
-    + MediumPark(name,area,streetName,postCode)
-    - validationGreenSpace()
-}
-
-class LargePark{
-    - String name
-    - int area
-    - Address
-
-    + getName()
-    + getArea()
-    + getAddress()
-    + LargePark(name,area,streetName,postCode)
-    - validationGreenSpace()
-
-}
-
-class RegisterGreenSpaceController {
-    + RegisterGreenSpaceController(greenSpaceRepository, collaboratorRepository)
-    + registerGreenSpace(type,name,area,streetName,postCode)
-    - getGSMFromSession()
-
-}
-
-class RegisterGreenSpaceUI {
-}
-
-class Collaborator {
-    -String name
-    -List<Skill> skill
-    -Job job
-    -Date dateOfBirth
-    -Date admissionDate
-    -Address address
-    -Document document
-    -String phoneNumber
-    -String email
-    -int taxpayer
-
-    + Collaborator(name, job, dateOfBirth, admissionDate, address, document, phoneNumber, email, taxpayer)
-}
-
-class Address {
-    -String streetName
-    -int postCode
-    -int doorNumber
-
-    +Address(streetName, postCode, doorNumber)
-    +Address(streetName, postCode)
-    -validateAddress(address)
-}
-
-class GreenSpaceManager {
-    - List<GreenSpace> managesGreenPlaceList
-
-    + GreenSpaceManager()
-    + addListManagerGreenSpace(GreenSpace)
-
-}
-
-class Repositories {
-
-    - Repositories()
-    + getInstance() : Repositories
-    + getGreenSpaceRepository()
-    + getCollaboratorRepository()
-}
-
-class CollaboratorRepository {
-    - List <Collaborator> collaboratorList
-
-    + getCollaboratorByEmail(greenSpace)
-}
-
-class GreenSpaceRepository {
-    - List <GreenSpace> greenSpaceList
-
-    - addGreenSpace(greenSpace)
-    - validationAllGreenSpace(greenSpace)
-    + registerGreenSpace(name,area,streetName,postCode)
-}
-
 '-------------------Instance-------------------
 Repositories -> Repositories : instance
 ApplicationSession -> ApplicationSession : instance
 
 '-------------------UI-------------------
-RegisterGreenSpaceUI .> RegisterGreenSpaceController
+RegisterGreenSpaceUI ..> RegisterGreenSpaceController
 
 '-------------------Controller-------------------
 RegisterGreenSpaceController ..> Repositories : repositories
 RegisterGreenSpaceController ..> ApplicationSession
 RegisterGreenSpaceController ...> UserSession
 RegisterGreenSpaceController ...> GreenSpaceRepository
+RegisterGreenSpaceController ...> GreenSpaceManager
 RegisterGreenSpaceController ...> CollaboratorRepository
-RegisterGreenSpaceController ...> Collaborator
 RegisterGreenSpaceController ...> GreenSpace
+RegisterGreenSpaceController ...> Address
+RegisterGreenSpaceController ...> PostCode
+RegisterGreenSpaceController ...> GreenSpaces
 
 '-------------------ApplicationSession-------------------
-ApplicationSession ---> "1" UserSession : userSession
+ApplicationSession --> "1" UserSession : userSession
 
 '-------------------Repositories-------------------
 Repositories ---> "1" GreenSpaceRepository : GreenSpaceRepository
 Repositories ---> "1" CollaboratorRepository : CollaboratorRepository
 
 '-------------------CollaboratorRepository-------------------
-CollaboratorRepository "1"  --> "*" Collaborator : collaborator
+CollaboratorRepository "1"  --> "*" ICollaborator : collaboratorList
 
 '-------------------GreenSpaceRepository-------------------
-GreenSpaceRepository "1" --> "*" GreenSpace : greenSpace
+GreenSpaceRepository "1" --> "*" GreenSpace : greenSpaceList
 
-'-------------------Collaborator-------------------
-Collaborator <|-- GreenSpaceManager
 
 '-------------------Green Space Manager-------------------
-GreenSpaceManager <- "*" GreenSpace : register/manages
+GreenSpaceManager <- "*" GreenSpace : registedBy/managedBy
+GreenSpaceManager "1" ---> "1" GreenSpaces : greenSpaces
 
 '-------------------GreenSpace-------------------
-GreenSpace <|-- Garden
-GreenSpace <|-- MediumPark
-GreenSpace <|-- LargePark
-
+GreenSpaces "1" -> "*" GreenSpace: greenSpaceList
 GreenSpace "1" *- "1" Address : is located in
 
+'-------------------Address-------------------
+Address "1..*" *- "1" PostCode : postCode
+ICollaborator "1..*" *---- "1" Address : address
+
+ICollaborator "1" -> "1" Document : has
+Document "1..*" ->"1" DocumentType : has
 
 
 
