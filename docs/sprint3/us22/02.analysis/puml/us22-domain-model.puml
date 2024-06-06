@@ -1,0 +1,109 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+title Domain Model
+
+class Collaborator {
+    name
+    dateOfBirth
+    admissionDate
+    phoneNumber
+    taxpayerNumber
+    email
+}
+
+class Document{
+    number
+}
+
+class DocumentType{
+    type
+}
+
+class Address {
+    street
+    doorNumber
+}
+
+class PostCode{
+    postCodeNumber
+    localization
+}
+
+class GreenSpaceManager {
+}
+
+class GreenSpace {
+    name
+    area
+}
+
+class Garden {
+}
+
+class MediumPark {
+}
+
+class LargePark {
+}
+
+class ToDoList {
+}
+
+class TaskToDoList{
+    status
+    urgency
+    duration
+}
+
+class TaskAgenda{
+    startDate
+    endDate
+}
+
+class Task {
+    description
+}
+
+class Agenda{
+}
+
+Address "1..*" -- "1" PostCode : has >
+
+Document "1..*" - "1" DocumentType : has >
+
+'-------------Collaborator-------------
+Collaborator "1" - "1" Document : has >
+GreenSpaceManager  -|>  Collaborator
+Address "1" - "1..*" Collaborator : lives <
+
+'-------------GreenSpaceManager-------------
+GreenSpaceManager "1" - "*" GreenSpace : register/manages >
+GreenSpaceManager "1..*" -- "1..*" Task : creates >
+GreenSpaceManager "1..*" - "1..*" TaskAgenda : inserts new entry >
+
+'-------------GreenSpace-------------
+GreenSpace "1" - "1" Address : is located in >
+GreenSpace <|-- Garden
+GreenSpace <|-- MediumPark
+GreenSpace <|-- LargePark
+
+'-------------Task-------------
+TaskAgenda "1..*" ---- "1" GreenSpace :  Carried out in  >
+TaskToDoList "1..*" --- "1" GreenSpace :  Carried out in  >
+
+Task "*" -- "1" ToDoList : includes <
+
+Agenda "1" - "*" Task : contains >
+
+
+(Task,ToDoList) .. TaskToDoList
+(Task,Agenda) .. TaskAgenda
+
+TaskAgenda - TaskToDoList : includes >
+@enduml
