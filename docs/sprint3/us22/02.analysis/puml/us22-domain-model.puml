@@ -13,54 +13,97 @@ class Collaborator {
     dateOfBirth
     admissionDate
     phoneNumber
-    taxpayer
+    taxpayerNumber
     email
 }
 
 class Document{
-    docType
     number
 }
 
+class DocumentType{
+    type
+}
+
 class Address {
-    streetName
-    postCode
+    street
     doorNumber
+}
+
+class PostCode{
+    postCodeNumber
+    localization
 }
 
 class GreenSpaceManager {
 }
 
+class GreenSpace {
+    name
+    area
+}
+
+class Garden {
+}
+
+class MediumPark {
+}
+
+class LargePark {
+}
+
 class ToDoList {
+}
+
+class TaskToDoList{
+    status
+    urgency
+    duration
+}
+
+class TaskAgenda{
+    startDate
+    endDate
 }
 
 class Task {
     description
-    urgency
-    duration
-    status
-
 }
 
-class Agenda {
-    startDate??
+class Agenda{
 }
 
+Address "1..*" -- "1" PostCode : has >
+
+Document "1..*" - "1" DocumentType : has >
+
+'-------------Collaborator-------------
 Collaborator "1" - "1" Document : has >
-Collaborator "1..*" -- "1" Address : lives >
-Collaborator  <|--  GreenSpaceManager
+GreenSpaceManager  -|>  Collaborator
+Address "1" - "1..*" Collaborator : lives <
 
-GreenSpaceManager "1..*" -- "1" Task : creates >
-GreenSpaceManager "1" -- "1" Agenda
+'-------------GreenSpaceManager-------------
+GreenSpaceManager "1" - "*" GreenSpace : register/manages >
+GreenSpaceManager "1..*" -- "1..*" Task : creates >
+GreenSpaceManager "1..*" - "1..*" TaskAgenda : inserts new entry >
+
+'-------------GreenSpace-------------
+GreenSpace "1" - "1" Address : is located in >
+GreenSpace <|-- Garden
+GreenSpace <|-- MediumPark
+GreenSpace <|-- LargePark
+
+'-------------Task-------------
+TaskAgenda "1..*" ---- "1" GreenSpace :  Carried out in  >
+TaskToDoList "1..*" --- "1" GreenSpace :  Carried out in  >
 
 Task "*" -- "1" ToDoList : includes <
 
-Agenda "*" -- "1" ToDoList : asd
-
-Agenda "1" -- "1" Task : asd
+Agenda "1" - "*" Task : contains >
 
 
+(Task,ToDoList) .. TaskToDoList
+(Task,Agenda) .. TaskAgenda
 
-
-
+TaskAgenda - TaskToDoList : includes >
 @enduml
