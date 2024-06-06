@@ -17,15 +17,14 @@ class Collaborator {
     email
 }
 
-class Document{
-    docType
-    number
+class Address {
+    street
+    doorNumber
 }
 
-class Address {
-    streetName
-    postCode
-    doorNumber
+class PostCode {
+    postCodeNumber
+    localization
 }
 
 class GreenSpaceManager {
@@ -39,13 +38,26 @@ class GreenSpace{
 class SortingAlgorithm {
 }
 
-Collaborator "1" - "1" Document : has >
+class Garden {
+}
+
+class MediumPark {
+}
+
+class LargePark {
+}
+
 Collaborator "1..*" -- "1" Address : lives >
 Collaborator  <|--  GreenSpaceManager
 
-GreenSpaceManager "1" - "1..*" GreenSpace : manages >
+Address "1..*" --> "1" PostCode : has
+
+GreenSpaceManager "1" -- "1..*" GreenSpace : manages >
 
 GreenSpace "1" - "1" Address : is located in >
-GreenSpace "1" -- "1" SortingAlgorithm : makes use of >
+GreenSpace "*" -- "1" SortingAlgorithm : makes use of >
+GreenSpace <|-- Garden
+GreenSpace <|-- MediumPark
+GreenSpace <|-- LargePark
 
 @enduml
