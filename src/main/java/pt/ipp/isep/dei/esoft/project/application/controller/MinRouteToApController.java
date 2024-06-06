@@ -30,6 +30,54 @@ public class MinRouteToApController {
                     "   text-padding: 3px;" +
                     "}";
 
+    private int methodToReplaceSize(List<SignalPoint> vertices) {
+        int count = 0;
+
+        try {
+            while (true) {
+                if (vertices.get(count) != null) {
+                    count++;
+                    continue;
+                }
+                break;
+            }
+        } catch (IndexOutOfBoundsException io) {
+            return count;
+
+        }
+        return -1;
+    }
+
+    private int methodToReplaceSizeRoute(List<Route> route) {
+        int count = 0;
+
+        try {
+            while (true) {
+                if (route.get(count) != null) {
+                    count++;
+                    continue;
+                }
+                break;
+            }
+        } catch (IndexOutOfBoundsException io) {
+            return count;
+
+        }
+        return -1;
+    }
+
+    //Metodo com operacoes primitivas para dar replace ao metodo IndexOf
+    private int methodToReplaceIndexOf(List<SignalPoint> vertices, SignalPoint signalPoint) {
+        int size = methodToReplaceSize(vertices);
+
+        for (int i = 0; i < size; i++) {
+            if (vertices.get(i).getName().equals(signalPoint.getName())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     /**
      * Imports signal point names from a CSV file and returns a list of SignalPoint objects.
      *
@@ -107,7 +155,7 @@ public class MinRouteToApController {
      */
     public List<Route> findShortestPath(SignalPoint source, SignalPoint target, List<SignalPoint> signalPoints, List<Route> routes) {
         // Número total de pontos de sinalização
-        int numPoints = signalPoints.size();
+        int numPoints = methodToReplaceSize(signalPoints);
 
         // Arrays para armazenar distâncias, pontos visitados e predecessores
         int[] distances = new int[numPoints];
@@ -122,7 +170,7 @@ public class MinRouteToApController {
         }
 
         // Índice do ponto de origem
-        int sourceIndex = signalPoints.indexOf(source);
+        int sourceIndex = methodToReplaceIndexOf(signalPoints, source);
         distances[sourceIndex] = 0; // A distância do ponto de origem para si mesmo é zero
 
         // Iterar até encontrar o caminho mais curto para todos os pontos ou até que todos os pontos sejam visitados
@@ -145,15 +193,17 @@ public class MinRouteToApController {
 
             // Marcar o ponto escolhido como visitado
             visited[closest] = true;
+            int sizeRoute = methodToReplaceSizeRoute(routes);
 
             // Atualizar as distâncias para os pontos vizinhos do ponto escolhido
-            for (Route route : routes) {
-                int fromIndex = signalPoints.indexOf(route.getS1());
-                int toIndex = signalPoints.indexOf(route.getS2());
+            for (int j = 0; j < sizeRoute; j++) {
+
+                int fromIndex = methodToReplaceIndexOf(signalPoints, routes.get(j).getS1());
+                int toIndex = methodToReplaceIndexOf(signalPoints, routes.get(j).getS2());
                 // Verificar se o ponto atual é o ponto de origem da rota e se o destino não foi visitado ainda
                 if (fromIndex == closest && !visited[toIndex]) {
                     // Calcular a nova distância
-                    int newDist = distances[closest] + route.getDistance();
+                    int newDist = distances[closest] + routes.get(j).getDistance();
                     // Atualizar a distância se a nova distância for menor
                     if (newDist < distances[toIndex]) {
                         distances[toIndex] = newDist;
@@ -162,7 +212,7 @@ public class MinRouteToApController {
                     // Verificar se o ponto atual é o destino da rota e se a origem não foi visitada ainda
                 } else if (toIndex == closest && !visited[fromIndex]) {
                     // Calcular a nova distância
-                    int newDist = distances[closest] + route.getDistance();
+                    int newDist = distances[closest] + routes.get(j).getDistance();
                     // Atualizar a distância se a nova distância for menor
                     if (newDist < distances[fromIndex]) {
                         distances[fromIndex] = newDist;
@@ -170,11 +220,13 @@ public class MinRouteToApController {
                     }
                 }
             }
+
         }
 
         // Reconstruir o caminho mais curto
         List<SignalPoint> path = new ArrayList<>();
-        for (int at = signalPoints.indexOf(target); at != -1; at = previous[at]) {
+        int atIndex = methodToReplaceIndexOf(signalPoints, target);
+        for (int at = atIndex; at != -1; at = previous[at]) {
             path.add(0, signalPoints.get(at));
         }
 
@@ -197,10 +249,13 @@ public class MinRouteToApController {
     private List<Route> constructRoute(List<SignalPoint> signalPoints, List<Route> routes) {
         List<Route> newRoute = new ArrayList<>();
 
-        for (int i = 0; i < signalPoints.size() - 1; i++) {
-            for (Route route : routes) {
-                if (route.equals(new Route(signalPoints.get(i), signalPoints.get(i + 1)))) {
-                    newRoute.add(new Route(route.getDistance(), signalPoints.get(i), signalPoints.get(i + 1)));
+        int sizeSignalPoint = methodToReplaceSize(signalPoints);
+        int sizeRoute = methodToReplaceSizeRoute(routes);
+        for (int i = 0; i < sizeSignalPoint - 1; i++) {
+
+            for (int j = 0; j < sizeRoute; j++) {
+                if (routes.get(j).equals(new Route(signalPoints.get(i), signalPoints.get(i + 1)))) {
+                    newRoute.add(new Route(routes.get(j).getDistance(), signalPoints.get(i), signalPoints.get(i + 1)));
                 }
             }
         }

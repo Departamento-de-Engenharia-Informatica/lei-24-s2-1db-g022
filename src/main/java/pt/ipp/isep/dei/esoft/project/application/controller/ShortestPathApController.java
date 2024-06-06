@@ -9,6 +9,35 @@ import java.util.List;
 
 public class ShortestPathApController {
 
+    private int methodToReplaceIndexOf(List<SignalPoint> vertices, SignalPoint signalPoint) {
+        int size = methodToReplaceSize(vertices);
+
+        for (int i = 0; i < size; i++) {
+            if (vertices.get(i).getName().equals(signalPoint.getName())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int methodToReplaceSize(List<SignalPoint> vertices) {
+        int count = 0;
+
+        try {
+            while (true) {
+                if (vertices.get(count) != null) {
+                    count++;
+                    continue;
+                }
+                break;
+            }
+        } catch (IndexOutOfBoundsException io) {
+            return count;
+
+        }
+        return -1;
+    }
+
     /**
      * Imports signal point names from a CSV file and returns a list of SignalPoint objects.
      *
@@ -83,8 +112,9 @@ public class ShortestPathApController {
      * @return A list of Route objects representing the shortest path from the source point to the nearest assembly point.
      */
     public List<Route> findShortestPathToNearestAP(SignalPoint source, List<SignalPoint> signalPoints, List<Route> routes, boolean[] isAssemblyPoint) {
+
         // Número total de pontos de sinalização
-        int numPoints = signalPoints.size();
+        int numPoints = methodToReplaceSize(signalPoints);
 
         // Arrays para armazenar distâncias, pontos visitados e predecessores
         int[] distances = new int[numPoints];
@@ -99,7 +129,7 @@ public class ShortestPathApController {
         }
 
         // Índice do ponto de origem
-        int sourceIndex = signalPoints.indexOf(source);
+        int sourceIndex = methodToReplaceIndexOf(signalPoints, source);
         distances[sourceIndex] = 0; // A distância do ponto de origem para si mesmo é zero
 
         // Iterar até encontrar o caminho mais curto para todos os pontos ou até que todos os pontos sejam visitados
@@ -125,8 +155,8 @@ public class ShortestPathApController {
 
             // Atualizar as distâncias para os pontos vizinhos do ponto escolhido
             for (Route route : routes) {
-                int fromIndex = signalPoints.indexOf(route.getS1());
-                int toIndex = signalPoints.indexOf(route.getS2());
+                int fromIndex = methodToReplaceIndexOf(signalPoints, route.getS1());
+                int toIndex = methodToReplaceIndexOf(signalPoints, route.getS2());
                 // Verificar se o ponto atual é o ponto de origem da rota e se o destino não foi visitado ainda
                 if (fromIndex == closest && !visited[toIndex]) {
                     // Calcular a nova distância
@@ -167,7 +197,8 @@ public class ShortestPathApController {
     private int findNearestAssemblyPointIndex(List<SignalPoint> signalPoints, int[] distances, boolean[] isAssemblyPoint) {
         int nearestAPIndex = -1;
         int minDistance = Integer.MAX_VALUE;
-        for (int i = 0; i < signalPoints.size(); i++) {
+        int size = methodToReplaceSize(signalPoints);
+        for (int i = 0; i < size; i++) {
             if (isAssemblyPoint[i] && distances[i] < minDistance) {
                 minDistance = distances[i];
                 nearestAPIndex = i;
@@ -185,8 +216,9 @@ public class ShortestPathApController {
      */
     private List<Route> constructRoute(List<SignalPoint> signalPoints, List<Route> routes) {
         List<Route> newRoute = new ArrayList<>();
+        int size = methodToReplaceSize(signalPoints);
 
-        for (int i = 0; i < signalPoints.size() - 1; i++) {
+        for (int i = 0; i < size - 1; i++) {
             SignalPoint current = signalPoints.get(i);
             SignalPoint next = signalPoints.get(i + 1);
             for (Route route : routes) {
