@@ -1,1 +1,17 @@
-Escadas3,Escadas2,Escadas1,AP;Total Cost:18
+﻿Biblioteca,AP;Total Cost: 10
+Teatro,AP;Total Cost: 7
+Pavilhao,AP;Total Cost: 5
+Topo,AP;Total Cost: 9
+ParqueInfantil,Topo,AP;Total Cost: 16
+Macieirinha,ParqueInfantil,Topo,AP;Total Cost: 26
+Fontaine,Miradouro,Topo,AP;Total Cost: 20
+Miradouro,Topo,AP;Total Cost: 12
+Capela,Topo,AP;Total Cost: 13
+Torreao,Miradouro,Topo,AP;Total Cost: 21
+Lago,AP;Total Cost: 9
+Escadas3,Escadas2,Escadas1,AP;Total Cost: 18
+Sentimentos,Escadas2,Escadas1,AP;Total Cost: 20
+CasaRoseiral,Escadas2,Escadas1,AP;Total Cost: 17
+JardimRoseiral,Escadas2,Escadas1,AP;Total Cost: 16
+Escadas2,Escadas1,AP;Total Cost: 13
+Escadas1,AP;Total Cost: 10

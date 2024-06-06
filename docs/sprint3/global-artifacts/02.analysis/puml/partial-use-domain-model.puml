@@ -75,7 +75,7 @@ class CheckUp{
     km
 }
 
-class GreenSpacesManager {
+class GreenSpaceManager {
 }
 
 class GreenSpace {
@@ -122,8 +122,8 @@ Collaborator "1" - "1" Document : has >
 Collaborator "1..*" --- "1" Job : has >
 Collaborator  <|--  HumanResourceManager
 Collaborator <|-- VehicleFleetManager
-GreenSpacesManager  -|>  Collaborator
-Address "1" - "1..*" Collaborator : lives >
+GreenSpaceManager  -|>  Collaborator
+Address "1" - "1..*" Collaborator : lives <
 Skill "*" ---------- "*" Collaborator : has <
 Collaborator "1..*" ----- "1" Team : Contains <
 
@@ -144,10 +144,11 @@ Brand "1" -  "1..*" Model : has >
 Vehicle "1..*" -- "1" Model : has >
 Vehicle "1" -- "*" CheckUp : does >
 
-'-------------GreenSpacesManager-------------
-GreenSpacesManager "1" - "*" GreenSpace : register/manages >
-GreenSpacesManager "1..*" -- "1" Task : creates >
-GreenSpacesManager "1..*" - "1" ToDoList : inserts new entry >
+'-------------GreenSpaceManager-------------
+GreenSpaceManager "1" - "*" GreenSpace : register/manages >
+GreenSpaceManager "1..*" -- "1..*" Task : creates >
+GreenSpaceManager "1..*" - "1..*" TaskToDoList : inserts new entry >
+GreenSpaceManager "1..*" - "1..*" TaskAgenda : inserts new entry >
 
 '-------------GreenSpace-------------
 GreenSpace "1" - "1" Address : is located in >
@@ -161,7 +162,7 @@ TaskToDoList "1..*" --- "1" GreenSpace :  Carried out in  >
 Task "*" -- "1" ToDoList : includes <
 
 
-GreenSpacesManager "1..*" - "1" TaskAgenda : Assign Team to an entry >
+GreenSpaceManager "1..*" - "1" TaskAgenda : Assign Team to an entry >
 Team "1" --- "*" TaskAgenda : executes by <
 Agenda "1" - "*" Task : contains >
 

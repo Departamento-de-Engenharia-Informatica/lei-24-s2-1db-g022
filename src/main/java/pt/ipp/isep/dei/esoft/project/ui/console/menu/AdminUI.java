@@ -38,6 +38,7 @@ public class AdminUI implements Runnable {
         options.add(new MenuItem("US13 - Apply Algorithm.", new MinSpanTreeUI()));
         options.add(new MenuItem("US14 - Test Algorithm.", new TestAlgorithmUI()));
         options.add(new MenuItem("US17 - Place sign to assembly point.", new MinRouteToApUI()));
+        options.add(new MenuItem("US18 - Place sign to evacuate to one of the several Assembly Points.", new ShortestPathApUI()));
 
         int option = 0;
         do {

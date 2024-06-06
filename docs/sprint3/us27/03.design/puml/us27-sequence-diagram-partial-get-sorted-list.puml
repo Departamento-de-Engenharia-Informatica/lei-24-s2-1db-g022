@@ -1,0 +1,29 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant "greenSpaces\n:GreenSpaces" as GSL
+participant "sortAlg\n:SortingAlgorithm" as SA
+
+autonumber 6
+-> GSL: getSortedGreenspaces()
+
+autonumber 6.1
+activate GSL
+    group Get Sorted List
+
+        GSL -> SA : getSortedList(greenSpaceList)
+    activate SA
+
+        SA --> GSL : greenSpaceListSorted
+    deactivate SA
+
+    end
+
+    autonumber 7
+    <-- GSL : greenSpaceListSorted
+deactivate GSL
+
+
+@enduml
