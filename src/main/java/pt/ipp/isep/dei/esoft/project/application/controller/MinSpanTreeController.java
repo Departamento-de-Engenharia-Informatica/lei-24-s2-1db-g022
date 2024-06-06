@@ -13,17 +13,78 @@ import java.util.List;
  * The MinSpanTreeController class manages operations related to minimum spanning trees.
  */
 public class MinSpanTreeController {
+    //Metodo com operacoes primitivas para dar replace ao metodo IndexOf
+    private int methodToReplaceIndexOf(List<String> vertices, String designation) {
+        int size = methodToReplaceSize(vertices);
+        for (int i = 0; i < size; i++) {
+            if (vertices.get(i).equals(designation)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int methodToReplaceSize(List<String> array) {
+        int count = 0;
+
+        try {
+            while (true) {
+                if (array.get(count) != null) {
+                    count++;
+                    continue;
+                }
+                break;
+            }
+        } catch (IndexOutOfBoundsException io) {
+            return count;
+
+        }
+        return -1;
+    }
+
+    private int methodToReplaceLength(Pipe[] array) {
+        int count = 0;
+
+        try {
+            while (true) {
+                if (array[count] != null) {
+                    count++;
+                    continue;
+                }
+                break;
+            }
+        } catch (IndexOutOfBoundsException io) {
+            return count;
+
+        }
+        return -1;
+    }
+
+    private boolean isNotDuplicate(List<String> vertices, String designation) {
+
+        int size = methodToReplaceSize(vertices);
+
+        for (int i = 0; i < size; i++) {
+            if (vertices.get(i).equals(designation)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     /**
      * Sorts the pipes array based on their distances in ascending order.
      *
      * @param pipes The array of pipes to be sorted.
      */
     private void sortPipes(Pipe[] pipes) {
+        int size = methodToReplaceLength(pipes);
         // Iterate through each element in the array Pipes US13
-        for (int i = 0; i < pipes.length - 1; i++) {
+        for (int i = 0; i < size - 1; i++) {
             int minIndex = i; // Assume the current index has the minimum distance
             // Iterate through the remaining elements to find the minimum distance
-            for (int j = i + 1; j < pipes.length; j++) {
+            for (int j = i + 1; j < size; j++) {
                 if (pipes[j].getDistance() < pipes[minIndex].getDistance()) {
                     minIndex = j; // Update the index of the minimum distance
                 }
@@ -81,27 +142,22 @@ public class MinSpanTreeController {
      */
     public List<String> findNumVertices(Pipe[] pipes) {
         List<String> vertices = new ArrayList<>();
-        for (Pipe pipe : pipes) {
-            String designationX = pipe.getWaterPoint_X().getDesignation();
-            String designationY = pipe.getWaterPoint_Y().getDesignation();
-            if (isDuplicate(vertices, designationX)) {
+        int size = methodToReplaceLength(pipes);
+
+        for (int i = 0; i < size; i++) {
+            String designationX = pipes[i].getWaterPoint_X().getDesignation();
+            String designationY = pipes[i].getWaterPoint_Y().getDesignation();
+            if (isNotDuplicate(vertices, designationX)) {
                 vertices.add(designationX);
             }
-            if (isDuplicate(vertices, designationY)) {
+            if (isNotDuplicate(vertices, designationY)) {
                 vertices.add(designationY);
             }
         }
+
         return vertices;
     }
 
-    private boolean isDuplicate(List<String> vertices, String designation) {
-        for (String vertex : vertices) {
-            if (vertex.equals(designation)) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     /**
      * Computes the minimum spanning tree using the Kruskal's algorithm.
@@ -114,7 +170,7 @@ public class MinSpanTreeController {
         sortPipes(pipes); // Sort pipes by distance
 
         List<String> vertices = findNumVertices(pipes); // Find unique vertices
-        int verticeMax = vertices.size(); // Get the total number of vertices
+        int verticeMax = methodToReplaceSize(vertices); // Get the total number of vertices
         List<Pipe> minSpanningTree = new ArrayList<>(); // List to store the minimum spanning tree
 
         int[] parent = new int[verticeMax]; // Array to store the parent of each vertex
@@ -129,11 +185,12 @@ public class MinSpanTreeController {
         int edgesAdded = 0; // Counter for added edges
         int pipeIndex = 0; // Pipe index
 
+        int size = methodToReplaceLength(pipes);
         // Iterate until all edges are added or all pipes are checked
-        while (edgesAdded < verticeMax - 1 && pipeIndex < pipes.length) {
+        while (edgesAdded < verticeMax - 1 && pipeIndex < size) {
             Pipe currentPipe = pipes[pipeIndex]; // Current pipe
-            int x = vertices.indexOf(currentPipe.getWaterPoint_X().getDesignation()); // Index of the start point
-            int y = vertices.indexOf(currentPipe.getWaterPoint_Y().getDesignation()); // Index of the end point
+            int x = methodToReplaceIndexOf(vertices, currentPipe.getWaterPoint_X().getDesignation()); // Index of the start point
+            int y = methodToReplaceIndexOf(vertices, currentPipe.getWaterPoint_Y().getDesignation());  // Index of the end point
 
             int xRoot = find(parent, x); // Representative of the set for the start point
             int yRoot = find(parent, y); // Representative of the set for the end point

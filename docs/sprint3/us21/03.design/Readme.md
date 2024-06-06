@@ -14,15 +14,16 @@
 | 			  		        | 	... instantiating a new TaskToDoList?            | ToDoList                        | Creator: <br/>(Rule 1): in the DM ToDoList has a TaskToDoList(Entries). <br/>(Rule 2) : ToDoList records instances of TaskToDoList. |
 | 			  		        | 							                                           | TaskToDoList                    | IE: knows its own data (e.g. urgency)                                                                                               |
 | 			  		        | 							                                           | Task                            | IE: knows its own data (e.g. description)                                                                                           |
+| 			  		        | 							                                           | GreenSpaces                     | Pure Fabrication: they form a collection of objects that do not “belong” to any domain object/class.                                |
 | 			  		        | 							                                           | TaskRepository                  | Pure Fabrication: they form a collection of objects that do not “belong” to any domain object/class.                                |
 | 			  		        | 							                                           | CollaboratorRepository          | Pure Fabrication: they form a collection of objects that do not “belong” to any domain object/class.                                |
 | 			  		        | 							                                           | GreenSpaceRepository            | Pure Fabrication: they form a collection of objects that do not “belong” to any domain object/class.                                |
 | Step 2         | ...knowing the list of GreenSpace by GSM to show? | GSM                             | IE:GreenSpace list managed by GSM.                                                                                                  |
 | Step 3         | ... saving the selected type?                     | GreenSpace                      | IE: object created in step 1 is classified in one type.                                                                             |
-| Step 4         | ...knowing the list of Tasks                      | TaskRepository                  | IE: knows/has its own Tasks                                                                                                                  |
+| Step 4         | ...knowing the list of Tasks                      | TaskRepository                  | IE: knows/has its own Tasks                                                                                                         |
 | Step 5         | ... saving the selected type?                     | Task                            | IE: object created in step 1 is classified in one type.                                                                             |
 | Step 6         |                                                   |                                 |                                                                                                                                     |
-| Step 7  		     | 	...saving the inputted data?                     | TaskToDoList                            | IE: object created in step 1 has its own data.                                                                                      |
+| Step 7  		     | 	...saving the inputted data?                     | TaskToDoList                    | IE: object created in step 1 has its own data.                                                                                      |
 | Step 8         |                                                   |                                 |                                                                                                                                     |
 | Step 9  		     | 	...  TaskToDoList data (local validation)?       | TaskToDoList                    | IE: owns its data.                                                                                                                  | 
 | 			  		        | 	... validating all data (global validation)?     | ToDoList                        | IE: knows all its TaskToDoList.                                                                                                     | 
@@ -46,6 +47,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 * CollaboratorRepository
 * GreenSpaceRepository
 * TaskRepository
+* GreenSpaces
 
 ## 3.2. Sequence Diagram (SD)
 

@@ -49,7 +49,12 @@ package "Domain" <<Folder>> {
             + hasName(greenSpaceName)
         }
 
-        class Garden{
+        class GreenSpaces{
+
+            +getSortedGreenSpaces()
+        }
+
+        class Garden implements GreenSpace{
             - String name
             - int area
             - Address
@@ -61,7 +66,7 @@ package "Domain" <<Folder>> {
             + hasName(greenSpaceName)
         }
 
-        class MediumPark{
+        class MediumPark implements GreenSpace{
             - String name
             - int area
             - Address
@@ -73,7 +78,7 @@ package "Domain" <<Folder>> {
             + hasName(greenSpaceName)
         }
 
-        class LargePark{
+        class LargePark implements GreenSpace{
             - String name
             - int area
             - Address
@@ -85,18 +90,43 @@ package "Domain" <<Folder>> {
             + hasName(greenSpaceName)
         }
 
-        class Collaborator {
-                -String name
-                -Job job
-                -Date dateOfBirth
-                -Date admissionDate
-                -Address address
-                -Document document
-                -String phoneNumber
-                -String email
-                -int taxpayer
+        interface ICollaborator{
+            + getName()
+            + getListSkill()
+            + getJob()
+            + getDateOfBirth()
+            + getAdmissionDate()
+            + getAddress()
+            + getDocument()
+            + getPhoneNumber()
+            + getEmail()
+            + getTaxpayer()
+            + hasEmail(email)
 
-                + Collaborator(name, job, dateOfBirth, admissionDate, address, document, phoneNumber, email, taxpayer)
+        }
+
+        class Document{
+            - int documentNumber
+        }
+
+        class DocumentType{
+            - String documentType
+        }
+
+        class Address {
+            - String streetName
+            - int doorNumber
+
+            + Address(streetName, postCodeNumber,localization)
+            - validation()
+        }
+
+        class PostCode{
+            - String postCodeNumber
+            - String localization
+
+            + PostCode(postCodeNumber,localization)
+            - validation()
         }
 
         class Task {
@@ -117,10 +147,13 @@ package "Domain" <<Folder>> {
             - validateTaskToDoList();
         }
 
-        class GreenSpaceManager {
-            - List<GreenSpace> managesGreenPlaceList
+        class GreenSpaceManager implements ICollaborator{
+            - String name
+            - Date dateOfBirth
+            - Date admissionDate
+            - String email
+            - int taxpayer
 
-            + GreenSpaceManager()
             + getGreenSpace()
         }
 
@@ -148,7 +181,7 @@ package "Domain" <<Folder>> {
 
         class CollaboratorRepository {
 
-            + getCollaboratorByEmail(greenSpace)
+            + getCollaboratorByEmail(email)
         }
 
         class GreenSpaceRepository {
@@ -177,48 +210,58 @@ RegisterEntryToDoListController ...> UserSession
 RegisterEntryToDoListController ...> GreenSpaceRepository
 RegisterEntryToDoListController ...> CollaboratorRepository
 RegisterEntryToDoListController ...> TaskRepository
-RegisterEntryToDoListController ...> Collaborator
+RegisterEntryToDoListController ...> ICollaborator
 RegisterEntryToDoListController ...> GreenSpace
 RegisterEntryToDoListController ...> ToDoList
 RegisterEntryToDoListController ...> Task
 RegisterEntryToDoListController ...> TaskToDoList
 RegisterEntryToDoListController ...> GreenSpaceManager
+RegisterEntryToDoListController ...> Address
+RegisterEntryToDoListController ...> PostCode
+RegisterEntryToDoListController ...> GreenSpaces
 
 '-------------------ApplicationSession-------------------
 ApplicationSession --> "1" UserSession : userSession
 
 '-------------------Repositories-------------------
-Repositories --> "1" GreenSpaceRepository : GreenSpaceRepository
+Repositories ----> "1" GreenSpaceRepository : GreenSpaceRepository
 Repositories ---> "1" CollaboratorRepository : CollaboratorRepository
-Repositories --> "1" ToDoList : ToDoList
-Repositories --> "1" TaskRepository : TaskRepository
+Repositories -> "1" ToDoList : ToDoList
+Repositories -> "1" TaskRepository : TaskRepository
 
 '-------------------CollaboratorRepository-------------------
-CollaboratorRepository "1"  -> "*" Collaborator : collaborator
+CollaboratorRepository "1"  --> "*" ICollaborator : collaboratorList
 
 '-------------------GreenSpaceRepository-------------------
-GreenSpaceRepository "1" -> "*" GreenSpace : greenSpace
+GreenSpaceRepository "1" -> "*" GreenSpace : greenSpaceList
 
 '-------------------TaskRepository-------------------
-TaskRepository "1" -> "*" Task : task
+TaskRepository "1" -> "*" Task : taskList
 
-'-------------------Collaborator-------------------
-Collaborator <|-- GreenSpaceManager
+'-------------------Address-------------------
+Address "1..*" *-- "1" PostCode : postCode
+ICollaborator "1..*" *---- "1" Address : address
+
+'-------------------Document-------------------
+ICollaborator "1" -> "1" Document : has
+Document "1..*" ->"1" DocumentType : has
 
 '-------------------GreenSpaceManager-------------------
 GreenSpaceManager "1..*" <-- "1..*" TaskToDoList : created by
-GreenSpaceManager "1..*" <-- "1..*" GreenSpace : managed by
+GreenSpaceManager <- "*" GreenSpace : registedBy/managedBy
+GreenSpaceManager "1" ---> "1" GreenSpaces : greenSpaces
 
 '-------------------GreenSpace-------------------
-GreenSpace <|-- Garden
-GreenSpace <|-- MediumPark
-GreenSpace <|-- LargePark
+GreenSpace "1" *-- "1" Address : is located in
+
+'-------------------GreenSpaces-------------------
+GreenSpaces "1" -> "*" GreenSpace: greenSpaceList
 
 '-------------------ToDoList-------------------
 ToDoList "1" --> "*" TaskToDoList : taskTdl
 
 '-------------------TaskToDoList-------------------
 TaskToDoList "1..*" --> "1" GreenSpace : greenSpace
-TaskToDoList "1..*" --> "1" Task : task
+TaskToDoList "1..*" ---> "1" Task : task
 
 @enduml
