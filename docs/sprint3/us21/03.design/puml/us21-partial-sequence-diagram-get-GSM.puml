@@ -7,75 +7,74 @@ participant ":RegisterGreenSpaceController" as CTRL
 participant ":ApplicationSession" as _APP
 participant "appSession\n:ApplicationSession" as APP
 participant "currentSession\n:UserSession" as SESSAO
+participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as REPO
 participant "collaboratorRepository\n:CollaboratorRepository" as COLREPO
-participant "iColaborator\n:IColaborator" as ICOL
+participant "iCollaborator\n:ICollaborator" as ICOL
 
-autonumber 9
+autonumber 3
 
 --> CTRL : getGSMFromSession()
 
-autonumber 9.1
+autonumber 3.1
 
 activate CTRL
 
-group Get GreenSpaceManager
+    group Get GreenSpaceManager
 
 
-CTRL -> _APP : getInstance()
+        CTRL -> _APP : getInstance()
+    activate _APP
 
-activate _APP
+        _APP --> CTRL : appSession
+    deactivate _APP
 
-_APP --> CTRL : appSession
+        CTRL -> APP : getCurrentSession()
 
-deactivate _APP
+    activate APP
 
-CTRL -> APP : getCurrentSession()
+        APP --> CTRL : currentSession
 
-activate APP
+    deactivate APP
 
-APP --> CTRL : currentSession
+        CTRL -> SESSAO : email = getUserEmail()
 
-deactivate APP
+    activate SESSAO
 
-CTRL -> SESSAO : email = getUserEmail()
+        SESSAO --> CTRL : email
 
-activate SESSAO
+    deactivate SESSAO
 
-SESSAO --> CTRL : email
+        CTRL -> RepositorySingleton : getInstance()
+    activate RepositorySingleton
 
-deactivate SESSAO
+        RepositorySingleton --> CTRL: repositories
+    deactivate RepositorySingleton
 
-CTRL -> REPO : getCollaboratorRepository()
+        CTRL -> REPO : getCollaboratorRepository()
+    activate REPO
 
-activate REPO
+        REPO --> CTRL : collaboratorReporitory
+    deactivate REPO
 
-REPO --> CTRL : collaboratorReporitory
+        CTRL ->  COLREPO : getCollaboratorByEmail(email)
+    activate COLREPO
 
-deactivate REPO
+    loop for each collaborator in collaboratorList [in CollaboratorRepository]]
 
-CTRL ->  COLREPO : getCollaboratorByEmail(email)
+        COLREPO -> ICOL : hasEmail(email)
+    activate ICOL
 
-activate COLREPO
+        ICOL --> COLREPO : true/false
+    deactivate ICOL
 
-loop for each collaborator in collaboratorList [in CollaboratorRepository]]
+    end
 
-COLREPO -> ICOL : hasEmail(email)
-
-activate ICOL
-
-ICOL --> COLREPO : true/false
-
-deactivate ICOL
-
-end
-
-COLREPO --> CTRL : collaborator
-
-deactivate COLREPO
+        COLREPO --> CTRL : collaborator
+    deactivate COLREPO
 
 end
-autonumber 10
+autonumber 4
 
 <--CTRL : manager
 deactivate CTRL

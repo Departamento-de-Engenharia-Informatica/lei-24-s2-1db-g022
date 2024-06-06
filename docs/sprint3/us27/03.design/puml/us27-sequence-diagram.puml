@@ -13,6 +13,7 @@ participant ":ListGreenSpacesUI" as UI
 participant ":ListGreenSpacesController" as CTRL
 participant "manager\n:GreenSpaceManager" as GSMO
 participant "greenSpaces\n:GreenSpaces" as GSL
+participant "sortAlg\n:SortingAlgorithm" as SA
 
 activate GSM
 
@@ -38,9 +39,11 @@ activate GSM
         GSMO -> GSL : getSortedGreenspaces()
     activate GSL
 
-        ref over GSL
-            Get Sorted List
-        end ref
+        GSL -> SA : getSortedList(greenSpaceList)
+    activate SA
+
+        SA --> GSL : greenSpaceListSorted
+    deactivate SA
 
         GSL --> GSMO : greenSpaceListSorted
     deactivate GSL
