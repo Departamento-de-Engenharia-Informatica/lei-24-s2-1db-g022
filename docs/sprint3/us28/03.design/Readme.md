@@ -11,6 +11,7 @@
 | 			  		        | 	                                           | Agenda                         | IE: knows all its taskAgenda.                                                                                                   |
 | 			  		        | 							                                     | TaskAgenda                     | IE: knows its own data (e.g. description)                                                                                       |
 | 			  		        | 							                                     | TeamRepository                 | Pure Fabrication: they form a collection of objects that do not “belong” to any domain object/class.<br>IE: Knows all its Teams |
+| 			  		        | 	                                           | TasksAgenda                    | Pure Fabrication: they form a collection of objects that do not “belong” to any domain object/class.<br>IE: Knows all its Teams |
 | Step 2         |                                             |                                |                                                                                                                                 |
 | Step 3  		     | 	                                           |                                |                                                                                                                                 |
 | Step 4         | ...shows data and requests confirmation     | ConsultAssignedTasksUI         | IE: is responsible for user interactions.                                                                                       |
@@ -29,6 +30,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 * ConsultAssignedTasksUI
 * ConsultAssignedTasksController
 * TeamRepository
+* TasksAgenda
 
 ## 3.2. Sequence Diagram (SD)
 
@@ -40,7 +42,9 @@ This diagram shows the full sequence of interactions between the classes involve
 
 ### Split Diagrams
 
-![Sequence Diagram - Partial - Get Collaborator](svg/us28-partial-sequence-diagram-get-collaborator.svg)
+Get Collaborator
+
+![Sequence Diagram - Split Manager](../../us20/03.design/svg/us20-partial-sequence-diagram-get-GSM.svg)
 
 ## 3.3. Class Diagram (CD)
 

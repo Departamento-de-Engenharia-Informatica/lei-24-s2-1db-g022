@@ -16,7 +16,9 @@ participant "teamRepository\n:TeamRepository" as TeamRepo
 participant "team\n:Team" as TEAM
 participant "collaborator\n:Collaborator" as Collab
 participant "agenda\n:Agenda" as AGENDA
+participant "tasksAgenda\n:TasksAgenda" as TASKSAGENDA
 participant "taskAgenda\n:TaskAgenda" as TASKAGENDA
+
 
 activate Col
 
@@ -42,7 +44,7 @@ activate Col
         activate CTRL
 
             ref over CTRL
-                Get Collaborator
+                Design in US20
             end ref
 
         CTRL --> CTRL : collaborator
@@ -92,6 +94,8 @@ activate Col
     CTRL -> AGENDA: getTaskListByTeam(team)
     activate AGENDA
 
+
+
     loop for each task in TaskAgenda
 
     AGENDA -> TASKAGENDA: hasTaskByTeam(team)
@@ -115,34 +119,49 @@ activate Col
 
         CTRL -> AGENDA: filterTasksByStatusDate(taskListTeam, status, startDate, endDate)
         activate AGENDA
+
+        AGENDA -> TASKSAGENDA : filterTasksByStatusDate(taskListTeam, status, startDate, endDate)
+        activate TASKSAGENDA
+
+
+
                 loop for each taskAgenda in taskListTeam
-        AGENDA -> TASKAGENDA : hasStatus(status)
+        TASKSAGENDA -> TASKAGENDA : hasStatus(status)
         activate TASKAGENDA
 
-        TASKAGENDA --> AGENDA : true/false
+        TASKAGENDA --> TASKSAGENDA : true/false
         deactivate TASKAGENDA
 
-        AGENDA -> TASKAGENDA : isBetweenDates(startDate, endDate)
+        TASKSAGENDA -> TASKAGENDA : isBetweenDates(startDate, endDate)
         activate TASKAGENDA
 
-        TASKAGENDA --> AGENDA : true/false
+        TASKAGENDA --> TASKSAGENDA : true/false
         deactivate TASKAGENDA
 
             alt hasStatus == true && isBetweenDates == true
-                AGENDA -> AGENDA: addFilteredTaskListTeam()
-                activate AGENDA
+                TASKSAGENDA -> TASKSAGENDA: addFilteredTaskListTeam()
+                activate TASKSAGENDA
 
-                AGENDA --> AGENDA: true/false
-                deactivate AGENDA
+                TASKSAGENDA --> TASKSAGENDA: true/false
+                deactivate TASKSAGENDA
             end
 
     end
+
+        TASKSAGENDA --> AGENDA : filteredTaskListTeam
+        deactivate TASKSAGENDA
 
         AGENDA --> CTRL: filteredTaskListTeam
         deactivate AGENDA
 
         CTRL -> AGENDA: sortTaskAgendaByDate(filteredTaskListTeam)
         activate AGENDA
+
+        AGENDA -> TASKSAGENDA: sortTaskAgendaByDate(filteredTaskListTeam)
+        activate TASKSAGENDA
+
+        TASKSAGENDA --> AGENDA: sortedTaskListTeam
+        deactivate TASKSAGENDA
 
         AGENDA --> CTRL: sortedTaskListTeam
         deactivate AGENDA

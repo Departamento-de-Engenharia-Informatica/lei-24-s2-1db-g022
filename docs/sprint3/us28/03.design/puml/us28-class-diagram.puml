@@ -52,81 +52,35 @@ package "Domain" <<Folder>> {
         }
 
         class Garden implements GreenSpace{
-            - String name
-            - int area
-            - Address
 
-            + Garden(name,area,streetName,postCode)
-            + getName()
-            + getArea()
-            + getAddress()
         }
 
         class MediumPark implements GreenSpace{
-            - String name
-            - int area
-            - Address
 
-            + getName()
-            + getArea()
-            + getAddress()
-            + MediumPark(name,area,streetName,postCode)
         }
 
         class LargePark implements GreenSpace{
-            - String name
-            - int area
-            - Address
 
-            + getName()
-            + getArea()
-            + getAddress()
-            + LargePark(name,area,streetName,postCode)
         }
 
         interface ICollaborator{
-            + getName()
-            + getListSkill()
-            + getJob()
-            + getDateOfBirth()
-            + getAdmissionDate()
-            + getAddress()
-            + getDocument()
-            + getPhoneNumber()
             + getEmail()
-            + getTaxpayer()
             + hasEmail(email)
 
-        }
-
-        class Document{
-            - int documentNumber
-        }
-
-        class DocumentType{
-            - String documentType
-        }
-
-        class Address {
-            - String streetName
-            - int doorNumber
-
-            + Address(streetName, postCodeNumber,localization)
-            - validation()
-        }
-
-        class PostCode{
-            - String postCodeNumber
-            - String localization
-
-            + PostCode(postCodeNumber,localization)
-            - validation()
         }
 
         class Task {
             - String taskDescription
 
             + Task(taskDescription)
+        }
+
+        class TasksAgenda {
+
+            + filterTasksByStatusDate(taskListTeam, status, startDate, endDate)
+            + sortTaskAgendaByDate(filteredTaskListTeam)
+            - addTaskListTeam()
+            - addFilteredTaskListTeam()
         }
 
         class TaskAgenda {
@@ -136,8 +90,6 @@ package "Domain" <<Folder>> {
             - Date startDate
             - Date endDate
 
-            + TaskAgenda(greenSpace, task, urgency, duration, startDate, endDate)
-            - validateTaskAgenda()
             - hasTaskByTeam(team)
             - hasStatus(status)
             - isBetweenDates(startDate, endDate)
@@ -159,9 +111,6 @@ package "Domain" <<Folder>> {
             + getTaskListByTeam(team)
             + filterTasksByStatusDate(taskListTeam, status, startDate, endDate)
             + sortTaskAgendaByDate(filteredTaskListTeam)
-            - addTaskListTeam()
-            - addFilteredTaskListTeam()
-
         }
 
     }
@@ -208,8 +157,6 @@ ConsultAssignedTasksController ...> Task
 ConsultAssignedTasksController ...> TaskAgenda
 ConsultAssignedTasksController ...> Agenda
 ConsultAssignedTasksController ...> Team
-ConsultAssignedTasksController ...> Address
-ConsultAssignedTasksController ...> PostCode
 
 '-------------------ApplicationSession-------------------
 ApplicationSession --> "1" UserSession : userSession
@@ -225,19 +172,10 @@ CollaboratorRepository "1"  --> "*" ICollaborator : collaboratorList
 '-------------------TeamRepository-------------------
 TeamRepository "1" -> "*" Team : teamList
 
-'-------------------Address-------------------
-Address "1..*" *-- "1" PostCode : postCode
-ICollaborator "1..*" *---- "1" Address : address
-
-'-------------------Document-------------------
-ICollaborator "1" -> "1" Document : has
-Document "1..*" ->"1" DocumentType : has
-
-'-------------------GreenSpace-------------------
-GreenSpace "1" *- "1" Address : is located in
-
 '-------------------Agenda-------------------
-Agenda "1" --> "*" TaskAgenda : taskAgenda
+Agenda "1" --> "1" TasksAgenda : tasksAgenda
+
+TasksAgenda "1" -> "*" TaskAgenda: taskAgendaList
 
 '-------------------TaskAgenda-------------------
 TaskAgenda "*" --> "1" GreenSpace : greenSpace
