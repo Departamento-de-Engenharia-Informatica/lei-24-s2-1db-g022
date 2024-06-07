@@ -5,36 +5,18 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 
 participant ":AssignTeamAgendaController" as CTRL
-participant ":Repositories" as RepositorySingleton
-participant "repositories\n:Repositories" as PLAT
 participant "agenda\n:Agenda" as AGENDA
+
 participant "agendaTask\n:AgendaTask" as TASK
 
-autonumber 28
+autonumber 35
 
---> CTRL : assignTeamTask(team,task)
+--> CTRL : assignTeamTask(teamCollaboratorName,taskParkName,taskName)
 
-autonumber 28.1
-
-activate CTRL
-
+autonumber 35.1
 group Assign Team Task
 
-CTRL -> RepositorySingleton : getInstance()
-
-activate RepositorySingleton
-
-RepositorySingleton --> CTRL : repositories
-
-deactivate RepositorySingleton
-
-CTRL -> PLAT : getAgenda()
-
-activate PLAT
-
-PLAT --> CTRL: agenda
-
-deactivate PLAT
+activate CTRL
 
 CTRL -> AGENDA : assignTeamTask(team,task)
 
@@ -70,7 +52,7 @@ deactivate AGENDA
 
 end
 
-autonumber 29
+autonumber 36
 
 <--CTRL : true/false
 

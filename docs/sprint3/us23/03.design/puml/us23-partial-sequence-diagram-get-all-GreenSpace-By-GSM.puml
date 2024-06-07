@@ -11,11 +11,11 @@ participant "agenda\n:Agenda" as AGENDA
 participant "agendaTask\n:AgendaTask" as TASK
 participant "greenSpace\n:GreenSpace" as GREENSPACE
 
-autonumber 9
+autonumber 11
 
---> CTRL : getAllTaskByGreenSpace()
+--> CTRL : getAllTaskByGreenSpace(listGreenSpace)
 
-autonumber 9.1
+autonumber 11.1
 
 activate CTRL
 
@@ -47,6 +47,16 @@ AGENDA -> TASK : verifyGreenSpace(listGreenSpace)
 
 activate TASK
 
+TASK -> TASK : verifyNullTeam()
+
+activate TASK
+
+TASK --> TASK : true/false
+
+deactivate TASK
+
+alt verifyNullTeam == true
+
 loop for each GreenSpace in ListGreenSpace
 
 TASK -> GREENSPACE : equalsGreenSpace(greenSpace)
@@ -58,7 +68,7 @@ GREENSPACE --> TASK : true/false
 deactivate GREENSPACE
 
 end
-
+end
 TASK -> AGENDA : true/false
 
 deactivate TASK
@@ -83,7 +93,7 @@ deactivate AGENDA
 
 end
 
-autonumber 10
+autonumber 12
 
 <--CTRL : listTask
 

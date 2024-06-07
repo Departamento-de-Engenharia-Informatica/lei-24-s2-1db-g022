@@ -1,0 +1,264 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype orto
+
+skinparam classAttributeIconSize "1"
+
+'left to right direction
+package "UI" <<Folder>> {
+    class AssignTeamAgendaUI {
+    }
+}
+
+package "Controller" <<Folder>> {
+    class AssignTeamAgendaController {
+        + AssignTeamAgendaController(collaboratorRepository, agenda,teamRepository)
+        + getAllByGSM()
+        + getAllTeam()
+        + assignTeamTask(teamCollaboratorName,taskParkName,taskName)
+        - assignTeam(team,task)
+        - sendEmailTeam(team,msg)
+        - getAllGreenSpaceByGSM(greenSpaceManager)
+        - getAllTaskByGreenSpace(listGreenSpace)
+        - getGSMFromSession()
+    }
+}
+package "UI" <<Folder>> {
+    class AssignTeamAgendaUI {
+    }
+}
+
+
+
+'left to right direction
+package "Domain" <<Folder>> {
+
+    package "Domain.Application" <<Folder>> {
+
+        class ApplicationSession
+        {
+            + static getInstance()
+            + getCurrentSession()
+        }
+
+        class UserSession
+        {
+            + getUserEmail()
+        }
+    }
+
+    package "Domain.Model" <<Folder>> {
+
+        interface EmailService{
+           + sendEmailByService(email,msg)
+        }
+
+        class DeiEmailService implements EmailService{
+
+        }
+
+        class GmailEmailService implements EmailService{
+
+        }
+
+        class Team{
+            + verifyCollaboratorName(teamCollaboratorName)
+            + sendEmail(msg)
+        }
+
+        interface ICollaborator{
+            + getName()
+            + getListSkill()
+            + getJob()
+            + getDateOfBirth()
+            + getAdmissionDate()
+            + getAddress()
+            + getDocument()
+            + getPhoneNumber()
+            + getEmail()
+            + getTaxpayer()
+            + hasEmail(email)
+            + hasName(name)
+
+        }
+
+        class Collaborator implements ICollaborator{
+            - String name
+            - Date dateOfBirth
+            - Date admissionDate
+            - String email
+            - int taxpayer
+            + hasName(teamCollaboratorName)
+        }
+
+        class GreenSpaceManager implements ICollaborator{
+            - String name
+            - Date dateOfBirth
+            - Date admissionDate
+            - String email
+            - int taxpayer
+            + hasName(teamCollaboratorName)
+            + getListGreenSpace()
+        }
+
+        interface GreenSpace {
+
+            + getName()
+            + getArea()
+            + getAddress()
+            + equalsGreenSpace(greenSpace)
+            + hasName(name)
+        }
+
+        class Garden implements GreenSpace{
+            - String name
+            - int area
+            - Address
+
+            + Garden(name,area,streetName,postCodeNumber,localization)
+            + getName()
+            + getArea()
+            + getAddress()
+            - validationGreenSpace()
+        }
+
+        class MediumPark implements GreenSpace{
+            - String name
+            - int area
+            - Address
+
+            + getName()
+            + getArea()
+            + getAddress()
+            + MediumPark(name,area,streetName,postCodeNumber,localization)
+            - validationGreenSpace()
+        }
+
+        class LargePark implements GreenSpace{
+            - String name
+            - int area
+            - Address
+
+            + getName()
+            + getArea()
+            + getAddress()
+            + LargePark(name,area,streetName,postCodeNumber,localization)
+            - validationGreenSpace()
+
+        }
+
+        class GreenSpaces{
+            + getSortedGreenSpaces()
+        }
+
+        class Agenda{
+
+            + getAllTaskByGreenSpace(listGreenSpace)
+            + getTaskByNameAndGreenSpace(taskParkName,taskName)
+            + assignTeamTask(teamTask)
+            - addListTaskByGreenSpace(task)
+        }
+
+
+        class AgendaTask {
+
+            - String urgency
+            - int expectedDuration
+            - date startDate
+            - date endDate
+            - String status
+
+            + hasTaskName(taskName)
+            + hasGreenSpaceName(taskParkName)
+            + verifyGreenSpace(listGreenSpace)
+            - verifyNull()
+            - equalsTask(task)
+            - updateTeam(team)
+
+        }
+
+    }
+
+    package "Domain.Repository" <<Folder>> {
+
+        class Repositories {
+
+            - Repositories()
+            + getInstance() : Repositories
+            + getTeamRepository()
+            + getAgenda()
+            + getCollaboratorRepository()
+        }
+
+        class CollaboratorRepository {
+            + getCollaboratorByEmail(greenSpace)
+        }
+
+        class GreenSpaceRepository {
+            - addGreenSpace(greenSpace)
+            - validationAllGreenSpace(greenSpace)
+            + registerGreenSpace(name,area,streetName,postCode)
+        }
+
+        class TeamRepository{
+            + getAllTeams()
+            + getTeamByCollaboratorName(teamCollaboratorName)
+        }
+    }
+}
+
+'-------------------Instance-------------------
+Repositories -> Repositories : instance
+ApplicationSession -> ApplicationSession : instance
+
+'-------------------UI-------------------
+AssignTeamAgendaUI ..> AssignTeamAgendaController
+
+'-------------------Controller-------------------
+AssignTeamAgendaController ..> Repositories : repositories
+AssignTeamAgendaController ..> ApplicationSession
+AssignTeamAgendaController ...> UserSession
+AssignTeamAgendaController ...> GreenSpaceRepository
+
+AssignTeamAgendaController ...> ICollaborator
+AssignTeamAgendaController ...> Agenda
+AssignTeamAgendaController ...> CollaboratorRepository
+AssignTeamAgendaController ...> TeamRepository
+AssignTeamAgendaController ...> GreenSpace
+AssignTeamAgendaController ...> AgendaTask
+AssignTeamAgendaController ...> EmailService
+
+AssignTeamAgendaController ...> Team
+
+
+'-------------------ApplicationSession-------------------
+ApplicationSession --> "1" UserSession : userSession
+
+'-------------------Repositories-------------------
+Repositories ---> "1" TeamRepository : TeamRepositoryRepository
+Repositories ---> "1" CollaboratorRepository : CollaboratorRepository
+Repositories ---> "1" Agenda : Agenda
+Repositories ---> "1" GreenSpaceRepository :GreenSpaceRepository
+GreenSpaceManager "1" ---> "1" GreenSpaces : greenSpaces
+
+
+'-------------------CollaboratorRepository-------------------
+CollaboratorRepository "1"  --> "*" ICollaborator : collaboratorList
+
+'-------------------GreenSpaceRepository-------------------
+GreenSpaceRepository "1" --> "*" GreenSpace : greenSpaceList
+
+'-------------------GreenSpaceRepository-------------------
+TeamRepository "1" --> "*" Team : teamList
+
+'-------------------GreenSpace-------------------
+GreenSpaces "1" -> "*" GreenSpace : greenSpaceList
+
+Agenda "1" --> "*" AgendaTask : taskList
+AgendaTask "*" --> "1" GreenSpace : greenSpace
+AgendaTask "*" --> "1" Team  : team
+
+Team "*" <-- "1" EmailService : send email to all elements of
+@enduml

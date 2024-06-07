@@ -1,0 +1,56 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":AssignTeamAgendaController" as CTRL
+participant "team\n:Team" as TEAM
+participant "collaborator\n:Collaborator" as COL
+participant "emailService\n:EmailService" as SERVICE
+
+autonumber 35.3
+
+--> CTRL : sendEmailTeam(team,msg)
+
+autonumber 35.3.1
+
+activate CTRL
+
+group Send Email By Team
+
+CTRL -> TEAM : sendEmail(msg)
+
+activate TEAM
+
+loop for each collaborator in collaboratorList[in Team]
+
+TEAM -> COL :  getEmail()
+
+activate COL
+
+COL --> TEAM : email
+
+
+deactivate COL
+
+TEAM -> SERVICE : sendEmailByService(email,msg)
+
+activate SERVICE
+
+SERVICE --> TEAM : true/false
+
+deactivate SERVICE
+
+end
+
+TEAM --> CTRL : true/false
+
+deactivate TEAM
+
+autonumber 35.4
+
+<--CTRL : true/false
+
+deactivate CTRL
+@enduml

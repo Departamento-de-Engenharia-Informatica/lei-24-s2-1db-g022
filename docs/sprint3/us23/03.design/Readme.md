@@ -54,14 +54,22 @@ Get All GreenSpace
 
 ![Sequence Diagram - Get All GreenSpace](svg/us23-partial-sequence-diagram-get-all-GreenSpace-By-GSM.svg)
 
-DTO Team
-
-![Sequence Diagram - DTO Tean](svg/us23-partial-sequence-diagram-toDTO.svg)
-
 Get Assign Team
 
 ![Sequence Diagram - Get Assign Team](svg/us23-partial-sequence-diagram-assign-team.svg)
 
+Get Team By Collaborator Name
+
+![Sequence Diagram - Get Team By Collaborator Name](svg/us23-partial-sequence-diagram-get-team.svg)
+
+Get Task By Name and GreenSpace
+
+![Sequence Diagram - Get Task By Name and GreenSpace](svg/us23-partial-sequence-diagram-get-task.svg)
+
+Send Email
+
+![Sequence Diagram - Send Email](svg/us23-partial-sequence-diagram-send-email.svg)
+
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us01-class-diagram.svg)
+![Class Diagram](svg/us23-class-diagram.svg)

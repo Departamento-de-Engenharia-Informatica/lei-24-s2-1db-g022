@@ -8,6 +8,7 @@ participant ":TeamMapper" as TEAMMP
 participant "listTeam\n:List<Team>" as TEAMLIST
 participant "listTeamDto\n:List<TeamDto>" as LSTEAMDTO
 participant "objDto\n:TeamDto" as DTOTEAM
+participant "collaboratorDto\n:CollaboratorDto" as DTOCOLLABORATOR
 
 autonumber 21
 
@@ -35,9 +36,13 @@ TEAMMP -> TEAMMP : objDto = toDTO(obj)
 
 activate TEAMMP
 
-TEAMMP --> DTOTEAM : create(obj)
+TEAMMP --> DTOTEAM** : create(obj)
 
 activate DTOTEAM
+
+DTOTEAM -> DTOCOLLABORATOR
+
+
 
 DTOTEAM --> TEAMMP : objDto
 

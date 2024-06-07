@@ -8,8 +8,8 @@ participant ":ApplicationSession" as _APP
 participant "appSession\n:ApplicationSession" as APP
 participant "currentSession\n:UserSession" as SESSAO
 participant "repositories\n:Repositories" as REPO
-participant "collaboratorRepositories\n:CollaboratorRepositories" as COLREPO
-participant "collaborator\nCollaborator" as COL
+participant "collaboratorRepository\n:CollaboratorRepository" as COLREPO
+participant "iColaborator\n:IColaborator" as ICOL
 
 autonumber 3
 
@@ -20,6 +20,7 @@ autonumber 3.1
 activate CTRL
 
 group Get GreenSpaceManager
+
 
 CTRL -> _APP : getInstance()
 
@@ -57,24 +58,23 @@ CTRL ->  COLREPO : getCollaboratorByEmail(email)
 
 activate COLREPO
 
-loop for collaborator in collaboratorRepository[in collaboratorList]
+loop for each collaborator in collaboratorList [in CollaboratorRepository]]
 
-COLREPO -> COL : hasEmail(email)
+COLREPO -> ICOL : hasEmail(email)
 
-activate COL
+activate ICOL
 
-COL --> COLREPO : true/false
+ICOL --> COLREPO : true/false
 
-deactivate COL
+deactivate ICOL
 
 end
 
-COLREPO --> CTRL : Collaborator
+COLREPO --> CTRL : collaborator
 
 deactivate COLREPO
 
 end
-
 autonumber 4
 
 <--CTRL : greenSpaceManager

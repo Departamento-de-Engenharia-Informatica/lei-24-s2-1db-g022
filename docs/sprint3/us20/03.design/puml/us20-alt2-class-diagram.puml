@@ -188,7 +188,6 @@ CollaboratorRepository "1"  --> "*" ICollaborator : collaboratorList
 '-------------------GreenSpaceRepository-------------------
 GreenSpaceRepository "1" --> "*" GreenSpace : greenSpaceList
 
-
 '-------------------Green Space Manager-------------------
 GreenSpaceManager <- "*" GreenSpace : registedBy/managedBy
 GreenSpaceManager "1" ---> "1" GreenSpaces : greenSpaces
