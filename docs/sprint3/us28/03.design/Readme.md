@@ -1,36 +1,34 @@
-# US28 - Consult the assigned tasks
+# US28 - Consult assigned tasks
 
-## 3. Design - User Story Realization 
+## 3. Design - User Story Realization
 
 ### 3.1. Rationale
 
-| Interaction ID | Question: Which class is responsible for...   | Answer                  | Justification (with patterns)                                                                                 |
-|:---------------|:----------------------------------------------|:------------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		     | 	... interacting with the actor?              | RegisterSkillUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		        | 	... coordinating the US?                     | RegisterSkillController | Controller                                                                                                    |
-| 			  		        | 	... instantiating a new Skill?               | SkillRepository         | Pure Fabrication: they form a collection of objects that do not “belong” to any domain object/class.          |
-| 			  		        | 							                                       | SkillRepository         | IE: knows/has its own Skill                                                                                   |
-| 			  		        | 							                                       | Skill                   | IE: knows its own data (e.g. name)                                                                            |
-| Step 2         |                                               |                         |                                                                                                               |
-| Step 3  		     | 	...saving the inputted data?                 | Skill                   | IE: object created in step 1 has its own data.                                                                |
-| Step 4         |                                               |                         |                                                                                                               |
-| Step 5  		     | 	...  all data (local validation)?            | Skill                   | IE: owns its data.                                                                                            | 
-| 			  		        | 	... validating all data (global validation)? | SkillRepository         | IE: knows all its skills.                                                                                     | 
-| 			  		        | 	... saving the created Skill?                | SkillRepository         | IE: owns all its skills.                                                                                      | 
-| Step 6  		     | 	... informing operation success?             | RegisterSkillUI         | IE: is responsible for user interactions.                                                                     | 
+| Interaction ID | Question: Which class is responsible for... | Answer                         | Justification (with patterns)                                                                                                   |
+|:---------------|:--------------------------------------------|:-------------------------------|:--------------------------------------------------------------------------------------------------------------------------------|
+| Step 1  		     | 	... interacting with the actor?            | ConsultAssignedTasksUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.                   |
+| 			  		        | 	... coordinating the US?                   | ConsultAssignedTasksController | Controller                                                                                                                      |
+| 			  		        | 	                                           | Agenda                         | IE: knows all its taskAgenda.                                                                                                   |
+| 			  		        | 							                                     | TaskAgenda                     | IE: knows its own data (e.g. description)                                                                                       |
+| 			  		        | 							                                     | TeamRepository                 | Pure Fabrication: they form a collection of objects that do not “belong” to any domain object/class.<br>IE: Knows all its Teams |
+| Step 2         |                                             |                                |                                                                                                                                 |
+| Step 3  		     | 	                                           |                                |                                                                                                                                 |
+| Step 4         | ...shows data and requests confirmation     | ConsultAssignedTasksUI         | IE: is responsible for user interactions.                                                                                       |
+| Step 5  		     |                                             |                                |                                                                                                                                 |
+| Step 6  		     | 	... shows data                             | ConsultAssignedTasksUI         | IE: is responsible for user interactions.                                                                                       | 
 
 ### Systematization ##
 
-According to the taken rationale, the conceptual classes promoted to software classes are: 
+According to the taken rationale, the conceptual classes promoted to software classes are:
 
-* Skill
+* Agenda
+* TaskAgenda
 
-Other software classes (i.e. Pure Fabrication) identified: 
+Other software classes (i.e. Pure Fabrication) identified:
 
-* RegisterSkillUI
-* RegisterSkillController
-* SkillRepository
-
+* ConsultAssignedTasksUI
+* ConsultAssignedTasksController
+* TeamRepository
 
 ## 3.2. Sequence Diagram (SD)
 
@@ -38,12 +36,12 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us01-sequence-diagram.svg)
+![Sequence Diagram - Full](svg/us28-sequence-diagram.svg)
 
 ### Split Diagrams
 
-n/a
+![Sequence Diagram - Partial - Get Collaborator](svg/us28-partial-sequence-diagram-get-collaborator.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us01-class-diagram.svg)
+![Class Diagram](svg/us28-class-diagram.svg)

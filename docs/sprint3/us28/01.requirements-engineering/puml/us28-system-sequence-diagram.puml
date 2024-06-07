@@ -15,10 +15,10 @@ activate Col
     Col -> System : asks to consult assigned tasks
     activate System
 
-    System --> Col : requests two dates
+    System --> Col : requests data(startDate, endDate, status)
     deactivate System
 
-    Col->System: types dates(startDate, endDate)
+    Col->System: types data
     activate System
 
     System --> Col : displays the data and requests confirmation
@@ -28,9 +28,6 @@ activate Col
     activate System
 
     System --> Col : shows list of assigned tasks
-    deactivate System
-
-    System --> Col : displays operation success
     deactivate System
 
 @enduml

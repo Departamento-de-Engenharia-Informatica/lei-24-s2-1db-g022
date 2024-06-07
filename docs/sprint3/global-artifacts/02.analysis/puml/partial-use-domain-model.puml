@@ -104,6 +104,8 @@ class TaskToDoList{
 class TaskAgenda{
     startDate
     endDate
+    expectedDuration
+    status
 }
 
 class Task {
@@ -160,7 +162,9 @@ GreenSpace "*" -- "1" SortingAlgorithm : makes use of >
 
 '-------------Task-------------
 TaskAgenda "1..*" --- "1" GreenSpace :  Carried out in  >
+TaskAgenda "1" -- "1..*" Vehicle : Carried out by >
 TaskToDoList "1..*" --- "1" GreenSpace :  Carried out in  >
+TaskToDoList "1" -- "1..*" Vehicle : Carried out by >
 
 Task "*" -- "1" ToDoList : includes <
 
