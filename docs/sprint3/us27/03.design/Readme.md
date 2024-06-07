@@ -42,10 +42,6 @@ Get Green Space Manager
 
 ![Sequence Diagram - Split Manager](svg/us27-partial-sequence-diagram-get-GSM.svg)
 
-Add Entry To Do List
-
-![Sequence Diagram - Split Sorted List](svg/us27-sequence-diagram-partial-get-sorted-list.svg)
-
 ## 3.3. Class Diagram (CD)
 
 ![Class Diagram](svg/us01-class-diagram.svg)

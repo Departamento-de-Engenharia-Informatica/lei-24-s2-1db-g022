@@ -17,6 +17,14 @@ class Collaborator {
     email
 }
 
+class Document{
+    number
+}
+
+class DocumentType{
+    type
+}
+
 class Address {
     street
     doorNumber
@@ -49,8 +57,11 @@ class LargePark {
 
 Collaborator "1..*" -- "1" Address : lives >
 Collaborator  <|--  GreenSpaceManager
+Collaborator "1" - "1" Document : has >
 
 Address "1..*" --> "1" PostCode : has
+
+Document "1..*" - "1" DocumentType : has >
 
 GreenSpaceManager "1" -- "1..*" GreenSpace : manages >
 
