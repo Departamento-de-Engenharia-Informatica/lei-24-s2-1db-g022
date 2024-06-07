@@ -13,14 +13,14 @@ participant ":ListGreenSpacesUI" as UI
 participant ":ListGreenSpacesController" as CTRL
 participant "manager\n:GreenSpaceManager" as GSMO
 participant "greenSpaces\n:GreenSpaces" as GSL
-participant "sortAlg\n:SortingAlgorithm" as SA
+participant "sortAlg\n:Sortable" as SA
 
 activate GSM
 
         GSM -> UI : asks to list all associated green spaces
     activate UI
 
-        UI -> CTRL : getGreenSpaceManagerGSpace()
+        UI -> CTRL : getGreenSpaceManagerGSpaceList()
     activate CTRL
 
         CTRL -> CTRL : getGSMFromSession()

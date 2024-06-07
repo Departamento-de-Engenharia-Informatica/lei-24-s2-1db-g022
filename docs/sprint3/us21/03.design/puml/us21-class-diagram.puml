@@ -102,7 +102,6 @@ package "Domain" <<Folder>> {
             + getEmail()
             + getTaxpayer()
             + hasEmail(email)
-
         }
 
         class Document{
@@ -114,10 +113,10 @@ package "Domain" <<Folder>> {
         }
 
         class Address {
-            - String streetName
+            - String street
             - int doorNumber
 
-            + Address(streetName, postCodeNumber,localization)
+            + Address(street, doorNumber, postCodeNumber,localization)
             - validation()
         }
 
@@ -137,8 +136,6 @@ package "Domain" <<Folder>> {
         }
 
         class TaskToDoList {
-            - GreenSpace greenSpace
-            - Task task
             - String urgency
             - int duration
             - String status

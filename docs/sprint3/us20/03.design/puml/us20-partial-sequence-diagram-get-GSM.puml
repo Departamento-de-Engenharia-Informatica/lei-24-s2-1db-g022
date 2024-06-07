@@ -9,7 +9,7 @@ participant "appSession\n:ApplicationSession" as APP
 participant "currentSession\n:UserSession" as SESSAO
 participant "repositories\n:Repositories" as REPO
 participant "collaboratorRepository\n:CollaboratorRepository" as COLREPO
-participant "iColaborator\n:IColaborator" as ICOL
+participant "iCollaborator\n:ICollaborator" as ICOL
 
 autonumber 9
 
