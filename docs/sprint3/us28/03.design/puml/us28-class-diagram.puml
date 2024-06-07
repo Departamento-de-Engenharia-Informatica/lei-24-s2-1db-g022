@@ -129,6 +129,14 @@ package "Domain" <<Folder>> {
             + Task(taskDescription)
         }
 
+        class TasksAgenda {
+
+            + filterTasksByStatusDate(taskListTeam, status, startDate, endDate)
+            + sortTaskAgendaByDate(filteredTaskListTeam)
+            - addTaskListTeam()
+            - addFilteredTaskListTeam()
+        }
+
         class TaskAgenda {
             - String urgency
             - int expectedDuration
@@ -159,9 +167,6 @@ package "Domain" <<Folder>> {
             + getTaskListByTeam(team)
             + filterTasksByStatusDate(taskListTeam, status, startDate, endDate)
             + sortTaskAgendaByDate(filteredTaskListTeam)
-            - addTaskListTeam()
-            - addFilteredTaskListTeam()
-
         }
 
     }
@@ -237,7 +242,9 @@ Document "1..*" ->"1" DocumentType : has
 GreenSpace "1" *- "1" Address : is located in
 
 '-------------------Agenda-------------------
-Agenda "1" --> "*" TaskAgenda : taskAgenda
+Agenda "1" --> "1" TasksAgenda : tasksAgenda
+
+TasksAgenda "1" -> "*" TaskAgenda: taskAgendaList
 
 '-------------------TaskAgenda-------------------
 TaskAgenda "*" --> "1" GreenSpace : greenSpace
