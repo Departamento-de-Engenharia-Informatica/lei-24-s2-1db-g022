@@ -1,0 +1,157 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (SD) - US28 - Consult assigned tasks
+
+autonumber
+
+actor "Collaborator" as Col
+participant "ConsultAssignedTasksUI" as UI
+participant "ConsultAssignedTasksController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "teamRepository\n:TeamRepository" as TeamRepo
+participant "team\n:Team" as TEAM
+participant "collaborator\n:Collaborator" as Collab
+participant "agenda\n:Agenda" as AGENDA
+participant "taskAgenda\n:TaskAgenda" as TASKAGENDA
+
+activate Col
+
+    Col -> UI : asks to consult assigned tasks
+    activate UI
+
+    UI --> Col : requests data(startDate, endDate, status)
+    deactivate UI
+
+    Col->UI: types data
+    activate UI
+
+    UI --> Col : displays the data and requests confirmation
+    deactivate UI
+
+    Col -> UI : confirms data
+    activate UI
+
+    UI-> CTRL : getTasksBetweenTwoDates(startDate, endDate, status)
+    activate CTRL
+
+        CTRL -> CTRL : getCollaboratorFromSession()
+        activate CTRL
+
+            ref over CTRL
+                Get Manager
+            end ref
+
+        CTRL --> CTRL : collaborator
+        deactivate CTRL
+
+    CTRL -> RepositorySingleton: getInstance()
+    activate RepositorySingleton
+
+    RepositorySingleton --> CTRL: repositories
+    deactivate RepositorySingleton
+
+    CTRL -> PLAT : getTeamRepository()
+    activate PLAT
+
+    PLAT --> CTRL : teamRepository
+    deactivate PLAT
+
+    CTRL -> TeamRepo : getTeamByCollaborator(collaborator)
+    activate TeamRepo
+
+        loop for each team in teamList[in teamRepository]
+
+            TeamRepo -> TEAM : hasTeamByCollaborator(collaborator)
+            activate TEAM
+
+            loop for each collaborator in collaboratorList[in Team]
+                TEAM -> Collab : isEquals(collaborator)
+                activate Collab
+
+                Collab --> TEAM: true/false
+                deactivate Collab
+
+            end
+                TEAM --> TeamRepo : true/false
+                deactivate TEAM
+        end
+
+        TeamRepo --> CTRL : team
+        deactivate TeamRepo
+
+    CTRL -> PLAT: getTaskRepository()
+    activate PLAT
+
+    PLAT --> CTRL: agenda
+    deactivate PLAT
+
+    CTRL -> AGENDA: getTaskListByTeam(team)
+    activate AGENDA
+
+    loop for each task in TaskAgenda
+
+    AGENDA -> TASKAGENDA: hasTaskByTeam(team)
+    activate TASKAGENDA
+
+            TASKAGENDA --> AGENDA: true/false
+            deactivate TASKAGENDA
+
+            alt hasTaskByTeam == true
+                AGENDA -> AGENDA : addTaskListTeam()
+                activate AGENDA
+
+                AGENDA --> AGENDA : true/false
+                deactivate AGENDA
+            end
+
+    end
+
+    AGENDA --> CTRL: taskListTeam
+    deactivate AGENDA
+
+        CTRL -> AGENDA: filterTasksByStatusDate(taskListTeam, status, startDate, endDate)
+        activate AGENDA
+                loop for each taskAgenda in taskListTeam
+        AGENDA -> TASKAGENDA : hasStatus(status)
+        activate TASKAGENDA
+
+        TASKAGENDA --> AGENDA : true/false
+        deactivate TASKAGENDA
+
+        AGENDA -> TASKAGENDA : isBetweenDates(startDate, endDate)
+        activate TASKAGENDA
+
+        TASKAGENDA --> AGENDA : true/false
+        deactivate TASKAGENDA
+
+            alt hasStatus == true && isBetweenDates == true
+                AGENDA -> AGENDA: addFilteredTaskListTeam()
+                activate AGENDA
+
+                AGENDA --> AGENDA: true/false
+                deactivate AGENDA
+            end
+
+    end
+
+        AGENDA --> CTRL: filteredTaskListTeam
+        deactivate AGENDA
+
+        CTRL -> AGENDA: sortTaskAgendaByDate(filteredTaskListTeam)
+        activate AGENDA
+
+        AGENDA --> CTRL: sortedTaskListTeam
+        deactivate AGENDA
+
+        CTRL --> UI : sortedTaskListTeam
+
+    UI --> Col : shows list of assigned tasks
+
+    UI --> Col : displays operation success
+    deactivate UI
+
+@enduml

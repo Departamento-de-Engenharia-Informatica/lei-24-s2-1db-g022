@@ -54,6 +54,8 @@ class GreenSpace {
 class TaskAgenda{
     startDate
     endDate
+    expectedDuration
+    status
 }
 
 class Task {

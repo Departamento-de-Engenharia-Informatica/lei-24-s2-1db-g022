@@ -1,0 +1,79 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+participant ":ConsultAssignedTasksController" as CTRL
+participant ":ApplicationSession" as _APP
+participant "appSession\n:ApplicationSession" as APP
+participant "currentSession\n:UserSession" as SESSAO
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as REPO
+participant "collaboratorRepository\n:CollaboratorRepository" as COLREPO
+participant "iColaborator\n:IColaborator" as ICOL
+
+
+
+autonumber 7
+
+--> CTRL : getCollaboratorFromSession()
+
+autonumber 7.1
+
+activate CTRL
+
+group Get Collaborator
+
+
+CTRL -> _APP : getInstance()
+activate _APP
+
+_APP --> CTRL : appSession
+deactivate _APP
+
+CTRL -> APP : getCurrentSession()
+activate APP
+
+APP --> CTRL : currentSession
+deactivate APP
+
+CTRL -> SESSAO : email = getUserEmail()
+activate SESSAO
+
+SESSAO --> CTRL : email
+deactivate SESSAO
+
+CTRL -> RepositorySingleton: getInstance()
+activate RepositorySingleton
+
+RepositorySingleton -> CTRL: repositories
+deactivate RepositorySingleton
+
+CTRL -> REPO : getCollaboratorRepository()
+activate REPO
+
+REPO --> CTRL : collaboratorReporitory
+deactivate REPO
+
+CTRL ->  COLREPO : getCollaboratorByEmail(email)
+activate COLREPO
+
+loop for each collaborator in collaboratorList [in CollaboratorRepository]
+
+COLREPO -> ICOL : hasEmail(email)
+activate ICOL
+
+ICOL --> COLREPO : true/false
+deactivate ICOL
+
+end
+
+COLREPO --> CTRL : collaborator
+deactivate COLREPO
+
+end
+autonumber 8
+
+<--CTRL : collaborator
+deactivate CTRL
+@enduml
