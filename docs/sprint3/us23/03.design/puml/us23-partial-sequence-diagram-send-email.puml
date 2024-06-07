@@ -9,11 +9,11 @@ participant "team\n:Team" as TEAM
 participant "collaborator\n:Collaborator" as COL
 participant "emailService\n:EmailService" as SERVICE
 
-autonumber 41
+autonumber 45
 
 --> CTRL : sendEmailTeam(team,msg)
 
-autonumber 41.1
+autonumber 45.1
 
 activate CTRL
 
@@ -48,7 +48,7 @@ TEAM --> CTRL : true/false
 
 deactivate TEAM
 
-autonumber 42
+autonumber 46
 
 <--CTRL : true/false
 

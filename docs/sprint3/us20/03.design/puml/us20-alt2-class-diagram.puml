@@ -87,25 +87,9 @@ package "Domain" <<Folder>> {
 
         interface ICollaborator{
             + getName()
-            + getListSkill()
-            + getJob()
-            + getDateOfBirth()
-            + getAdmissionDate()
-            + getAddress()
-            + getDocument()
-            + getPhoneNumber()
             + getEmail()
-            + getTaxpayer()
             + hasEmail(email)
 
-        }
-
-        class Document{
-            - int documentNumber
-        }
-
-        class DocumentType{
-            - String documentType
         }
 
         class GreenSpaceManager implements ICollaborator{
@@ -189,20 +173,15 @@ CollaboratorRepository "1"  --> "*" ICollaborator : collaboratorList
 GreenSpaceRepository "1" --> "*" GreenSpace : greenSpaceList
 
 '-------------------Green Space Manager-------------------
-GreenSpaceManager <- "*" GreenSpace : registedBy/managedBy
-GreenSpaceManager "1" ---> "1" GreenSpaces : greenSpaces
+GreenSpaceManager "1" --> "1" GreenSpaces : greenSpaces
 
 '-------------------GreenSpace-------------------
 GreenSpaces "1" -> "*" GreenSpace: greenSpaceList
-GreenSpace "1" *- "1" Address : is located in
+GreenSpace "1" *- "1" Address : address
 
 '-------------------Address-------------------
 Address "1..*" *- "1" PostCode : postCode
 ICollaborator "1..*" *---- "1" Address : address
-
-ICollaborator "1" -> "1" Document : has
-Document "1..*" ->"1" DocumentType : has
-
 
 
 @enduml
