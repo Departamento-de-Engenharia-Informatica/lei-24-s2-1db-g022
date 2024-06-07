@@ -19,10 +19,10 @@ activate GSR
 
 group Register GreenSpace
 
-GSR -> GREENSPACE** : create(name,area,streetName, postCodeNumber,localization)
+GSR -> GREENSPACE** : create(name,area,streetName,doorNumber, postCodeNumber,localization)
 activate GREENSPACE
 
-GREENSPACE -> ADDRESS**  : create(streetName,postCodeNumber,localization)
+GREENSPACE -> ADDRESS**  : create(streetName,doorNumber,postCodeNumber,localization)
 
 activate ADDRESS
 
