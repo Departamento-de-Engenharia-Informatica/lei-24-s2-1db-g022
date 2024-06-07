@@ -14,18 +14,16 @@ class Collaborator {
     dateOfBirth
     admissionDate
     phoneNumber
-    taxpayer
+    taxpayerNumber
     email
 }
 
 class Document{
-    docType
     number
 }
 
-class Address {
-    streetName
-    doorNumber
+class DocumentType{
+    type
 }
 
 class PostCode{
@@ -57,6 +55,11 @@ class TaskAgenda{
     endDate
 }
 
+class Address {
+    streetName
+    doorNumber
+}
+
 class Task {
     description
 
@@ -64,6 +67,7 @@ class Task {
 
 class Agenda{
 }
+Document "1..*" - "1" DocumentType : has >
 
 Address "1..*" -- "1" PostCode : has >
 

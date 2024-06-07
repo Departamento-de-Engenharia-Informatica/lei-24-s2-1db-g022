@@ -16,9 +16,9 @@ participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "teamRepository\n:TeamRepository" as TR
 participant "greenSpaceManager\n:GreenSpaceManager" as GSMO
-participant ":TeamMapper" as TEAMMP
-
-
+participant "greenSpaces\nGreenSpaces" as GREENSPACES
+participant "teamRepository\n:TeamRepository" as TEAMREPO
+participant "agenda\n:Agenda" as AGENDA
 
 activate GSM	
 
@@ -49,8 +49,18 @@ CTRL -> CTRL : getAllGreenSpaceByGSM(greenSpaceManager)
 activate CTRL
 
 CTRL -> GSMO : getListGreenSpace()
-
 activate GSMO
+
+GSMO -> GREENSPACES : getSortedGreenSpaces()
+
+activate GREENSPACES
+
+ref over GREENSPACES
+Design in US27
+end ref
+
+GREENSPACES --> GSMO : greenSpaceList
+deactivate GREENSPACES
 
 GSMO --> CTRL : List greenSpace
 
@@ -113,21 +123,18 @@ TR --> CTRL : listTeam
 
 deactivate TR
 
-CTRL -> TEAMMP : toDTO(listTeam)
+'CTRL -> TEAMMP : toDTO(listTeam)
 
-activate TEAMMP
+'activate TEAMMP
 
-ref over TEAMMP
-    SD_toDTO_List
-end
+'ref over TEAMMP
+'    SD_toDTO_List
+'end
 
-TEAMMP --> CTRL : listTeamDto
-
-deactivate TEAMMP
-
-CTRL --> UI : listTeamDto
+'TEAMMP --> CTRL : listTeamDto
 
 
+CTRL --> UI : listTeam
 
 deactivate CTRL
 
@@ -147,13 +154,91 @@ GSM -> UI : confirms data
 
 activate UI
 
-UI -> CTRL: assignTeamTask(team,task)
+UI -> CTRL: assignTeamTask(teamCollaboratorName,taskParkName,taskName)
+
+activate CTRL
+
+CTRL -> RepositorySingleton : getInstance()
+
+activate RepositorySingleton
+
+RepositorySingleton --> CTRL : repositories
+
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getTeamRepository()
+
+activate PLAT
+
+PLAT --> CTRL: teamRepository
+
+deactivate PLAT
+
+CTRL -> TEAMREPO : getTeamByCollaboratorName(teamCollaboratorName)
+
+activate TEAMREPO
+
+ref over TEAMREPO
+
+Get team By Collaborator
+
+end
+
+TEAMREPO --> CTRL : team
+
+deactivate TEAMREPO
+
+CTRL -> PLAT : getAgenda()
+
+activate PLAT
+
+PLAT --> CTRL: agenda
+
+deactivate PLAT
+
+CTRL -> AGENDA : getTaskByNameAndGreenSpace(taskParkName, taskName)
+
+activate AGENDA
+
+ref over AGENDA
+
+Get Task By Name and GreenSpace
+
+end
+
+AGENDA --> CTRL : task
+
+deactivate AGENDA
+
+CTRL -> CTRL : assignTeam(team,task)
 
 activate CTRL
 
 ref over CTRL
 
 Assign Team Task
+
+end
+
+CTRL --> CTRL : true/false
+
+deactivate CTRL
+
+alt assignTeam == true
+
+CTRL -> CTRL : sendEmailTeam(team, msg)
+
+activate CTRL
+
+ref over CTRL
+
+Send Email By Team
+
+end
+
+CTRL --> CTRL : true/false
+
+deactivate CTRL
 
 end
 

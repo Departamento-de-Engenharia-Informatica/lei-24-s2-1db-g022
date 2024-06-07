@@ -1,0 +1,58 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UI Sequence Diagram (SD) - US27 - List Green Spaces
+
+autonumber
+
+'hide footbox
+actor "Green Spaces Manager (GSM)" as GSM
+participant ":ListGreenSpacesUI" as UI
+participant ":ListGreenSpacesController" as CTRL
+participant "manager\n:GreenSpaceManager" as GSMO
+participant "greenSpaces\n:GreenSpaces" as GSL
+
+activate GSM
+
+        GSM -> UI : asks to list all associated green spaces
+    activate UI
+
+        UI -> CTRL : getGreenSpaceManagerGSpace()
+    activate CTRL
+
+        CTRL -> CTRL : getGSMFromSession()
+    activate CTRL
+
+        ref over CTRL
+            Get Manager
+        end ref
+
+        CTRL --> CTRL : manager
+    deactivate CTRL
+
+        CTRL -> GSMO : getGreenSpaces()
+    activate GSMO
+
+        GSMO -> GSL : getSortedGreenspaces()
+    activate GSL
+
+        ref over GSL
+            Get Sorted List
+        end ref
+
+        GSL --> GSMO : greenSpaceListSorted
+    deactivate GSL
+
+        GSMO --> CTRL : greenSpaceListSorted
+    deactivate GSMO
+
+        CTRL --> UI : greenSpaceListSorted
+    deactivate CTRL
+
+        UI --> GSM : shows list of green spaces
+    deactivate UI
+
+deactivate GSM
+@enduml

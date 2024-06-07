@@ -26,7 +26,7 @@ activate GSM
         GSM -> UI : asks to register a new entry in the to do list
     activate UI
 
-        UI -> CTRL : getGreenSpaceManager()
+        UI -> CTRL : getGreenSpaceManagerGSpace()
     activate CTRL
 
         CTRL -> CTRL : getGSMFromSession()

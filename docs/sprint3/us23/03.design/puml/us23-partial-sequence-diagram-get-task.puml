@@ -1,0 +1,56 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant "agenda\n:Agenda" as AGENDA
+participant "agendaTask\n:AgendaTask" as TASK
+participant "greenSpace\n:GreenSpace" as GREEN
+
+autonumber 35.3
+
+--> AGENDA : getTaskByNameAndGreenSpace(taskParkName, taskName)
+
+autonumber 35.3.1
+
+activate AGENDA
+
+group Get Task By Name and GreenSpace
+
+loop for each TaskAgenda in Agenda
+
+AGENDA -> TASK : hasTaskName(taskName)
+
+activate TASK
+
+TASK --> AGENDA :true/false
+
+deactivate TASK
+
+AGENDA -> TASK : hasGreenSpaceName(taskParkName)
+
+activate TASK
+
+TASK -> GREEN :  hasName(taskParkName)
+
+activate GREEN
+
+GREEN --> TASK : true/false
+
+deactivate GREEN
+
+TASK --> AGENDA :true/false
+
+deactivate TASK
+
+end
+
+end
+
+autonumber 35.4
+
+<--AGENDA : task
+
+deactivate AGENDA
+@enduml

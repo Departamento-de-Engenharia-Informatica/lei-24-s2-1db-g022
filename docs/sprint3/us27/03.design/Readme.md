@@ -1,36 +1,32 @@
 # US27 - List all Green Spaces
 
-## 3. Design - User Story Realization 
+## 3. Design - User Story Realization
 
 ### 3.1. Rationale
 
-| Interaction ID | Question: Which class is responsible for...   | Answer                  | Justification (with patterns)                                                                                 |
-|:---------------|:----------------------------------------------|:------------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		     | 	... interacting with the actor?              | RegisterSkillUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		        | 	... coordinating the US?                     | RegisterSkillController | Controller                                                                                                    |
-| 			  		        | 	... instantiating a new Skill?               | SkillRepository         | Pure Fabrication: they form a collection of objects that do not “belong” to any domain object/class.          |
-| 			  		        | 							                                       | SkillRepository         | IE: knows/has its own Skill                                                                                   |
-| 			  		        | 							                                       | Skill                   | IE: knows its own data (e.g. name)                                                                            |
-| Step 2         |                                               |                         |                                                                                                               |
-| Step 3  		     | 	...saving the inputted data?                 | Skill                   | IE: object created in step 1 has its own data.                                                                |
-| Step 4         |                                               |                         |                                                                                                               |
-| Step 5  		     | 	...  all data (local validation)?            | Skill                   | IE: owns its data.                                                                                            | 
-| 			  		        | 	... validating all data (global validation)? | SkillRepository         | IE: knows all its skills.                                                                                     | 
-| 			  		        | 	... saving the created Skill?                | SkillRepository         | IE: owns all its skills.                                                                                      | 
-| Step 6  		     | 	... informing operation success?             | RegisterSkillUI         | IE: is responsible for user interactions.                                                                     | 
+| Interaction ID | Question: Which class is responsible for... | Answer                    | Justification (with patterns)                                                                                 |
+|:---------------|:--------------------------------------------|:--------------------------|:--------------------------------------------------------------------------------------------------------------|
+| Step 1  		     | 	... interacting with the actor?            | ListGreenSpacesUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| 			  		        | 	... coordinating the US?                   | ListGreenSpacesController | Controller                                                                                                    |
+| 			  		        | 	... instantiating GreenSpace List?         | GreenSpaceManager         | IE: knows/has its own GreenSpaces                                                                             |
+| 			  		        | 							                                     | GreenSpaces               | IE: knows/has its own GreenSpace                                                                              |
+| 			  		        | 							                                     | GreenSpace                | IE: knows its own data (e.g. area)                                                                            |
+| 			  		        | 							                                     | SortingAlgorithm          | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| Step 2  		     | 	... informing operation success?           | RegisterSkillUI           | IE: is responsible for user interactions.                                                                     | 
 
 ### Systematization ##
 
-According to the taken rationale, the conceptual classes promoted to software classes are: 
+According to the taken rationale, the conceptual classes promoted to software classes are:
 
-* Skill
+* GreenSpace
+* GreenSpaceManager
+* GreenSpaces
+* SortingAlgorithm
 
-Other software classes (i.e. Pure Fabrication) identified: 
+Other software classes (i.e. Pure Fabrication) identified:
 
-* RegisterSkillUI
-* RegisterSkillController
-* SkillRepository
-
+* ListGreenSpacesUI
+* ListGreenSpacesController
 
 ## 3.2. Sequence Diagram (SD)
 
@@ -38,11 +34,17 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us01-sequence-diagram.svg)
+![Sequence Diagram - Full](svg/us27-sequence-diagram.svg)
 
 ### Split Diagrams
 
-n/a
+Get Green Space Manager
+
+![Sequence Diagram - Split Manager](svg/us27-partial-sequence-diagram-get-GSM.svg)
+
+Add Entry To Do List
+
+![Sequence Diagram - Split Sorted List](svg/us27-sequence-diagram-partial-get-sorted-list.svg)
 
 ## 3.3. Class Diagram (CD)
 

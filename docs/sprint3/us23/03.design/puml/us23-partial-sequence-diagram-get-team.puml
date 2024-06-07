@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant "teamRepository\n:TeamRepository" as TEAMREPO
+participant "team\n:Team" as TEAM
+participant "collaborator\n:Collaborator" as COL
+
+autonumber 35.1
+
+--> TEAMREPO : getTeamByCollaboratorName(teamCollaboratorName)
+
+autonumber 35.1.1
+
+activate TEAMREPO
+
+group Get team By Collaborator
+
+loop for each team in teamList[in TeamRepository]
+
+TEAMREPO -> TEAM : verifyCollaboratorName(teamCollaboratorName)
+
+activate TEAM
+
+loop for each Collaborator in collaboratorList[in Team]
+
+TEAM -> COL : hasName(teamCollaboratorName)
+
+activate COL
+
+COL --> TEAM : true/false
+
+deactivate COL
+
+end
+
+TEAM --> TEAMREPO : true/false
+
+deactivate TEAM
+
+end
+
+end
+
+autonumber 35.2
+
+<--TEAMREPO : true/team
+
+deactivate TEAMREPO
+@enduml

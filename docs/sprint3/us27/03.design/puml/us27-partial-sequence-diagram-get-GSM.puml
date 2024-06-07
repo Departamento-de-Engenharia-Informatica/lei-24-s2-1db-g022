@@ -8,8 +8,7 @@ participant ":ApplicationSession" as _APP
 participant "appSession\n:ApplicationSession" as APP
 participant "currentSession\n:UserSession" as SESSAO
 participant "repositories\n:Repositories" as REPO
-participant "collaboratorRepository\n:CollaboratorRepository" as COLREPO
-participant "iColaborator\n:IColaborator" as ICOL
+participant "collaboratorRepositories\n:CollaboratorRepositories" as COLREPO
 
 autonumber 3
 
@@ -58,25 +57,13 @@ CTRL ->  COLREPO : getCollaboratorByEmail(email)
 
 activate COLREPO
 
-loop for each collaborator in collaboratorList [in CollaboratorRepository]]
-
-COLREPO -> ICOL : hasEmail(email)
-
-activate ICOL
-
-ICOL --> COLREPO : true/false
-
-deactivate ICOL
-
-end
-
-COLREPO --> CTRL : collaborator
+COLREPO --> CTRL : Collaborator
 
 deactivate COLREPO
 
 end
 autonumber 4
 
-<--CTRL : greenSpaceManager
+<--CTRL : manager
 deactivate CTRL
 @enduml
