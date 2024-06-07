@@ -98,14 +98,13 @@ class ToDoList {
 class TaskToDoList{
     status
     urgency
-    duration
+    aproxExpectedDuration
 }
 
 class TaskAgenda{
     startDate
     endDate
     expectedDuration
-    status
 }
 
 class Task {
@@ -140,7 +139,7 @@ VehicleFleetManager "1" -- "1..*" Vehicle : registers/manages >
 VehicleFleetManager "1" -- "1..*" CheckUp : Registers >
 
 '-------------Brand-------------
-Brand "1" -  "1..*" Model : has >
+Brand "1" -l  "1..*" Model : has >
 
 '-------------Vehicle-------------
 Vehicle "1..*" -- "1" Model : has >
@@ -149,7 +148,7 @@ Vehicle "1" -- "*" CheckUp : does >
 '-------------GreenSpaceManager-------------
 GreenSpaceManager "1" - "*" GreenSpace : register/manages >
 GreenSpaceManager "1..*" -- "1..*" Task : creates >
-GreenSpaceManager "1..*" - "1..*" TaskToDoList : inserts new entry >
+GreenSpaceManager "1..*" - "1..*" TaskToDoList : inserts >
 GreenSpaceManager "1..*" - "1..*" TaskAgenda : inserts new entry >
 GreenSpaceManager "1..*" - "1" TaskAgenda : Assign Team to an entry >
 
@@ -157,25 +156,27 @@ GreenSpaceManager "1..*" - "1" TaskAgenda : Assign Team to an entry >
 GreenSpace "1" - "1" Address : is located in >
 GreenSpace <|-- Garden
 GreenSpace <|-- MediumPark
-GreenSpace <|-- LargePark
+GreenSpace <|-l- LargePark
 GreenSpace "*" -- "1" SortingAlgorithm : makes use of >
 
 '-------------Task-------------
 TaskAgenda "1..*" --- "1" GreenSpace :  Carried out in  >
 TaskAgenda "1" -- "1..*" Vehicle : Carried out by >
 TaskToDoList "1..*" --- "1" GreenSpace :  Carried out in  >
-TaskToDoList "1" -- "1..*" Vehicle : Carried out by >
 
 Task "*" -- "1" ToDoList : includes <
 
 Team "1" --- "*" TaskAgenda : executes by <
-Agenda "1" - "*" Task : contains >
+Agenda "1" -u- "*" TaskAgenda : contains >
 
-EmailService "1" -- "*" Team :  send email to all elements of >
-
+EmailService "1" -u- "*" Team :  makes use of <
 
 (Task,ToDoList) .. TaskToDoList
-(Task,Agenda) .. TaskAgenda
+(HumanResourceManager,TaskAgenda) .. Team : assign Team
 
-TaskAgenda - TaskToDoList : includes >
+TaskAgenda "1" - "1" TaskToDoList : includes >
+
+ToDoList "1" -- "*" TaskToDoList : includes  >
+
+TaskToDoList "1" -u- "1" Task : contains >
 @enduml

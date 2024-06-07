@@ -24,11 +24,11 @@ TEAMMP --> LSTEAMDTO : create()
 
 loop for each object in listTeam
 
-TEAMMP -> TEAMLIST : obj = get(i)
+TEAMMP -> TEAMLIST : get(i)
 
 activate TEAMLIST
 
-TEAMLIST --> TEAMMP : team
+TEAMLIST --> TEAMMP : obj
 
 deactivate TEAMLIST
 
@@ -42,9 +42,6 @@ activate DTOTEAM
 
 DTOTEAM -> DTOCOLLABORATOR
 
-
-
-DTOTEAM --> TEAMMP : objDto
 
 deactivate DTOTEAM
 
