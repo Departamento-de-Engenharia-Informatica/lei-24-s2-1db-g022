@@ -6,35 +6,22 @@ skinparam shadowing false
 
 participant "teamRepository\n:TeamRepository" as TEAMREPO
 participant "team\n:Team" as TEAM
-participant "collaborator\n:Collaborator" as COL
 
-autonumber 33
+autonumber 37
 
---> TEAMREPO : getTeamByCollaboratorName(teamCollaboratorName)
+--> TEAMREPO : getTeamById(teamId)
 
-autonumber 33.1
+autonumber 37.1
 
 activate TEAMREPO
 
-group Get team By Collaborator
+group Get team By Id
 
 loop for each team in teamList[in TeamRepository]
 
-TEAMREPO -> TEAM : verifyCollaboratorName(teamCollaboratorName)
+TEAMREPO -> TEAM : verifyIdTeam(teamId)
 
 activate TEAM
-
-loop for each Collaborator in collaboratorList[in Team]
-
-TEAM -> COL : hasName(teamCollaboratorName)
-
-activate COL
-
-COL --> TEAM : true/false
-
-deactivate COL
-
-end
 
 TEAM --> TEAMREPO : true/false
 
@@ -44,9 +31,9 @@ end
 
 end
 
-autonumber 34
+autonumber 38
 
-<--TEAMREPO : true/team
+<--TEAMREPO : team
 
 deactivate TEAMREPO
 @enduml

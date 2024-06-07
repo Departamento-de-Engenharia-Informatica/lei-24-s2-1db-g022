@@ -2,9 +2,10 @@
 'skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
-skinparam linetype orto
+skinparam linetype polyline
+'skinparam linetype orto
 
-skinparam classAttributeIconSize "1"
+skinparam classAttributeIconSize 0
 
 'left to right direction
 package "UI" <<Folder>> {
@@ -18,7 +19,7 @@ package "Controller" <<Folder>> {
         + getAllByGSM()
         + getAllTeam()
         + assignTeamTask(teamCollaboratorName,taskParkName,taskName)
-        - assignTeam(team,task)
+        - assignTeam(team,taskAgenda)
         - sendEmailTeam(team,msg)
         - getAllGreenSpaceByGSM(greenSpaceManager)
         - getAllTaskByGreenSpace(listGreenSpace)
@@ -34,6 +35,28 @@ package "UI" <<Folder>> {
 
 'left to right direction
 package "Domain" <<Folder>> {
+    package "Domain.DTO" <<Folder>> {
+        class TeamMapper{
+            + List<TeamDto> toDTO<List<Team>list>
+            + TeamDto toDTO(Team obj)
+        }
+
+        class TeamDto{
+            + int id
+            + TeamDto(id)
+        }
+
+        class TaskAgendaMapper{
+            + List<TaskAgendaDto> toDTO<List<TaskAgenda>list>
+            + TaskAgendaDto toDTO(TaskAgenda obj)
+        }
+
+        class TaskAgendaDto{
+            + String greenSpaceName
+            + String taskName
+            + TaskAgendaDto(greenSpaceName,taskName)
+        }
+    }
 
     package "Domain.Application" <<Folder>> {
 
@@ -64,24 +87,13 @@ package "Domain" <<Folder>> {
         }
 
         class Team{
-            + verifyCollaboratorName(teamCollaboratorName)
+            + verifyIdTeam(teamId)
             + sendEmail(msg)
         }
 
         interface ICollaborator{
-            + getName()
-            + getListSkill()
-            + getJob()
-            + getDateOfBirth()
-            + getAdmissionDate()
-            + getAddress()
-            + getDocument()
-            + getPhoneNumber()
-            + getEmail()
-            + getTaxpayer()
             + hasEmail(email)
-            + hasName(name)
-
+            + getEmail()
         }
 
         class Collaborator implements ICollaborator{
@@ -90,7 +102,8 @@ package "Domain" <<Folder>> {
             - Date admissionDate
             - String email
             - int taxpayer
-            + hasName(teamCollaboratorName)
+            + hasEmail(email)
+            + getEmail()
         }
 
         class GreenSpaceManager implements ICollaborator{
@@ -99,15 +112,12 @@ package "Domain" <<Folder>> {
             - Date admissionDate
             - String email
             - int taxpayer
-            + hasName(teamCollaboratorName)
             + getListGreenSpace()
+            + hasEmail(email)
+            + getEmail()
         }
 
         interface GreenSpace {
-
-            + getName()
-            + getArea()
-            + getAddress()
             + equalsGreenSpace(greenSpace)
             + hasName(name)
         }
@@ -150,19 +160,19 @@ package "Domain" <<Folder>> {
         }
 
         class GreenSpaces{
-            + getSortedGreenSpaces()
+            + getGreenSpaceList()
         }
 
         class Agenda{
 
-            + getAllTaskByGreenSpace(listGreenSpace)
+            + getAllTaskByGreenSpace(greenSpaceList)
             + getTaskByNameAndGreenSpace(taskParkName,taskName)
-            + assignTeamTask(teamTask)
+            + assignTeamTask(team,taskAgenda)
             - addListTaskByGreenSpace(task)
         }
 
 
-        class AgendaTask {
+        class TaskAgenda {
 
             - String urgency
             - int expectedDuration
@@ -172,10 +182,11 @@ package "Domain" <<Folder>> {
 
             + hasTaskName(taskName)
             + hasGreenSpaceName(taskParkName)
-            + verifyGreenSpace(listGreenSpace)
-            - verifyNull()
-            - equalsTask(task)
+            + verifyGreenSpace(greenSpaceList)
+            - verifyNullTeam()
+            - equalsTask(taskAgenda)
             - updateTeam(team)
+
 
         }
 
@@ -193,7 +204,7 @@ package "Domain" <<Folder>> {
         }
 
         class CollaboratorRepository {
-            + getCollaboratorByEmail(greenSpace)
+            + getCollaboratorByEmail(email)
         }
 
         class GreenSpaceRepository {
@@ -204,19 +215,27 @@ package "Domain" <<Folder>> {
 
         class TeamRepository{
             + getAllTeams()
-            + getTeamByCollaboratorName(teamCollaboratorName)
+            + getTeamById(teamId)
         }
     }
 }
+
+TeamMapper ..> TeamDto
+TeamMapper ..> Team
+TaskAgendaMapper ..> TaskAgendaDto
+TaskAgendaMapper ..> TaskAgenda
 
 '-------------------Instance-------------------
 Repositories -> Repositories : instance
 ApplicationSession -> ApplicationSession : instance
 
 '-------------------UI-------------------
-AssignTeamAgendaUI ..> AssignTeamAgendaController
+AssignTeamAgendaUI .> AssignTeamAgendaController
+AssignTeamAgendaUI ..> TeamDto
 
 '-------------------Controller-------------------
+AssignTeamAgendaController ..> TeamDto
+AssignTeamAgendaController ..> TeamMapper
 AssignTeamAgendaController ..> Repositories : repositories
 AssignTeamAgendaController ..> ApplicationSession
 AssignTeamAgendaController ...> UserSession
@@ -227,7 +246,7 @@ AssignTeamAgendaController ...> Agenda
 AssignTeamAgendaController ...> CollaboratorRepository
 AssignTeamAgendaController ...> TeamRepository
 AssignTeamAgendaController ...> GreenSpace
-AssignTeamAgendaController ...> AgendaTask
+AssignTeamAgendaController ...> TaskAgenda
 AssignTeamAgendaController ...> EmailService
 
 AssignTeamAgendaController ...> Team
@@ -245,7 +264,7 @@ GreenSpaceManager "1" ---> "1" GreenSpaces : greenSpaces
 
 
 '-------------------CollaboratorRepository-------------------
-CollaboratorRepository "1"  --> "*" ICollaborator : collaboratorList
+CollaboratorRepository "1"  -> "*" ICollaborator : collaboratorList
 
 '-------------------GreenSpaceRepository-------------------
 GreenSpaceRepository "1" --> "*" GreenSpace : greenSpaceList
@@ -256,9 +275,9 @@ TeamRepository "1" --> "*" Team : teamList
 '-------------------GreenSpace-------------------
 GreenSpaces "1" -> "*" GreenSpace : greenSpaceList
 
-Agenda "1" --> "*" AgendaTask : taskList
-AgendaTask "*" --> "1" GreenSpace : greenSpace
-AgendaTask "*" --> "1" Team  : team
+Agenda "1" --> "*" TaskAgenda : taskAgendaList
+TaskAgenda "*" ----> "1" GreenSpace : greenSpace
+TaskAgenda "*" ---> "1" Team  : team
 
 Team "*" <-- "1" EmailService : send email to all elements of
 @enduml

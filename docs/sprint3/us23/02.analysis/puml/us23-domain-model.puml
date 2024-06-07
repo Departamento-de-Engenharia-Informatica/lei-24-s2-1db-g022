@@ -18,24 +18,11 @@ class Collaborator {
     email
 }
 
-class Document{
-    number
-}
-
-class DocumentType{
-    type
-}
-
-class PostCode{
-    postCodeNumber
-    localization
-}
-
-
 class GreenSpaceManager {
 }
 
 class Team{
+    id
 }
 
 class EmailService{
@@ -47,18 +34,15 @@ class ToDoList {
 class TaskToDoList{
     status
     urgency
-    duration
+    aproxExpectedDuration
 }
 
 class TaskAgenda{
     startDate
     endDate
+    expectedDuration
 }
 
-class Address {
-    streetName
-    doorNumber
-}
 
 class Task {
     description
@@ -67,30 +51,24 @@ class Task {
 
 class Agenda{
 }
-Document "1..*" - "1" DocumentType : has >
-
-Address "1..*" -- "1" PostCode : has >
-
-Collaborator "1" - "1" Document : has >
-
-Collaborator "1..*" -- "1" Address : lives >
 
 Collaborator  <|--  GreenSpaceManager
 
-GreenSpaceManager "1..*" - "1" TaskAgenda : Assign Team to an entry >
+Team "1" --u- "*" TaskAgenda : executes by <
 
-Team "1" --- "*" TaskAgenda : executes by <
+Agenda "1" -- "*" TaskAgenda : contains >
 
-Agenda "1" - "*" Task : contains >
-
-EmailService "1" - "*" Team :  send email to all elements of >
+EmailService "1" -u "*" Team : makes use of <
 
 Collaborator "1..*" ---- "1" Team : Contains <
 
-Task "*" - "1" ToDoList : includes <
-
 (Task,ToDoList) .. TaskToDoList
-(Task,Agenda) .. TaskAgenda
 
-TaskAgenda - TaskToDoList : includes >
+(GreenSpaceManager,TaskAgenda) .. Team : assign Team
+
+TaskAgenda "1" -- "1" TaskToDoList : includes >
+
+ToDoList "1" -- "*" TaskToDoList : includes  >
+
+TaskToDoList "1" -u- "1" Task : contains >
 @enduml
