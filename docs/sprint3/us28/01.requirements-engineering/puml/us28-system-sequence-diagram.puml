@@ -30,7 +30,4 @@ activate Col
     System --> Col : shows list of assigned tasks
     deactivate System
 
-    System --> Col : displays operation success
-    deactivate System
-
 @enduml

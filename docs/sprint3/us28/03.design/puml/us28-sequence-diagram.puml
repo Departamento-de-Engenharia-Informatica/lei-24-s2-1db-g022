@@ -42,7 +42,7 @@ activate Col
         activate CTRL
 
             ref over CTRL
-                Get Manager
+                Get Collaborator
             end ref
 
         CTRL --> CTRL : collaborator
@@ -83,7 +83,7 @@ activate Col
         TeamRepo --> CTRL : team
         deactivate TeamRepo
 
-    CTRL -> PLAT: getTaskRepository()
+    CTRL -> PLAT: getAgenda()
     activate PLAT
 
     PLAT --> CTRL: agenda
@@ -150,8 +150,6 @@ activate Col
         CTRL --> UI : sortedTaskListTeam
 
     UI --> Col : shows list of assigned tasks
-
-    UI --> Col : displays operation success
     deactivate UI
 
 @enduml
