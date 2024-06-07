@@ -91,25 +91,8 @@ package "Domain" <<Folder>> {
         }
 
         interface ICollaborator{
-            + getName()
-            + getListSkill()
-            + getJob()
-            + getDateOfBirth()
-            + getAdmissionDate()
-            + getAddress()
-            + getDocument()
-            + getPhoneNumber()
             + getEmail()
-            + getTaxpayer()
             + hasEmail(email)
-        }
-
-        class Document{
-            - int documentNumber
-        }
-
-        class DocumentType{
-            - String documentType
         }
 
         class Address {
@@ -137,19 +120,14 @@ package "Domain" <<Folder>> {
 
         class TaskToDoList {
             - String urgency
-            - int duration
+            - int aproxExpectedDuration
             - String status
 
-            + TaskToDoList(greenSpace, task, urgency, duration)
+            + TaskToDoList(greenSpace, task, urgency, aproxExpectedDuration)
             - validateTaskToDoList();
         }
 
         class GreenSpaceManager implements ICollaborator{
-            - String name
-            - Date dateOfBirth
-            - Date admissionDate
-            - String email
-            - int taxpayer
 
             + getGreenSpace()
         }
@@ -227,26 +205,20 @@ Repositories -> "1" ToDoList : ToDoList
 Repositories -> "1" TaskRepository : TaskRepository
 
 '-------------------CollaboratorRepository-------------------
-CollaboratorRepository "1"  --> "*" ICollaborator : collaboratorList
+CollaboratorRepository "1"  ---> "*" ICollaborator : collaboratorList
 
 '-------------------GreenSpaceRepository-------------------
 GreenSpaceRepository "1" -> "*" GreenSpace : greenSpaceList
 
 '-------------------TaskRepository-------------------
-TaskRepository "1" -> "*" Task : taskList
+TaskRepository "1" --> "*" Task : taskList
 
 '-------------------Address-------------------
 Address "1..*" *-- "1" PostCode : postCode
-ICollaborator "1..*" *---- "1" Address : address
-
-'-------------------Document-------------------
-ICollaborator "1" -> "1" Document : has
-Document "1..*" ->"1" DocumentType : has
 
 '-------------------GreenSpaceManager-------------------
 GreenSpaceManager "1..*" <-- "1..*" TaskToDoList : created by
-GreenSpaceManager <- "*" GreenSpace : registedBy/managedBy
-GreenSpaceManager "1" ---> "1" GreenSpaces : greenSpaces
+GreenSpaceManager "1" ----> "1" GreenSpaces : greenSpaces
 
 '-------------------GreenSpace-------------------
 GreenSpace "1" *-- "1" Address : is located in
@@ -258,7 +230,7 @@ GreenSpaces "1" -> "*" GreenSpace: greenSpaceList
 ToDoList "1" --> "*" TaskToDoList : taskTdl
 
 '-------------------TaskToDoList-------------------
-TaskToDoList "1..*" --> "1" GreenSpace : greenSpace
-TaskToDoList "1..*" ---> "1" Task : task
+TaskToDoList "1..*" -> "1" GreenSpace : greenSpace
+TaskToDoList "1..*" -> "1" Task : task
 
 @enduml

@@ -83,8 +83,11 @@ Address "1..*" -- "1" PostCode : has >
 Document "1..*" - "1" DocumentType : has >
 
 Task "*" -- "1" ToDoList : includes <
+Task "1" -- "*" TaskToDoList : contains <
 (Task,ToDoList) .. TaskToDoList
 
 TaskToDoList "1..*" --- "1" GreenSpace :  Carried out in  >
+
+ToDoList "1" --- "1..*" TaskToDoList : includes >
 
 @enduml

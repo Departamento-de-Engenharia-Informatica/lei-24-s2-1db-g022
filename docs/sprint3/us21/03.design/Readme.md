@@ -62,7 +62,11 @@ This diagram shows the full sequence of interactions between the classes involve
 Get Green Space Manager
 
 ![Sequence Diagram - Split Manager](../../us20/03.design/svg/us20-partial-sequence-diagram-get-GSM.svg)
-1
+
+Get Green Space List
+
+![Sequence Diagram - Split List](../../us27/03.design/svg/us27-sequence-diagram.svg)
+
 Add Entry To Do List
 
 ![Sequence Diagram - Split Entry](svg/us21-sequence-diagram-partial-add-to-do-list.svg)

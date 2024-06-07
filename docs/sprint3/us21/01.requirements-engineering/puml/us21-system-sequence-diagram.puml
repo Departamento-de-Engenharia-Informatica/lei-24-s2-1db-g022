@@ -27,7 +27,7 @@ activate GSM
     GSM->System: chooses one
     activate System
 
-        System --> GSM : requests data (urgency,duration)
+        System --> GSM : requests data (urgency,aproxExpectedDuration)
     deactivate System
 
     GSM -> System : types data
