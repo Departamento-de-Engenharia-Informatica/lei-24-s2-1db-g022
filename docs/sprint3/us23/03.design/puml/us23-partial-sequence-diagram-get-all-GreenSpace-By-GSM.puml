@@ -8,12 +8,13 @@ participant ":AssignTeamAgendaController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "agenda\n:Agenda" as AGENDA
+participant "listTaskAgenda\n:List<AgendaTask>" as LSTASK
 participant "agendaTask\n:AgendaTask" as TASK
 participant "greenSpace\n:GreenSpace" as GREENSPACE
 
 autonumber 11
 
---> CTRL : getAllTaskByGreenSpace(listGreenSpace)
+--> CTRL : getAllTaskByGreenSpace(greenSpaceList)
 
 autonumber 11.1
 
@@ -37,13 +38,16 @@ PLAT --> CTRL: agenda
 
 deactivate PLAT
 
-CTRL -> AGENDA : getAllTaskByGreenSpace(listGreenSpace)
+CTRL -> AGENDA : getAllTaskByGreenSpace(greenSpaceList)
+
 
 activate AGENDA
 
+AGENDA -> LSTASK** : create
+
 loop for each Task in listTask[in Agenda]
 
-AGENDA -> TASK : verifyGreenSpace(listGreenSpace)
+AGENDA -> TASK : verifyGreenSpace(greenSpaceList)
 
 activate TASK
 
@@ -68,26 +72,27 @@ GREENSPACE --> TASK : true/false
 deactivate GREENSPACE
 
 end
+
 end
-TASK -> AGENDA : true/false
+TASK -> AGENDA : taskAgenda
 
 deactivate TASK
 
-alt verifyGreenSpace == true
+alt verifyGreenSpace != null
 
-AGENDA -> AGENDA : addListTaskByGreenSpace(task)
+AGENDA -> LSTASK : add(taskAgenda)
 
-activate AGENDA
+activate LSTASK
 
-AGENDA --> AGENDA : true/false
+LSTASK --> AGENDA : true/false
 
-deactivate AGENDA
-
-end
+deactivate LSTASK
 
 end
 
-AGENDA --> CTRL : listTask
+end
+
+AGENDA --> CTRL : listTaskAgenda
 
 deactivate AGENDA
 
@@ -95,7 +100,7 @@ end
 
 autonumber 12
 
-<--CTRL : listTask
+<--CTRL : listTaskAgenda
 
 deactivate CTRL
 @enduml

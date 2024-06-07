@@ -46,25 +46,33 @@ This diagram shows the full sequence of interactions between the classes involve
 
 ### Split Diagrams
 
-Get GSM
+Get Green Space Manager
 
-![Sequence Diagram - Get Get GSM](svg/us23-partial-sequence-diagram-get-GSM.svg)
+![Sequence Diagram - Split Manager](../../us20/03.design/svg/us20-partial-sequence-diagram-get-GSM.svg)
 
 Get All GreenSpace
 
 ![Sequence Diagram - Get All GreenSpace](svg/us23-partial-sequence-diagram-get-all-GreenSpace-By-GSM.svg)
 
-Get Assign Team
+toDTO List Task Agenda
 
-![Sequence Diagram - Get Assign Team](svg/us23-partial-sequence-diagram-assign-team.svg)
+![Sequence Diagram - toDTO List Task Agenda](svg/us23-partial-sequence-diagram-DTO-TaskAgenda.svg)
 
-Get Team By Collaborator Name
+DTO Team
 
-![Sequence Diagram - Get Team By Collaborator Name](svg/us23-partial-sequence-diagram-get-team.svg)
+![Sequence Diagram - DTO Team](svg/us23-partial-sequence-diagram-toDTO.svg)
+
+Get Team By Id
+
+![Sequence Diagram - Get Team By Id](svg/us23-partial-sequence-diagram-get-team.svg)
 
 Get Task By Name and GreenSpace
 
 ![Sequence Diagram - Get Task By Name and GreenSpace](svg/us23-partial-sequence-diagram-get-task.svg)
+
+Get Assign Team
+
+![Sequence Diagram - Get Assign Team](svg/us23-partial-sequence-diagram-assign-team.svg)
 
 Send Email
 

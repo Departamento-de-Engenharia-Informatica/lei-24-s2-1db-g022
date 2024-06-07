@@ -4,16 +4,16 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-participant ":TeamMapper" as TEAMMP
-participant "listTeam\n:List<Team>" as TEAMLIST
-participant "listTeamDto\n:List<TeamDto>" as LSTEAMDTO
-participant "objDto\n:TeamDto" as DTOTEAM
+participant ":TaskAgendaMapper" as TEAMMP
+participant "listTaskAgenda\n:List<TaskAgenda>" as TEAMLIST
+participant "listTaskAgendaDto\n:List<TaskAgendaDto>" as LSTEAMDTO
+participant "objDto\n:TaskAgendaDto" as DTOTEAM
 
-autonumber 25
+autonumber 13
 
---> TEAMMP : toDTO(listTeam)
+--> TEAMMP : toDTO(listTaskAgenda)
 
-autonumber 25.1
+autonumber 13.1
 
 activate TEAMMP
 
@@ -21,7 +21,7 @@ group To DTO List
 
 TEAMMP --> LSTEAMDTO : create()
 
-loop for each object in listTeam
+loop for each object in listTaskAgenda
 
 TEAMMP -> TEAMLIST : get(i)
 
@@ -51,9 +51,9 @@ end
 
 end
 
-autonumber 26
+autonumber 14
 
-<-- TEAMMP : listTeamDto
+<-- TEAMMP : listTaskAgendaDto
 
 deactivate TEAMMP
 @enduml

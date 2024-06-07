@@ -9,22 +9,22 @@ participant "agenda\n:Agenda" as AGENDA
 
 participant "agendaTask\n:AgendaTask" as TASK
 
-autonumber 39
+autonumber 43
 
---> CTRL : assignTeamTask(teamCollaboratorName,taskParkName,taskName)
+--> CTRL : assignTeamTask(team,taskAgenda)
 
-autonumber 39.1
+autonumber 43.1
 group Assign Team Task
 
 activate CTRL
 
-CTRL -> AGENDA : assignTeamTask(team,task)
+CTRL -> AGENDA : assignTeamTask(team,taskAgenda)
 
 activate AGENDA
 
-loop for each task in listTask[in Agenda]
+loop for each taskAgenda in listTaskAgenda[in Agenda]
 
-AGENDA -> TASK : equalsTask(task)
+AGENDA -> TASK : equalsTask(taskAgenda)
 
 activate TASK
 
@@ -52,7 +52,7 @@ deactivate AGENDA
 
 end
 
-autonumber 40
+autonumber 44
 
 <--CTRL : true/false
 

@@ -67,7 +67,9 @@ class Skill{
 class Job{
     name
 }
+
 class Team{
+    id
 }
 
 class CheckUp{
@@ -150,7 +152,7 @@ GreenSpaceManager "1" - "*" GreenSpace : register/manages >
 GreenSpaceManager "1..*" -- "1..*" Task : creates >
 GreenSpaceManager "1..*" - "1..*" TaskToDoList : inserts >
 GreenSpaceManager "1..*" - "1..*" TaskAgenda : inserts new entry >
-GreenSpaceManager "1..*" - "1" TaskAgenda : Assign Team to an entry >
+GreenSpaceManager "1..*" - "1" TaskAgenda : Assign Team >
 
 '-------------GreenSpace-------------
 GreenSpace "1" - "1" Address : is located in >
@@ -172,7 +174,7 @@ Agenda "1" -u- "*" TaskAgenda : contains >
 EmailService "1" -u- "*" Team :  makes use of <
 
 (Task,ToDoList) .. TaskToDoList
-(HumanResourceManager,TaskAgenda) .. Team : assign Team
+(GreenSpaceManager,TaskAgenda) .. Team
 
 TaskAgenda "1" - "1" TaskToDoList : includes >
 

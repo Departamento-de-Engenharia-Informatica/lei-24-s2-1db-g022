@@ -19,6 +19,8 @@ participant "greenSpaceManager\n:GreenSpaceManager" as GSMO
 participant "greenSpaces\nGreenSpaces" as GREENSPACES
 participant "teamRepository\n:TeamRepository" as TEAMREPO
 participant "agenda\n:Agenda" as AGENDA
+participant "teamMapper\n:TeamMapper" as TEAMMAPPER
+participant "taskAgendaMapper\n:TeamMapper" as TASKAGENDAMAPPER
 
 activate GSM	
 
@@ -51,26 +53,22 @@ activate CTRL
 CTRL -> GSMO : getListGreenSpace()
 activate GSMO
 
-GSMO -> GREENSPACES : getSortedGreenSpaces()
+GSMO -> GREENSPACES : getGreenSpaceList()
 
 activate GREENSPACES
-
-ref over GREENSPACES
-Design in US27
-end ref
 
 GREENSPACES --> GSMO : greenSpaceList
 deactivate GREENSPACES
 
-GSMO --> CTRL : List greenSpace
+GSMO --> CTRL : greenSpaceList
 
 deactivate GSMO
 
-CTRL --> CTRL : List greenSpace
+CTRL --> CTRL : greenSpaceList
 
 deactivate CTRL
 
-CTRL -> CTRL : getAllTaskByGreenSpace(listGreenSpace)
+CTRL -> CTRL : getAllTaskByGreenSpace(greenSpaceList)
 
 activate CTRL
 
@@ -80,15 +78,29 @@ Get All Task By GreenSpace
 
 end
 
-CTRL --> CTRL : listTask
-
-deactivate
-
-CTRL --> UI : listTask
+CTRL --> CTRL : listTaskAgenda
 
 deactivate CTRL
 
-UI --> GSM	 : Show Task List and ask to select one
+CTRL -> TASKAGENDAMAPPER : toDTO(listTaskAgenda)
+
+activate TASKAGENDAMAPPER
+
+ref over TASKAGENDAMAPPER
+
+toDTO List Task Agenda
+
+end
+TASKAGENDAMAPPER --> CTRL : listTaskAgendaDTO
+
+deactivate TASKAGENDAMAPPER
+
+
+CTRL --> UI : listTaskAgendaDTO
+
+deactivate CTRL
+
+UI --> GSM	 : Show a task name and greenSpaceName Task Agenda List and ask to select one
 deactivate UI
 
 GSM	->UI: choose a task
@@ -123,22 +135,23 @@ TR --> CTRL : listTeam
 
 deactivate TR
 
-'CTRL -> TEAMMP : toDTO(listTeam)
+CTRL -> TEAMMAPPER: toDTO(listTeam)
 
-'activate TEAMMP
+activate TEAMMAPPER
 
-'ref over TEAMMP
-'    SD_toDTO_List
-'end
+ref over TEAMMAPPER
+SD_toDTO_List
+end
 
-'TEAMMP --> CTRL : listTeamDto
+TEAMMAPPER --> CTRL : listTeamDto
 
+deactivate TEAMMAPPER
 
-CTRL --> UI : listTeam
+CTRL --> UI : listTeamDto
 
 deactivate CTRL
 
-UI --> GSM	 : show the list of the teams and ask to choose one of them
+UI --> GSM	 : show the list of the id teams and ask to choose one of them
 
 deactivate UI
 
@@ -154,7 +167,7 @@ GSM -> UI : confirms data
 
 activate UI
 
-UI -> CTRL: assignTeamTask(teamCollaboratorName,taskParkName,taskName)
+UI -> CTRL: assignTeamTask(teamId,taskParkName,taskName)
 
 activate CTRL
 
@@ -174,13 +187,13 @@ PLAT --> CTRL: teamRepository
 
 deactivate PLAT
 
-CTRL -> TEAMREPO : getTeamByCollaboratorName(teamCollaboratorName)
+CTRL -> TEAMREPO : getTeamById(teamId)
 
 activate TEAMREPO
 
 ref over TEAMREPO
 
-Get team By Collaborator
+Get team By ID
 
 end
 
@@ -206,11 +219,11 @@ Get Task By Name and GreenSpace
 
 end
 
-AGENDA --> CTRL : task
+AGENDA --> CTRL : taskAgenda
 
 deactivate AGENDA
 
-CTRL -> CTRL : assignTeam(team,task)
+CTRL -> CTRL : assignTeam(team,taskAgenda)
 
 activate CTRL
 

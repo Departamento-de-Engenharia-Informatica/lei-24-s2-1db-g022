@@ -8,11 +8,11 @@ participant "agenda\n:Agenda" as AGENDA
 participant "agendaTask\n:AgendaTask" as TASK
 participant "greenSpace\n:GreenSpace" as GREEN
 
-autonumber 37
+autonumber 41
 
 --> AGENDA : getTaskByNameAndGreenSpace(taskParkName, taskName)
 
-autonumber 37.1
+autonumber 41.1
 
 activate AGENDA
 
@@ -48,9 +48,9 @@ end
 
 end
 
-autonumber 38
+autonumber 42
 
-<--AGENDA : task
+<--AGENDA : agendaTask
 
 deactivate AGENDA
 @enduml
