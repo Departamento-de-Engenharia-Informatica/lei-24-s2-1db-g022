@@ -1,0 +1,153 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype orto
+
+skinparam classAttributeIconSize "1"
+
+package "UI" <<Folder>> {
+    class ListGreenSpacesUI {
+    }
+}
+
+
+package "Controller" <<Folder>> {
+
+    class ListGreenSpacesController {
+        + ListGreenSpacesController(collaboratorRepository)
+        + getGreenSpaceManagerGSpaceList
+        - getGSMFromSession()
+    }
+
+}
+
+'left to right direction
+package "Domain" <<Folder>> {
+
+    package "Domain.Application" <<Folder>> {
+
+        class ApplicationSession
+        {
+            + static getInstance()
+            + getCurrentSession()
+        }
+
+        class UserSession
+        {
+            + getUserEmail()
+        }
+    }
+
+    package "Domain.Model" <<Folder>> {
+
+        interface GreenSpace <<Interface>>{
+            + getName()
+            + getArea()
+        }
+
+        class GreenSpaces{
+
+            +getSortedGreenSpaces()
+        }
+
+        class Garden implements GreenSpace{
+            - String name
+            - int area
+
+            + getName()
+            + getArea()
+        }
+
+        class MediumPark implements GreenSpace{
+            - String name
+            - int area
+
+            + getName()
+            + getArea()
+        }
+
+        class LargePark implements GreenSpace{
+            - String name
+            - int area
+
+            + getName()
+            + getArea()
+        }
+
+        interface ICollaborator <<Interface>>{
+            + getEmail()
+            + hasEmail(email)
+        }
+
+        class GreenSpaceManager implements ICollaborator{
+
+            + getGreenSpace()
+        }
+
+        interface Sortable <<Interface>>{
+
+            + getSortedList(greenSpaceList)
+        }
+
+        class BubbleSort implements Sortable{
+        }
+
+        class SelectionSort implements Sortable{
+        }
+
+    }
+
+    package "Domain.Repository" <<Folder>> {
+
+        class Repositories {
+
+            - Repositories()
+            + getInstance() : Repositories
+            + getCollaboratorRepository()
+        }
+
+        class CollaboratorRepository {
+
+            + getCollaboratorByEmail(email)
+        }
+    }
+}
+
+'-------------------Instance-------------------
+Repositories -> Repositories : instance
+ApplicationSession -> ApplicationSession : instance
+
+'-------------------UI-------------------
+ListGreenSpacesUI ..> ListGreenSpacesController
+
+'-------------------Controller-------------------
+ListGreenSpacesController ...> Repositories : repositories
+ListGreenSpacesController ...> ApplicationSession
+ListGreenSpacesController ...> UserSession
+ListGreenSpacesController ...> CollaboratorRepository
+ListGreenSpacesController ...> ICollaborator
+ListGreenSpacesController ...> GreenSpace
+ListGreenSpacesController ...> GreenSpaceManager
+ListGreenSpacesController ...> GreenSpaces
+ListGreenSpacesController ...> Sortable
+
+'-------------------ApplicationSession-------------------
+ApplicationSession --> "1" UserSession : userSession
+
+'-------------------Repositories-------------------
+Repositories ---> "1" CollaboratorRepository : CollaboratorRepository
+
+'-------------------CollaboratorRepository-------------------
+CollaboratorRepository "1"  --> "*" ICollaborator : collaboratorLis
+
+'-------------------GreenSpaceManager-------------------
+GreenSpaceManager "1" --> "1" GreenSpaces : greenSpaces
+
+'-------------------GreenSpaces-------------------
+GreenSpaces "1" --> "*" GreenSpace : greenSpaceList
+
+'-------------------Sortable-------------------
+Sortable "1" <- "*" GreenSpace : makes use of
+
+@enduml

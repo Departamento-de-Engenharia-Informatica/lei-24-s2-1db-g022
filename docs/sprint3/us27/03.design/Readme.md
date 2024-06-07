@@ -40,8 +40,8 @@ This diagram shows the full sequence of interactions between the classes involve
 
 Get Green Space Manager
 
-![Sequence Diagram - Split Manager](svg/us27-partial-sequence-diagram-get-GSM.svg)
+![Sequence Diagram - Split Manager](../../us20/03.design/svg/us20-partial-sequence-diagram-get-GSM.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us01-class-diagram.svg)
+![Class Diagram](svg/us27-class-diagram.svg)
