@@ -9,11 +9,11 @@ participant "agenda\n:Agenda" as AGENDA
 
 participant "agendaTask\n:AgendaTask" as TASK
 
-autonumber 35
+autonumber 39
 
 --> CTRL : assignTeamTask(teamCollaboratorName,taskParkName,taskName)
 
-autonumber 35.1
+autonumber 39.1
 group Assign Team Task
 
 activate CTRL
@@ -52,7 +52,7 @@ deactivate AGENDA
 
 end
 
-autonumber 36
+autonumber 40
 
 <--CTRL : true/false
 

@@ -8,11 +8,11 @@ participant "teamRepository\n:TeamRepository" as TEAMREPO
 participant "team\n:Team" as TEAM
 participant "collaborator\n:Collaborator" as COL
 
-autonumber 35.1
+autonumber 33
 
 --> TEAMREPO : getTeamByCollaboratorName(teamCollaboratorName)
 
-autonumber 35.1.1
+autonumber 33.1
 
 activate TEAMREPO
 
@@ -44,7 +44,7 @@ end
 
 end
 
-autonumber 35.2
+autonumber 34
 
 <--TEAMREPO : true/team
 
