@@ -97,7 +97,9 @@ public class CollaboratorRepository {
 
         for (Skill newSkill : skillList) {
             for (ICollaborator collaborator : collaboratorList) {
+
                 if(collaborator instanceof Collaborator){
+
                     if (((Collaborator) collaborator).hasCollaboratorSkill(newSkill) && !newCollaboratorList.contains((Collaborator) collaborator)) {
                         newCollaboratorList.add((Collaborator) collaborator);
                     }

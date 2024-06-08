@@ -29,6 +29,12 @@ public class LargePark implements GreenSpace {
     }
 
     @Override
+    public boolean hasName(String greenSpaceName){
+
+        return this.name.equals(greenSpaceName);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof LargePark)) return false;

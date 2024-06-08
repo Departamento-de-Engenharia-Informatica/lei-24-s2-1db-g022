@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
+import pt.ipp.isep.dei.esoft.project.domain.TaskToDoList;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
 
 import java.util.ArrayList;
@@ -110,6 +111,24 @@ public class TeamRepository {
     }
 
     private boolean addTeam(Team team) {
-        return teamList.add(team);
+
+        boolean isCreated = teamList.add(team);
+        int id;
+
+        if(teamList.size() == 1){
+            id = 1;
+        }else{
+           id = teamList.get(teamList.size()-2).getId() + 1;
+        }
+
+        team.generateId(id);
+
+        return isCreated;
+    }
+
+    public void ver(){
+        for (Team t:teamList) {
+            System.out.println(t.toString());
+        }
     }
 }

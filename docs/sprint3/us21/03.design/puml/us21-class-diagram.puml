@@ -150,9 +150,8 @@ package "Domain" <<Folder>> {
             - String status
             - String taskRef
 
-            + TaskToDoList(greenSpace, task, urgency, aproxExpectedDuration)
+            + TaskToDoList(greenSpace, task, urgency, aproxExpectedDuration, taskRef)
             - validateTaskToDoList()
-            - generateUniqueReference()
         }
 
         class GreenSpaceManager implements ICollaborator{
@@ -164,8 +163,10 @@ package "Domain" <<Folder>> {
 
             + ToDoList()
             + registerEntryToDoList(greenSpace,task,urgency,aproxExpectedDuration)
-            - addListTaskToDoList(taskTdl)
+            - addTaskToDoList(taskTdl)
             - validateToDoList(taskTdl)
+            - generateUniqueReference()
+            - validateref(taskRef)
         }
 
     }
@@ -270,7 +271,7 @@ GreenSpace "1" *-- "1" Address : is located in
 GreenSpaces "1" -> "*" GreenSpace: greenSpaceList
 
 '-------------------ToDoList-------------------
-ToDoList "1" --> "*" TaskToDoList : taskTdl
+ToDoList "1" --> "*" TaskToDoList : taskTdlList
 
 '-------------------TaskToDoList-------------------
 TaskToDoList "1..*" -> "1" GreenSpace : greenSpace

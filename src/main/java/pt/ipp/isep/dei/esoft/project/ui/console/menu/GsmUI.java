@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 import pt.ipp.isep.dei.esoft.project.ui.console.MinRouteToApUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.MinSpanTreeUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.RegisterGreenSpaceUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.RegisterEntryToDoListUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.ShortestPathApUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
@@ -34,7 +35,7 @@ public class GsmUI implements Runnable {
         options.add(new MenuItem("US17 - Place sign to assembly point.", new MinRouteToApUI()));
         options.add(new MenuItem("US18 - Place sign to evacuate to one of the several Assembly Points.", new ShortestPathApUI()));
         options.add(new MenuItem("US20 - Register GreenSpace.", new RegisterGreenSpaceUI()));
-        options.add(new MenuItem("US21 - Add New Entry ToDoList.", new ShortestPathApUI()));
+        options.add(new MenuItem("US21 - Add New Entry ToDoList.", new RegisterEntryToDoListUI()));
         options.add(new MenuItem("US22 - Add New Entry Agenda.", new ShortestPathApUI()));
         options.add(new MenuItem("US23 - Assign Team To Entry Agenda.", new ShortestPathApUI()));
         options.add(new MenuItem("US27 - List GreenSpaces Managed by me.", new ShortestPathApUI()));

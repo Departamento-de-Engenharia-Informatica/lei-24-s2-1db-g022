@@ -12,6 +12,7 @@ import java.util.Objects;
 public class Team {
 
     private final List<Collaborator> collaboratorList;
+    private int id;
 
     /**
      * Constructs a Team object with the specified list of collaborators.
@@ -22,6 +23,13 @@ public class Team {
         this.collaboratorList = collaboratorList;
     }
 
+    public void generateId(int id){
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 
     /**
      * Gets the list of collaborators in the team.
@@ -41,6 +49,7 @@ public class Team {
     public String toString() {
         return "Team{" +
                 "collaboratorList=" + collaboratorList +
+                ", id=" + id +
                 '}';
     }
 

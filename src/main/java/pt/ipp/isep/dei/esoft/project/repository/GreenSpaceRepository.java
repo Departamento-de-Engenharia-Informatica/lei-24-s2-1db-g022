@@ -1,9 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Garden;
-import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
-import pt.ipp.isep.dei.esoft.project.domain.LargePark;
-import pt.ipp.isep.dei.esoft.project.domain.MediumPark;
+import pt.ipp.isep.dei.esoft.project.domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +45,25 @@ public class GreenSpaceRepository {
         return success;
     }
 
+    public void addGreenSpaceBootstrap (GreenSpace greenSpace){
+        greenSpaceList.add(greenSpace);
+    }
+
     private boolean validateAllData(GreenSpace greenSpace) {
         return !greenSpaceList.contains(greenSpace);
+    }
+
+    public Optional<GreenSpace> getGreenSpaceByName(String greenSpaceName) {
+
+        for (GreenSpace g : greenSpaceList) {
+
+            if (g.hasName(greenSpaceName)) {
+
+                return Optional.of(g);
+            }
+        }
+
+        return Optional.empty();
     }
 
     public void ver(){

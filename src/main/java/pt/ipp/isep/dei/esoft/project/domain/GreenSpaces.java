@@ -7,16 +7,20 @@ public class GreenSpaces {
     List<GreenSpace> greenSpacesList;
 
     public GreenSpaces() {
-        this.greenSpacesList = new ArrayList<>();
+        greenSpacesList = new ArrayList<>();
     }
 
     public boolean addListGreenSpaces(GreenSpace greenSpace) {
         return this.greenSpacesList.add(greenSpace);
     }
 
-    public void ver() {
-        for (GreenSpace greenSpace : greenSpacesList) {
-            System.out.println(greenSpace.toString());
-        }
+    public List<GreenSpace> getGreenSpaceList() {
+
+        return greenSpacesList;
     }
+
+    public void addListBootstrapGreenSpaces(GreenSpace greenSpace) {
+        this.greenSpacesList.add(greenSpace);
+    }
+
 }

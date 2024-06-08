@@ -23,7 +23,9 @@ public class Bootstrap implements Runnable {
         addSkills();
         addBrands();
         addCollaborators();
+        addGreenSpaces();
         addVehicles();
+        addTasks();
     }
 
 
@@ -33,9 +35,6 @@ public class Bootstrap implements Runnable {
     private void addCollaborators() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
 
-        GreenSpace garden = new Garden("Jardim Porto",3,"street Porto",12,"1234-123","Porto");
-        GreenSpace gardem2 = new Garden("Jardim Lisboa",5,"street Lisboa",11,"1234-143","Lisboa");
-
         // Create sample collaborators
         Collaborator collaborator = new Collaborator("luigy", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988676", "luigy@luigy.pt", new Address("streeName", "1234-123", 1), 123456789, "Passport", 123321123, new Job("Jardineiro"));
         Collaborator collaborator2 = new Collaborator("daniel", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988671", "daniel@daniel.pt", new Address("streeName", "1234-123", 1), 123456780, "Passport", 123321125, new Job("Calceteiro"));
@@ -43,10 +42,8 @@ public class Bootstrap implements Runnable {
         Collaborator collaborator4 = new Collaborator("diogo", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988673", "diogo@diogo.pt", new Address("streeName", "1234-123", 1), 675432564, "Passport", 123321122, new Job("Calceteiro"));
         GreenSpaceManager greenSpaceManager = new GreenSpaceManager("gsname", Date.valueOf("1999-01-10"), Date.valueOf("2024-01-10"), "+351 914981073", "gsm@gsm.pt", new Address("streeName", "1234-123", 1), 675432501, "Passport", 123021022, new Job("Gestor"));
 
-        greenSpaceManager.addListGreenSpace(garden);
-        greenSpaceManager.addListGreenSpace(gardem2);
-
-        greenSpaceManager.getGreenSpaces();
+        greenSpaceManager.getGreenSpaces().addListBootstrapGreenSpaces(new Garden("Jardim Porto",3,"street Porto",12,"1234-123","Porto"));
+        greenSpaceManager.getGreenSpaces().addListBootstrapGreenSpaces(new Garden("Jardim Lisboa",5,"street Lisboa",11,"1234-143","Lisboa"));
 
         // Add skills to collaborators
         collaborator.addSkillCollaboratorBootStrap(new Skill("Podador"));
@@ -76,6 +73,15 @@ public class Bootstrap implements Runnable {
         addUsersGSM(greenSpaceManager);
     }
 
+    private void addGreenSpaces(){
+        GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
+        GreenSpace garden = new Garden("Jardim Porto",3,"street Porto",12,"1234-123","Porto");
+        GreenSpace garden2 = new Garden("Jardim Lisboa",5,"street Lisboa",11,"1234-143","Lisboa");
+
+        greenSpaceRepository.addGreenSpaceBootstrap(garden);
+        greenSpaceRepository.addGreenSpaceBootstrap(garden2);
+    }
+
 
     /**
      * Adds predefined jobs to the job repository.
@@ -88,6 +94,19 @@ public class Bootstrap implements Runnable {
         jobRepository.createJob("Condutor");
         jobRepository.createJob("Gestor");
 
+    }
+
+    /**
+     * Adds predefined tasks to the task repository.
+     */
+    private void addTasks() {
+
+        TaskRepository taskRepository = Repositories.getInstance().getTaskRepository();
+        taskRepository.createTask("Podar Árvores");
+        taskRepository.createTask("Reparar Paredes");
+        taskRepository.createTask("Pintar Paredes");
+        taskRepository.createTask("Podar Arbustos");
+        taskRepository.createTask("Cortar Relva");
     }
 
     /**

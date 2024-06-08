@@ -152,6 +152,8 @@ public class GenerateTeamController {
      * @return true if the team is successfully registered, false otherwise.
      */
     public boolean registerProposalTeam(Team selectTeam) {
-        return getTeamRepository().registerProposalTeam(selectTeam);
+       boolean ola =  getTeamRepository().registerProposalTeam(selectTeam);
+        getTeamRepository().ver();
+        return ola;
     }
 }

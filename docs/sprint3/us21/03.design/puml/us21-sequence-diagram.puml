@@ -19,9 +19,9 @@ participant "greenSpaceMapper\n:GreenSpaceMapper" as GSMP
 participant "taskRepository\n:TaskRepository" as TR
 participant "taskMapper\n:TaskMapper" as TMP
 participant "greenSpaceRepository\n:GreenSpaceRepository" as GSR
-participant "toDoList\n:ToDoList" as TDL
 participant "greenSpace\nGreenSpace" as GREENSPACE
 participant "task\nTask" as TASK
+participant "toDoList\n:ToDoList" as TDL
 
 activate GSM
 
@@ -53,7 +53,7 @@ activate GSM
         GSMO --> CTRL : greenSpaceList
     deactivate GSMO
 
-        CTRL -> GSMP : toDTOGreenSpace(greenSpaceList)
+        CTRL -> GSMP : toDTO(greenSpaceList)
     activate GSMP
 
         ref over GSMP
@@ -72,7 +72,7 @@ activate GSM
         GSM->UI: chooses one
     activate UI
 
-        UI-> CTRL : getTask()
+        UI-> CTRL : getAllTasks()
     activate CTRL
 
         CTRL -> RepositorySingleton : getInstance()
@@ -93,7 +93,7 @@ activate GSM
         TR --> CTRL : taskList
     deactivate TR
 
-        CTRL -> TMP : toDTOTask(taskList)
+        CTRL -> TMP : toDTO(taskList)
     activate TMP
 
         ref over TMP

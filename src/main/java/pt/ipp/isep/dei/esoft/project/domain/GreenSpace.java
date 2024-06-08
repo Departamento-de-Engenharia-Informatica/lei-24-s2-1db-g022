@@ -6,4 +6,6 @@ public interface GreenSpace {
     int getArea();
 
     Address getAddress();
+
+    boolean hasName(String greenSpaceName);
 }

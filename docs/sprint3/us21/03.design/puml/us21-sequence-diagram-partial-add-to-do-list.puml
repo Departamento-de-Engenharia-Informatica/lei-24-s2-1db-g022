@@ -16,6 +16,13 @@ activate TDL
 
         TDL -> TDL: generateUniqueReference()
         activate TDL
+
+            TDL -> TDL : validateRef()
+        activate TDL
+
+            TDL --> TDL : true/false
+        deactivate TDL
+
         TDL --> TDL: taskRef
         deactivate TDL
 

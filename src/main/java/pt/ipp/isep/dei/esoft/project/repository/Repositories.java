@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import pt.ipp.isep.dei.esoft.project.domain.ToDoList;
+
 /**
  * @author Group22
  */
@@ -15,6 +17,9 @@ public class Repositories {
     private final AddressRepository addressRepository;
     private final TeamRepository teamRepository;
     private final GreenSpaceRepository greenSpaceRepository;
+    private final TaskRepository taskRepository;
+    private final ToDoList toDoList;
+
 
     /**
      * Constructs a Repositories object with default repositories.
@@ -30,7 +35,8 @@ public class Repositories {
         collaboratorRepository = new CollaboratorRepository();
         teamRepository = new TeamRepository();
         greenSpaceRepository = new GreenSpaceRepository();
-
+        taskRepository = new TaskRepository();
+        toDoList = new ToDoList();
     }
 
     /**
@@ -122,5 +128,23 @@ public class Repositories {
 
     public GreenSpaceRepository getGreenSpaceRepository() {
         return greenSpaceRepository;
+    }
+
+    /**
+     * Retrieves the task repository.
+     *
+     * @return the task repository
+     */
+    public TaskRepository getTaskRepository() {
+        return taskRepository;
+    }
+
+    /**
+     * Retrieves the To Do List.
+     *
+     * @return the To Do List
+     */
+    public ToDoList getToDoList() {
+        return toDoList;
     }
 }
