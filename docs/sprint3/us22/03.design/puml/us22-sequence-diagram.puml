@@ -1,0 +1,198 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (SD) - US22 - Add new entry to the agenda.
+
+autonumber
+
+actor "Green Space Manager (GSM)" as GSM
+participant ":AddNewEntryToAgendaUI" as UI
+participant ":AddNewEntryToAgendaController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "manager\n:GreenSpaceManager" as GSMO
+participant "greenSpaces\n:GreenSpaces" as GREENSPACES
+participant "greenSpaceMapper\n:GreenSpaceMapper" as GSMP
+participant "toDoList\n:ToDoList" as TDL
+participant "agenda\n:Agenda" as AGENDA
+participant "tasksAgenda\n:TasksAgenda" as TASKSAGENDA
+participant "taskAgenda\n:TaskAgenda" as TASKAGENDA
+participant "taskToDoList\n:TaskToDoList" as TTDL
+participant "greenSpace\n:GreenSpace" as GS
+
+activate GSM
+
+    GSM -> UI : asks to register a new entry in the agenda
+    activate UI
+
+     UI -> CTRL : getGreenSpaceManager()
+        activate CTRL
+
+            CTRL -> CTRL : getGSMFromSession()
+        activate CTRL
+
+            ref over CTRL
+                Design in US20
+            end ref
+
+            CTRL --> CTRL : manager
+        deactivate CTRL
+
+            CTRL -> GSMO : getListGreenSpace()
+        activate GSMO
+
+            GSMO -> GREENSPACES : getGreenSpaceList()
+        activate GREENSPACES
+
+        GREENSPACES --> GSMO : greenSpaceList
+        deactivate GREENSPACES
+
+        GSMO --> CTRL : greenSpaceList
+        deactivate GSMO
+
+CTRL -> GSMP : toDTOGreenSpace(greenSpaceList)
+    activate GSMP
+
+        ref over GSMP
+            Design in US21
+        end ref
+
+       GSMP --> CTRL : greenSpaceListDto
+    deactivate GSMP
+
+        CTRL --> UI : greenSpaceListDto
+    deactivate CTRL
+
+    UI --> GSM : shows list of user associated Green spaces and asks to select one
+    deactivate UI
+
+    GSM -> UI: selects one
+    activate UI
+
+    UI -> CTRL : getTaskToDoList(greenSpaceName)
+    activate CTRL
+
+        ref over CTRL
+            Get Task ToDoList
+        end
+
+
+
+            CTRL --> UI : taskListGreenSpaceDto
+            deactivate CTRL
+
+    UI --> GSM : shows list of tasks and asks to select one
+    deactivate UI
+
+    GSM->UI: selects task
+    activate UI
+
+    UI --> GSM : requests data(startDate, endDate, expectedDuration)
+    deactivate UI
+
+    GSM -> UI : types data
+    activate UI
+
+    UI --> GSM : shows data and asks to confirm
+    deactivate UI
+
+    GSM -> UI : confirms data
+    activate UI
+
+    UI -> CTRL : addNewEntryToAgenda(taskToDoListReference, startDate, endDate, expectedDuration)
+    activate CTRL
+
+    CTRL -> RepositorySingleton : getInstance()
+    activate RepositorySingleton
+
+    RepositorySingleton --> CTRL : repositories
+    deactivate RepositorySingleton
+
+    CTRL -> PLAT : getAgenda()
+    activate PLAT
+
+    PLAT --> CTRL : agenda
+    deactivate PLAT
+
+    CTRL -> PLAT : getToDoList()
+    activate PLAT
+
+    PLAT --> CTRL : toDoList
+    deactivate PLAT
+
+    CTRL -> TDL : getTaskToDoList(taskToDoListReference)
+    activate TDL
+
+        loop for each taskToDoList in ToDoList
+
+        TDL -> TTDL : hasReference(reference)
+        activate TTDL
+
+        TTDL --> TDL : true/false
+        deactivate TTDL
+
+        end
+
+        TDL --> CTRL : taskToDoList
+        deactivate TDL
+
+    CTRL -> AGENDA : addNewEntryToAgenda(taskToDoList, startDate, endDate, expectedDuration)
+    activate AGENDA
+
+    AGENDA -> TASKSAGENDA : addNewEntryToAgenda(taskToDoList, startDate, endDate, expectedDuration)
+    activate TASKSAGENDA
+
+    TASKSAGENDA -> TASKAGENDA**: create(taskToDolist, startDate, endDate, expectedDuration)
+    activate TASKAGENDA
+
+    TASKAGENDA -> TTDL : setPlanned()
+    activate TTDL
+
+    TTDL --> TASKAGENDA :
+    deactivate TTDL
+
+    TASKAGENDA -> TASKAGENDA : validationTaskAgenda()
+    activate TASKAGENDA
+
+    TASKAGENDA --> TASKAGENDA : true/false
+    deactivate TASKAGENDA
+
+    TASKAGENDA --> TASKSAGENDA: taskAgenda
+    deactivate TASKAGENDA
+
+    TASKSAGENDA -> TASKSAGENDA : addTaskAgendaToList(taskAgenda)
+    activate TASKSAGENDA
+
+    TASKSAGENDA --> TASKSAGENDA: true/false
+    deactivate TASKSAGENDA
+
+    TASKSAGENDA --> AGENDA : taskAgenda
+    deactivate TASKSAGENDA
+
+    AGENDA -> CTRL : taskAgenda
+    deactivate AGENDA
+
+    alt taskAgenda != null
+
+    CTRL -> ToDoList : removeOldEntryToDoList()
+    activate ToDoList
+
+    ToDoList -> ToDoList : removeEntry()
+    activate ToDoList
+
+    ToDoList --> ToDoList : true/false
+    deactivate ToDoList
+
+    ToDoList --> CTRL : true/false
+    deactivate ToDoList
+    end
+
+    CTRL --> UI : taskAgenda
+    deactivate CTRL
+
+    UI --> GSM : displays operation success
+    deactivate UI
+
+@enduml

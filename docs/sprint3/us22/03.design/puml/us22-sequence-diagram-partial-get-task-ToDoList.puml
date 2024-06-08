@@ -1,0 +1,101 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":AddNewEntryToAgendaController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "greenSpaceRepository\n:GreenSpaceRepository" as GSR
+participant "toDoList\n:ToDoList" as TDL
+participant "taskToDoList\n:TaskToDoList" as TTDL
+participant "greenSpace\n:GreenSpace" as GS
+participant "taskToDoListMapper\n:TaskToDoListMapper" as TTDLMP
+
+autonumber 14
+-> CTRL: getTaskToDoList(greenSpaceName)
+
+autonumber 14.1
+activate CTRL
+    group Register Entry
+ CTRL -> RepositorySingleton : getInstance()
+    activate RepositorySingleton
+
+    RepositorySingleton -> CTRL : repositories
+    deactivate RepositorySingleton
+
+    CTRL -> PLAT : getGreenSpaceRepository()
+    activate PLAT
+
+    PLAT -> CTRL : greenSpaceRepository
+    deactivate PLAT
+
+    CTRL -> PLAT : getToDoList()
+    activate PLAT
+
+    PLAT -> CTRL : toDoList
+    deactivate PLAT
+
+    CTRL -> GSR : getGreenSpaceByName(greenSpaceName)
+    activate GSR
+
+    loop for each greenSpace in greenSpaceList[in greenSpaceRepository]
+
+                GSR -> GS : hasName(greenSpaceName)
+                activate GS
+
+                    GS --> GSR : true/false
+                    deactivate GS
+
+            end
+
+                GSR --> CTRL : greenSpace
+                deactivate GSR
+
+            CTRL -> TDL : getTasksByGreenSpace(greenSpace)
+            activate TDL
+
+                    loop for each TaskToDoList in ToDoList
+
+                    TDL -> TTDL: hasTaskByGreenSpace(greenSpace)
+                    activate TTDL
+
+                        TTDL -> GS : equalsGreenSpace(greenSpace)
+                        activate GS
+
+                        GS --> TTDL : true/false
+                        deactivate GS
+
+                            TTDL --> TDL: true/false
+                            deactivate TTDL
+
+                            alt hasTaskByGreenSpace == true
+                                TDL -> TDL : addTaskListGreenSpace()
+                                activate TDL
+
+                                TDL --> TDL : true/false
+                                deactivate TDL
+                            end
+
+                    end
+
+            TDL --> CTRL : taskListGreenSpace
+            deactivate TDL
+
+            CTRL -> TTDLMP :toDTOTaskToDoList(taskListGreenSpace)
+            activate TTDLMP
+
+                    ref over TTDLMP
+                        Task ToDoList To DTO
+                    end ref
+
+            TTDLMP --> CTRL : taskListGreenSpaceDto
+            deactivate TTDLMP
+    end
+
+    autonumber 15
+    <-- CTRL : taskListGreenSpaceDto
+deactivate CTRL
+
+
+@enduml

@@ -1,0 +1,307 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+package "UI" <<Folder>> {
+    class AddNewEntryToAgendaUI {
+    }
+}
+
+
+package "Controller" <<Folder>> {
+
+    class AddNewEntryToAgendaController {
+        + AddNewEntryToAgendaController(greenSpaceRepository, collaboratorRepository, agenda, toDoList)
+        + addNewEntryToAgenda(taskToDoListReference, startDate, endDate, expectedDuration)
+        + getGreenSpace()
+        + getTask()
+        + getTaskToDoList(greenSpaceName)
+        + getGreenSpaceManager()
+        + registerEntryToDoList(greenSpaceName,taskDescription,urgency,aproxExpectedDuration)
+        - getGSMFromSession()
+    }
+
+}
+
+'left to right direction
+package "Domain" <<Folder>> {
+
+    package "Domain.Application" <<Folder>> {
+
+        class ApplicationSession
+        {
+            + static getInstance()
+            + getCurrentSession()
+        }
+
+        class UserSession
+        {
+            + getUserEmail()
+        }
+    }
+
+    package "Domain.DTO" <<Folder>> {
+
+        class TaskToDoListMapper{
+            + List<TaskToDoListDto> toDTO(List<TaskToDoList>list)
+            + TaskToDoListDto toDTO(TaskToDoList obj)
+        }
+
+        class TaskToDoListDto{
+            + String taskDescription
+            + String greenSpaceName
+            + String taskRef
+
+            + TaskToDoListDto(taskDescription, greenSpaceName, taskRef)
+        }
+
+        class GreenSpaceMapper{
+            + List<GreenSpaceDto> toDTO(List<GreenSpace>list)
+            + GreenSpaceDto toDTO(GreenSpace obj)
+        }
+
+        class GreenSpaceDto{
+            + String greenSpaceName
+            + GreenSpaceDto(greenSpaceName)
+        }
+    }
+
+    package "Domain.Model" <<Folder>> {
+
+        interface GreenSpace <<Interface>>{
+            + getName()
+            + getArea()
+            + getAddress()
+            + hasName(greenSpaceName)
+            + equalsGreenSpace(greenSpace)
+        }
+
+        class GreenSpaces{
+
+            + getGreenSpaceList()
+        }
+
+        class Garden implements GreenSpace{
+            - String name
+            - int area
+            - Address
+
+            + Garden(name, area, streetName, doorNumber, postCodeNumber, localization)
+            + getName()
+            + getArea()
+            + getAddress()
+            + hasName(greenSpaceName)
+            + equalsGreenSpace(greenSpace)
+        }
+
+        class MediumPark implements GreenSpace{
+            - String name
+            - int area
+            - Address
+
+            + getName()
+            + getArea()
+            + getAddress()
+            + MediumPark(name, area, streetName, doorNumber, postCodeNumber, localization)
+            + hasName(greenSpaceName)
+            + equalsGreenSpace(greenSpace)
+        }
+
+        class LargePark implements GreenSpace{
+            - String name
+            - int area
+            - Address
+
+            + getName()
+            + getArea()
+            + getAddress()
+            + LargePark(name, area, streetName, doorNumber, postCodeNumber, localization)
+            + hasName(greenSpaceName)
+            + equalsGreenSpace(greenSpace)
+        }
+
+        interface ICollaborator <<Interface>>{
+            + getEmail()
+            + hasEmail(email)
+        }
+
+        class Address {
+            - String street
+            - int doorNumber
+
+            + Address(street, doorNumber, postCodeNumber, localization)
+            - validation()
+        }
+
+        class PostCode{
+            - String postCodeNumber
+            - String localization
+
+            + PostCode(postCodeNumber,localization)
+            - validation()
+        }
+
+        class Task {
+            - String taskDescription
+
+            + Task(taskDescription)
+        }
+
+        class TaskToDoList {
+            - String urgency
+            - int aproxExpectedDuration
+            - String status
+            - String taskRef
+
+            + TaskToDoList(greenSpace, task, urgency, aproxExpectedDuration)
+            + hasReference(reference)
+            + hasTaskByGreenSpace(greenSpace)
+        }
+
+        class TaskAgenda {
+            - int expectedDuration
+            - Date startDate
+            - Date endDate
+
+            + TaskAgenda(taskToDoList, expectedDuration, startDate, endDate)
+            - validateTaskAgenda()
+        }
+
+        class TasksAgenda {
+
+            + TasksAgenda()
+            + addNewEntryToAgenda(taskToDoList, startDate, endDate, expectedDuration)
+            - validateTasksAgenda()
+            - addTaskAgendaToList(taskAgenda)
+        }
+
+        class GreenSpaceManager implements ICollaborator{
+
+            + getListGreenSpace()
+        }
+
+        class ToDoList{
+
+            + getTasksByGreenSpace(greenSpace)
+            + removeOldEntryToDoList()
+            - removeEntry()
+            - addTaskListGreenSpace()
+        }
+
+        class Agenda{
+
+            + Agenda()
+            + addNewEntryToAgenda(taskToDoList, startDate, endDate, expectedDuration)
+        }
+
+    }
+
+    package "Domain.Repository" <<Folder>> {
+
+        class Repositories {
+
+            - Repositories()
+            + getInstance() : Repositories
+            + getGreenSpaceRepository()
+            + getCollaboratorRepository()
+            + getToDoList()
+            + getAgenda()
+        }
+
+        class CollaboratorRepository {
+
+            + getCollaboratorByEmail(email)
+        }
+
+        class GreenSpaceRepository {
+
+            + getGreenSpaceByName(greenSpaceName)
+        }
+
+    }
+}
+
+'-------------------Agenda-------------------
+Agenda "1" -> "1" TasksAgenda : tasksAgenda
+
+'-------------------TasksAgenda-------------------
+TasksAgenda "1" --> "*"TaskAgenda : taskAgendaList
+
+'-------------------TaskMapper-------------------
+TaskToDoListMapper ..> TaskToDoListDto
+TaskToDoListMapper ..> Task
+
+'-------------------GreenSpaceMapper-------------------
+GreenSpaceMapper ..> GreenSpaceDto
+GreenSpaceMapper ..> GreenSpace
+
+'-------------------Instance-------------------
+Repositories -> Repositories : instance
+ApplicationSession -> ApplicationSession : instance
+
+'-------------------UI-------------------
+AddNewEntryToAgendaUI ..> AddNewEntryToAgendaController
+AddNewEntryToAgendaUI ..> TaskToDoListDto
+AddNewEntryToAgendaUI ..> GreenSpaceDto
+
+'-------------------Controller-------------------
+AddNewEntryToAgendaController ...> Repositories : repositories
+AddNewEntryToAgendaController ...> ApplicationSession
+AddNewEntryToAgendaController ...> UserSession
+AddNewEntryToAgendaController ...> GreenSpaceRepository
+AddNewEntryToAgendaController ...> CollaboratorRepository
+AddNewEntryToAgendaController ...> ICollaborator
+AddNewEntryToAgendaController ...> GreenSpace
+AddNewEntryToAgendaController ...> ToDoList
+AddNewEntryToAgendaController ...> Task
+AddNewEntryToAgendaController ...> TaskToDoList
+AddNewEntryToAgendaController ...> GreenSpaceManager
+AddNewEntryToAgendaController ...> Address
+AddNewEntryToAgendaController ...> PostCode
+AddNewEntryToAgendaController ...> GreenSpaces
+AddNewEntryToAgendaController ...> TaskToDoListMapper
+AddNewEntryToAgendaController ...> GreenSpaceMapper
+AddNewEntryToAgendaController ...> TaskToDoListDto
+AddNewEntryToAgendaController ...> GreenSpaceDto
+
+'-------------------ApplicationSession-------------------
+ApplicationSession --> "1" UserSession : userSession
+
+'-------------------Repositories-------------------
+Repositories ----> "1" GreenSpaceRepository : GreenSpaceRepository
+Repositories ---> "1" CollaboratorRepository : CollaboratorRepository
+Repositories -> "1" ToDoList : ToDoList
+
+'-------------------CollaboratorRepository-------------------
+CollaboratorRepository "1"  ---> "*" ICollaborator : collaboratorList
+
+'-------------------GreenSpaceRepository-------------------
+GreenSpaceRepository "1" -> "*" GreenSpace : greenSpaceList
+
+'-------------------Address-------------------
+Address "1..*" *-- "1" PostCode : postCode
+
+'-------------------GreenSpaceManager-------------------
+GreenSpaceManager "1..*" <-- "1..*" TaskToDoList : created by
+GreenSpaceManager "1..*" <--- "1..*" TaskAgenda : created by
+GreenSpaceManager "1" ----> "1" GreenSpaces : greenSpaces
+
+'-------------------GreenSpace-------------------
+GreenSpace "1" *-- "1" Address : is located in
+
+'-------------------GreenSpaces-------------------
+GreenSpaces "1" -> "*" GreenSpace: greenSpaceList
+
+'-------------------ToDoList-------------------
+ToDoList "1" --> "*" TaskToDoList : taskTdl
+
+'-------------------TaskToDoList-------------------
+TaskToDoList "1..*" -> "1" GreenSpace : greenSpace
+TaskToDoList "1..*" --> "1" Task : task
+
+@enduml
