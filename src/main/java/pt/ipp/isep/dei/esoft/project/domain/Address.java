@@ -40,9 +40,14 @@ public class Address {
 
     public Address(String streetName, int doorNumber, String postCodeNumber, String localization) {
         this.streetName = streetName;
-        this.doorNumber = doorNumber;
+        if(validateNullInt(doorNumber)){
+            this.doorNumber = doorNumber;
+        }else {
+            throw new IllegalArgumentException("DoorNumber cannot be zero or negative numbers.");
+        }
         this.postCode = new PostCode(postCodeNumber, localization);
     }
+
 
     /**
      * Gets the street name of the address.

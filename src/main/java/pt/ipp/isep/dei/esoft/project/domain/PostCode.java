@@ -6,9 +6,13 @@ public class PostCode {
     private String localization;
     private String postCodeNumber;
 
-    public PostCode(String localization, String postCodeNumber) {
+    public PostCode(String postCodeNumber, String localization) {
         this.localization = localization;
-        this.postCodeNumber = postCodeNumber;
+        if (validateNullString(postCodeNumber) && validatePostCode(postCodeNumber)) {
+            this.postCodeNumber = postCodeNumber;
+        } else {
+            throw new IllegalArgumentException("Address post code cannot be null or empty or have an incorrect format.");
+        }
     }
 
     public PostCode(String postCodeNumber) {
