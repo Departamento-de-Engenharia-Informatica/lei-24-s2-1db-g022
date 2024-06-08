@@ -187,10 +187,10 @@ activate GSM
             Register TaskToDoList
         end
 
-        TDL --> CTRL : true/false
+        TDL --> CTRL : taskTdl
     deactivate TDL
 
-        CTRL --> UI : true/false
+        CTRL --> UI : taskTdl
     deactivate CTRL
 
         UI --> GSM : displays operation success

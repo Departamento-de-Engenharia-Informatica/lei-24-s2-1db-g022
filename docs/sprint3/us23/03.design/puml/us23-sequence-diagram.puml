@@ -167,7 +167,7 @@ GSM -> UI : confirms data
 
 activate UI
 
-UI -> CTRL: assignTeamTask(teamId,taskParkName,taskName)
+UI -> CTRL: assignTeamTask(teamId,taskReference)
 
 activate CTRL
 
@@ -209,13 +209,13 @@ PLAT --> CTRL: agenda
 
 deactivate PLAT
 
-CTRL -> AGENDA : getTaskByNameAndGreenSpace(taskParkName, taskName)
+CTRL -> AGENDA : getTaskByReference(taskReference)
 
 activate AGENDA
 
 ref over AGENDA
 
-Get Task By Name and GreenSpace
+Get Task By Reference
 
 end
 

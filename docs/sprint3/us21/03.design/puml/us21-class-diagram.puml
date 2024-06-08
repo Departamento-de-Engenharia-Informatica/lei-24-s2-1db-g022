@@ -17,6 +17,7 @@ package "Controller" <<Folder>> {
 
     class RegisterEntryToDoListController {
         + RegisterEntryToDoListController(greenSpaceRepository, collaboratorRepository, taskRepository, toDoList)
+        + getGreenSpaceManagerGSpace()
         + getGreenSpace()
         + getTask()
         + registerEntryToDoList(greenSpaceName,taskDescription,urgency,aproxExpectedDuration)
@@ -150,7 +151,8 @@ package "Domain" <<Folder>> {
             - String taskRef
 
             + TaskToDoList(greenSpace, task, urgency, aproxExpectedDuration)
-            - validateTaskToDoList();
+            - validateTaskToDoList()
+            - generateUniqueReference()
         }
 
         class GreenSpaceManager implements ICollaborator{
@@ -176,7 +178,7 @@ package "Domain" <<Folder>> {
             + getInstance() : Repositories
             + getGreenSpaceRepository()
             + getCollaboratorRepository()
-            + getTaskRepository();
+            + getTaskRepository()
             + getToDoList()
         }
 

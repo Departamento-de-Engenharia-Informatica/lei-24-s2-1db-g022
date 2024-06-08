@@ -6,8 +6,8 @@ skinparam shadowing false
 
 participant ":AssignTeamAgendaController" as CTRL
 participant "agenda\n:Agenda" as AGENDA
-
-participant "agendaTask\n:AgendaTask" as TASK
+participant "tasksAgenda\n:TasksAgenda" as TASKAGENDA
+participant "taskAgenda\n:TaskAgenda" as TASK
 
 autonumber 43
 
@@ -22,29 +22,37 @@ CTRL -> AGENDA : assignTeamTask(team,taskAgenda)
 
 activate AGENDA
 
-loop for each taskAgenda in listTaskAgenda[in Agenda]
+AGENDA -> TASKAGENDA : assignTeamTask(team,taskAgenda)
 
-AGENDA -> TASK : equalsTask(taskAgenda)
+activate TASKAGENDA
+
+loop for each taskAgenda in listTaskAgenda[in TasksAgenda]
+
+TASKAGENDA -> TASK : equalsTask(taskAgenda)
 
 activate TASK
 
-TASK --> AGENDA : true/false
+TASK --> TASKAGENDA : true/false
 
 deactivate TASK
 
 alt equalsTask == true
 
-AGENDA -> TASK : updateTeam(team)
+TASKAGENDA -> TASK : updateTeam(team)
 
 activate TASK
 
-TASK --> AGENDA : true/false
+TASK --> TASKAGENDA : true/false
 
 deactivate TASK
 
 end
 
 end
+
+TASKAGENDA --> AGENDA : true/false
+
+deactivate TASKAGENDA
 
 AGENDA --> CTRL : true/false
 

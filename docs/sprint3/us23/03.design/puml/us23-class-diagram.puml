@@ -18,7 +18,7 @@ package "Controller" <<Folder>> {
         + AssignTeamAgendaController(collaboratorRepository, agenda,teamRepository)
         + getAllByGSM()
         + getAllTeam()
-        + assignTeamTask(teamCollaboratorName,taskParkName,taskName)
+        + assignTeamTask(teamCollaboratorName,taskReference)
         - assignTeam(team,taskAgenda)
         - sendEmailTeam(team,msg)
         - getAllGreenSpaceByGSM(greenSpaceManager)
@@ -143,9 +143,8 @@ package "Domain" <<Folder>> {
         class Agenda{
 
             + getAllTaskByGreenSpace(greenSpaceList)
-            + getTaskByNameAndGreenSpace(taskParkName,taskName)
+            + getTaskByReference(taskReference)
             + assignTeamTask(team,taskAgenda)
-            - addListTaskByGreenSpace(task)
         }
 
 
@@ -154,12 +153,24 @@ package "Domain" <<Folder>> {
             - date startDate
             - date endDate
 
+            + getAllTaskByGreenSpace(greenSpaceList)
             + hasTaskName(taskName)
             + hasGreenSpaceName(taskParkName)
             + verifyGreenSpace(greenSpaceList)
+            + verifyHasTaskReference(taskReference)
+            + equalsTask(taskAgenda)
+            + updateTeam(team)
             - verifyNullTeam()
-            - equalsTask(taskAgenda)
-            - updateTeam(team)
+
+        }
+
+        class TasksAgenda{
+            + assignTeamTask(team,taskAgenda)
+            + getTaskByReference(taskReference)
+        }
+
+        class TaskToDoList{
+            + hasReference(taskReference)
         }
 
     }
@@ -191,7 +202,9 @@ package "Domain" <<Folder>> {
         }
     }
 }
-
+TaskAgenda *-- TaskToDoList : taskToDoList
+Agenda "1"-->"1" TasksAgenda : tasksAgenda
+TasksAgenda "1" --> "*" TaskAgenda : taskAgendaList
 TeamMapper ..> TeamDto
 TeamMapper ..> Team
 TaskAgendaMapper ..> TaskAgendaDto

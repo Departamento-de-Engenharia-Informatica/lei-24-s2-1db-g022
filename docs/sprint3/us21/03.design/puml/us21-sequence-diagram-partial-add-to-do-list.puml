@@ -6,14 +6,20 @@ skinparam shadowing false
 participant "toDoList\n:ToDoList" as TDL
 participant "taskTdl\n:TaskToDoList" as TTDL
 
-autonumber 41
+autonumber 45
 -> TDL: registerEntryToDoList(greenSpace,task,urgency,duration)
 
-autonumber 41.1
+autonumber 45.1
 activate TDL
     group Register Entry
 
-        TDL -> TTDL**: create(greenSpace,task,urgency,duration)
+
+        TDL -> TDL: generateUniqueReference()
+        activate TDL
+        TDL --> TDL: taskRef
+        deactivate TDL
+
+        TDL -> TTDL**: create(greenSpace,task,urgency,duration,taskRef)
 
     activate TTDL
 
@@ -39,8 +45,8 @@ activate TDL
     deactivate TDL
     end
 
-    autonumber 42
-    <-- TDL : true/false
+    autonumber 46
+    <-- TDL : taskTdl
 deactivate TDL
 
 

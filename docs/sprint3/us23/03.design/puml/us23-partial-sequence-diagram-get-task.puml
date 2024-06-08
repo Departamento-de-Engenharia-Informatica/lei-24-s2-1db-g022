@@ -5,52 +5,53 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 
 participant "agenda\n:Agenda" as AGENDA
-participant "agendaTask\n:AgendaTask" as TASK
-participant "greenSpace\n:GreenSpace" as GREEN
+participant "tasksAgenda\n:TasksAgenda" as TASKSAGENDA
+participant "taskAgenda\n:TaskAgenda" as TASK
+participant "taskToDoList\n:TaskToDoList" as TODO
 
 autonumber 41
 
---> AGENDA : getTaskByNameAndGreenSpace(taskParkName, taskName)
+--> AGENDA : getTaskByReference(taskReference)
 
 autonumber 41.1
 
 activate AGENDA
 
-group Get Task By Name and GreenSpace
+group Get Task By Reference
 
-loop for each TaskAgenda in Agenda
+AGENDA -> TASKSAGENDA : getTaskByReference(taskReference)
 
-AGENDA -> TASK : hasTaskName(taskName)
+activate TASKSAGENDA
 
-activate TASK
+loop for each TaskAgenda in taskAgendaList[in TaskAgenda]
 
-TASK --> AGENDA :true/false
-
-deactivate TASK
-
-AGENDA -> TASK : hasGreenSpaceName(taskParkName)
+TASKSAGENDA -> TASK : verifyHasTaskReference(taskReference)
 
 activate TASK
 
-TASK -> GREEN :  hasName(taskParkName)
+TASK -> TODO : hasReference(taskReference)
 
-activate GREEN
+activate TODO
 
-GREEN --> TASK : true/false
+TODO --> TASK : true/false
 
-deactivate GREEN
+deactivate TODO
 
-TASK --> AGENDA :true/false
+TASK --> TASKSAGENDA :true/false
 
 deactivate TASK
 
 end
+
+TASKSAGENDA -> AGENDA : taskAgenda
+
+deactivate TASKSAGENDA
 
 end
 
 autonumber 42
 
-<--AGENDA : agendaTask
+<--AGENDA : taskAgenda
 
 deactivate AGENDA
 @enduml

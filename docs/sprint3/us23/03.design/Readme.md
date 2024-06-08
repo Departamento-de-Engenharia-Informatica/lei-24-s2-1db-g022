@@ -66,7 +66,7 @@ Get Team By Id
 
 ![Sequence Diagram - Get Team By Id](svg/us23-partial-sequence-diagram-get-team.svg)
 
-Get Task By Name and GreenSpace
+Get Task By Reference
 
 ![Sequence Diagram - Get Task By Name and GreenSpace](svg/us23-partial-sequence-diagram-get-task.svg)
 

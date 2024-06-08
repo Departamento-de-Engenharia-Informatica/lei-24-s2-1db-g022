@@ -8,8 +8,9 @@ participant ":AssignTeamAgendaController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "agenda\n:Agenda" as AGENDA
+participant "tasksAgenda\n:TasksAgenda" as TASKSAGENDA
 participant "listTaskAgenda\n:List<AgendaTask>" as LSTASK
-participant "agendaTask\n:AgendaTask" as TASK
+participant "taskAgenda\n:TaskAgenda" as TASK
 participant "greenSpace\n:GreenSpace" as GREENSPACE
 
 autonumber 11
@@ -40,14 +41,17 @@ deactivate PLAT
 
 CTRL -> AGENDA : getAllTaskByGreenSpace(greenSpaceList)
 
-
 activate AGENDA
 
-AGENDA -> LSTASK** : create
+AGENDA -> TASKSAGENDA : getAllTaskByGreenSpace(greenSpaceList)
 
-loop for each Task in listTask[in Agenda]
+activate TASKSAGENDA
 
-AGENDA -> TASK : verifyGreenSpace(greenSpaceList)
+TASKSAGENDA -> LSTASK** : create
+
+loop for each Task in listTasksAgenda[in TasksAgenda]
+
+TASKSAGENDA -> TASK : verifyGreenSpace(greenSpaceList)
 
 activate TASK
 
@@ -74,23 +78,27 @@ deactivate GREENSPACE
 end
 
 end
-TASK -> AGENDA : taskAgenda
+TASK -> TASKSAGENDA : taskAgenda
 
 deactivate TASK
 
 alt verifyGreenSpace != null
 
-AGENDA -> LSTASK : add(taskAgenda)
+TASKSAGENDA -> LSTASK : add(taskAgenda)
 
 activate LSTASK
 
-LSTASK --> AGENDA : true/false
+LSTASK --> TASKSAGENDA : true/false
 
 deactivate LSTASK
 
 end
 
 end
+
+TASKSAGENDA --> AGENDA : listTaskAgenda
+
+deactivate TASKSAGENDA
 
 AGENDA --> CTRL : listTaskAgenda
 
