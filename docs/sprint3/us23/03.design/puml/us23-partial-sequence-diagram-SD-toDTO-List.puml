@@ -19,7 +19,7 @@ activate TEAMMP
 
 group To DTO List
 
-TEAMMP --> LSTEAMDTO : create()
+TEAMMP --> LSTEAMDTO** : create()
 
 loop for each object in listTeam
 

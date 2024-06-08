@@ -19,7 +19,7 @@ activate GSMP
 
 group Green Space List To DTO
 
-        GSMP --> GSLDTO : create()
+        GSMP --> GSLDTO** : create()
 
     loop for each object in greenSpaceList
 
