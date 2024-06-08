@@ -13,12 +13,6 @@ import java.util.Optional;
 public class CollaboratorRepository {
     private final List<ICollaborator> collaboratorList;
 
-    public void ver() {
-        for (ICollaborator collaborator : this.collaboratorList) {
-            System.out.println(collaborator.toString());
-        }
-    }
-
     /**
      * Constructor for the CollaboratorRepository class.
      * Initializes the list of collaborators.
@@ -103,8 +97,10 @@ public class CollaboratorRepository {
 
         for (Skill newSkill : skillList) {
             for (ICollaborator collaborator : collaboratorList) {
-                if (((Collaborator) collaborator).hasCollaboratorSkill(newSkill) && !newCollaboratorList.contains((Collaborator) collaborator)) {
-                    newCollaboratorList.add((Collaborator) collaborator);
+                if(collaborator instanceof Collaborator){
+                    if (((Collaborator) collaborator).hasCollaboratorSkill(newSkill) && !newCollaboratorList.contains((Collaborator) collaborator)) {
+                        newCollaboratorList.add((Collaborator) collaborator);
+                    }
                 }
             }
         }
@@ -123,6 +119,16 @@ public class CollaboratorRepository {
             if (collaborator.getName().equals(collaboratorName)) {
                 return Optional.of((Collaborator) collaborator);
             }
+        }
+        return Optional.empty();
+    }
+
+    public Optional<ICollaborator> getCollaboratorByEmail(String email) {
+        for (ICollaborator collaborator : collaboratorList) {
+            if (collaborator.hasEmail(email)) {
+                return Optional.of(collaborator);
+            }
+
         }
         return Optional.empty();
     }

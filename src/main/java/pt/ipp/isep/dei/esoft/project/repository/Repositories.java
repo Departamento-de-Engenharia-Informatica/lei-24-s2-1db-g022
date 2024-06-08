@@ -14,6 +14,7 @@ public class Repositories {
     private final VehicleRepository vehicleRepository;
     private final AddressRepository addressRepository;
     private final TeamRepository teamRepository;
+    private final GreenSpaceRepository greenSpaceRepository;
 
     /**
      * Constructs a Repositories object with default repositories.
@@ -28,6 +29,7 @@ public class Repositories {
         addressRepository = new AddressRepository();
         collaboratorRepository = new CollaboratorRepository();
         teamRepository = new TeamRepository();
+        greenSpaceRepository = new GreenSpaceRepository();
 
     }
 
@@ -108,6 +110,7 @@ public class Repositories {
     public CollaboratorRepository getCollaboratorRepository() {
         return collaboratorRepository;
     }
+
     /**
      * Retrieves the address repository.
      *
@@ -115,5 +118,9 @@ public class Repositories {
      */
     public AddressRepository getAddressRepository() {
         return addressRepository;
+    }
+
+    public GreenSpaceRepository getGreenSpaceRepository() {
+        return greenSpaceRepository;
     }
 }

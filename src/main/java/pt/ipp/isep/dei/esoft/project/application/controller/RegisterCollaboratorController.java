@@ -71,8 +71,6 @@ public class RegisterCollaboratorController {
             authenticationRepository.addUserWithRole(newCollaborator.get().getName(), newCollaborator.get().getEmail(), "col", AuthenticationController.ROLE_COLLABORATOR);
         }
 
-        getCollaboratorRepository().ver();
-
         return newCollaborator;
     }
 

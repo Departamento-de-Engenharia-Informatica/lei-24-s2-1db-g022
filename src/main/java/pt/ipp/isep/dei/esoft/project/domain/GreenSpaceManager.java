@@ -17,6 +17,14 @@ public class GreenSpaceManager implements ICollaborator {
     private Job job;
     private int taxpayer;
     private final List<Skill> skillList;
+    private GreenSpaces greenSpaces;
+
+    public GreenSpaceManager(String email) {
+        this.email = email;
+        this.skillList = new ArrayList<>();
+        this.greenSpaces = new GreenSpaces();
+    }
+
 
     public GreenSpaceManager(String name, Date dateOfBirth, Date admissionDate, String phoneNumber, String email, Address address, int taxpayer, String docType, int number, Job job) {
         this.document = new Document(docType, number);
@@ -57,6 +65,7 @@ public class GreenSpaceManager implements ICollaborator {
         }
 
         this.skillList = new ArrayList<>();
+        this.greenSpaces = new GreenSpaces();
     }
 
 
@@ -238,6 +247,11 @@ public class GreenSpaceManager implements ICollaborator {
         return clone;
     }
 
+    @Override
+    public boolean hasEmail(String email) {
+        return this.email.equals(email);
+    }
+
     /**
      * Checks if this collaborator is equal to another object.
      *
@@ -281,5 +295,13 @@ public class GreenSpaceManager implements ICollaborator {
                 ", taxpayer=" + taxpayer +
                 ", skillList=" + skillList +
                 '}';
+    }
+
+    public boolean addListGreenSpace(GreenSpace greenSpace) {
+        return this.greenSpaces.addListGreenSpaces(greenSpace);
+    }
+
+    public void getGreenSpaces() {
+        this.greenSpaces.ver();
     }
 }

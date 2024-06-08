@@ -26,11 +26,15 @@ public class Bootstrap implements Runnable {
         addVehicles();
     }
 
+
     /**
      * Adds sample collaborators to the collaborator repository for bootstrapping purposes.
      */
     private void addCollaborators() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
+
+        GreenSpace garden = new Garden("Jardim Porto",3,"street Porto",12,"1234-123","Porto");
+        GreenSpace gardem2 = new Garden("Jardim Lisboa",5,"street Lisboa",11,"1234-143","Lisboa");
 
         // Create sample collaborators
         Collaborator collaborator = new Collaborator("luigy", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988676", "luigy@luigy.pt", new Address("streeName", "1234-123", 1), 123456789, "Passport", 123321123, new Job("Jardineiro"));
@@ -38,6 +42,11 @@ public class Bootstrap implements Runnable {
         Collaborator collaborator3 = new Collaborator("tomas", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988672", "tomas@tomas.pt", new Address("streeName", "1234-123", 1), 123643879, "Passport", 123321121, new Job("Calceteiro"));
         Collaborator collaborator4 = new Collaborator("diogo", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988673", "diogo@diogo.pt", new Address("streeName", "1234-123", 1), 675432564, "Passport", 123321122, new Job("Calceteiro"));
         GreenSpaceManager greenSpaceManager = new GreenSpaceManager("gsname", Date.valueOf("1999-01-10"), Date.valueOf("2024-01-10"), "+351 914981073", "gsm@gsm.pt", new Address("streeName", "1234-123", 1), 675432501, "Passport", 123021022, new Job("Gestor"));
+
+        greenSpaceManager.addListGreenSpace(garden);
+        greenSpaceManager.addListGreenSpace(gardem2);
+
+        greenSpaceManager.getGreenSpaces();
 
         // Add skills to collaborators
         collaborator.addSkillCollaboratorBootStrap(new Skill("Podador"));
@@ -59,8 +68,6 @@ public class Bootstrap implements Runnable {
         collaboratorRepository.addCollaboratorBootstrap(collaborator4);
 
         collaboratorRepository.addCollaboratorBootstrap(greenSpaceManager);
-
-        collaboratorRepository.ver();
 
         addUsersCollaborator(collaborator);
         addUsersCollaborator(collaborator2);
@@ -156,7 +163,6 @@ public class Bootstrap implements Runnable {
 
         authenticationRepository.addUserWithRole("Human Resource Manager", "hrm@musgosublime.pt", "hrm", AuthenticationController.ROLE_HRM);
         authenticationRepository.addUserWithRole("Vehicle and Equipment Fleet Manager", "vfm@musgosublime.pt", "vfm", AuthenticationController.ROLE_VFM);
-        authenticationRepository.addUserWithRole("Green Spaces Manager", "gsm@musgosublime.pt", "gsm", AuthenticationController.ROLE_GSM);
         authenticationRepository.addUserWithRole("Software Quality Assessment Team Manager", "qam@musgosublime.pt", "qam", AuthenticationController.ROLE_QAM);
     }
 

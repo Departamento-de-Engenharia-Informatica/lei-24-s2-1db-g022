@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 /**
  * The Address class represents a physical address with a street name, postal code, and door number.
@@ -37,6 +36,12 @@ public class Address {
 
         this.postCode = new PostCode(postCodeNumber);
 
+    }
+
+    public Address(String streetName, int doorNumber, String postCodeNumber, String localization) {
+        this.streetName = streetName;
+        this.doorNumber = doorNumber;
+        this.postCode = new PostCode(postCodeNumber, localization);
     }
 
     /**

@@ -243,6 +243,12 @@ public class Collaborator implements ICollaborator {
         return clone;
     }
 
+    //Metodo novo para as interfaces (ps: para nao dar conflito e ter de corrigir muito codigo)
+    @Override
+    public boolean hasEmail(String email) {
+        return false;
+    }
+
     /**
      * Adds a skill to the collaborator's skill list during bootstrapping.
      *

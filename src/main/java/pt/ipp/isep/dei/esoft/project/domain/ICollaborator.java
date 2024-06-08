@@ -15,4 +15,7 @@ public interface ICollaborator {
     Document getDocument();
 
     ICollaborator clone();
+
+    boolean hasEmail(String email);
+
 }
