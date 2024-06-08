@@ -6,15 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-/**
- * The Collaborator class represents a collaborator in an organization.
- * It contains personal and professional information such as name, date of birth, admission date, contact details,
- * address, job position, and skills.
- *
- * @author Group22
- */
-public class Collaborator implements ICollaborator {
-
+public class GreenSpaceManager implements ICollaborator {
     private String name;
     private Date dateOfBirth;
     private Date admissionDate;
@@ -26,19 +18,7 @@ public class Collaborator implements ICollaborator {
     private int taxpayer;
     private final List<Skill> skillList;
 
-    /**
-     * Constructs a Collaborator object with the specified attributes.
-     *
-     * @param name          The name of the collaborator.
-     * @param dateOfBirth   The date of birth of the collaborator.
-     * @param admissionDate The admission date of the collaborator.
-     * @param phoneNumber   The phone number of the collaborator.
-     * @param email         The email address of the collaborator.
-     * @param address       The address of the collaborator.
-     * @param job           The job position of the collaborator.
-     * @throws IllegalArgumentException if any of the parameters are invalid or null.
-     */
-    public Collaborator(String name, Date dateOfBirth, Date admissionDate, String phoneNumber, String email, Address address, int taxpayer, String docType, int number, Job job) {
+    public GreenSpaceManager(String name, Date dateOfBirth, Date admissionDate, String phoneNumber, String email, Address address, int taxpayer, String docType, int number, Job job) {
         this.document = new Document(docType, number);
         this.address = address;
         this.job = job;
@@ -227,44 +207,35 @@ public class Collaborator implements ICollaborator {
         return !(value == null) && !(value.isEmpty());
     }
 
+    @Override
+    public boolean hasEqualsEmail(ICollaborator collaborator) {
+        return this.email.equals(((GreenSpaceManager) collaborator).email);
+    }
+
+    @Override
+    public boolean hasEqualsPhoneNumber(ICollaborator collaborator) {
+        return this.phoneNumber.equals(((GreenSpaceManager) collaborator).phoneNumber);
+    }
+
+    @Override
+    public boolean hasEqualsTaxNumber(ICollaborator collaborator) {
+        return this.taxpayer == ((GreenSpaceManager) collaborator).taxpayer;
+    }
+
     /**
      * Clones the brand.
      *
      * @return A clone of the current collaborator instance.
      */
-    public Collaborator clone() {
+    public GreenSpaceManager clone() {
 
-        Collaborator clone = new Collaborator(this.name, this.dateOfBirth, this.admissionDate, this.phoneNumber, this.email, this.address, this.taxpayer, this.document.getDocType(), this.document.getNumber(), this.job);
+        GreenSpaceManager clone = new GreenSpaceManager(this.name, this.dateOfBirth, this.admissionDate, this.phoneNumber, this.email, this.address, this.taxpayer, this.document.getDocType(), this.document.getNumber(), this.job);
 
         for (Skill in : this.skillList) {
             clone.skillList.add(in.clone());
         }
 
         return clone;
-    }
-
-    /**
-     * Adds a skill to the collaborator's skill list during bootstrapping.
-     *
-     * @param skill The skill to be added.
-     */
-    public void addSkillCollaboratorBootStrap(Skill skill) {
-        skillList.add(skill);
-    }
-
-    /**
-     * Checks if the collaborator has a specific skill.
-     *
-     * @param newSkill The skill to check.
-     * @return True if the collaborator has the skill, false otherwise.
-     */
-    public boolean hasCollaboratorSkill(Skill newSkill) {
-        for (Skill skill : skillList) {
-            if (skill.equals(newSkill)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
@@ -276,15 +247,15 @@ public class Collaborator implements ICollaborator {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Collaborator)) return false;
-        Collaborator that = (Collaborator) o;
+        if (!(o instanceof GreenSpaceManager)) return false;
+        GreenSpaceManager that = (GreenSpaceManager) o;
         return taxpayer == that.taxpayer && Objects.equals(name, that.name) && Objects.equals(dateOfBirth, that.dateOfBirth) && Objects.equals(admissionDate, that.admissionDate) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(email, that.email) && Objects.equals(address, that.address) && Objects.equals(document, that.document) && Objects.equals(job, that.job) && Objects.equals(skillList, that.skillList);
     }
 
     /**
-     * Generates a hash code value for the collaborator.
+     * Generates a hash code value for the GreenSpaceManager.
      *
-     * @return A hash code value for the collaborator.
+     * @return A hash code value for the GreenSpaceManager.
      */
     @Override
     public int hashCode() {
@@ -292,27 +263,23 @@ public class Collaborator implements ICollaborator {
     }
 
     /**
-     * Returns a string representation of the collaborator.
+     * Returns a string representation of the GreenSpaceManager.
      *
-     * @return A string representation of the collaborator.
+     * @return A string representation of the GreenSpaceManager.
      */
     @Override
     public String toString() {
-        return "Collaborator{" + "name='" + name + '\'' + ", dateOfBirth=" + dateOfBirth + ", admissionDate=" + admissionDate + ", phoneNumber=" + phoneNumber + ", email='" + email + '\'' + ", address=" + address + ", document=" + document + ", job=" + job + ", skillList=" + skillList + '}';
-    }
-
-    @Override
-    public boolean hasEqualsEmail(ICollaborator collaborator) {
-        return this.email.equals(((Collaborator) collaborator).email);
-    }
-
-    @Override
-    public boolean hasEqualsPhoneNumber(ICollaborator collaborator) {
-        return this.phoneNumber.equals(((Collaborator) collaborator).phoneNumber);
-    }
-
-    @Override
-    public boolean hasEqualsTaxNumber(ICollaborator collaborator) {
-        return this.taxpayer == ((Collaborator) collaborator).taxpayer;
+        return "GreenSpaceManager{" +
+                "name='" + name + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", admissionDate=" + admissionDate +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", address=" + address +
+                ", document=" + document +
+                ", job=" + job +
+                ", taxpayer=" + taxpayer +
+                ", skillList=" + skillList +
+                '}';
     }
 }

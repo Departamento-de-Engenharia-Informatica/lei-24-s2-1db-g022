@@ -12,35 +12,31 @@ import java.util.regex.Pattern;
 public class Address {
 
     private String streetName;
-    private String postCode;
+    private PostCode postCode;
     private int doorNumber;
 
     /**
      * Constructs an Address object with the specified street name, postal code, and door number.
      *
      * @param streetName The street name.
-     * @param postCode The postal code.
      * @param doorNumber The door number.
      */
-    public Address(String streetName, String postCode, int doorNumber) {
+    public Address(String streetName, String postCodeNumber, int doorNumber) {
 
-        if(validateNullString(streetName)){
+        if (validateNullString(streetName)) {
             this.streetName = streetName;
-        }else{
+        } else {
             throw new IllegalArgumentException("Address street name cannot be null or empty.");
         }
 
-        if(validateNullInt(doorNumber)){
+        if (validateNullInt(doorNumber)) {
             this.doorNumber = doorNumber;
-        }else{
+        } else {
             throw new IllegalArgumentException("Address door number cannot be null or empty.");
         }
 
-        if(validateNullString(postCode) && validatePostCode(postCode)){
-            this.postCode = postCode;
-        }else{
-            throw new IllegalArgumentException("Address post code cannot be null or empty or have an incorrect format.");
-        }
+        this.postCode = new PostCode(postCodeNumber);
+
     }
 
     /**
@@ -57,7 +53,7 @@ public class Address {
      *
      * @return The postal code.
      */
-    public String getPostCode() {
+    public PostCode getPostCode() {
         return postCode;
     }
 
@@ -84,17 +80,10 @@ public class Address {
                 '}';
     }
 
-    public Address clone(){
-        return new Address(this.streetName,this.postCode,this.doorNumber);
+    public Address clone() {
+        return new Address(this.streetName, this.postCode.getPostCodeNumber(), this.doorNumber);
     }
 
-    private boolean validatePostCode(String value){
-        String regex = "\\d{4}-\\d{3}";
-
-        Pattern pattern = Pattern.compile(regex);
-
-        return pattern.matcher(value).matches();
-    }
     private boolean validateNullString(String value) {
         return !(value == null) && !(value.isEmpty());
     }

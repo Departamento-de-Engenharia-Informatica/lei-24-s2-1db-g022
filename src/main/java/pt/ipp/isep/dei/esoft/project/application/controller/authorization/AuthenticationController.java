@@ -17,6 +17,9 @@ public class AuthenticationController {
     public static final String ROLE_GSM = "GSM";
     public static final String ROLE_QAM = "QAM";
 
+    public static final String ROLE_COLLABORATOR = "COLL";
+
+
     //private final ApplicationSession applicationSession;
     private final AuthenticationRepository authenticationRepository;
 

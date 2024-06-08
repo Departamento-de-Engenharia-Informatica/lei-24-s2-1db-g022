@@ -18,7 +18,7 @@ public class Bootstrap implements Runnable {
      * Runs the Bootstrap process by adding users and jobs to the application.
      */
     public void run() {
-        addUsers();
+        addUsersDefault();
         addJobs();
         addSkills();
         addBrands();
@@ -37,6 +37,7 @@ public class Bootstrap implements Runnable {
         Collaborator collaborator2 = new Collaborator("daniel", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988671", "daniel@daniel.pt", new Address("streeName", "1234-123", 1), 123456780, "Passport", 123321125, new Job("Calceteiro"));
         Collaborator collaborator3 = new Collaborator("tomas", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988672", "tomas@tomas.pt", new Address("streeName", "1234-123", 1), 123643879, "Passport", 123321121, new Job("Calceteiro"));
         Collaborator collaborator4 = new Collaborator("diogo", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988673", "diogo@diogo.pt", new Address("streeName", "1234-123", 1), 675432564, "Passport", 123321122, new Job("Calceteiro"));
+        GreenSpaceManager greenSpaceManager = new GreenSpaceManager("gsname", Date.valueOf("1999-01-10"), Date.valueOf("2024-01-10"), "+351 914981073", "gsm@gsm.pt", new Address("streeName", "1234-123", 1), 675432501, "Passport", 123021022, new Job("Gestor"));
 
         // Add skills to collaborators
         collaborator.addSkillCollaboratorBootStrap(new Skill("Podador"));
@@ -56,6 +57,16 @@ public class Bootstrap implements Runnable {
         collaboratorRepository.addCollaboratorBootstrap(collaborator2);
         collaboratorRepository.addCollaboratorBootstrap(collaborator3);
         collaboratorRepository.addCollaboratorBootstrap(collaborator4);
+
+        collaboratorRepository.addCollaboratorBootstrap(greenSpaceManager);
+
+        collaboratorRepository.ver();
+
+        addUsersCollaborator(collaborator);
+        addUsersCollaborator(collaborator2);
+        addUsersCollaborator(collaborator3);
+        addUsersCollaborator(collaborator4);
+        addUsersGSM(greenSpaceManager);
     }
 
 
@@ -68,6 +79,8 @@ public class Bootstrap implements Runnable {
         jobRepository.createJob("Calceteiro");
         jobRepository.createJob("Electricista");
         jobRepository.createJob("Condutor");
+        jobRepository.createJob("Gestor");
+
     }
 
     /**
@@ -96,6 +109,7 @@ public class Bootstrap implements Runnable {
         vehicleRepo.addVehicleBootstrap(vehicle2);
 
     }
+
     /**
      * Adds predefined brands and models to the brands repository.
      */
@@ -126,7 +140,7 @@ public class Bootstrap implements Runnable {
     /**
      * Adds predefined users with their roles to the authentication repository.
      */
-    private void addUsers() {
+    private void addUsersDefault() {
         AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
         authenticationRepository.addUserRole(AuthenticationController.ROLE_ADMIN, AuthenticationController.ROLE_ADMIN);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_VFM, AuthenticationController.ROLE_VFM);
@@ -144,5 +158,25 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserWithRole("Vehicle and Equipment Fleet Manager", "vfm@musgosublime.pt", "vfm", AuthenticationController.ROLE_VFM);
         authenticationRepository.addUserWithRole("Green Spaces Manager", "gsm@musgosublime.pt", "gsm", AuthenticationController.ROLE_GSM);
         authenticationRepository.addUserWithRole("Software Quality Assessment Team Manager", "qam@musgosublime.pt", "qam", AuthenticationController.ROLE_QAM);
+    }
+
+    /**
+     * Adds predefined users with their roles to the authentication repository.
+     */
+    private void addUsersGSM(GreenSpaceManager greenSpaceManager) {
+        AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_GSM, AuthenticationController.ROLE_GSM);
+
+        authenticationRepository.addUserWithRole(greenSpaceManager.getName(), greenSpaceManager.getEmail(), "gsm", AuthenticationController.ROLE_GSM);
+    }
+
+    /**
+     * Adds predefined users with their roles to the authentication repository.
+     */
+    private void addUsersCollaborator(Collaborator collaborator) {
+        AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_COLLABORATOR, AuthenticationController.ROLE_COLLABORATOR);
+
+        authenticationRepository.addUserWithRole(collaborator.getName(), collaborator.getEmail(), "col", AuthenticationController.ROLE_COLLABORATOR);
     }
 }

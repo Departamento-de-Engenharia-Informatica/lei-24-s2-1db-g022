@@ -1,9 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Address;
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
-import pt.ipp.isep.dei.esoft.project.domain.Job;
-import pt.ipp.isep.dei.esoft.project.domain.Skill;
+import pt.ipp.isep.dei.esoft.project.domain.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,7 +11,13 @@ import java.util.Optional;
  * Repository class for managing Collaborator objects.
  */
 public class CollaboratorRepository {
-    private final List<Collaborator> collaboratorList;
+    private final List<ICollaborator> collaboratorList;
+
+    public void ver() {
+        for (ICollaborator collaborator : this.collaboratorList) {
+            System.out.println(collaborator.toString());
+        }
+    }
 
     /**
      * Constructor for the CollaboratorRepository class.
@@ -29,7 +32,7 @@ public class CollaboratorRepository {
      *
      * @param collaborator The collaborator to be added.
      */
-    public void addCollaboratorBootstrap(Collaborator collaborator) {
+    public void addCollaboratorBootstrap(ICollaborator collaborator) {
         collaboratorList.add(collaborator.clone());
     }
 
@@ -55,7 +58,6 @@ public class CollaboratorRepository {
             optionalCollaborator = Optional.of(collaborator);
         }
 
-
         return optionalCollaborator;
     }
 
@@ -80,9 +82,11 @@ public class CollaboratorRepository {
      * @return True if the collaborator is not present, false otherwise.
      */
     private boolean validateCollaborator(Collaborator collaborator) {
-        for (Collaborator collaborator1 : collaboratorList) {
-            if (collaborator1.hasEqualsEmail(collaborator) || collaborator1.hasEqualsPhoneNumber(collaborator) || collaborator1.hasEqualsTaxNumber(collaborator) || collaborator1.getDocument().duplicateNumber(collaborator.getDocument())) {
-                return false;
+        for (ICollaborator collaborator1 : collaboratorList) {
+            if (collaborator1 instanceof Collaborator) {
+                if (collaborator1.hasEqualsEmail(collaborator) || collaborator1.hasEqualsPhoneNumber(collaborator) || collaborator1.hasEqualsTaxNumber(collaborator) || collaborator1.getDocument().duplicateNumber(collaborator.getDocument())) {
+                    return false;
+                }
             }
         }
         return !collaboratorList.contains(collaborator);
@@ -98,9 +102,9 @@ public class CollaboratorRepository {
         ArrayList<Collaborator> newCollaboratorList = new ArrayList<>();
 
         for (Skill newSkill : skillList) {
-            for (Collaborator collaborator : collaboratorList) {
-                if (collaborator.hasCollaboratorSkill(newSkill) && !newCollaboratorList.contains(collaborator)) {
-                    newCollaboratorList.add(collaborator);
+            for (ICollaborator collaborator : collaboratorList) {
+                if (((Collaborator) collaborator).hasCollaboratorSkill(newSkill) && !newCollaboratorList.contains((Collaborator) collaborator)) {
+                    newCollaboratorList.add((Collaborator) collaborator);
                 }
             }
         }
@@ -115,9 +119,9 @@ public class CollaboratorRepository {
      * @return An optional containing the collaborator with the specified ID, or empty if not found.
      */
     public Optional<Collaborator> getCollaboratorByName(String collaboratorName) {
-        for (Collaborator collaborator : collaboratorList) {
+        for (ICollaborator collaborator : collaboratorList) {
             if (collaborator.getName().equals(collaboratorName)) {
-                return Optional.of(collaborator);
+                return Optional.of((Collaborator) collaborator);
             }
         }
         return Optional.empty();

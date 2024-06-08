@@ -1,12 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
+import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.esoft.project.domain.Address;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Job;
-import pt.ipp.isep.dei.esoft.project.repository.AddressRepository;
-import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
-import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
-import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+import pt.ipp.isep.dei.esoft.project.repository.*;
 
 import java.util.Date;
 import java.util.List;
@@ -22,6 +20,7 @@ public class RegisterCollaboratorController {
         getJobRepository();
         getAddressRepository();
     }
+
 
     public RegisterCollaboratorController(CollaboratorRepository collaboratorRepository){
         this.collaboratorRepository=collaboratorRepository;
@@ -64,6 +63,15 @@ public class RegisterCollaboratorController {
         if(newAddress.isPresent()){
             newCollaborator = getCollaboratorRepository().registerCollaborator(name,dateOfBirth,admissionDate,newAddress.get(),phoneNumber,email,taxpayer,docType,number,job);
         }
+
+        if(newCollaborator.isPresent()){
+            AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
+
+            authenticationRepository.addUserRole(AuthenticationController.ROLE_COLLABORATOR, AuthenticationController.ROLE_COLLABORATOR);
+            authenticationRepository.addUserWithRole(newCollaborator.get().getName(), newCollaborator.get().getEmail(), "col", AuthenticationController.ROLE_COLLABORATOR);
+        }
+
+        getCollaboratorRepository().ver();
 
         return newCollaborator;
     }
