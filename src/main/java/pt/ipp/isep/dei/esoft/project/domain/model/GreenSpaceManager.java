@@ -19,6 +19,20 @@ public class GreenSpaceManager implements ICollaborator {
     private final List<Skill> skillList;
     private GreenSpaces greenSpaces;
 
+    public GreenSpaceManager(GreenSpaces greenSpaces, int taxpayer, Job job, Document document, Address address, String email, String phoneNumber, Date admissionDate, Date dateOfBirth, String name) {
+        this.greenSpaces = greenSpaces;
+        this.skillList = new ArrayList<>();
+        this.taxpayer = taxpayer;
+        this.job = job;
+        this.document = document;
+        this.address = address;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.admissionDate = admissionDate;
+        this.dateOfBirth = dateOfBirth;
+        this.name = name;
+    }
+
     public GreenSpaceManager(String email) {
         this.email = email;
         this.skillList = new ArrayList<>();
@@ -238,7 +252,7 @@ public class GreenSpaceManager implements ICollaborator {
      */
     public GreenSpaceManager clone() {
 
-        GreenSpaceManager clone = new GreenSpaceManager(this.name, this.dateOfBirth, this.admissionDate, this.phoneNumber, this.email, this.address, this.taxpayer, this.document.getDocType(), this.document.getNumber(), this.job);
+        GreenSpaceManager clone = new GreenSpaceManager(this.greenSpaces,this.taxpayer, this.job, this.document, this.address, this.email, this.phoneNumber, this.admissionDate, this.dateOfBirth, this.name);
 
         for (Skill in : this.skillList) {
             clone.skillList.add(in.clone());

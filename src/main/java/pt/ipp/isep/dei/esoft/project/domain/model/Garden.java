@@ -29,12 +29,12 @@ public class Garden implements GreenSpace {
 
     @Override
     public int getArea() {
-        return 0;
+        return this.area;
     }
 
     @Override
     public Address getAddress() {
-        return null;
+        return this.address;
     }
 
     @Override
@@ -63,5 +63,11 @@ public class Garden implements GreenSpace {
                 ", area=" + area +
                 ", address=" + address +
                 '}';
+    }
+
+    @Override
+    public boolean isAreaLarger(int area) {
+
+        return this.area > area;
     }
 }

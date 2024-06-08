@@ -38,7 +38,7 @@ public class MediumPark implements GreenSpace {
     }
 
     @Override
-    public boolean hasName(String greenSpaceName){
+    public boolean hasName(String greenSpaceName) {
 
         return this.name.equals(greenSpaceName);
     }
@@ -63,5 +63,11 @@ public class MediumPark implements GreenSpace {
                 ", area=" + area +
                 ", address=" + address +
                 '}';
+    }
+
+    @Override
+    public boolean isAreaLarger(int area) {
+
+        return this.area > area;
     }
 }

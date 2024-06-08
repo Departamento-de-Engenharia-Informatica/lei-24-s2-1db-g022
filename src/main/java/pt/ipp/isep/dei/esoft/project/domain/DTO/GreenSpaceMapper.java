@@ -24,6 +24,6 @@ public class GreenSpaceMapper {
 
     public GreenSpaceDto toDto(GreenSpace obj) {
 
-        return new GreenSpaceDto(obj.getName());
+        return new GreenSpaceDto(obj.getName(), obj.getArea());
     }
 }

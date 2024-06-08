@@ -14,6 +14,7 @@ participant ":ListGreenSpacesController" as CTRL
 participant "manager\n:GreenSpaceManager" as GSMO
 participant "greenSpaces\n:GreenSpaces" as GSL
 participant "sortAlg\n:Sortable" as SA
+participant "greenSpace\n:GreenSpace" as GS
 participant "greenSpaceMapper\n:GreenSpaceMapper" as GSMP
 
 activate GSM
@@ -42,6 +43,16 @@ activate GSM
 
         GSL -> SA : getSortedList(greenSpaceList)
     activate SA
+
+        loop for each object in greenSpaceList
+
+            SA -> GS : isAreaLarger(area)
+        activate GS
+
+            GS --> SA : true/false
+        deactivate GS
+
+        end
 
         SA --> GSL : greenSpaceListSorted
     deactivate SA

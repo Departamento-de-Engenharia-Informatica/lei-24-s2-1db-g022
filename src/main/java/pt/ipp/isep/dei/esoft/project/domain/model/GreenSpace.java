@@ -8,4 +8,6 @@ public interface GreenSpace {
     Address getAddress();
 
     boolean hasName(String greenSpaceName);
+
+    boolean isAreaLarger(int area);
 }

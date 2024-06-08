@@ -49,7 +49,9 @@ package "Domain" <<Folder>> {
 
         class GreenSpaceDto{
             + String greenSpaceName
-            + GreenSpaceDto(greenSpaceName)
+            + int area
+
+            + GreenSpaceDto(greenSpaceName, area)
         }
     }
 
@@ -58,6 +60,7 @@ package "Domain" <<Folder>> {
         interface GreenSpace <<Interface>>{
             + getName()
             + getArea()
+            + isAreaLarger(area)
         }
 
         class GreenSpaces{
@@ -71,6 +74,7 @@ package "Domain" <<Folder>> {
 
             + getName()
             + getArea()
+            + isAreaLarger(area)
         }
 
         class MediumPark implements GreenSpace{
@@ -79,6 +83,7 @@ package "Domain" <<Folder>> {
 
             + getName()
             + getArea()
+            + isAreaLarger(area)
         }
 
         class LargePark implements GreenSpace{
@@ -87,6 +92,7 @@ package "Domain" <<Folder>> {
 
             + getName()
             + getArea()
+            + isAreaLarger(area)
         }
 
         interface ICollaborator <<Interface>>{
@@ -105,9 +111,13 @@ package "Domain" <<Folder>> {
         }
 
         class BubbleSort implements Sortable{
+
+            + getSortedList(greenSpaceList)
         }
 
         class SelectionSort implements Sortable{
+
+            + getSortedList(greenSpaceList)
         }
 
     }
@@ -160,15 +170,15 @@ ApplicationSession --> "1" UserSession : userSession
 Repositories ---> "1" CollaboratorRepository : CollaboratorRepository
 
 '-------------------CollaboratorRepository-------------------
-CollaboratorRepository "1"  --> "*" ICollaborator : collaboratorLis
+CollaboratorRepository "1"  ---> "*" ICollaborator : collaboratorLis
 
 '-------------------GreenSpaceManager-------------------
 GreenSpaceManager "1" --> "1" GreenSpaces : greenSpaces
 
 '-------------------GreenSpaces-------------------
-GreenSpaces "1" --> "*" GreenSpace : greenSpaceList
+GreenSpaces "1" -> "*" GreenSpace : greenSpaceList
 
 '-------------------Sortable-------------------
-Sortable "1" <- "*" GreenSpace : makes use of
+Sortable "1" <- "*" GreenSpaces : makes use of
 
 @enduml

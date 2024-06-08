@@ -1,4 +1,35 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
-public class ListGreenSpacesUI {
+import pt.ipp.isep.dei.esoft.project.application.controller.ListGreenSpacesController;
+import pt.ipp.isep.dei.esoft.project.domain.DTO.GreenSpaceDto;
+
+import java.util.List;
+
+public class ListGreenSpacesUI implements Runnable{
+
+    private final ListGreenSpacesController controller;
+
+    /**
+     * Constructs a ListGreenSpacesUI object with a new ListGreenSpacesController.
+     */
+    public ListGreenSpacesUI() {
+        controller = new ListGreenSpacesController();
+    }
+
+    /**
+     * Gets the ListGreenSpacesController associated with this UI.
+     * @return The ListGreenSpacesController instance.
+     */
+    private ListGreenSpacesController getController() {
+        return controller;
+    }
+    @Override
+    public void run() {
+        List<GreenSpaceDto> greenSpaceListDto = getController().getGreenSpaceManagerGSpaceSorted();
+
+        for (GreenSpaceDto g: greenSpaceListDto) {
+            System.out.println("\nParque: " + g.getGreenSpaceName());
+            System.out.println("Área: " + g.getArea());
+        }
+    }
 }
