@@ -16,9 +16,21 @@ public class TaskToDoList {
         this.greenSpace = greenSpace;
         this.task = task;
         this.urgency = urgency;
-        this.aproxExpectedDuration = aproxExpectedDuration;
+
+        if (validateNullInt(aproxExpectedDuration)) {
+
+            this.aproxExpectedDuration = aproxExpectedDuration;
+        } else {
+
+            throw new IllegalArgumentException("Approximate Expected Duration cannot be zero or negative numbers.");
+        }
         this.status = "Pending";
         this.taskRef = taskRef;
+    }
+
+    private boolean validateNullInt(int value) {
+
+        return !(value <= 0);
     }
 
     public boolean hasRef(String ref) {

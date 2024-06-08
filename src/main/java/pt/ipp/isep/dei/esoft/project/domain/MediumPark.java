@@ -9,8 +9,17 @@ public class MediumPark implements GreenSpace {
 
     public MediumPark(String greenSpaceName, int area, String streetName, int doorNumber, String postCodeNumber, String localization) {
         this.name = greenSpaceName;
-        this.area = area;
+        if (validateNullInt(area)) {
+            this.area = area;
+        } else {
+            throw new IllegalArgumentException("Area cannot be zero or negative numbers.");
+        }
+
         this.address = new Address(streetName, doorNumber, postCodeNumber, localization);
+    }
+
+    private boolean validateNullInt(int value) {
+        return !(value <= 0);
     }
 
     @Override
