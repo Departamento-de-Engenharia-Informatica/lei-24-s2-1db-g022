@@ -1,7 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import org.junit.jupiter.api.Test;
-import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.ipp.isep.dei.esoft.project.domain.model.Address;
+import pt.ipp.isep.dei.esoft.project.domain.model.Collaborator;
+import pt.ipp.isep.dei.esoft.project.domain.model.Job;
+import pt.ipp.isep.dei.esoft.project.domain.model.Team;
 
 import java.sql.Date;
 import java.util.ArrayList;

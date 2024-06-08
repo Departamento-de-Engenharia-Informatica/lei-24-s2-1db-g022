@@ -1,13 +1,13 @@
-package pt.ipp.isep.dei.esoft.project.domain;
+package pt.ipp.isep.dei.esoft.project.domain.model;
 
 import java.util.Objects;
 
-public class MediumPark implements GreenSpace {
+public class Garden implements GreenSpace {
     private String name;
     private int area;
     Address address;
 
-    public MediumPark(String greenSpaceName, int area, String streetName, int doorNumber, String postCodeNumber, String localization) {
+    public Garden(String greenSpaceName, int area, String streetName, int doorNumber, String postCodeNumber, String localization) {
         this.name = greenSpaceName;
         if (validateNullInt(area)) {
             this.area = area;
@@ -29,12 +29,12 @@ public class MediumPark implements GreenSpace {
 
     @Override
     public int getArea() {
-        return this.area;
+        return 0;
     }
 
     @Override
     public Address getAddress() {
-        return this.address;
+        return null;
     }
 
     @Override
@@ -46,9 +46,9 @@ public class MediumPark implements GreenSpace {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof MediumPark)) return false;
-        MediumPark that = (MediumPark) o;
-        return area == that.area && Objects.equals(name, that.name) && Objects.equals(address, that.address);
+        if (!(o instanceof Garden)) return false;
+        Garden garden = (Garden) o;
+        return area == garden.area && Objects.equals(name, garden.name) && Objects.equals(address, garden.address);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class MediumPark implements GreenSpace {
 
     @Override
     public String toString() {
-        return "MediumPark{" +
+        return "Garden{" +
                 "name='" + name + '\'' +
                 ", area=" + area +
                 ", address=" + address +

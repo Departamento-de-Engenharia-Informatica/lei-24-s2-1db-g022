@@ -1,7 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.CheckUp;
-import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
+import pt.ipp.isep.dei.esoft.project.domain.model.CheckUp;
+import pt.ipp.isep.dei.esoft.project.domain.model.Vehicle;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 

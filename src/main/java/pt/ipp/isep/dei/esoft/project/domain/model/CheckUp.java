@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.domain;
+package pt.ipp.isep.dei.esoft.project.domain.model;
 
 import java.util.Date;
 

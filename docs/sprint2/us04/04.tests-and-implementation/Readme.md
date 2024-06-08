@@ -6,14 +6,14 @@ n/a
 
 ## 5. Construction (Implementation)
 
-### Class AssignSkillController 
+### Class AssignSkillController
 
 ```java
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
-import pt.ipp.isep.dei.esoft.project.domain.Job;
-import pt.ipp.isep.dei.esoft.project.domain.Skill;
+import pt.ipp.isep.dei.esoft.project.domain.model.Collaborator;
+pt.ipp.isep.dei.esoft.project.domain.model.Job;
+import pt.ipp.isep.dei.esoft.project.domain.model.Skill;
 import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
@@ -28,15 +28,16 @@ import java.util.Optional;
 public class AssignSkillController {
 
     private CollaboratorRepository collaboratorRepository;
-    private  SkillRepository skillRepository;
+    private SkillRepository skillRepository;
     private JobRepository jobRepository;
 
 
-    public AssignSkillController(){
+    public AssignSkillController() {
         getCollaboratorRepository();
         getJobRepository();
         getSkillRepository();
     }
+
     /**
      * Assigns a skill to a collaborator with the given ID.
      *
@@ -71,24 +72,24 @@ public class AssignSkillController {
         }
     }
 
-    private CollaboratorRepository getCollaboratorRepository(){
-        if(collaboratorRepository == null){
+    private CollaboratorRepository getCollaboratorRepository() {
+        if (collaboratorRepository == null) {
             Repositories repositories = Repositories.getInstance();
             collaboratorRepository = repositories.getCollaboratorRepository();
         }
         return collaboratorRepository;
     }
 
-    private JobRepository getJobRepository(){
-        if(jobRepository == null){
+    private JobRepository getJobRepository() {
+        if (jobRepository == null) {
             Repositories repositories = Repositories.getInstance();
             jobRepository = repositories.getJobRepository();
         }
         return jobRepository;
     }
 
-    private SkillRepository getSkillRepository(){
-        if(skillRepository == null){
+    private SkillRepository getSkillRepository() {
+        if (skillRepository == null) {
             Repositories repositories = Repositories.getInstance();
             skillRepository = repositories.getSkillRepository();
         }

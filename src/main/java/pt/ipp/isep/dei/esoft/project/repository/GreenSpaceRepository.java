@@ -1,6 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.ipp.isep.dei.esoft.project.domain.model.Garden;
+import pt.ipp.isep.dei.esoft.project.domain.model.GreenSpace;
+import pt.ipp.isep.dei.esoft.project.domain.model.LargePark;
+import pt.ipp.isep.dei.esoft.project.domain.model.MediumPark;
 
 import java.util.ArrayList;
 import java.util.List;

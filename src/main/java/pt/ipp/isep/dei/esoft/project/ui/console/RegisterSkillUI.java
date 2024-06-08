@@ -1,7 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterSkillController;
-import pt.ipp.isep.dei.esoft.project.domain.Skill;
+import pt.ipp.isep.dei.esoft.project.domain.model.Skill;
 
 import java.util.Optional;
 import java.util.Scanner;

@@ -1,8 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import org.junit.jupiter.api.Test;
-import pt.ipp.isep.dei.esoft.project.domain.Job;
-import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
+import pt.ipp.isep.dei.esoft.project.domain.model.Job;
 
 import java.util.Optional;
 

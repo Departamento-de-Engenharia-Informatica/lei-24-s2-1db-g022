@@ -1,7 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.Route;
-import pt.ipp.isep.dei.esoft.project.domain.SignalPoint;
+import pt.ipp.isep.dei.esoft.project.domain.model.Route;
+import pt.ipp.isep.dei.esoft.project.domain.model.SignalPoint;
 
 import java.io.*;
 import java.util.ArrayList;

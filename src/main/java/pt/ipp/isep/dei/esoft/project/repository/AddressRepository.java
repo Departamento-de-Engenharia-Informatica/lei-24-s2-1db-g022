@@ -1,6 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Address;
+import pt.ipp.isep.dei.esoft.project.domain.model.Address;
 
 import java.util.ArrayList;
 import java.util.List;

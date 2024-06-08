@@ -1,7 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 import org.junit.jupiter.api.Test;
-import pt.ipp.isep.dei.esoft.project.domain.Brand;
+import pt.ipp.isep.dei.esoft.project.domain.model.Brand;
 
 import static org.junit.jupiter.api.Assertions.*;
 

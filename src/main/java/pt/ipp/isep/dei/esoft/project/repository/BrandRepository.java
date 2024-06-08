@@ -1,8 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Brand;
-import pt.ipp.isep.dei.esoft.project.domain.Model;
-import pt.ipp.isep.dei.esoft.project_exemplo.domain.Organization;
+import pt.ipp.isep.dei.esoft.project.domain.model.Brand;
 
 import java.util.ArrayList;
 import java.util.List;

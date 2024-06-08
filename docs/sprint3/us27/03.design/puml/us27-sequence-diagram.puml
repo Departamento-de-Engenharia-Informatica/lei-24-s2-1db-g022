@@ -21,7 +21,7 @@ activate GSM
         GSM -> UI : asks to list all associated green spaces
     activate UI
 
-        UI -> CTRL : getGreenSpaceManagerGSpaceList()
+        UI -> CTRL : getGreenSpaceManagerGSpaceSorted()
     activate CTRL
 
         CTRL -> CTRL : getGSMFromSession()

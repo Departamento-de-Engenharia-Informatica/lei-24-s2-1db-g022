@@ -1,10 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
-import pt.ipp.isep.dei.esoft.project.domain.Skill;
-import pt.ipp.isep.dei.esoft.project.domain.TaskToDoList;
-import pt.ipp.isep.dei.esoft.project.domain.Team;
+import pt.ipp.isep.dei.esoft.project.domain.model.Collaborator;
+import pt.ipp.isep.dei.esoft.project.domain.model.Skill;
+import pt.ipp.isep.dei.esoft.project.domain.model.Team;
 
 import java.util.ArrayList;
 import java.util.List;

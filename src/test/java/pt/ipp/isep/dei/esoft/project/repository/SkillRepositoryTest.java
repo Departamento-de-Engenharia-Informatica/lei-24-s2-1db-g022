@@ -1,7 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import org.junit.jupiter.api.Test;
-import pt.ipp.isep.dei.esoft.project.domain.Skill;
+import pt.ipp.isep.dei.esoft.project.domain.model.Skill;
 
 import java.util.Optional;
 

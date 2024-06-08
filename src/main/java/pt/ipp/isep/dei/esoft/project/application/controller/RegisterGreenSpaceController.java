@@ -1,8 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
-import pt.ipp.isep.dei.esoft.project.domain.GreenSpaceManager;
-import pt.ipp.isep.dei.esoft.project.domain.ICollaborator;
+import pt.ipp.isep.dei.esoft.project.domain.model.GreenSpace;
+import pt.ipp.isep.dei.esoft.project.domain.model.GreenSpaceManager;
+import pt.ipp.isep.dei.esoft.project.domain.model.ICollaborator;
 import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;

@@ -1,8 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 import org.junit.jupiter.api.Test;
-
-import java.sql.Date;
+import pt.ipp.isep.dei.esoft.project.domain.model.Address;
 
 import static org.junit.jupiter.api.Assertions.*;
 

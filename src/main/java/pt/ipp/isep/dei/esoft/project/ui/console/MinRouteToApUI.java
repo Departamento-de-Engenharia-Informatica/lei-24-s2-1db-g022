@@ -1,8 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.MinRouteToApController;
-import pt.ipp.isep.dei.esoft.project.domain.Route;
-import pt.ipp.isep.dei.esoft.project.domain.SignalPoint;
+import pt.ipp.isep.dei.esoft.project.domain.model.Route;
+import pt.ipp.isep.dei.esoft.project.domain.model.SignalPoint;
 
 import java.io.BufferedReader;
 import java.io.IOException;

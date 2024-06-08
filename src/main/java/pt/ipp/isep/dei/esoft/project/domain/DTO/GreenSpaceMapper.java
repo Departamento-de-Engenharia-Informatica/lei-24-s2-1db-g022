@@ -1,6 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain.DTO;
 
-import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
+import pt.ipp.isep.dei.esoft.project.domain.model.GreenSpace;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.ToDoList;
+import pt.ipp.isep.dei.esoft.project.domain.model.ToDoList;
 
 /**
  * @author Group22

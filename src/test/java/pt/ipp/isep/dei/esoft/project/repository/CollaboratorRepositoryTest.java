@@ -1,9 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import org.junit.jupiter.api.Test;
-import pt.ipp.isep.dei.esoft.project.domain.Address;
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
-import pt.ipp.isep.dei.esoft.project.domain.Job;
+import pt.ipp.isep.dei.esoft.project.domain.model.Address;
+import pt.ipp.isep.dei.esoft.project.domain.model.Collaborator;
+import pt.ipp.isep.dei.esoft.project.domain.model.Job;
 
 import java.sql.Date;
 import java.util.Optional;

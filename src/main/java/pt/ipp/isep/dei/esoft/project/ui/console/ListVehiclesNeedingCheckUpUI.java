@@ -1,7 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.ListVehiclesNeedingCheckUpController;
-import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
+import pt.ipp.isep.dei.esoft.project.domain.model.Vehicle;
 
 import java.util.List;
 

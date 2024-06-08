@@ -2,9 +2,9 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 
 
 import pt.ipp.isep.dei.esoft.project.application.controller.GenerateTeamController;
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
-import pt.ipp.isep.dei.esoft.project.domain.Skill;
-import pt.ipp.isep.dei.esoft.project.domain.Team;
+import pt.ipp.isep.dei.esoft.project.domain.model.Collaborator;
+import pt.ipp.isep.dei.esoft.project.domain.model.Skill;
+import pt.ipp.isep.dei.esoft.project.domain.model.Team;
 
 import java.util.ArrayList;
 import java.util.List;

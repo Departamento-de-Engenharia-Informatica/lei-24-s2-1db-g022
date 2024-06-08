@@ -1,10 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import org.junit.jupiter.api.Test;
-import pt.ipp.isep.dei.esoft.project.domain.Brand;
-import pt.ipp.isep.dei.esoft.project.domain.Model;
-import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
-import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
+import pt.ipp.isep.dei.esoft.project.domain.model.Brand;
+import pt.ipp.isep.dei.esoft.project.domain.model.Model;
+import pt.ipp.isep.dei.esoft.project.domain.model.Vehicle;
 
 import java.sql.Date;
 import java.util.Optional;

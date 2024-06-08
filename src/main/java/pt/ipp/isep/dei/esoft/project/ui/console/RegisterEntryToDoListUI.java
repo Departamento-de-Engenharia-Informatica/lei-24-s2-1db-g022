@@ -3,7 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 import pt.ipp.isep.dei.esoft.project.domain.DTO.GreenSpaceDto;
 import pt.ipp.isep.dei.esoft.project.domain.DTO.TaskDto;
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterEntryToDoListController;
-import pt.ipp.isep.dei.esoft.project.domain.TaskToDoList;
+import pt.ipp.isep.dei.esoft.project.domain.model.TaskToDoList;
 
 import java.text.ParseException;
 import java.util.ArrayList;

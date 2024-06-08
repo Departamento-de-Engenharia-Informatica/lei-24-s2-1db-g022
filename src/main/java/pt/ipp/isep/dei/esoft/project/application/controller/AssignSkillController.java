@@ -1,8 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
-import pt.ipp.isep.dei.esoft.project.domain.Job;
-import pt.ipp.isep.dei.esoft.project.domain.Skill;
+import pt.ipp.isep.dei.esoft.project.domain.model.Collaborator;
+import pt.ipp.isep.dei.esoft.project.domain.model.Job;
+import pt.ipp.isep.dei.esoft.project.domain.model.Skill;
 import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;

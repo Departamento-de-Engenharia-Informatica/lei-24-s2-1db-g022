@@ -1,10 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.domain.DTO.GreenSpaceDto;
 import pt.ipp.isep.dei.esoft.project.domain.DTO.GreenSpaceMapper;
 import pt.ipp.isep.dei.esoft.project.domain.DTO.TaskDto;
 import pt.ipp.isep.dei.esoft.project.domain.DTO.TaskMapper;
+import pt.ipp.isep.dei.esoft.project.domain.model.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 import pt.isep.lei.esoft.auth.domain.model.Email;
 

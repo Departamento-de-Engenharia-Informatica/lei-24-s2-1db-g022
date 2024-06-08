@@ -2,8 +2,8 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.SingleGraph;
-import pt.ipp.isep.dei.esoft.project.domain.Pipe;
-import pt.ipp.isep.dei.esoft.project.domain.WaterPoint;
+import pt.ipp.isep.dei.esoft.project.domain.model.Pipe;
+import pt.ipp.isep.dei.esoft.project.domain.model.WaterPoint;
 
 import java.io.*;
 import java.util.ArrayList;

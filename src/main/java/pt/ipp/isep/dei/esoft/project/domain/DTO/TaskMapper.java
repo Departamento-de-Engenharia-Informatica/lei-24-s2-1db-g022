@@ -1,6 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain.DTO;
 
-import pt.ipp.isep.dei.esoft.project.domain.Task;
+import pt.ipp.isep.dei.esoft.project.domain.model.Task;
 
 import java.util.ArrayList;
 import java.util.List;

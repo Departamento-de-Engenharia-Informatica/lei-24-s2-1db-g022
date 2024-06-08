@@ -1,13 +1,12 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.Brand;
-import pt.ipp.isep.dei.esoft.project.domain.Model;
+import pt.ipp.isep.dei.esoft.project.domain.model.Brand;
+import pt.ipp.isep.dei.esoft.project.domain.model.Model;
 import pt.ipp.isep.dei.esoft.project.repository.BrandRepository;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
-import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
+import pt.ipp.isep.dei.esoft.project.domain.model.Vehicle;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
-import java.sql.SQLOutput;
 import java.util.Date;
 import java.util.Optional;
 

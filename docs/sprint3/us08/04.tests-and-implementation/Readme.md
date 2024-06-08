@@ -6,13 +6,12 @@ n/a
 
 ## 5. Construction (Implementation)
 
-### Class ListVehiclesNeedingCheckUpController 
+### Class ListVehiclesNeedingCheckUpController
 
 ```java
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
-import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
+import pt.ipp.isep.dei.esoft.project.domain.model.Vehicle;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 
@@ -31,8 +30,8 @@ public class ListVehiclesNeedingCheckUpController {
     }
 
 
-    private VehicleRepository getVehicleRepository(){
-        if(vehicleRepository == null){
+    private VehicleRepository getVehicleRepository() {
+        if (vehicleRepository == null) {
             Repositories repositories = Repositories.getInstance();
             vehicleRepository = repositories.getVehicleRepository();
         }
@@ -45,6 +44,10 @@ public class ListVehiclesNeedingCheckUpController {
 
 ```java
 package pt.ipp.isep.dei.esoft.project.domain;
+
+import pt.ipp.isep.dei.esoft.project.domain.model.Brand;
+import pt.ipp.isep.dei.esoft.project.domain.model.CheckUp;
+import pt.ipp.isep.dei.esoft.project.domain.model.Model;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -117,19 +120,19 @@ public class Vehicle {
             throw new IllegalArgumentException("Vehicle currentKm and checkUpFrequency cannot be null or empty.");
         }
 
-        if(validateNullDate(acquisitionDate) && validateNullDate(registerDate)){
+        if (validateNullDate(acquisitionDate) && validateNullDate(registerDate)) {
 
             this.acquisitionDate = acquisitionDate;
             this.registerDate = registerDate;
-        }else{
+        } else {
 
             throw new IllegalArgumentException("Vehicle acquisitionDate and registerDate cannot be null or empty.");
         }
 
-        if(validateVehicle(registerDate, licensePlate)){
+        if (validateVehicle(registerDate, licensePlate)) {
 
             this.licensePlate = licensePlate;
-        }else{
+        } else {
 
             throw new IllegalArgumentException("Incorrect Vehicle licensePlate format.");
         }
@@ -272,6 +275,7 @@ public class Vehicle {
             return false;
         }
     }
+
     /**
      * Checks if a check-up is needed for the vehicle.
      *
@@ -294,6 +298,7 @@ public class Vehicle {
             return new Date().after(nextCheckUpDate);
         }
     }
+
     /**
      * Retrieves the mileage of the last check-up or the current mileage if no check-ups are recorded.
      *
@@ -322,6 +327,7 @@ public class Vehicle {
         int freq = getCheckUpFrequency();
         return lastCheckupKms + freq;
     }
+
     /**
      * Calculates the next check-up date based on the last check-up date and the check-up frequency.
      *
@@ -343,7 +349,7 @@ public class Vehicle {
      * @param vehicleObj The other vehicle object to compare the license plates with.
      * @return True if the license plates match, false otherwise.
      */
-    public boolean validateVehicleLicense(Vehicle vehicleObj){
+    public boolean validateVehicleLicense(Vehicle vehicleObj) {
 
         return this.getLicensePlate().equals(vehicleObj.getLicensePlate());
     }
@@ -435,7 +441,7 @@ public class Vehicle {
      */
     public Vehicle clone() {
 
-        Vehicle clone = new Vehicle(this.type, this.tare,this.grossWeight, this.currentKm, this.registerDate, this.acquisitionDate, this.checkUpFrequency, this.licensePlate, this.brand, this.model);
+        Vehicle clone = new Vehicle(this.type, this.tare, this.grossWeight, this.currentKm, this.registerDate, this.acquisitionDate, this.checkUpFrequency, this.licensePlate, this.brand, this.model);
 
         for (CheckUp in : this.checkUpList) {
 
@@ -449,12 +455,13 @@ public class Vehicle {
 ```
 
 ### Class ListVehiclesNeedingCheckUpUI
+
 ```java
 
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.ListVehiclesNeedingCheckUpController;
-import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
+import pt.ipp.isep.dei.esoft.project.domain.model.Vehicle;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.ipp.isep.dei.esoft.project.domain.model.*;
 
 import java.util.ArrayList;
 import java.util.Date;

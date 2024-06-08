@@ -1,7 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterCheckUpController;
-import pt.ipp.isep.dei.esoft.project.domain.CheckUp;
+import pt.ipp.isep.dei.esoft.project.domain.model.CheckUp;
 
 import java.text.DateFormat;
 import java.text.ParseException;

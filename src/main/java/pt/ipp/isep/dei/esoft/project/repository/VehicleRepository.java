@@ -1,9 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Brand;
-import pt.ipp.isep.dei.esoft.project.domain.CheckUp;
-import pt.ipp.isep.dei.esoft.project.domain.Model;
-import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
+import pt.ipp.isep.dei.esoft.project.domain.model.Brand;
+import pt.ipp.isep.dei.esoft.project.domain.model.CheckUp;
+import pt.ipp.isep.dei.esoft.project.domain.model.Model;
+import pt.ipp.isep.dei.esoft.project.domain.model.Vehicle;
 
 import java.util.ArrayList;
 import java.util.Date;

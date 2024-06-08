@@ -2,7 +2,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.MinSpanTreeController;
 import pt.ipp.isep.dei.esoft.project.application.controller.TestAlgorithmController;
-import pt.ipp.isep.dei.esoft.project.domain.Pipe;
+import pt.ipp.isep.dei.esoft.project.domain.model.Pipe;
 
 import java.io.File;
 import java.io.FileWriter;
