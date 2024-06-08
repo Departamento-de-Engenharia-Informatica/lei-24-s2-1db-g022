@@ -17,14 +17,6 @@ class Collaborator {
     email
 }
 
-class Document{
-    number
-}
-
-class DocumentType{
-    type
-}
-
 class Address {
     street
     doorNumber
@@ -65,8 +57,6 @@ class MediumPark {
 class LargePark {
 }
 
-Collaborator "1" - "1" Document : has >
-Collaborator "1..*" -- "1" Address : lives >
 Collaborator  <|--  GreenSpaceManager
 
 GreenSpaceManager "1..*" -- "1..*" Task : creates >
@@ -79,8 +69,6 @@ GreenSpace <|-- LargePark
 GreenSpace "1" - "1" Address : is located in >
 
 Address "1..*" -- "1" PostCode : has >
-
-Document "1..*" - "1" DocumentType : has >
 
 Task "*" -- "1" ToDoList : includes <
 Task "1" -- "*" TaskToDoList : contains <

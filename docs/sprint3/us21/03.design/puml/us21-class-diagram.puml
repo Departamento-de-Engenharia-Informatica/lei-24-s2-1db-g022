@@ -2,9 +2,10 @@
 'skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
-skinparam linetype orto
+skinparam linetype polyline
+'skinparam linetype orto
 
-skinparam classAttributeIconSize "1"
+skinparam classAttributeIconSize 0
 
 package "UI" <<Folder>> {
     class RegisterEntryToDoListUI {
@@ -17,7 +18,8 @@ package "Controller" <<Folder>> {
     class RegisterEntryToDoListController {
         + RegisterEntryToDoListController(greenSpaceRepository, collaboratorRepository, taskRepository, toDoList)
         + getGreenSpace()
-        + registerEntryToDoList(greenSpaceName,taskDescription,urgency,duration)
+        + getTask()
+        + registerEntryToDoList(greenSpaceName,taskDescription,urgency,aproxExpectedDuration)
         - getGSMFromSession()
     }
 
@@ -40,6 +42,29 @@ package "Domain" <<Folder>> {
         }
     }
 
+    package "Domain.DTO" <<Folder>> {
+
+        class TaskMapper{
+            + List<TaskDto> toDTO(List<Task>list)
+            + TaskDto toDTO(Task obj)
+        }
+
+        class TaskDto{
+            + String taskDescription
+            + TaskDto(taskDescription)
+        }
+
+        class GreenSpaceMapper{
+            + List<GreenSpaceDto> toDTO(List<GreenSpace>list)
+            + GreenSpaceDto toDTO(GreenSpace obj)
+        }
+
+        class GreenSpaceDto{
+            + String greenSpaceName
+            + GreenSpaceDto(greenSpaceName)
+        }
+    }
+
     package "Domain.Model" <<Folder>> {
 
         interface GreenSpace {
@@ -51,7 +76,7 @@ package "Domain" <<Folder>> {
 
         class GreenSpaces{
 
-            +getSortedGreenSpaces()
+            + getGreenSpaceList()
         }
 
         class Garden implements GreenSpace{
@@ -59,7 +84,7 @@ package "Domain" <<Folder>> {
             - int area
             - Address
 
-            + Garden(name,area,streetName,postCode)
+            + Garden(name, area, streetName, doorNumber, postCodeNumber, localization)
             + getName()
             + getArea()
             + getAddress()
@@ -74,7 +99,7 @@ package "Domain" <<Folder>> {
             + getName()
             + getArea()
             + getAddress()
-            + MediumPark(name,area,streetName,postCode)
+            + MediumPark(name, area, streetName, doorNumber, postCodeNumber, localization)
             + hasName(greenSpaceName)
         }
 
@@ -86,7 +111,7 @@ package "Domain" <<Folder>> {
             + getName()
             + getArea()
             + getAddress()
-            + LargePark(name,area,streetName,postCode)
+            + LargePark(name, area, streetName, doorNumber, postCodeNumber, localization)
             + hasName(greenSpaceName)
         }
 
@@ -99,7 +124,7 @@ package "Domain" <<Folder>> {
             - String street
             - int doorNumber
 
-            + Address(street, doorNumber, postCodeNumber,localization)
+            + Address(street, doorNumber, postCodeNumber, localization)
             - validation()
         }
 
@@ -122,6 +147,7 @@ package "Domain" <<Folder>> {
             - String urgency
             - int aproxExpectedDuration
             - String status
+            - String taskRef
 
             + TaskToDoList(greenSpace, task, urgency, aproxExpectedDuration)
             - validateTaskToDoList();
@@ -129,15 +155,15 @@ package "Domain" <<Folder>> {
 
         class GreenSpaceManager implements ICollaborator{
 
-            + getGreenSpace()
+            + getListGreenSpace()
         }
 
         class ToDoList{
 
             + ToDoList()
-            + registerEntryToDoList(greenSpace,task,urgency,duration)
-            - addListTaskToDoList(taskToDoList)
-            - validateToDoList()
+            + registerEntryToDoList(greenSpace,task,urgency,aproxExpectedDuration)
+            - addListTaskToDoList(taskTdl)
+            - validateToDoList(taskTdl)
         }
 
     }
@@ -167,9 +193,18 @@ package "Domain" <<Folder>> {
         class TaskRepository {
 
             + getAllTaskDescriptions()
+            + getTaskByDescription(taskDescription)
         }
     }
 }
+
+'-------------------TaskMapper-------------------
+TaskMapper ..> TaskDto
+TaskMapper ..> Task
+
+'-------------------GreenSpaceMapper-------------------
+GreenSpaceMapper ..> GreenSpaceDto
+GreenSpaceMapper ..> GreenSpace
 
 '-------------------Instance-------------------
 Repositories -> Repositories : instance
@@ -177,6 +212,8 @@ ApplicationSession -> ApplicationSession : instance
 
 '-------------------UI-------------------
 RegisterEntryToDoListUI ..> RegisterEntryToDoListController
+RegisterEntryToDoListUI ..> TaskDto
+RegisterEntryToDoListUI ..> GreenSpaceDto
 
 '-------------------Controller-------------------
 RegisterEntryToDoListController ...> Repositories : repositories
@@ -194,6 +231,10 @@ RegisterEntryToDoListController ...> GreenSpaceManager
 RegisterEntryToDoListController ...> Address
 RegisterEntryToDoListController ...> PostCode
 RegisterEntryToDoListController ...> GreenSpaces
+RegisterEntryToDoListController ...> TaskMapper
+RegisterEntryToDoListController ...> GreenSpaceMapper
+RegisterEntryToDoListController ...> TaskDto
+RegisterEntryToDoListController ...> GreenSpaceDto
 
 '-------------------ApplicationSession-------------------
 ApplicationSession --> "1" UserSession : userSession
@@ -202,7 +243,7 @@ ApplicationSession --> "1" UserSession : userSession
 Repositories ----> "1" GreenSpaceRepository : GreenSpaceRepository
 Repositories ---> "1" CollaboratorRepository : CollaboratorRepository
 Repositories -> "1" ToDoList : ToDoList
-Repositories -> "1" TaskRepository : TaskRepository
+Repositories ---> "1" TaskRepository : TaskRepository
 
 '-------------------CollaboratorRepository-------------------
 CollaboratorRepository "1"  ---> "*" ICollaborator : collaboratorList
@@ -231,6 +272,6 @@ ToDoList "1" --> "*" TaskToDoList : taskTdl
 
 '-------------------TaskToDoList-------------------
 TaskToDoList "1..*" -> "1" GreenSpace : greenSpace
-TaskToDoList "1..*" -> "1" Task : task
+TaskToDoList "1..*" --> "1" Task : task
 
 @enduml

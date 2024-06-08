@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":GreenSpaceMapper" as GSMP
+participant "greenSpaceList\n:List<GreenSpace>" as GSLIST
+participant "greenSpaceListDto\n:List<GreenSpaceListDto>" as GSLDTO
+participant "objDto\n:GreenSpaceDto" as DTOGS
+
+autonumber 9
+
+--> GSMP : toDTOGreenSpace(greenSpaceList)
+
+autonumber 9.1
+
+activate GSMP
+
+group Green Space List To DTO
+
+        GSMP --> GSLDTO : create()
+
+    loop for each object in greenSpaceList
+
+        GSMP -> GSLIST : get(i)
+    activate GSLIST
+
+        GSLIST --> GSMP : obj
+    deactivate GSLIST
+
+        GSMP -> GSMP : objDto = toDTO(obj)
+    activate GSMP
+
+        GSMP --> DTOGS** : create(obj)
+    deactivate GSMP
+
+        GSMP -> GSLDTO : add(objDto)
+    activate GSLDTO
+
+        GSLDTO --> GSMP : true/false
+    deactivate GSLDTO
+
+    end
+
+end
+
+autonumber 10
+
+<-- GSMP : greenSpaceListDto
+
+deactivate GSMP
+@enduml

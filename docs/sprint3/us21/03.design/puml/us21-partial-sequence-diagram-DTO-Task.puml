@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":TaskMapper" as TMP
+participant "taskList\n:List<Task>" as TLIST
+participant "taskListDto\n:List<TaskListDto>" as TLDTO
+participant "objDto\n:TDto" as DTOT
+
+autonumber 21
+
+--> TMP : toDTOTask(taskList)
+
+autonumber 21.1
+
+activate TMP
+
+group Task List To DTO
+
+        TMP --> TLDTO : create()
+
+    loop for each object in taskList
+
+        TMP -> TLIST : get(i)
+    activate TLIST
+
+        TLIST --> TMP : obj
+    deactivate TLIST
+
+        TMP -> TMP : objDto = toDTO(obj)
+    activate TMP
+
+        TMP --> DTOT** : create(obj)
+    deactivate TMP
+
+        TMP -> TLDTO : add(objDto)
+    activate TLDTO
+
+        TLDTO --> TMP : true/false
+    deactivate TLDTO
+
+    end
+
+end
+
+autonumber 22
+
+<-- TMP : taskListDto
+
+deactivate TMP
+@enduml

@@ -15,7 +15,9 @@ participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "manager\n:GreenSpaceManager" as GSMO
 participant "greenSpaces\nGreenSpaces" as GREENSPACES
+participant "greenSpaceMapper\n:GreenSpaceMapper" as GSMP
 participant "taskRepository\n:TaskRepository" as TR
+participant "taskMapper\n:TaskMapper" as TMP
 participant "greenSpaceRepository\n:GreenSpaceRepository" as GSR
 participant "toDoList\n:ToDoList" as TDL
 participant "greenSpace\nGreenSpace" as GREENSPACE
@@ -39,24 +41,29 @@ activate GSM
         CTRL --> CTRL : manager
     deactivate CTRL
 
-        CTRL -> GSMO : getGreenSpace()
+        CTRL -> GSMO : getListGreenSpace()
     activate GSMO
 
-        GSMO -> GREENSPACES : getSortedGreenSpaces()
+        GSMO -> GREENSPACES : getGreenSpaceList()
     activate GREENSPACES
-
-        ref over GREENSPACES
-            Design in US27
-        end ref
 
         GREENSPACES --> GSMO : greenSpaceList
     deactivate GREENSPACES
 
         GSMO --> CTRL : greenSpaceList
-
     deactivate GSMO
 
-        CTRL --> UI : greenSpaceList
+        CTRL -> GSMP : toDTOGreenSpace(greenSpaceList)
+    activate GSMP
+
+        ref over GSMP
+            Green Space List To DTO
+        end ref
+
+       GSMP --> CTRL : greenSpaceListDto
+    deactivate GSMP
+
+        CTRL --> UI : greenSpaceListDto
     deactivate CTRL
 
         UI --> GSM : shows all the Green Spaces managed by the GSM \n and asks to select one
@@ -86,7 +93,17 @@ activate GSM
         TR --> CTRL : taskList
     deactivate TR
 
-        CTRL --> UI : taskList
+        CTRL -> TMP : toDTOTask(taskList)
+    activate TMP
+
+        ref over TMP
+            Task List To DTO
+        end ref
+
+        TMP --> CTRL : taskListDto
+    deactivate TMP
+
+        CTRL --> UI : taskListDto
     deactivate CTRL
 
         UI --> GSM : shows all the tasks and asks to select one
@@ -163,7 +180,7 @@ activate GSM
         TR --> CTRL : task
     deactivate TR
 
-        CTRL -> TDL : registerEntryToDoList(greenSpace,task,urgency,duration)
+        CTRL -> TDL : registerEntryToDoList(greenSpace,task,urgency,aproxExpectedDuration)
     activate TDL
 
         ref over TDL

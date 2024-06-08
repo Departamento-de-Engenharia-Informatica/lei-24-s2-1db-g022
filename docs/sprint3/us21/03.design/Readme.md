@@ -48,6 +48,10 @@ Other software classes (i.e. Pure Fabrication) identified:
 * GreenSpaceRepository
 * TaskRepository
 * GreenSpaces
+* DTOTask
+* DTOGreenSpace
+* GreenSpaceMapper
+* TaskMapper
 
 ## 3.2. Sequence Diagram (SD)
 
@@ -63,9 +67,13 @@ Get Green Space Manager
 
 ![Sequence Diagram - Split Manager](../../us20/03.design/svg/us20-partial-sequence-diagram-get-GSM.svg)
 
-Get Green Space List
+DTO Green Space List
 
-![Sequence Diagram - Split List](../../us27/03.design/svg/us27-sequence-diagram.svg)
+![Sequence Diagram - DTO GreenSpace](svg/us21-partial-sequence-diagram-DTO-GreenSpace.svg)
+
+Get Green Space Manager
+
+![Sequence Diagram - Split Manager](svg/us21-partial-sequence-diagram-DTO-Task.svg)
 
 Add Entry To Do List
 

@@ -87,6 +87,8 @@ package "Domain" <<Folder>> {
         }
 
         class Team{
+            - int id
+
             + verifyIdTeam(teamId)
             + sendEmail(msg)
         }
@@ -97,21 +99,15 @@ package "Domain" <<Folder>> {
         }
 
         class Collaborator implements ICollaborator{
-            - String name
-            - Date dateOfBirth
-            - Date admissionDate
             - String email
-            - int taxpayer
+
             + hasEmail(email)
             + getEmail()
         }
 
         class GreenSpaceManager implements ICollaborator{
-            - String name
-            - Date dateOfBirth
-            - Date admissionDate
             - String email
-            - int taxpayer
+
             + getListGreenSpace()
             + hasEmail(email)
             + getEmail()
@@ -124,39 +120,20 @@ package "Domain" <<Folder>> {
 
         class Garden implements GreenSpace{
             - String name
-            - int area
-            - Address
 
-            + Garden(name,area,streetName,postCodeNumber,localization)
             + getName()
-            + getArea()
-            + getAddress()
-            - validationGreenSpace()
         }
 
         class MediumPark implements GreenSpace{
             - String name
-            - int area
-            - Address
 
             + getName()
-            + getArea()
-            + getAddress()
-            + MediumPark(name,area,streetName,postCodeNumber,localization)
-            - validationGreenSpace()
         }
 
         class LargePark implements GreenSpace{
             - String name
-            - int area
-            - Address
 
             + getName()
-            + getArea()
-            + getAddress()
-            + LargePark(name,area,streetName,postCodeNumber,localization)
-            - validationGreenSpace()
-
         }
 
         class GreenSpaces{
@@ -173,12 +150,9 @@ package "Domain" <<Folder>> {
 
 
         class TaskAgenda {
-
-            - String urgency
             - int expectedDuration
             - date startDate
             - date endDate
-            - String status
 
             + hasTaskName(taskName)
             + hasGreenSpaceName(taskParkName)
@@ -186,8 +160,6 @@ package "Domain" <<Folder>> {
             - verifyNullTeam()
             - equalsTask(taskAgenda)
             - updateTeam(team)
-
-
         }
 
     }
@@ -232,10 +204,13 @@ ApplicationSession -> ApplicationSession : instance
 '-------------------UI-------------------
 AssignTeamAgendaUI .> AssignTeamAgendaController
 AssignTeamAgendaUI ..> TeamDto
+AssignTeamAgendaUI ..> TaskAgendaDto
 
 '-------------------Controller-------------------
 AssignTeamAgendaController ..> TeamDto
 AssignTeamAgendaController ..> TeamMapper
+AssignTeamAgendaController ..> TaskAgendaMapper
+AssignTeamAgendaController ..> TaskAgendaDto
 AssignTeamAgendaController ..> Repositories : repositories
 AssignTeamAgendaController ..> ApplicationSession
 AssignTeamAgendaController ...> UserSession
@@ -257,8 +232,8 @@ ApplicationSession --> "1" UserSession : userSession
 
 '-------------------Repositories-------------------
 Repositories ---> "1" TeamRepository : TeamRepositoryRepository
-Repositories ---> "1" CollaboratorRepository : CollaboratorRepository
-Repositories ---> "1" Agenda : Agenda
+Repositories ----> "1" CollaboratorRepository : CollaboratorRepository
+Repositories -----> "1" Agenda : Agenda
 Repositories ---> "1" GreenSpaceRepository :GreenSpaceRepository
 GreenSpaceManager "1" ---> "1" GreenSpaces : greenSpaces
 
@@ -279,5 +254,5 @@ Agenda "1" --> "*" TaskAgenda : taskAgendaList
 TaskAgenda "*" ----> "1" GreenSpace : greenSpace
 TaskAgenda "*" ---> "1" Team  : team
 
-Team "*" <-- "1" EmailService : send email to all elements of
+Team "*" <--- "1" EmailService : send email to all elements of
 @enduml
