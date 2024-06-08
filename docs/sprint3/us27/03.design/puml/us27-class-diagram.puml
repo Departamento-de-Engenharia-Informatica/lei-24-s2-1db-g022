@@ -2,9 +2,10 @@
 'skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
-skinparam linetype orto
+skinparam linetype polyline
+'skinparam linetype orto
 
-skinparam classAttributeIconSize "1"
+skinparam classAttributeIconSize 0
 
 package "UI" <<Folder>> {
     class ListGreenSpacesUI {
@@ -16,7 +17,7 @@ package "Controller" <<Folder>> {
 
     class ListGreenSpacesController {
         + ListGreenSpacesController(collaboratorRepository)
-        + getGreenSpaceManagerGSpaceList
+        + getGreenSpaceManagerGSpaceList()
         - getGSMFromSession()
     }
 
@@ -36,6 +37,19 @@ package "Domain" <<Folder>> {
         class UserSession
         {
             + getUserEmail()
+        }
+    }
+
+    package "Domain.DTO" <<Folder>> {
+
+        class GreenSpaceMapper{
+            + List<GreenSpaceDto> toDTO(List<GreenSpace>list)
+            + GreenSpaceDto toDTO(GreenSpace obj)
+        }
+
+        class GreenSpaceDto{
+            + String greenSpaceName
+            + GreenSpaceDto(greenSpaceName)
         }
     }
 
@@ -114,12 +128,17 @@ package "Domain" <<Folder>> {
     }
 }
 
+'-------------------GreenSpaceMapper-------------------
+GreenSpaceMapper ..> GreenSpaceDto
+GreenSpaceMapper ..> GreenSpace
+
 '-------------------Instance-------------------
 Repositories -> Repositories : instance
 ApplicationSession -> ApplicationSession : instance
 
 '-------------------UI-------------------
 ListGreenSpacesUI ..> ListGreenSpacesController
+ListGreenSpacesUI ..> GreenSpaceDto
 
 '-------------------Controller-------------------
 ListGreenSpacesController ...> Repositories : repositories
@@ -131,6 +150,8 @@ ListGreenSpacesController ...> GreenSpace
 ListGreenSpacesController ...> GreenSpaceManager
 ListGreenSpacesController ...> GreenSpaces
 ListGreenSpacesController ...> Sortable
+ListGreenSpacesController ...> GreenSpaceMapper
+ListGreenSpacesController ...> GreenSpaceDto
 
 '-------------------ApplicationSession-------------------
 ApplicationSession --> "1" UserSession : userSession

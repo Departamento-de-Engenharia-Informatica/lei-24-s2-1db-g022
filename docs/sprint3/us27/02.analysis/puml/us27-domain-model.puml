@@ -17,24 +17,6 @@ class Collaborator {
     email
 }
 
-class Document{
-    number
-}
-
-class DocumentType{
-    type
-}
-
-class Address {
-    street
-    doorNumber
-}
-
-class PostCode {
-    postCodeNumber
-    localization
-}
-
 class GreenSpaceManager {
 }
 
@@ -55,17 +37,10 @@ class MediumPark {
 class LargePark {
 }
 
-Collaborator "1..*" -- "1" Address : lives >
 Collaborator  <|--  GreenSpaceManager
-Collaborator "1" - "1" Document : has >
-
-Address "1..*" --> "1" PostCode : has
-
-Document "1..*" - "1" DocumentType : has >
 
 GreenSpaceManager "1" -- "1..*" GreenSpace : manages >
 
-GreenSpace "1" - "1" Address : is located in >
 GreenSpace "*" -- "1" SortingAlgorithm : makes use of >
 GreenSpace <|-- Garden
 GreenSpace <|-- MediumPark

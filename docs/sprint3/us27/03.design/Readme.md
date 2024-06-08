@@ -42,6 +42,9 @@ Get Green Space Manager
 
 ![Sequence Diagram - Split Manager](../../us20/03.design/svg/us20-partial-sequence-diagram-get-GSM.svg)
 
+DTO Green Space List
+
+![Sequence Diagram - DTO GreenSpace](../../us21/03.design/svg/us21-partial-sequence-diagram-DTO-GreenSpace.svg)
 ## 3.3. Class Diagram (CD)
 
 ![Class Diagram](svg/us27-class-diagram.svg)

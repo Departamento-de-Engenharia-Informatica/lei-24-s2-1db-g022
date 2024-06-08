@@ -14,6 +14,7 @@ participant ":ListGreenSpacesController" as CTRL
 participant "manager\n:GreenSpaceManager" as GSMO
 participant "greenSpaces\n:GreenSpaces" as GSL
 participant "sortAlg\n:Sortable" as SA
+participant "greenSpaceMapper\n:GreenSpaceMapper" as GSMP
 
 activate GSM
 
@@ -27,7 +28,7 @@ activate GSM
     activate CTRL
 
         ref over CTRL
-            Get Manager
+            Design in US20
         end ref
 
         CTRL --> CTRL : manager
@@ -51,7 +52,17 @@ activate GSM
         GSMO --> CTRL : greenSpaceListSorted
     deactivate GSMO
 
-        CTRL --> UI : greenSpaceListSorted
+        CTRL -> GSMP : toDTOGreenSpace(greenSpaceListSorted)
+    activate GSMP
+
+        ref over GSMP
+            Design in US21
+        end ref
+
+       GSMP --> CTRL : greenSpaceListDto
+    deactivate GSMP
+
+        CTRL --> UI : greenSpaceListDto
     deactivate CTRL
 
         UI --> GSM : shows list of green spaces
