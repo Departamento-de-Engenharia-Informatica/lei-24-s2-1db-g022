@@ -2,9 +2,10 @@
 'skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
-skinparam linetype orto
+skinparam linetype polyline
+'skinparam linetype orto
 
-skinparam classAttributeIconSize "1"
+skinparam classAttributeIconSize 0
 
 'left to right direction
 package "UI" <<Folder>> {
@@ -36,7 +37,7 @@ package "Domain" <<Folder>> {
     }
 
     package "Domain.Model" <<Folder>> {
-        interface GreenSpace {
+        interface GreenSpace <<Interface>>{
 
             + getName()
             + getArea()
@@ -85,7 +86,7 @@ package "Domain" <<Folder>> {
 
         }
 
-        interface ICollaborator{
+        interface ICollaborator <<Interface>>{
             + getName()
             + getEmail()
             + hasEmail(email)

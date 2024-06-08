@@ -67,7 +67,7 @@ package "Domain" <<Folder>> {
 
     package "Domain.Model" <<Folder>> {
 
-        interface GreenSpace {
+        interface GreenSpace <<Interface>>{
             + getName()
             + getArea()
             + getAddress()
@@ -115,7 +115,7 @@ package "Domain" <<Folder>> {
             + hasName(greenSpaceName)
         }
 
-        interface ICollaborator{
+        interface ICollaborator <<Interface>>{
             + getEmail()
             + hasEmail(email)
         }

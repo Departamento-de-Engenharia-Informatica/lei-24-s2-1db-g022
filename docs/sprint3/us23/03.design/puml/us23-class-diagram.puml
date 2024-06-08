@@ -74,7 +74,7 @@ package "Domain" <<Folder>> {
 
     package "Domain.Model" <<Folder>> {
 
-        interface EmailService{
+        interface EmailService <<Interface>>{
            + sendEmailByService(email,msg)
         }
 
@@ -93,7 +93,7 @@ package "Domain" <<Folder>> {
             + sendEmail(msg)
         }
 
-        interface ICollaborator{
+        interface ICollaborator <<Interface>>{
             + hasEmail(email)
             + getEmail()
         }
@@ -113,7 +113,7 @@ package "Domain" <<Folder>> {
             + getEmail()
         }
 
-        interface GreenSpace {
+        interface GreenSpace <<Interface>>{
             + equalsGreenSpace(greenSpace)
             + hasName(name)
         }
