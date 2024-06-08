@@ -38,12 +38,17 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us01-sequence-diagram.svg)
+![Sequence Diagram - Full](svg/us22-sequence-diagram.svg)
 
 ### Split Diagrams
 
-n/a
+TaskToDoList To DTO
+![Sequence Diagram - Full](svg/us22-partial-sequence-diagram-DTO-Task-GreenSpace.svg)
+
+
+Get Task ToDoList
+![Sequence Diagram - Full](svg/us22-sequence-diagram-partial-get-task-ToDoList.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us01-class-diagram.svg)
+![Class Diagram](svg/us22-class-diagram.svg)

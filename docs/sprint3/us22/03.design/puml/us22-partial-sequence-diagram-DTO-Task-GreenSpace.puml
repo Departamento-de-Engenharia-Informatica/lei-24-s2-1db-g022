@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":TaskToDoListMapper" as TTDLMP
+participant "taskToDoList\n:List<TaskToDoList>" as TTDLIST
+participant "taskToDoListDto\n:List<TaskToDoListDto>" as TTDLDTO
+participant "objDto\n:TaskToDoListDto" as DTOTTDL
+
+autonumber 33
+
+--> TTDLMP : toDTOTaskToDoList(taskListGreenSpace)
+
+autonumber 33.1
+
+activate TTDLMP
+
+group Green Space List To DTO
+
+        TTDLMP --> TTDLDTO**: create()
+
+    loop for each object in taskToDoList
+
+        TTDLMP -> TTDLIST : get(i)
+    activate TTDLIST
+
+        TTDLIST --> TTDLMP : obj
+    deactivate TTDLIST
+
+        TTDLMP -> TTDLMP : objDto = toDTO(obj)
+    activate TTDLMP
+
+        TTDLMP --> DTOTTDL** : create(obj)
+    deactivate TTDLMP
+
+        TTDLMP -> TTDLDTO : add(objDto)
+    activate TTDLDTO
+
+        TTDLDTO --> TTDLMP : true/false
+    deactivate TTDLDTO
+
+    end
+
+end
+
+autonumber 34
+
+<-- TTDLMP : taskListGreenSpaceDto
+
+deactivate TTDLMP
+@enduml
