@@ -19,11 +19,11 @@ public class TaskToDoList {
     /**
      * Constructs a new TaskToDoList object with the given parameters.
      *
-     * @param greenSpace             The green space associated with the task.
-     * @param task                   The task to be completed.
-     * @param urgency                The urgency level of the task.
-     * @param aproxExpectedDuration  The approximate expected duration of the task in hours.
-     * @param taskRef                The reference identifier of the task.
+     * @param greenSpace            The green space associated with the task.
+     * @param task                  The task to be completed.
+     * @param urgency               The urgency level of the task.
+     * @param aproxExpectedDuration The approximate expected duration of the task in hours.
+     * @param taskRef               The reference identifier of the task.
      * @throws IllegalArgumentException if the approximate expected duration is zero or negative.
      */
     public TaskToDoList(GreenSpace greenSpace, Task task, String urgency, int aproxExpectedDuration, String taskRef) {
@@ -139,7 +139,16 @@ public class TaskToDoList {
 
         return value > 0;
     }
+
     public void setStatusToPlanned() {
         this.status = "Planned";
+    }
+
+    public boolean equalsGreenSpace(GreenSpace greenSpace) {
+        return this.greenSpace.equals(greenSpace) && hasStatus("Planned");
+    }
+
+    public boolean hasStatus(String status) {
+        return this.status.equals(status);
     }
 }

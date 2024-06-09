@@ -1,7 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.domain.model;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
+import java.util.Properties;
 
 /**
  * The Team class represents a team of collaborators.
@@ -94,5 +97,41 @@ public class Team {
         Team clone = new Team(this.collaboratorList);
 
         return clone;
+    }
+
+    public boolean verifyIdTeam(int teamId) {
+
+        return this.id == teamId;
+    }
+
+    public boolean sendEmail(String msg) {
+        for (Collaborator collaborator : collaboratorList) {
+            String email = collaborator.getEmail();
+
+            Properties properties = new Properties();
+
+            try {
+                InputStream in = new FileInputStream("src\\main\\resources\\config.properties");
+
+                properties.load(in);
+                in.close();
+
+                String classPath = properties.getProperty("email.service");
+                Class<?> clazz = Class.forName(classPath);
+                EmailService es = (EmailService) clazz.newInstance();
+
+
+                boolean success = es.sendEmail(email, msg);
+                if (!success) {
+                    return false;
+                }
+
+            } catch (Exception e) {
+
+                throw new RuntimeException(e);
+            }
+
+        }
+        return true;
     }
 }

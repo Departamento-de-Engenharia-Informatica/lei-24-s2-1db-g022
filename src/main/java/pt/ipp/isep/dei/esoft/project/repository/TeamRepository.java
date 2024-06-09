@@ -3,10 +3,12 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.model.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.model.Skill;
+import pt.ipp.isep.dei.esoft.project.domain.model.TaskToDoList;
 import pt.ipp.isep.dei.esoft.project.domain.model.Team;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Repository class for managing Team objects.
@@ -116,10 +118,10 @@ public class TeamRepository {
         boolean isCreated = teamList.add(team);
         int id;
 
-        if(teamList.size() == 1){
+        if (teamList.size() == 1) {
             id = 1;
-        }else{
-           id = teamList.get(teamList.size()-2).getId() + 1;
+        } else {
+            id = teamList.get(teamList.size() - 2).getId() + 1;
         }
 
         team.generateId(id);
@@ -127,9 +129,23 @@ public class TeamRepository {
         return isCreated;
     }
 
-    public void ver(){
-        for (Team t:teamList) {
+    public void ver() {
+        for (Team t : teamList) {
             System.out.println(t.toString());
         }
+    }
+
+    public List<Team> getTeamList() {
+        return teamList;
+    }
+
+    public Optional<Team> getTeamById(int id) {
+
+        for (Team t : teamList) {
+            if (t.verifyIdTeam(id)) {
+                return Optional.of(t);
+            }
+        }
+        return Optional.empty();
     }
 }

@@ -22,7 +22,7 @@ public class TaskToDoListMapper {
         return taskToDoListDtoList;
     }
 
-    public TaskToDoListDto toDto(TaskToDoList obj) {
+    private TaskToDoListDto toDto(TaskToDoList obj) {
 
         return new TaskToDoListDto(obj.getTaskRef(), obj.getTask().getTaskDescription(), obj.getGreenSpace().getName());
     }

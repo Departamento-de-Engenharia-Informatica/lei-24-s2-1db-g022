@@ -29,4 +29,35 @@ public class TasksAgenda {
             System.out.println(taskAgenda.toString());
         }
     }
+
+    public List<TaskAgenda> getAllTaskByGreenSpace(List<GreenSpace> greenSpaceList) {
+        List<TaskAgenda> listTaskAgenda = new ArrayList<>();
+
+        for (TaskAgenda ts : taskAgendaList) {
+            if (ts.verifyGreenSpace(greenSpaceList)) {
+                listTaskAgenda.add(ts);
+            }
+        }
+        return listTaskAgenda;
+    }
+
+    public Optional<TaskAgenda> verifyHasTaskReference(String taskReference) {
+
+        for (TaskAgenda t : taskAgendaList) {
+            if (t.verifyHasTaskReference(taskReference)) {
+                return Optional.of(t);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public boolean assignTeamTask(Team team, TaskAgenda taskAgenda){
+        for (TaskAgenda tA : taskAgendaList){
+            if (tA.equalsTask(taskAgenda)){
+                tA.updateTeam(team);
+                return true;
+            }
+        }
+        return false;
+    }
 }

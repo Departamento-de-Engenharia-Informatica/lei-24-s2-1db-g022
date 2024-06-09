@@ -42,7 +42,7 @@ public class GreenSpaceMapper {
      * @param obj The GreenSpace entity to be converted.
      * @return A GreenSpaceDto object.
      */
-    public GreenSpaceDto toDto(GreenSpace obj) {
+    private GreenSpaceDto toDto(GreenSpace obj) {
 
         return new GreenSpaceDto(obj.getName(), obj.getArea());
     }

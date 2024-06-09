@@ -170,7 +170,7 @@ package "Domain" <<Folder>> {
         }
 
         class TaskToDoList{
-            + hasReference(taskReference)
+            + hasRef(ref)
         }
 
     }

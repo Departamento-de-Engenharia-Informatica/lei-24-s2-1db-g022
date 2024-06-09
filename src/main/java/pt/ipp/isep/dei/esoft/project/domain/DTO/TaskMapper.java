@@ -42,7 +42,7 @@ public class TaskMapper {
      * @param obj The Task entity to be converted.
      * @return A TaskDto object.
      */
-    public TaskDto toDto(Task obj) {
+    private TaskDto toDto(Task obj) {
 
         return new TaskDto(obj.getTaskDescription());
     }

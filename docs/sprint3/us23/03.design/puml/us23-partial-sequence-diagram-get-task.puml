@@ -29,7 +29,7 @@ TASKSAGENDA -> TASK : verifyHasTaskReference(taskReference)
 
 activate TASK
 
-TASK -> TODO : hasReference(taskReference)
+TASK -> TODO : hasRef(ref)
 
 activate TODO
 
