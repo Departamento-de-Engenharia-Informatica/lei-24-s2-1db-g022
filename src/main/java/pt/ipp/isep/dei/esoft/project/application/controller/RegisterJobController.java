@@ -24,6 +24,7 @@ public class RegisterJobController {
 
     /**
      * Constructs a RegisterJobController object with a specified JobRepository instance.
+     *
      * @param jobRepository The JobRepository instance to use.
      */
     public RegisterJobController(JobRepository jobRepository) {
@@ -33,6 +34,7 @@ public class RegisterJobController {
     /**
      * Retrieves the JobRepository instance.
      * If not initialized, it gets the JobRepository from the Repositories singleton.
+     *
      * @return The JobRepository instance.
      */
     private JobRepository getJobRepository() {
@@ -45,10 +47,11 @@ public class RegisterJobController {
 
     /**
      * Registers a new job with the given name.
+     *
      * @param name The name of the job to register.
      * @return An Optional containing the registered Job, or empty if the registration fails.
      */
-    public Optional<Job> registerJob(String name){
+    public Optional<Job> registerJob(String name) {
         Optional<Job> newJob = Optional.empty();
         newJob = getJobRepository().createJob(name);
         return newJob;

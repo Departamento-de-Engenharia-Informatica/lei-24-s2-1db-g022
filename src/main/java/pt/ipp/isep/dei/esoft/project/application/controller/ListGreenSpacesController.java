@@ -35,8 +35,9 @@ public class ListGreenSpacesController {
 
     /**
      * Constructs a ListGreenSpacesController object with a specified AuthenticationRepository and CollaboratorRepository instances.
+     *
      * @param authenticationRepository The AuthenticationRepository instance to use.
-     * @param collaboratorRepository The CollaboratorRepository instance to use.
+     * @param collaboratorRepository   The CollaboratorRepository instance to use.
      */
     public ListGreenSpacesController(AuthenticationRepository authenticationRepository, CollaboratorRepository collaboratorRepository) {
 
@@ -47,6 +48,7 @@ public class ListGreenSpacesController {
     /**
      * Retrieves the AuthenticationRepository instance.
      * If not initialized, it gets the AuthenticationRepository from the Repositories singleton.
+     *
      * @return The AuthenticationRepository instance.
      */
     private AuthenticationRepository getAuthenticationRepository() {
@@ -63,6 +65,7 @@ public class ListGreenSpacesController {
     /**
      * Retrieves the CollaboratorRepository instance.
      * If not initialized, it gets the CollaboratorRepository from the Repositories singleton.
+     *
      * @return The CollaboratorRepository instance.
      */
     private CollaboratorRepository getCollaboratorRepository() {

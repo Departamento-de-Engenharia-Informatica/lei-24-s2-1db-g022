@@ -29,7 +29,7 @@ public class JobRepository {
      * @param job The job to add.
      * @return True if the job is successfully added, false otherwise.
      */
-    private boolean addJob(Job job){
+    private boolean addJob(Job job) {
         boolean success = false;
         if (validateJob(job)) {
             // A clone of the job is added to the list of jobs, to avoid side effects and outside manipulation.
@@ -65,19 +65,31 @@ public class JobRepository {
         return optionalJob;
     }
 
-    public List<Job> getJobList(){
+    /**
+     * Retrieves an immutable copy of the list of jobs.
+     *
+     * @return An immutable list containing all the jobs.
+     */
+    public List<Job> getJobList() {
         return List.copyOf(jobList);
     }
 
+    /**
+     * Retrieves a job by its name.
+     *
+     * @param jobName The name of the job to retrieve.
+     * @return The job with the specified name.
+     * @throws IllegalArgumentException If the job with the specified name does not exist.
+     */
     public Job getJobByName(String jobName) {
-        Job newJob =new Job(jobName);
-        Job job=null;
-        if (jobList.contains(newJob)){
+        Job newJob = new Job(jobName);
+        Job job = null;
+        if (jobList.contains(newJob)) {
             job = jobList.get(jobList.indexOf(newJob));
         }
-        if(job == null){
+        if (job == null) {
             throw new IllegalArgumentException(
-                    "Job requested for ["+jobName+"] does not exit.");
+                    "Job requested for [" + jobName + "] does not exit.");
         }
         return job;
     }

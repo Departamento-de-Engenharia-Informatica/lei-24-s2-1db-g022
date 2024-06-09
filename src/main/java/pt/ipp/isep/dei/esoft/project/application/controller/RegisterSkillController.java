@@ -24,6 +24,7 @@ public class RegisterSkillController {
 
     /**
      * Constructs a RegisterSkillController object with a specified SkillRepository instance.
+     *
      * @param skillRepository The SkillRepository instance to use.
      */
     public RegisterSkillController(SkillRepository skillRepository) {
@@ -33,6 +34,7 @@ public class RegisterSkillController {
     /**
      * Retrieves the SkillRepository instance.
      * If not initialized, it gets the SkillRepository from the Repositories singleton.
+     *
      * @return The SkillRepository instance.
      */
     private SkillRepository getSkillRepository() {
@@ -45,10 +47,11 @@ public class RegisterSkillController {
 
     /**
      * Registers a new skill with the given name.
+     *
      * @param name The name of the skill to register.
      * @return An Optional containing the registered Skill, or empty if the registration fails.
      */
-    public Optional<Skill> registerSkill(String name){
+    public Optional<Skill> registerSkill(String name) {
         Optional<Skill> newSkill = Optional.empty();
         newSkill = getSkillRepository().createSkill(name);
         return newSkill;

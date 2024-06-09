@@ -79,6 +79,12 @@ public class Team {
         return (collaboratorList.contains(collaborator));
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param o The reference object with which to compare.
+     * @return true if this object is the same as the obj argument; false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -87,11 +93,21 @@ public class Team {
         return Objects.equals(collaboratorList, team.collaboratorList);
     }
 
+    /**
+     * Returns a hash code value for the object. This method is supported for the benefit of hash tables such as those provided by {@link HashMap}.
+     *
+     * @return A hash code value for this object.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(collaboratorList);
     }
 
+    /**
+     * Creates and returns a copy of this team. The copy contains the same collaborators as the original team.
+     *
+     * @return A new Team object that is a copy of this team.
+     */
     public Team clone() {
 
         Team clone = new Team(this.collaboratorList);
@@ -99,11 +115,24 @@ public class Team {
         return clone;
     }
 
+    /**
+     * Verifies if the given team ID matches the ID of this team.
+     *
+     * @param teamId The team ID to verify against.
+     * @return true if the given team ID matches the ID of this team, otherwise false.
+     */
     public boolean verifyIdTeam(int teamId) {
 
         return this.id == teamId;
     }
 
+    /**
+     * Sends an email message to all collaborators in the team.
+     *
+     * @param msg The message content to be sent via email.
+     * @return true if the email was successfully sent to all collaborators, otherwise false.
+     * @throws RuntimeException If there is an error reading the email configuration file or instantiating the EmailService implementation.
+     */
     public boolean sendEmail(String msg) {
         for (Collaborator collaborator : collaboratorList) {
             String email = collaborator.getEmail();

@@ -25,15 +25,15 @@ public class Document {
 
         this.number = number;
 
-        if (validateNullString(docType)){
+        if (validateNullString(docType)) {
             this.docType = docType;
-        }else {
+        } else {
             throw new IllegalArgumentException("Document type cannot be null or empty.");
         }
 
-        if(validateNullInt(number) && validateDocNumber(number)){
+        if (validateNullInt(number) && validateDocNumber(number)) {
             this.number = number;
-        }else{
+        } else {
             throw new IllegalArgumentException("Document Number cannot be null or empty or have an incorrect format.");
         }
     }
@@ -109,7 +109,7 @@ public class Document {
      * @param value The document number to validate.
      * @return {@code true} if the document number has the correct format; {@code false} otherwise.
      */
-    private boolean validateDocNumber(int value){
+    private boolean validateDocNumber(int value) {
         String regex = "\\b\\d{9}\\b";
 
         Pattern pattern = Pattern.compile(regex);

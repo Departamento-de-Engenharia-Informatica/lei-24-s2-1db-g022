@@ -9,7 +9,6 @@ import java.util.List;
  * Represents a data transfer object (DTO) for a team.
  *
  * @author Group22
- *
  */
 public final class TeamDto {
 
@@ -19,7 +18,7 @@ public final class TeamDto {
     /**
      * Constructs a TeamDto object with the specified team ID and list of collaborators.
      *
-     * @param teamId The ID of the team.
+     * @param teamId            The ID of the team.
      * @param collaboratorNames The list of collaborators in the team.
      */
     public TeamDto(int teamId, List<Collaborator> collaboratorNames) {

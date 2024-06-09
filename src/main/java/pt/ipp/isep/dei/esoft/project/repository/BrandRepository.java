@@ -55,8 +55,8 @@ public class BrandRepository {
      * @return True if a brand with the given name exists, false otherwise.
      */
     public boolean hasBrandByName(String brandName) {
-        
-        Brand brand = new Brand (brandName);
+
+        Brand brand = new Brand(brandName);
 
         return brandList.contains(brand);
     }
@@ -67,7 +67,7 @@ public class BrandRepository {
      * @param modelName The name of the model associated with the brand.
      * @return An Optional containing the Brand object if found, otherwise empty.
      */
-    public Optional<Brand> getBrandByModelName(String modelName){
+    public Optional<Brand> getBrandByModelName(String modelName) {
 
         Optional<Brand> brand = Optional.empty();
 

@@ -14,6 +14,8 @@ import java.util.List;
 /**
  * This class represents the controller for generating teams.
  * It manages interactions between the UI and the repositories to generate and register teams.
+ *
+ * @author Group22
  */
 public class GenerateTeamController {
     private TeamRepository teamRepository;
@@ -152,7 +154,7 @@ public class GenerateTeamController {
      * @return true if the team is successfully registered, false otherwise.
      */
     public boolean registerProposalTeam(Team selectTeam) {
-       boolean ola =  getTeamRepository().registerProposalTeam(selectTeam);
+        boolean ola = getTeamRepository().registerProposalTeam(selectTeam);
         getTeamRepository().ver();
         return ola;
     }

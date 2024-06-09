@@ -10,6 +10,11 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller class for managing the minimum route to an assembly point.
+ *
+ * @author Group22
+ */
 public class MinRouteToApController {
 
     protected String styleSheet =
@@ -30,6 +35,12 @@ public class MinRouteToApController {
                     "   text-padding: 3px;" +
                     "}";
 
+    /**
+     * Calculates the size of a list of SignalPoint objects.
+     *
+     * @param vertices The list of SignalPoint objects.
+     * @return The size of the list.
+     */
     private int methodToReplaceSize(List<SignalPoint> vertices) {
         int count = 0;
 
@@ -48,6 +59,12 @@ public class MinRouteToApController {
         return -1;
     }
 
+    /**
+     * Calculates the size of a list of Route objects.
+     *
+     * @param route The list of Route objects.
+     * @return The size of the list.
+     */
     private int methodToReplaceSizeRoute(List<Route> route) {
         int count = 0;
 
@@ -67,6 +84,13 @@ public class MinRouteToApController {
     }
 
     //Metodo com operacoes primitivas para dar replace ao metodo IndexOf
+    /**
+     * Finds the index of a SignalPoint object in a list of SignalPoint objects.
+     *
+     * @param vertices     The list of SignalPoint objects.
+     * @param signalPoint  The SignalPoint object to find the index of.
+     * @return The index of the SignalPoint object if found, otherwise -1.
+     */
     private int methodToReplaceIndexOf(List<SignalPoint> vertices, SignalPoint signalPoint) {
         int size = methodToReplaceSize(vertices);
 
@@ -278,7 +302,14 @@ public class MinRouteToApController {
         return total;
     }
 
-
+    /**
+     * Visualizes the graph represented by a list of routes.
+     *
+     * @param routes   The list of routes representing the graph.
+     * @param title    The title of the graph.
+     * @param FILE_PATH The file path where the graph image will be saved.
+     * @throws IOException If an I/O error occurs while writing the graph image.
+     */
     public void visualizeGraph(List<Route> routes, String title, String FILE_PATH) throws IOException {
         Graph graph = new SingleGraph(title);
 
@@ -318,6 +349,12 @@ public class MinRouteToApController {
         pic.writeAll(graph, filePath);
     }
 
+    /**
+     * Writes CSV content to a file.
+     *
+     * @param csvContent The content to be written to the CSV file.
+     * @param filePath   The path where the CSV file will be saved.
+     */
     public void writeCSVToFile(String csvContent, String filePath) {
         String csvFilePath = filePath + File.separator + "output_subgraph.csv";
 
@@ -328,6 +365,12 @@ public class MinRouteToApController {
         }
     }
 
+    /**
+     * Generates CSV content representing the given shortest path.
+     *
+     * @param shortestPath The list of routes representing the shortest path.
+     * @return The CSV content representing the shortest path.
+     */
     public String generateSubgraphCSV(List<Route> shortestPath) {
         StringBuilder csvContent = new StringBuilder();
 
@@ -347,6 +390,13 @@ public class MinRouteToApController {
         return csvContent.toString(); // Return the CSV content
     }
 
+    /**
+     * Generates CSV content representing all subgraphs and appends it to the existing content.
+     *
+     * @param content      The existing content to which the new CSV content will be appended.
+     * @param shortestPath The list of routes representing the shortest path.
+     * @return The updated content with the appended CSV content representing all subgraphs.
+     */
     public String generateAllSubgraphCSV(String content, List<Route> shortestPath) {
 
         StringBuilder csvContent = new StringBuilder();

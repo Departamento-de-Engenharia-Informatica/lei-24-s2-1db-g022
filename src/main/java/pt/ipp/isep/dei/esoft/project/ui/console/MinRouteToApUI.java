@@ -31,14 +31,25 @@ public class MinRouteToApUI implements Runnable {
     private String pointsFilePath;
     private SignalPoint signalPoint;
 
+    /**
+     * Initializes the UI with its corresponding controller.
+     */
     public MinRouteToApUI() {
         controller = new MinRouteToApController();
     }
 
+    /**
+     * Retrieves the controller associated with this UI.
+     *
+     * @return The MinRouteToApController instance.
+     */
     private MinRouteToApController getController() {
         return controller;
     }
 
+    /**
+     * Runs the UI to display the shortest path to the assembly point.
+     */
     @Override
     public void run() {
         Scanner scanner = new Scanner(System.in);
@@ -56,6 +67,9 @@ public class MinRouteToApUI implements Runnable {
         }
     }
 
+    /**
+     * Displays all possible paths to the assembly point.
+     */
     private void displayAllPath() {
         List<SignalPoint> listPointNames = getController().importNamesFromCSV(FILE_PATH_NAMES);
         List<Route> listRoutes = getController().importRouteFromCSV(listPointNames, FILE_PATH_MATRIX);
@@ -77,6 +91,9 @@ public class MinRouteToApUI implements Runnable {
         getController().writeCSVToFile(content, FILE_PATH_OUTPUT);
     }
 
+    /**
+     * Displays one shortest path to the assembly point based on user input.
+     */
     private void displayOnePath() {
         try {
             //requestData();
@@ -104,10 +121,18 @@ public class MinRouteToApUI implements Runnable {
         }
     }
 
+    /**
+     * Requests input for the signal point.
+     */
     private void requestDataInput() {
         signalPoint = requestSignalPoint();
     }
 
+    /**
+     * Requests input for the signal point.
+     *
+     * @return The signal point obtained from user input.
+     */
     private SignalPoint requestSignalPoint() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Start SignalPoint: ");
@@ -115,18 +140,35 @@ public class MinRouteToApUI implements Runnable {
         return new SignalPoint(startNome);
     }
 
+    /**
+     * Requests input for the file paths.
+     *
+     * @throws IOException If an I/O error occurs.
+     */
     private void requestData() throws IOException {
         matrixFilePath = requestMatrixFilePath();
         pointsFilePath = pointsFilePath();
 
     }
 
+    /**
+     * Requests input for the file path of the matrix CSV file.
+     *
+     * @return The file path entered by the user.
+     * @throws IOException If an I/O error occurs.
+     */
     private String requestMatrixFilePath() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Enter the path to the CSV file with matrix: ");
         return reader.readLine();
     }
 
+    /**
+     * Requests input for the file path of the name points CSV file.
+     *
+     * @return The file path entered by the user.
+     * @throws IOException If an I/O error occurs.
+     */
     private String pointsFilePath() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Enter the path to the CSV file with name points: ");

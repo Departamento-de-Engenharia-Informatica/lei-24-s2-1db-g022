@@ -15,56 +15,98 @@ public class RegisterCollaboratorController {
     private JobRepository jobRepository;
     private AddressRepository addressRepository;
 
-    public RegisterCollaboratorController(){
+    /**
+     * Constructs a RegisterCollaboratorController object with a default CollaboratorRepository, JobRepository and AddressRepository instances.
+     */
+    public RegisterCollaboratorController() {
         getCollaboratorRepository();
         getJobRepository();
         getAddressRepository();
     }
 
-
-    public RegisterCollaboratorController(CollaboratorRepository collaboratorRepository){
-        this.collaboratorRepository=collaboratorRepository;
+    /**
+     * Constructs a RegisterCollaboratorController object with a specified CollaboratorRepository instance.
+     *
+     * @param collaboratorRepository The CollaboratorRepository instance to use.
+     */
+    public RegisterCollaboratorController(CollaboratorRepository collaboratorRepository) {
+        this.collaboratorRepository = collaboratorRepository;
     }
 
-    private AddressRepository getAddressRepository(){
-        if(addressRepository == null){
+    /**
+     * Retrieves the AddressRepository instance.
+     * If not initialized, it gets the AddressRepository from the Repositories singleton.
+     *
+     * @return The AddressRepository instance.
+     */
+    private AddressRepository getAddressRepository() {
+        if (addressRepository == null) {
             Repositories repositories = Repositories.getInstance();
             addressRepository = repositories.getAddressRepository();
         }
         return addressRepository;
     }
 
-    private CollaboratorRepository getCollaboratorRepository(){
-        if(collaboratorRepository == null){
+    /**
+     * Retrieves the CollaboratorRepository instance.
+     * If not initialized, it gets the CollaboratorRepository from the Repositories singleton.
+     *
+     * @return The CollaboratorRepository instance.
+     */
+    private CollaboratorRepository getCollaboratorRepository() {
+        if (collaboratorRepository == null) {
             Repositories repositories = Repositories.getInstance();
             collaboratorRepository = repositories.getCollaboratorRepository();
         }
         return collaboratorRepository;
     }
 
-    private JobRepository getJobRepository(){
-        if(jobRepository == null){
+    /**
+     * Retrieves the JobRepository instance.
+     * If not initialized, it gets the JobRepository from the Repositories singleton.
+     *
+     * @return The JobRepository instance.
+     */
+    private JobRepository getJobRepository() {
+        if (jobRepository == null) {
             Repositories repositories = Repositories.getInstance();
             jobRepository = repositories.getJobRepository();
         }
         return jobRepository;
     }
 
-
-    public Optional<Collaborator> registerCollaborator(String name, String jobName, Date dateOfBirth, Date admissionDate, String streetName, String postCode, int doorNumber, String phoneNumber, String email, int taxpayer,String docType, int number){
+    /**
+     * Registers a new collaborator with the provided details.
+     *
+     * @param name          The name of the collaborator.
+     * @param jobName       The name of the job/position of the collaborator.
+     * @param dateOfBirth   The date of birth of the collaborator.
+     * @param admissionDate The date of admission/joining of the collaborator.
+     * @param streetName    The street name of the collaborator's address.
+     * @param postCode      The postal code of the collaborator's address.
+     * @param doorNumber    The door number of the collaborator's address.
+     * @param phoneNumber   The phone number of the collaborator.
+     * @param email         The email address of the collaborator.
+     * @param taxpayer      The taxpayer number of the collaborator.
+     * @param docType       The type of document (e.g., Passport or Citizen Card) of the collaborator.
+     * @param number        The document number of the collaborator.
+     * @return An Optional containing the newly registered collaborator if the registration is successful,
+     * otherwise an empty Optional.
+     */
+    public Optional<Collaborator> registerCollaborator(String name, String jobName, Date dateOfBirth, Date admissionDate, String streetName, String postCode, int doorNumber, String phoneNumber, String email, int taxpayer, String docType, int number) {
         Optional<Address> newAddress;
 
         Optional<Collaborator> newCollaborator = Optional.empty();
 
         Job job = getJobByName(jobName);
 
-        newAddress = registerAddress(streetName,doorNumber,postCode);
+        newAddress = registerAddress(streetName, doorNumber, postCode);
 
-        if(newAddress.isPresent()){
-            newCollaborator = getCollaboratorRepository().registerCollaborator(name,dateOfBirth,admissionDate,newAddress.get(),phoneNumber,email,taxpayer,docType,number,job);
+        if (newAddress.isPresent()) {
+            newCollaborator = getCollaboratorRepository().registerCollaborator(name, dateOfBirth, admissionDate, newAddress.get(), phoneNumber, email, taxpayer, docType, number, job);
         }
 
-        if(newCollaborator.isPresent()){
+        if (newCollaborator.isPresent()) {
             AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
 
             authenticationRepository.addUserRole(AuthenticationController.ROLE_COLLABORATOR, AuthenticationController.ROLE_COLLABORATOR);
@@ -74,19 +116,38 @@ public class RegisterCollaboratorController {
         return newCollaborator;
     }
 
-    private Optional<Address> registerAddress(String streetName, int doorNumber, String codPost ){
+    /**
+     * Registers a new address with the provided details.
+     *
+     * @param streetName The street name of the address.
+     * @param doorNumber The door number of the address.
+     * @param codPost    The postal code of the address.
+     * @return An Optional containing the newly registered address if the registration is successful, otherwise an empty Optional.
+     */
+    private Optional<Address> registerAddress(String streetName, int doorNumber, String codPost) {
         Optional<Address> newAddress;
-        newAddress = getAddressRepository().registerAddress(streetName,codPost,doorNumber);
+        newAddress = getAddressRepository().registerAddress(streetName, codPost, doorNumber);
         return newAddress;
     }
 
-    //return the list of Job List
+    /**
+     * Retrieves the list of all available jobs from the job repository.
+     *
+     * @return The list of all available jobs.
+     */
     public List<Job> getJobList() {
         JobRepository jobRepository = getJobRepository();
         return jobRepository.getJobList();
     }
 
-    private Job getJobByName(String jobName){
+    /**
+     * Retrieves the job with the specified name from the job repository.
+     *
+     * @param jobName The name of the job to retrieve.
+     * @return The job with the specified name, or null if not found.
+     */
+
+    private Job getJobByName(String jobName) {
         Job jobByName;
         jobByName = getJobRepository().getJobByName(jobName);
         return jobByName;

@@ -15,6 +15,8 @@ import java.util.List;
  * User interface for testing algorithms.
  * This class provides functionality to run tests on minimum spanning tree and other algorithms.
  * It initializes controllers for minimum spanning tree and algorithm testing.
+ *
+ * @author Group22
  */
 public class TestAlgorithmUI implements Runnable {
     private final MinSpanTreeController controller1;

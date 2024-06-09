@@ -100,7 +100,7 @@ public class CollaboratorRepository {
         for (Skill newSkill : skillList) {
             for (ICollaborator collaborator : collaboratorList) {
 
-                if(collaborator instanceof Collaborator){
+                if (collaborator instanceof Collaborator) {
 
                     if (((Collaborator) collaborator).hasCollaboratorSkill(newSkill) && !newCollaboratorList.contains((Collaborator) collaborator)) {
                         newCollaboratorList.add((Collaborator) collaborator);
@@ -127,6 +127,12 @@ public class CollaboratorRepository {
         return Optional.empty();
     }
 
+    /**
+     * Retrieves a collaborator from the repository by their email address.
+     *
+     * @param email the email address of the collaborator to retrieve
+     * @return an Optional containing the collaborator with the specified email address if found, otherwise an empty Optional
+     */
     public Optional<ICollaborator> getCollaboratorByEmail(String email) {
         for (ICollaborator collaborator : collaboratorList) {
             if (collaborator.hasEmail(email)) {

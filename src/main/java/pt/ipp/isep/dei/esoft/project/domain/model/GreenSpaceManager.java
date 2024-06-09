@@ -278,7 +278,7 @@ public class GreenSpaceManager implements ICollaborator {
      */
     public GreenSpaceManager clone() {
 
-        GreenSpaceManager clone = new GreenSpaceManager(this.greenSpaces,this.taxpayer, this.job, this.document, this.address, this.email, this.phoneNumber, this.admissionDate, this.dateOfBirth, this.name);
+        GreenSpaceManager clone = new GreenSpaceManager(this.greenSpaces, this.taxpayer, this.job, this.document, this.address, this.email, this.phoneNumber, this.admissionDate, this.dateOfBirth, this.name);
 
         for (Skill in : this.skillList) {
             clone.skillList.add(in.clone());

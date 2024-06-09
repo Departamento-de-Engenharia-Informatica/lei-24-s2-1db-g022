@@ -27,6 +27,7 @@ public class RegisterSkillUI implements Runnable {
 
     /**
      * Gets the RegisterSkillController associated with this UI.
+     *
      * @return The RegisterSkillController instance.
      */
     private RegisterSkillController getController() {
@@ -42,7 +43,7 @@ public class RegisterSkillUI implements Runnable {
 
         boolean register = false;
 
-        while (!register){
+        while (!register) {
             requestData();
             displayData();
 
@@ -76,6 +77,7 @@ public class RegisterSkillUI implements Runnable {
         System.out.println("\n\n--- Display Information ------------------------");
         System.out.printf("\nSkill Name: %s", skillName);
     }
+
     /**
      * Submits the skill data to create the skill and displays the result.
      *
@@ -105,6 +107,7 @@ public class RegisterSkillUI implements Runnable {
 
     /**
      * Requests a skill name input from the user.
+     *
      * @return The skill name entered by the user.
      */
     private String requestSkillName() {

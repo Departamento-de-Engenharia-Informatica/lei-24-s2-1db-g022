@@ -3,11 +3,11 @@ package pt.ipp.isep.dei.esoft.project.domain.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Represents a list of tasks to be completed.
+ *
+ * @author Group22
  */
 public class ToDoList {
 
@@ -100,6 +100,12 @@ public class ToDoList {
         return optionalTaskToDoList;
     }
 
+    /**
+     * Retrieves a list of task to-do list entries associated with the specified green space.
+     *
+     * @param greenSpace The green space for which to retrieve task entries.
+     * @return A list of task to-do list entries associated with the specified green space.
+     */
     public List<TaskToDoList> getTaskByGreenSpace(GreenSpace greenSpace) {
         List<TaskToDoList> taskList = new ArrayList<>();
         for (TaskToDoList ttdl : taskTdlList) {
@@ -110,6 +116,12 @@ public class ToDoList {
         return taskList;
     }
 
+    /**
+     * Retrieves the task to-do list entry with the specified reference.
+     *
+     * @param taskToDoListReference The reference of the task to-do list entry to retrieve.
+     * @return An Optional containing the task to-do list entry with the specified reference, or empty if not found.
+     */
     public Optional<TaskToDoList> getTaskToDoListByReference(String taskToDoListReference) {
         Optional<TaskToDoList> optionalTaskToDoList = Optional.empty();
 
@@ -121,6 +133,12 @@ public class ToDoList {
         return optionalTaskToDoList;
     }
 
+    /**
+     * Removes the specified task to-do list entry from the list of entries.
+     *
+     * @param taskToDoList The task to-do list entry to be removed.
+     * @return true if the entry was successfully removed, false otherwise.
+     */
     public boolean removeOldEntryToDoList(TaskToDoList taskToDoList) {
         return taskTdlList.remove(taskToDoList);
     }

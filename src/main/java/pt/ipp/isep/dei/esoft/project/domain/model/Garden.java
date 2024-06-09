@@ -15,12 +15,12 @@ public class Garden implements GreenSpace {
     /**
      * Constructs a Garden object with the specified name, area, and address details.
      *
-     * @param greenSpaceName   The name of the garden.
-     * @param area             The area of the garden.
-     * @param streetName       The street name of the garden's address.
-     * @param doorNumber       The door number of the garden's address.
-     * @param postCodeNumber   The post code number of the garden's address.
-     * @param localization     The localization of the garden's address.
+     * @param greenSpaceName The name of the garden.
+     * @param area           The area of the garden.
+     * @param streetName     The street name of the garden's address.
+     * @param doorNumber     The door number of the garden's address.
+     * @param postCodeNumber The post code number of the garden's address.
+     * @param localization   The localization of the garden's address.
      * @throws IllegalArgumentException If the area is zero or negative.
      */
     public Garden(String greenSpaceName, int area, String streetName, int doorNumber, String postCodeNumber, String localization) {
@@ -75,7 +75,7 @@ public class Garden implements GreenSpace {
      * @return true if the GreenSpace has the given name, false otherwise.
      */
     @Override
-    public boolean hasName(String greenSpaceName){
+    public boolean hasName(String greenSpaceName) {
 
         return this.name.equals(greenSpaceName);
     }

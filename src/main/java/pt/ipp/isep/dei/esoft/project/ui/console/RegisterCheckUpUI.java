@@ -22,14 +22,26 @@ public class RegisterCheckUpUI implements Runnable {
 
     private String checkUpLicensePlate;
 
+    /**
+     * Initializes the RegisterCheckUpUI with a RegisterCheckUpController.
+     */
     public RegisterCheckUpUI() {
         controller = new RegisterCheckUpController();
     }
 
+    /**
+     * Gets the RegisterCheckUpController associated with this UI.
+     *
+     * @return The RegisterCheckUpController associated with this UI.
+     */
     public RegisterCheckUpController getController() {
         return controller;
     }
 
+    /**
+     * Runs the process for registering a check-up. Prompts the user to enter data, displays the entered data,
+     * and asks for confirmation before submitting the data.
+     */
     @Override
     public void run() {
         boolean register = false;
@@ -50,6 +62,11 @@ public class RegisterCheckUpUI implements Runnable {
         }
     }
 
+    /**
+     * Submits the entered check-up data to the controller for registration.
+     *
+     * @return true if the check-up data is successfully registered; otherwise, false.
+     */
     private boolean submitData() {
 
         boolean success = true;
@@ -65,6 +82,11 @@ public class RegisterCheckUpUI implements Runnable {
         }
     }
 
+    /**
+     * Asks the user to confirm the entered data.
+     *
+     * @return true if the user confirms the data by entering 'Y' or 'y'; otherwise, false.
+     */
     private boolean confirmationData() {
         Scanner input = new Scanner(System.in);
         System.out.println("\n\n--- Confirm Data[Y/N]: ");
@@ -73,6 +95,9 @@ public class RegisterCheckUpUI implements Runnable {
         return res.equals("Y") || res.equals("y");
     }
 
+    /**
+     * Displays the information entered for the check-up.
+     */
     private void displayData() {
         System.out.println("\n\n--- Display Information ------------------------");
         System.out.printf("\n License Plate: %s", checkUpLicensePlate);
@@ -81,24 +106,45 @@ public class RegisterCheckUpUI implements Runnable {
 
     }
 
+    /**
+     * Requests the necessary data for registering a check-up.
+     *
+     * @throws ParseException If there is an error parsing the date input.
+     */
     private void requestData() throws ParseException {
         checkUpLicensePlate = requestCheckUpLincesePlate();
         checkUpDate = requestCheckUpDate();
         checkUpCurrenteKms = requestCheckUpCurrentKms();
     }
 
+    /**
+     * Requests the current kilometers for the check-up.
+     *
+     * @return The current kilometers input by the user.
+     */
     private int requestCheckUpCurrentKms() {
         Scanner input = new Scanner(System.in);
         System.out.println("Current Kms: ");
         return input.nextInt();
     }
 
+    /**
+     * Requests the license plate for the check-up.
+     *
+     * @return The license plate input by the user.
+     */
     private String requestCheckUpLincesePlate() {
         Scanner input = new Scanner(System.in);
         System.out.println("License PLate: ");
         return input.nextLine();
     }
 
+    /**
+     * Requests the date for the check-up.
+     *
+     * @return The date input by the user.
+     * @throws ParseException If the input date cannot be parsed.
+     */
     private Date requestCheckUpDate() throws ParseException {
         Scanner input = new Scanner(System.in);
         System.out.println("CheckUp Date: ");

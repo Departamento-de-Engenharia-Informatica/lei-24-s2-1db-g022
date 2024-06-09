@@ -4,7 +4,6 @@ package pt.ipp.isep.dei.esoft.project.domain.DTO;
  * Represents a data transfer object (DTO) for a task to do list.
  *
  * @author Group22
- *
  */
 public final class TaskToDoListDto {
 
@@ -15,8 +14,8 @@ public final class TaskToDoListDto {
     /**
      * Constructs a TaskToDoListDto object with the specified task reference, description, and green space name.
      *
-     * @param taskReference The reference of the task.
-     * @param description The description of the task.
+     * @param taskReference  The reference of the task.
+     * @param description    The description of the task.
      * @param greenSpaceName The name of the green space associated with the task.
      */
     public TaskToDoListDto(String taskReference, String description, String greenSpaceName) {

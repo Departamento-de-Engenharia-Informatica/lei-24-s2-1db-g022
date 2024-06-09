@@ -156,7 +156,7 @@ public class TaskToDoList {
 
     /**
      * Sets the status of the TaskToDoList to "Planned".
-     *
+     * <p>
      * This method updates the status field of the TaskToDoList object to "Planned".
      */
     public void setStatusToPlanned() {

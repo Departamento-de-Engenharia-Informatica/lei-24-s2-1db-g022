@@ -14,8 +14,8 @@ public final class TaskAgendaDto {
     /**
      * Constructs a TaskAgendaDto object with the specified task reference, description, and green space name.
      *
-     * @param taskReference The reference of the task.
-     * @param description The description of the task.
+     * @param taskReference  The reference of the task.
+     * @param description    The description of the task.
      * @param greenSpaceName The name of the green space associated with the task.
      */
     public TaskAgendaDto(String taskReference, String description, String greenSpaceName) {

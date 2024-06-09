@@ -11,9 +11,18 @@ import java.util.List;
 
 /**
  * The MinSpanTreeController class manages operations related to minimum spanning trees.
+ *
+ * @author Group22
  */
 public class MinSpanTreeController {
+
     //Metodo com operacoes primitivas para dar replace ao metodo IndexOf
+    /**
+     * Returns the index of the specified designation in the list of vertices.
+     * @param vertices The list of vertices.
+     * @param designation The designation to search for.
+     * @return The index of the designation in the list, or -1 if not found.
+     */
     private int methodToReplaceIndexOf(List<String> vertices, String designation) {
         int size = methodToReplaceSize(vertices);
         for (int i = 0; i < size; i++) {
@@ -24,6 +33,12 @@ public class MinSpanTreeController {
         return -1;
     }
 
+    /**
+     * Returns the size of the specified array.
+     *
+     * @param array The array whose size is to be determined.
+     * @return The size of the array.
+     */
     private int methodToReplaceSize(List<String> array) {
         int count = 0;
 
@@ -42,6 +57,11 @@ public class MinSpanTreeController {
         return -1;
     }
 
+    /**
+     * Returns the length of the specified array of Pipe objects.
+     * @param array The array whose length is to be determined.
+     * @return The length of the array.
+     */
     private int methodToReplaceLength(Pipe[] array) {
         int count = 0;
 
@@ -60,6 +80,12 @@ public class MinSpanTreeController {
         return -1;
     }
 
+    /**
+     * Checks if the specified designation is not a duplicate in the list of vertices.
+     * @param vertices The list of vertices to check.
+     * @param designation The designation to check for duplication.
+     * @return True if the designation is not a duplicate, otherwise false.
+     */
     private boolean isNotDuplicate(List<String> vertices, String designation) {
 
         int size = methodToReplaceSize(vertices);

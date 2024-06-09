@@ -27,16 +27,16 @@ public class Vehicle {
     /**
      * Constructs a Vehicle object with the specified attributes.
      *
-     * @param type            The type of the vehicle.
-     * @param tare            The tare weight of the vehicle.
-     * @param grossWeight     The gross weight of the vehicle.
-     * @param currentKm       The current kilometers driven by the vehicle.
-     * @param registerDate    The registration date of the vehicle.
-     * @param acquisitionDate The acquisition date of the vehicle.
+     * @param type             The type of the vehicle.
+     * @param tare             The tare weight of the vehicle.
+     * @param grossWeight      The gross weight of the vehicle.
+     * @param currentKm        The current kilometers driven by the vehicle.
+     * @param registerDate     The registration date of the vehicle.
+     * @param acquisitionDate  The acquisition date of the vehicle.
      * @param checkUpFrequency The frequency of check-ups for the vehicle.
-     * @param licensePlate    The license plate of the vehicle.
-     * @param brand           The brand of the vehicle.
-     * @param model           The model of the vehicle.
+     * @param licensePlate     The license plate of the vehicle.
+     * @param brand            The brand of the vehicle.
+     * @param model            The model of the vehicle.
      * @throws IllegalArgumentException If any of the parameters are null or empty, or if the license plate format is incorrect.
      */
     public Vehicle(String type, float tare, float grossWeight, int currentKm, Date registerDate, Date acquisitionDate, int checkUpFrequency, String licensePlate, Brand brand, Model model) {
@@ -68,19 +68,19 @@ public class Vehicle {
             throw new IllegalArgumentException("Vehicle currentKm and checkUpFrequency cannot be null or empty.");
         }
 
-        if(validateNullDate(acquisitionDate) && validateNullDate(registerDate)){
+        if (validateNullDate(acquisitionDate) && validateNullDate(registerDate)) {
 
             this.acquisitionDate = acquisitionDate;
             this.registerDate = registerDate;
-        }else{
+        } else {
 
             throw new IllegalArgumentException("Vehicle acquisitionDate and registerDate cannot be null or empty.");
         }
 
-        if(validateVehicle(registerDate, licensePlate)){
+        if (validateVehicle(registerDate, licensePlate)) {
 
             this.licensePlate = licensePlate;
-        }else{
+        } else {
 
             throw new IllegalArgumentException("Incorrect Vehicle licensePlate format.");
         }
@@ -90,6 +90,11 @@ public class Vehicle {
         checkUpList = new ArrayList<>();
     }
 
+    /**
+     * Constructs a new Vehicle with the specified license plate.
+     *
+     * @param licensePlate The license plate of the vehicle.
+     */
     public Vehicle(String licensePlate) {
         this.licensePlate = licensePlate;
     }
@@ -227,9 +232,10 @@ public class Vehicle {
             return false;
         }
     }
+
     /**
      * Checks if a check-up is needed for the vehicle.
-     *
+     * <p>
      * This method determines whether a check-up is needed based on the vehicle's check-up history and frequency.
      * If no check-ups are recorded, or if the current date is after the calculated next check-up date,
      * a check-up is considered needed.
@@ -249,9 +255,10 @@ public class Vehicle {
             return new Date().after(nextCheckUpDate);
         }
     }
+
     /**
      * Retrieves the mileage of the last check-up or the current mileage if no check-ups are recorded.
-     *
+     * <p>
      * This method returns the mileage of the last recorded check-up if available. If no check-ups are recorded,
      * it returns the current mileage of the vehicle.
      *
@@ -277,6 +284,7 @@ public class Vehicle {
         int freq = getCheckUpFrequency();
         return lastCheckupKms + freq;
     }
+
     /**
      * Calculates the next check-up date based on the last check-up date and the check-up frequency.
      *
@@ -291,14 +299,13 @@ public class Vehicle {
         return new Date(nextCheckUpTime);
     }
 
-
     /**
      * Validates if the license plate of this vehicle matches the license plate of another vehicle.
      *
      * @param vehicleObj The other vehicle object to compare the license plates with.
      * @return True if the license plates match, false otherwise.
      */
-    public boolean validateVehicleLicense(Vehicle vehicleObj){
+    public boolean validateVehicleLicense(Vehicle vehicleObj) {
 
         return this.licensePlate.equals(vehicleObj.licensePlate);
     }
@@ -323,6 +330,12 @@ public class Vehicle {
         return !(value <= 0);
     }
 
+    /**
+     * Validates if the given string value is not null or empty.
+     *
+     * @param value The string value to be validated.
+     * @return true if the string value is not null or empty, false otherwise.
+     */
     private boolean validateNullString(String value) {
         return !(value == null) && !(value.isEmpty());
     }
@@ -390,7 +403,7 @@ public class Vehicle {
      */
     public Vehicle clone() {
 
-        Vehicle clone = new Vehicle(this.type, this.tare,this.grossWeight, this.currentKm, this.registerDate, this.acquisitionDate, this.checkUpFrequency, this.licensePlate, this.brand, this.model);
+        Vehicle clone = new Vehicle(this.type, this.tare, this.grossWeight, this.currentKm, this.registerDate, this.acquisitionDate, this.checkUpFrequency, this.licensePlate, this.brand, this.model);
 
         for (CheckUp in : this.checkUpList) {
 
@@ -400,10 +413,23 @@ public class Vehicle {
         return clone;
     }
 
+    /**
+     * Checks if the license plate of this vehicle is equal to the license plate of another vehicle.
+     *
+     * @param newVeiVehicle The other vehicle to compare license plates with.
+     * @return true if the license plate of this vehicle is equal to the license plate of the other vehicle, false otherwise.
+     */
     public boolean hasLicensePlateEquals(Vehicle newVeiVehicle) {
         return this.licensePlate.equals(newVeiVehicle.licensePlate);
     }
 
+    /**
+     * Registers a check-up for the vehicle with the given date and current kilometers.
+     *
+     * @param checkUpDate        The date of the check-up.
+     * @param checkUpCurrenteKms The current kilometers of the vehicle at the time of the check-up.
+     * @return An Optional containing the newly registered check-up if the operation was successful, or an empty Optional otherwise.
+     */
     public Optional<CheckUp> regiterCheckUpByVehicle(Date checkUpDate, int checkUpCurrenteKms) {
         Optional<CheckUp> checkUpOptional = Optional.empty();
 
@@ -417,9 +443,15 @@ public class Vehicle {
         return checkUpOptional;
     }
 
+    /**
+     * Adds a new check-up to the list of check-ups for the vehicle.
+     *
+     * @param newCheckUp The new check-up to add.
+     * @return true if the check-up was successfully added, false otherwise.
+     */
     private boolean addCheckUp(CheckUp newCheckUp) {
         boolean success = false;
-        // A clone of the job is added to the list of jobs, to avoid side effects and outside manipulation.
+
         success = checkUpList.add(newCheckUp.clone());
         return success;
     }

@@ -41,10 +41,10 @@ public class Address {
     /**
      * Constructs an Address object with the specified attributes.
      *
-     * @param streetName The name of the street.
-     * @param doorNumber The door number.
+     * @param streetName     The name of the street.
+     * @param doorNumber     The door number.
      * @param postCodeNumber The postal code number.
-     * @param localization The localization.
+     * @param localization   The localization.
      * @throws IllegalArgumentException If the door number is zero or negative.
      */
     public Address(String streetName, int doorNumber, String postCodeNumber, String localization) {

@@ -40,6 +40,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Gets the RegisterVehicleController associated with this UI.
+     *
      * @return The RegisterVehicleController instance.
      */
     private RegisterVehicleController getController() {
@@ -58,12 +59,12 @@ public class RegisterVehicleUI implements Runnable {
 
         boolean register = false;
 
-        while (!register){
+        while (!register) {
             try {
                 requestData();
                 displayData();
 
-                if(confirmationData()){
+                if (confirmationData()) {
                     register = submitData();
                 }
 
@@ -97,16 +98,16 @@ public class RegisterVehicleUI implements Runnable {
      */
     private void displayData() {
         System.out.println("\n\n--- Display Information ------------------------");
-        System.out.printf("\nBrand: %s",brandName);
-        System.out.printf("\nModel: %s",modelName);
-        System.out.printf("\nType: %s",type);
-        System.out.printf("\nTare: %f",tare);
-        System.out.printf("\nGross Weight: %f",grossWeight);
-        System.out.printf("\nCurrent Km: %d",currentKm);
-        System.out.printf("\nRegister Date: %s",registerDate);
-        System.out.printf("\nAcquisition Date: %s",acquisitionDate);
-        System.out.printf("\nCheck-Up Frequency: %d",checkUpFrequency);
-        System.out.printf("\nLicense Plate: %s",licensePlate);
+        System.out.printf("\nBrand: %s", brandName);
+        System.out.printf("\nModel: %s", modelName);
+        System.out.printf("\nType: %s", type);
+        System.out.printf("\nTare: %f", tare);
+        System.out.printf("\nGross Weight: %f", grossWeight);
+        System.out.printf("\nCurrent Km: %d", currentKm);
+        System.out.printf("\nRegister Date: %s", registerDate);
+        System.out.printf("\nAcquisition Date: %s", acquisitionDate);
+        System.out.printf("\nCheck-Up Frequency: %d", checkUpFrequency);
+        System.out.printf("\nLicense Plate: %s", licensePlate);
     }
 
 
@@ -119,7 +120,7 @@ public class RegisterVehicleUI implements Runnable {
 
         boolean success = true;
 
-        Optional<Vehicle> vehicle = getController().registerVehicle(type,tare,grossWeight,currentKm,registerDate,acquisitionDate,checkUpFrequency,licensePlate,brandName,modelName);
+        Optional<Vehicle> vehicle = getController().registerVehicle(type, tare, grossWeight, currentKm, registerDate, acquisitionDate, checkUpFrequency, licensePlate, brandName, modelName);
 
         if (vehicle.isPresent()) {
             System.out.println("\nVehicle successfully registered!");
@@ -152,6 +153,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Requests a vehicle brand input from the user.
+     *
      * @return The vehicle brand entered by the user.
      */
     private String requestBrandName() {
@@ -162,6 +164,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Requests a vehicle model input from the user.
+     *
      * @return The vehicle model entered by the user.
      */
     private String requestModelName() {
@@ -172,6 +175,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Requests a vehicle type input from the user.
+     *
      * @return The vehicle type entered by the user.
      */
     private String requestType() {
@@ -182,6 +186,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Requests a vehicle tare input from the user.
+     *
      * @return The vehicle tare entered by the user.
      */
     private float requestTare() {
@@ -192,6 +197,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Requests a vehicle grossWeight input from the user.
+     *
      * @return The vehicle grossWeight entered by the user.
      */
     private float requestGrossWeight() {
@@ -202,6 +208,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Requests a vehicle currentKm input from the user.
+     *
      * @return The vehicle currentKm entered by the user.
      */
     private int requestCurrentKm() {
@@ -212,6 +219,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Requests a vehicle registerDate input from the user.
+     *
      * @return The vehicle registerDate entered by the user.
      */
     private Date requestRegisterDate() throws ParseException {
@@ -224,6 +232,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Requests a vehicle acquisitionDate input from the user.
+     *
      * @return The vehicle acquisitionDate entered by the user.
      */
     private Date requestAcquisitionDate() throws ParseException {
@@ -236,6 +245,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Requests a vehicle checkUpFrequency input from the user.
+     *
      * @return The vehicle checkUpFrequency entered by the user.
      */
     private int requestCheckupFrequency() {
@@ -246,6 +256,7 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Requests a vehicle licensePlate input from the user.
+     *
      * @return The vehicle licensePlate entered by the user.
      */
     private String requestLicensePlate() {

@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.domain.DTO;
 
 /**
  * Represents a data transfer object (DTO) for a collaborator.
+ *
  * @author Group22
  */
 public final class CollaboratorDto {

@@ -87,6 +87,7 @@ public class Skill {
                 "name='" + name + '\'' +
                 '}';
     }
+
     /**
      * Indicates whether some other object is "equal to" this one.
      *

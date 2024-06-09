@@ -7,8 +7,20 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller class for finding the shortest path to the assembly point.
+ *
+ * @author Group22
+ */
 public class ShortestPathApController {
 
+    /**
+     * Finds the index of a SignalPoint object in a list of SignalPoint objects.
+     *
+     * @param vertices    The list of SignalPoint objects.
+     * @param signalPoint The SignalPoint object to find the index of.
+     * @return The index of the SignalPoint object if found, otherwise -1.
+     */
     private int methodToReplaceIndexOf(List<SignalPoint> vertices, SignalPoint signalPoint) {
         int size = methodToReplaceSize(vertices);
 
@@ -20,6 +32,12 @@ public class ShortestPathApController {
         return -1;
     }
 
+    /**
+     * Calculates the size of a list of SignalPoint objects.
+     *
+     * @param vertices The list of SignalPoint objects.
+     * @return The size of the list.
+     */
     private int methodToReplaceSize(List<SignalPoint> vertices) {
         int count = 0;
 

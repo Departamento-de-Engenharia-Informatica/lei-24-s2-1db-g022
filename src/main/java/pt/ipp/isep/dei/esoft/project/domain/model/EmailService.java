@@ -4,7 +4,6 @@ package pt.ipp.isep.dei.esoft.project.domain.model;
  * Represents an email service that can send emails.
  *
  * @author Group22
- *
  */
 public interface EmailService {
 

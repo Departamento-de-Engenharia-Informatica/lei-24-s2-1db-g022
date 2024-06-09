@@ -19,7 +19,6 @@ import java.util.Optional;
  * Controller for assigning teams to task agendas.
  *
  * @author Group22
- *
  */
 public class AssignTeamAgendaController {
 
@@ -30,7 +29,7 @@ public class AssignTeamAgendaController {
 
     /**
      * Constructs an instance of AssignTeamAgendaController.
-     *
+     * <p>
      * This constructor initializes the controller without explicitly setting repository and agenda instances.
      * It appears to only invoke getter methods for these instances without utilizing their returned values.
      * This might not be the intended behavior.
@@ -46,9 +45,9 @@ public class AssignTeamAgendaController {
      * Constructs an instance of AssignTeamAgendaController.
      *
      * @param authenticationRepository The repository for authentication.
-     * @param collaboratorRepository The repository for collaborators.
-     * @param teamRepository The repository for teams.
-     * @param agenda The agenda instance.
+     * @param collaboratorRepository   The repository for collaborators.
+     * @param teamRepository           The repository for teams.
+     * @param agenda                   The agenda instance.
      */
     public AssignTeamAgendaController(AuthenticationRepository authenticationRepository, CollaboratorRepository collaboratorRepository, TeamRepository teamRepository, Agenda agenda) {
         this.authenticationRepository = authenticationRepository;
@@ -208,7 +207,7 @@ public class AssignTeamAgendaController {
     /**
      * Assigns a task referenced by its ID to a team.
      *
-     * @param teamId The ID of the team to which the task will be assigned.
+     * @param teamId        The ID of the team to which the task will be assigned.
      * @param taskReference The reference of the task to be assigned.
      * @return {@code true} if the task was successfully assigned to the team and an email notification was sent; {@code false} otherwise.
      */
@@ -234,7 +233,7 @@ public class AssignTeamAgendaController {
      * Sends an email to the specified team.
      *
      * @param team The team to whom the email will be sent.
-     * @param msg The message to be sent.
+     * @param msg  The message to be sent.
      * @return {@code true} if the email was successfully sent; {@code false} otherwise.
      */
     private boolean sendEmailTeam(Team team, String msg) {
@@ -244,7 +243,7 @@ public class AssignTeamAgendaController {
     /**
      * Assigns a task agenda to the specified team.
      *
-     * @param team The team to which the task agenda will be assigned.
+     * @param team       The team to which the task agenda will be assigned.
      * @param taskAgenda The task agenda to be assigned.
      * @return {@code true} if the task agenda was successfully assigned to the team; {@code false} otherwise.
      */

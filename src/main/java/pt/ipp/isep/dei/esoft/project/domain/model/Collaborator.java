@@ -268,6 +268,7 @@ public class Collaborator implements ICollaborator {
     }
 
     //Metodo novo para as interfaces (ps: para nao dar conflito e ter de corrigir muito codigo)
+
     /**
      * Checks if the Collaborator has the given email.
      *

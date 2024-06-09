@@ -9,7 +9,6 @@ import java.util.List;
  * Maps Team objects to TeamDto objects.
  *
  * @author Group22
- *
  */
 public class TeamMapper {
 

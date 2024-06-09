@@ -43,7 +43,11 @@ public class VehicleRepository {
         return success;
     }
 
-
+    /**
+     * Adds a check-up entry to the list of check-ups for this vehicle.
+     *
+     * @param checkUp The check-up to add.
+     */
     public void addCheckUp(CheckUp checkUp) {
         this.checkUpList.add(checkUp);
     }
@@ -115,26 +119,39 @@ public class VehicleRepository {
         }
         return vehiclesNeedingCheckUp;
     }
-        public Vehicle getVehicleByPlate (String licensePlate){
-            Vehicle newVeiVehicle = new Vehicle(licensePlate);
-            Vehicle vehicle = null;
-            for (Vehicle vehicleFor : vehicleList) {
-                if (vehicleFor.hasLicensePlateEquals(newVeiVehicle)) {
-                    vehicle = vehicleFor;
-                    break;
-                }
-            }
 
-            if (vehicle == null) {
-                throw new IllegalArgumentException(
-                        "Vehicle requested for [" + licensePlate + "] does not exit.");
+    /**
+     * Retrieves a vehicle by its license plate.
+     *
+     * @param licensePlate The license plate of the vehicle to retrieve.
+     * @return The vehicle with the specified license plate.
+     * @throws IllegalArgumentException If the vehicle with the given license plate does not exist.
+     */
+    public Vehicle getVehicleByPlate(String licensePlate) {
+        Vehicle newVeiVehicle = new Vehicle(licensePlate);
+        Vehicle vehicle = null;
+        for (Vehicle vehicleFor : vehicleList) {
+            if (vehicleFor.hasLicensePlateEquals(newVeiVehicle)) {
+                vehicle = vehicleFor;
+                break;
             }
-            return vehicle;
         }
 
-        public void addVehicleBootstrap (Vehicle vehicle){
-            vehicleList.add(vehicle);
-
+        if (vehicle == null) {
+            throw new IllegalArgumentException(
+                    "Vehicle requested for [" + licensePlate + "] does not exit.");
         }
+        return vehicle;
     }
+
+    /**
+     * Adds a vehicle to the bootstrap list of vehicles.
+     *
+     * @param vehicle The vehicle to add.
+     */
+    public void addVehicleBootstrap(Vehicle vehicle) {
+        vehicleList.add(vehicle);
+
+    }
+}
 

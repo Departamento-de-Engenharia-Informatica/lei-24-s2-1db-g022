@@ -17,7 +17,7 @@ public class CheckUp {
      * Constructs a CheckUp object with the specified date and mileage.
      *
      * @param date The date of the check-up.
-     * @param km The mileage of the vehicle at the time of the check-up.
+     * @param km   The mileage of the vehicle at the time of the check-up.
      */
     public CheckUp(Date date, int km) {
         this.date = date;

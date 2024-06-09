@@ -9,7 +9,6 @@ import java.util.Properties;
  * Implementation of the EmailService interface for sending emails using the DEI email service.
  *
  * @author Group22
- *
  */
 public class DeiEmailService implements EmailService {
 

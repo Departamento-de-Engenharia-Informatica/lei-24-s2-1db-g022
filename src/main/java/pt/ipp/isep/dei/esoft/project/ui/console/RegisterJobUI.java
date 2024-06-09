@@ -27,6 +27,7 @@ public class RegisterJobUI implements Runnable {
 
     /**
      * Gets the RegisterJobController associated with this UI.
+     *
      * @return The RegisterJobController instance.
      */
     private RegisterJobController getController() {
@@ -44,11 +45,11 @@ public class RegisterJobUI implements Runnable {
 
         boolean register = false;
 
-        while (!register){
+        while (!register) {
             requestData();
             displayData();
 
-            if(confirmationData()){
+            if (confirmationData()) {
                 register = submitData();
             }
         }
@@ -76,7 +77,7 @@ public class RegisterJobUI implements Runnable {
      */
     private void displayData() {
         System.out.println("\n\n--- Display Information ------------------------");
-        System.out.printf("\nJob Name: %s",jobName);
+        System.out.printf("\nJob Name: %s", jobName);
     }
 
     /**
@@ -108,6 +109,7 @@ public class RegisterJobUI implements Runnable {
 
     /**
      * Requests a job name input from the user.
+     *
      * @return The job name entered by the user.
      */
     private String requestJobName() {

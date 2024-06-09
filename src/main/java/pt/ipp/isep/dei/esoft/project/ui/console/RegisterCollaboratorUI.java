@@ -76,6 +76,11 @@ public class RegisterCollaboratorUI implements Runnable {
         }
     }
 
+    /**
+     * Asks for confirmation from the user.
+     *
+     * @return True if the user confirms with 'Y' or 'y', false otherwise.
+     */
     private boolean confirmationData() {
         Scanner input = new Scanner(System.in);
         System.out.println("\n\n--- Confirm Data[Y/N]: ");
@@ -84,6 +89,9 @@ public class RegisterCollaboratorUI implements Runnable {
         return res.equals("Y") || res.equals("y");
     }
 
+    /**
+     * Displays information about the collaborator.
+     */
     private void displayData() {
         System.out.println("\n\n--- Display Information ------------------------");
         System.out.printf("\nCollaborator Name: %s", collaboratorName);
@@ -120,6 +128,11 @@ public class RegisterCollaboratorUI implements Runnable {
         }
     }
 
+    /**
+     * Displays the list of available jobs and allows the user to select one.
+     *
+     * @return The name of the selected job.
+     */
     private String displayAndSelectJobList() {
         List<Job> jobList = controller.getJobList();
 
@@ -137,6 +150,11 @@ public class RegisterCollaboratorUI implements Runnable {
         return jobList.get(answer - 1).getName();
     }
 
+    /**
+     * Displays the options for selecting a job from the provided list of jobs.
+     *
+     * @param jobList The list of available jobs.
+     */
     private void displayJobOptions(List<Job> jobList) {
         int i = 1;
         for (Job job : jobList) {
@@ -174,6 +192,12 @@ public class RegisterCollaboratorUI implements Runnable {
         return input.nextLine();
     }
 
+    /**
+     * Requests the date of birth of the collaborator from the user.
+     *
+     * @return The date of birth entered by the user.
+     * @throws ParseException If the entered date string cannot be parsed.
+     */
     private Date requestCollaboratorDateOfBirth() throws ParseException {
         Scanner input = new Scanner(System.in);
         System.out.println("Collaborator Date of Birth: ");
@@ -182,6 +206,12 @@ public class RegisterCollaboratorUI implements Runnable {
         return formatter.parse(dateString);
     }
 
+    /**
+     * Requests the admission date of the collaborator from the user.
+     *
+     * @return The admission date entered by the user.
+     * @throws ParseException If the entered date string cannot be parsed.
+     */
     private Date requestCollaboratorAdmissionDate() throws ParseException {
         Scanner input = new Scanner(System.in);
         System.out.println("Collaborator Admission Date: ");
@@ -190,48 +220,88 @@ public class RegisterCollaboratorUI implements Runnable {
         return formatter.parse(dateString);
     }
 
+    /**
+     * Requests the street name of the collaborator from the user.
+     *
+     * @return The street name entered by the user.
+     */
     private String requestCollaboratorStreetName() {
         Scanner input = new Scanner(System.in);
         System.out.println("Collaborator Street Name: ");
         return input.nextLine();
     }
 
+    /**
+     * Requests the post code of the collaborator from the user.
+     *
+     * @return The post code entered by the user.
+     */
     private String requestCollaboratorPostCode() {
         Scanner input = new Scanner(System.in);
         System.out.println("Collaborator Post Code: ");
         return input.nextLine();
     }
 
+    /**
+     * Requests the tax payer number of the collaborator from the user.
+     *
+     * @return The tax payer number entered by the user.
+     */
     private int requestCollaboratorTaxPayer() {
         Scanner input = new Scanner(System.in);
         System.out.println("Collaborator TaxPayer: ");
         return input.nextInt();
     }
 
+    /**
+     * Requests the door number of the collaborator from the user.
+     *
+     * @return The door number entered by the user.
+     */
     private int requestCollaboratorDoorNumber() {
         Scanner input = new Scanner(System.in);
         System.out.println("Collaborator Door Number: ");
         return input.nextInt();
     }
 
+    /**
+     * Requests the phone number of the collaborator from the user.
+     *
+     * @return The phone number entered by the user.
+     */
     private String requestCollaboratorPhoneNumber() {
         Scanner input = new Scanner(System.in);
         System.out.println("Collaborator Phone Number: ");
         return input.nextLine();
     }
 
+    /**
+     * Requests the email address of the collaborator from the user.
+     *
+     * @return The email address entered by the user.
+     */
     private String requestCollaboratorEmail() {
         Scanner input = new Scanner(System.in);
         System.out.println("Collaborator Email: ");
         return input.nextLine();
     }
 
+    /**
+     * Requests the type of document (Passport or Citizen Card) of the collaborator from the user.
+     *
+     * @return The type of document entered by the user.
+     */
     private String requestCollaboratorDocType() {
         Scanner input = new Scanner(System.in);
         System.out.println("Collaborator Document Type (Passport or Citizen Card): ");
         return input.nextLine();
     }
 
+    /**
+     * Requests the document number of the collaborator from the user.
+     *
+     * @return The document number entered by the user.
+     */
     private int requestCollaboratorNumber() {
         Scanner input = new Scanner(System.in);
         System.out.println("Collaborator Document Number: ");

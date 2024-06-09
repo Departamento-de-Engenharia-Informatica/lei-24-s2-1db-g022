@@ -1,6 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
-
 import pt.ipp.isep.dei.esoft.project.application.controller.AssignTeamAgendaController;
 import pt.ipp.isep.dei.esoft.project.domain.DTO.CollaboratorDto;
 import pt.ipp.isep.dei.esoft.project.domain.DTO.TaskAgendaDto;
@@ -9,6 +8,11 @@ import pt.ipp.isep.dei.esoft.project.domain.DTO.TeamDto;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents a user interface for assigning a team to an agenda.
+ *
+ * @author Group22
+ */
 public class AssignTeamAgendaUi implements Runnable {
 
     private AssignTeamAgendaController controller;
@@ -17,14 +21,25 @@ public class AssignTeamAgendaUi implements Runnable {
 
     private String taskReference;
 
+    /**
+     * Initializes the Assign Team Agenda UI with its corresponding controller.
+     */
     public AssignTeamAgendaUi() {
         controller = new AssignTeamAgendaController();
     }
 
+    /**
+     * Retrieves the controller responsible for assigning teams to the agenda.
+     *
+     * @return The AssignTeamAgendaController object.
+     */
     private AssignTeamAgendaController getController() {
         return controller;
     }
 
+    /**
+     * Executes the process of assigning a team to the agenda.
+     */
     @Override
     public void run() {
         boolean register = false;
@@ -44,6 +59,9 @@ public class AssignTeamAgendaUi implements Runnable {
 
     }
 
+    /**
+     * Submits the assigned team task data.
+     */
     private void submitData() {
 
 
@@ -56,6 +74,11 @@ public class AssignTeamAgendaUi implements Runnable {
         }
     }
 
+    /**
+     * Requests confirmation of the entered data.
+     *
+     * @return true if the user confirms the data, false otherwise.
+     */
     private boolean confirmationData() {
         Scanner input = new Scanner(System.in);
         System.out.println("\n\n--- Confirm Data[Y/N]: ");
@@ -64,12 +87,20 @@ public class AssignTeamAgendaUi implements Runnable {
         return res.equals("Y") || res.equals("y");
     }
 
+    /**
+     * Displays the information of the task reference and team ID.
+     */
     private void displayData() {
         System.out.println("\n\n--- Display Information ------------------------");
         System.out.printf("\nTask: %s", taskReference);
         System.out.printf("\nteamID: %s", teamId);
     }
 
+    /**
+     * Displays the task agendas and allows the user to select one.
+     *
+     * @return The selected task agenda reference.
+     */
     private String displayAndSelectTaskAgenda() {
         List<TaskAgendaDto> listAgendaDto = getController().getAllTaskByGSM();
 
@@ -89,6 +120,11 @@ public class AssignTeamAgendaUi implements Runnable {
         return listAgendaDto.get(answer - 1).getTaskToDoListReference();
     }
 
+    /**
+     * Displays the options for task agendas.
+     *
+     * @param listAgendaDto The list of task agendas to display.
+     */
     private void displayTaskAgendaOptions(List<TaskAgendaDto> listAgendaDto) {
 
         int i = 1;
@@ -99,6 +135,11 @@ public class AssignTeamAgendaUi implements Runnable {
         }
     }
 
+    /**
+     * Displays the options for teams and allows the user to select a team.
+     *
+     * @return The ID of the selected team.
+     */
     private int displayAndSelectTeam() {
         List<TeamDto> listTeamDto = getController().getAllTeams();
 
@@ -118,6 +159,11 @@ public class AssignTeamAgendaUi implements Runnable {
         return listTeamDto.get(answer - 1).getTeamId();
     }
 
+    /**
+     * Displays the options for teams and their collaborators and allows the user to select a team.
+     *
+     * @param teamDtoList The list of team DTOs containing team information.
+     */
     private void displayTeamOptions(List<TeamDto> teamDtoList) {
 
         int i = 1;

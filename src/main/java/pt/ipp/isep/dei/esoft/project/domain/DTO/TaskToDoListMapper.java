@@ -9,7 +9,6 @@ import java.util.List;
  * Maps TaskToDoList objects to TaskToDoListDto objects.
  *
  * @author Group22
- *
  */
 public class TaskToDoListMapper {
 

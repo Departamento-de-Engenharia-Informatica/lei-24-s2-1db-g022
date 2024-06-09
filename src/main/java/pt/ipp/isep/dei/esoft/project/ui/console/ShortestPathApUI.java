@@ -23,10 +23,18 @@ public class ShortestPathApUI implements Runnable {
     private String matrixFilePath;
     private String pointsFilePath;
 
+    /**
+     * Initializes the UI with the controller for finding the shortest path to the assembly point.
+     */
     public ShortestPathApUI() {
         controller = new ShortestPathApController();
     }
 
+    /**
+     * Retrieves the controller for finding the shortest path to the assembly point.
+     *
+     * @return The controller for finding the shortest path to the assembly point.
+     */
     private ShortestPathApController getController() {
         return controller;
     }

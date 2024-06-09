@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Group22
  */
-public class ListGreenSpacesUI implements Runnable{
+public class ListGreenSpacesUI implements Runnable {
 
     private final ListGreenSpacesController controller;
 
@@ -24,6 +24,7 @@ public class ListGreenSpacesUI implements Runnable{
 
     /**
      * Gets the ListGreenSpacesController associated with this UI.
+     *
      * @return The ListGreenSpacesController instance.
      */
     private ListGreenSpacesController getController() {
@@ -39,7 +40,7 @@ public class ListGreenSpacesUI implements Runnable{
 
         List<GreenSpaceDto> greenSpaceListDto = getController().getGreenSpaceManagerGSpaceSorted();
 
-        for (GreenSpaceDto g: greenSpaceListDto) {
+        for (GreenSpaceDto g : greenSpaceListDto) {
 
             System.out.println("\nParque: " + g.getGreenSpaceName());
             System.out.println("Área: " + g.getArea());

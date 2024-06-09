@@ -70,7 +70,7 @@ public class Brand {
      */
     public boolean hasModelByName(String modelName) {
 
-        Model model = new Model (modelName);
+        Model model = new Model(modelName);
 
         return modelList.contains(model);
     }

@@ -16,6 +16,9 @@ public class AssignSkillUI implements Runnable {
     private final AssignSkillController controller = new AssignSkillController();
     private final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Runs the Skill Assignment Interface, allowing users to assign skills to collaborators.
+     */
     @Override
     public void run() {
         System.out.println("Welcome to the Skill Assignment Interface");

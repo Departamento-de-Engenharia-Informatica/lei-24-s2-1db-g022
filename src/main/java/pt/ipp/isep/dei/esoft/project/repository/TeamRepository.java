@@ -3,7 +3,6 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.model.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.model.Skill;
-import pt.ipp.isep.dei.esoft.project.domain.model.TaskToDoList;
 import pt.ipp.isep.dei.esoft.project.domain.model.Team;
 
 import java.util.ArrayList;
@@ -113,6 +112,12 @@ public class TeamRepository {
         return addTeam(selectTeam);
     }
 
+    /**
+     * Adds a team to the list of teams and generates an ID for the team.
+     *
+     * @param team The team to add.
+     * @return True if the team was successfully added, false otherwise.
+     */
     private boolean addTeam(Team team) {
 
         boolean isCreated = teamList.add(team);
@@ -135,10 +140,21 @@ public class TeamRepository {
         }
     }
 
+    /**
+     * Retrieves a list of all teams.
+     *
+     * @return A list containing all teams.
+     */
     public List<Team> getTeamList() {
         return teamList;
     }
 
+    /**
+     * Retrieves a team from the repository by its ID.
+     *
+     * @param id The ID of the team to retrieve.
+     * @return An Optional containing the team with the specified ID, or an empty Optional if no team with that ID is found.
+     */
     public Optional<Team> getTeamById(int id) {
 
         for (Team t : teamList) {

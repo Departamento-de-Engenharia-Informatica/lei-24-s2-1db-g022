@@ -13,24 +13,29 @@ import java.util.Optional;
 
 /**
  * The AssignSkillController class manages the assignment of skills to collaborators.
+ *
+ * @author Group22
  */
 public class AssignSkillController {
 
     private CollaboratorRepository collaboratorRepository;
-    private  SkillRepository skillRepository;
+    private SkillRepository skillRepository;
     private JobRepository jobRepository;
 
-
-    public AssignSkillController(){
+    /**
+     * Constructs a new AssignSkillController and initializes its dependencies.
+     */
+    public AssignSkillController() {
         getCollaboratorRepository();
         getJobRepository();
         getSkillRepository();
     }
+
     /**
      * Assigns a skill to a collaborator with the given ID.
      *
      * @param collaboratorName The ID of the collaborator.
-     * @param skillName      The name of the skill to assign.
+     * @param skillName        The name of the skill to assign.
      * @return True if the skill is successfully assigned to the collaborator, false otherwise.
      */
     public boolean assignSkillToCollaborator(String collaboratorName, String skillName) {
@@ -60,24 +65,42 @@ public class AssignSkillController {
         }
     }
 
-    private CollaboratorRepository getCollaboratorRepository(){
-        if(collaboratorRepository == null){
+    /**
+     * Retrieves the CollaboratorRepository instance.
+     * If not initialized, it gets the CollaboratorRepository from the Repositories singleton.
+     *
+     * @return The CollaboratorRepository instance.
+     */
+    private CollaboratorRepository getCollaboratorRepository() {
+        if (collaboratorRepository == null) {
             Repositories repositories = Repositories.getInstance();
             collaboratorRepository = repositories.getCollaboratorRepository();
         }
         return collaboratorRepository;
     }
 
-    private JobRepository getJobRepository(){
-        if(jobRepository == null){
+    /**
+     * Retrieves the JobRepository instance.
+     * If not initialized, it gets the JobRepository from the Repositories singleton.
+     *
+     * @return The JobRepository instance.
+     */
+    private JobRepository getJobRepository() {
+        if (jobRepository == null) {
             Repositories repositories = Repositories.getInstance();
             jobRepository = repositories.getJobRepository();
         }
         return jobRepository;
     }
 
-    private SkillRepository getSkillRepository(){
-        if(skillRepository == null){
+    /**
+     * Retrieves the SkillRepository instance.
+     * If not initialized, it gets the SkillRepository from the Repositories singleton.
+     *
+     * @return The SkillRepository instance.
+     */
+    private SkillRepository getSkillRepository() {
+        if (skillRepository == null) {
             Repositories repositories = Repositories.getInstance();
             skillRepository = repositories.getSkillRepository();
         }

@@ -14,6 +14,9 @@ public class ListVehiclesNeedingCheckUpUI implements Runnable {
 
     private final ListVehiclesNeedingCheckUpController controller = new ListVehiclesNeedingCheckUpController();
 
+    /**
+     * Represents a user interface for displaying and managing vehicles needing check-ups.
+     */
     @Override
     public void run() {
         List<Vehicle> vehicles = controller.getVehiclesNeedingCheckUp();

@@ -39,11 +39,12 @@ public class RegisterEntryToDoListController {
 
     /**
      * Constructs a ListGreenSpacesController object with a specified AuthenticationRepository, CollaboratorRepository, GreenSpaceRepository, TaskRepository and ToDoList instances.
+     *
      * @param authenticationRepository The AuthenticationRepository instance to use.
-     * @param collaboratorRepository The CollaboratorRepository instance to use.
-     * @param greenSpaceRepository The GreenSpaceRepository instance to use.
-     * @param taskRepository The TaskRepository instance to use.
-     * @param toDoList The ToDoList instance to use.
+     * @param collaboratorRepository   The CollaboratorRepository instance to use.
+     * @param greenSpaceRepository     The GreenSpaceRepository instance to use.
+     * @param taskRepository           The TaskRepository instance to use.
+     * @param toDoList                 The ToDoList instance to use.
      */
     public RegisterEntryToDoListController(AuthenticationRepository authenticationRepository, CollaboratorRepository collaboratorRepository, GreenSpaceRepository greenSpaceRepository, TaskRepository taskRepository, ToDoList toDoList) {
 
@@ -57,6 +58,7 @@ public class RegisterEntryToDoListController {
     /**
      * Retrieves the AuthenticationRepository instance.
      * If not initialized, it gets the AuthenticationRepository from the Repositories singleton.
+     *
      * @return The AuthenticationRepository instance.
      */
     private AuthenticationRepository getAuthenticationRepository() {
@@ -73,6 +75,7 @@ public class RegisterEntryToDoListController {
     /**
      * Retrieves the CollaboratorRepository instance.
      * If not initialized, it gets the CollaboratorRepository from the Repositories singleton.
+     *
      * @return The CollaboratorRepository instance.
      */
     private CollaboratorRepository getCollaboratorRepository() {
@@ -89,6 +92,7 @@ public class RegisterEntryToDoListController {
     /**
      * Retrieves the GreenSpaceRepository instance.
      * If not initialized, it gets the GreenSpaceRepository from the Repositories singleton.
+     *
      * @return The GreenSpaceRepository instance.
      */
     private GreenSpaceRepository getGreenSpaceRepository() {
@@ -105,6 +109,7 @@ public class RegisterEntryToDoListController {
     /**
      * Retrieves the TaskRepository instance.
      * If not initialized, it gets the TaskRepository from the Repositories singleton.
+     *
      * @return The TaskRepository instance.
      */
     private TaskRepository getTaskRepository() {
@@ -121,6 +126,7 @@ public class RegisterEntryToDoListController {
     /**
      * Retrieves the ToDoList instance.
      * If not initialized, it gets the ToDoList from the Repositories singleton.
+     *
      * @return The ToDoList instance.
      */
     private ToDoList getToDoList() {
@@ -173,10 +179,10 @@ public class RegisterEntryToDoListController {
     /**
      * Registers a new entry in the to-do list for a task to be performed in a specific green space.
      *
-     * @param greenSpaceName          The name of the green space where the task is to be performed.
-     * @param taskDescription         The description of the task to be registered.
-     * @param urgency                 The urgency level of the task.
-     * @param aproxExpectedDuration   The approximate expected duration of the task.
+     * @param greenSpaceName        The name of the green space where the task is to be performed.
+     * @param taskDescription       The description of the task to be registered.
+     * @param urgency               The urgency level of the task.
+     * @param aproxExpectedDuration The approximate expected duration of the task.
      * @return An Optional containing the registered TaskToDoList object if the task and green space exist, else empty.
      */
     public Optional<TaskToDoList> registerEntryToDoList(String greenSpaceName, String taskDescription, String urgency, int aproxExpectedDuration) {

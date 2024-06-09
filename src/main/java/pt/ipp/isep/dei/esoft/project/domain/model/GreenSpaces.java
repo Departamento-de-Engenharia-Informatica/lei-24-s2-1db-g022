@@ -57,7 +57,7 @@ public class GreenSpaces {
 
             String classPath = properties.getProperty("class.path");
             Class<?> clazz = Class.forName(classPath);
-            Sortable st =(Sortable) clazz.newInstance();
+            Sortable st = (Sortable) clazz.newInstance();
 
             return st.getSortedGreenSpaces(this.greenSpacesList);
 
@@ -68,6 +68,7 @@ public class GreenSpaces {
         }
 
     }
+
     /**
      * Adds a GreenSpace to the list of bootstrap GreenSpaces.
      *

@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface ICollaborator {
     String getName();
+
     List<Skill> getSkillList();
 
     /**
