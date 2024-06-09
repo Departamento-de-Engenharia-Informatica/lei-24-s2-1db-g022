@@ -41,9 +41,13 @@ public class Bootstrap implements Runnable {
         Collaborator collaborator3 = new Collaborator("tomas", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988672", "tomas@tomas.pt", new Address("streeName", "1234-123", 1), 123643879, "Passport", 123321121, new Job("Calceteiro"));
         Collaborator collaborator4 = new Collaborator("diogo", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988673", "diogo@diogo.pt", new Address("streeName", "1234-123", 1), 675432564, "Passport", 123321122, new Job("Calceteiro"));
         GreenSpaceManager greenSpaceManager = new GreenSpaceManager("gsname", Date.valueOf("1999-01-10"), Date.valueOf("2024-01-10"), "+351 914981073", "gsm@gsm.pt", new Address("streeName", "1234-123", 1), 675432501, "Passport", 123021022, new Job("Gestor"));
+        GreenSpaceManager greenSpaceManager2 = new GreenSpaceManager("gsname", Date.valueOf("1999-01-10"), Date.valueOf("2024-01-10"), "+351 914581073", "gsm2@gsm.pt", new Address("streeName", "1234-123", 1), 672432501, "Passport", 123621022, new Job("Gestor"));
 
         greenSpaceManager.getListGreenSpaces().addListBootstrapGreenSpaces(new Garden("Jardim Porto",3,"street Porto",12,"1234-123","Porto"));
         greenSpaceManager.getListGreenSpaces().addListBootstrapGreenSpaces(new Garden("Jardim Lisboa",5,"street Lisboa",11,"1234-143","Lisboa"));
+
+        greenSpaceManager2.getListGreenSpaces().addListBootstrapGreenSpaces(new MediumPark("Jardim Braga",10,"street Braga",12,"1235-135","Braga"));
+        greenSpaceManager2.getListGreenSpaces().addListBootstrapGreenSpaces(new LargePark("Jardim Viseu",30,"street Viseu",12,"1237-145","Viseu"));
 
         // Add skills to collaborators
         collaborator.addSkillCollaboratorBootStrap(new Skill("Podador"));
@@ -65,12 +69,14 @@ public class Bootstrap implements Runnable {
         collaboratorRepository.addCollaboratorBootstrap(collaborator4);
 
         collaboratorRepository.addCollaboratorBootstrap(greenSpaceManager);
+        collaboratorRepository.addCollaboratorBootstrap(greenSpaceManager2);
 
         addUsersCollaborator(collaborator);
         addUsersCollaborator(collaborator2);
         addUsersCollaborator(collaborator3);
         addUsersCollaborator(collaborator4);
         addUsersGSM(greenSpaceManager);
+        addUsersGSM(greenSpaceManager2);
     }
 
     private void addGreenSpaces(){

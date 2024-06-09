@@ -18,6 +18,11 @@ As a GSM, I need to list all green spaces managed by me.
 >
 > **Answer:** Each de team can decide about the aspects related to UX/UI.
 
+> **Question:** Dear client, in this user story you only want to list the Green Spaces manage by the GSM. Due to this, the GSM should be register in the app previusly, isn't it? Which atributes should it have? A  GSM is a collaborator?
+>
+> **Answer:** Yes, the app can have multiple GSM registered (for instance that can be done during usgin the boostrap);
+A collaborator is a person (an employee) that have a name, birthdate, a salary, etc, A GSM is a role played by a collaborator. Depending in the size of the company, you can have a collaborator playing multiple roles like GSM, VFM or HRM or different persons playing the same role like GSM.
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The list of green spaces must be sorted by size in descending order. The sorting algorithm to be used by the application must be defined through a configuration file. At least two sorting algorithms should be available.

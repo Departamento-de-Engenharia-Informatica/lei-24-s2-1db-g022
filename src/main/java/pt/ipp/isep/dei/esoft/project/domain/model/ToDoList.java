@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 public class ToDoList {
 
     private final List<TaskToDoList> taskTdlList;
+    private static int referenceCount = 0;
 
     /**
      * Constructs a new ToDoList object.
@@ -84,10 +85,10 @@ public class ToDoList {
                 String prefix = matcher.group(1); // ref
                 String numStr = matcher.group(2); // numbers
 
-                int num = Integer.parseInt(numStr);
-                num++;
+                referenceCount = Integer.parseInt(numStr);
+                referenceCount++;
 
-                str = prefix + num;
+                str = prefix + referenceCount;
             } else {
 
                 str = str + "1";
