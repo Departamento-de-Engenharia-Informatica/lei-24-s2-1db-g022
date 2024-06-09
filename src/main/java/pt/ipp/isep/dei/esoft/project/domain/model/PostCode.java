@@ -2,6 +2,11 @@ package pt.ipp.isep.dei.esoft.project.domain.model;
 
 import java.util.regex.Pattern;
 
+/**
+ * Represents a postal code, consisting of a localization and a postal code number.
+ *
+ * @author Group22
+ */
 public class PostCode {
     private String localization;
     private String postCodeNumber;

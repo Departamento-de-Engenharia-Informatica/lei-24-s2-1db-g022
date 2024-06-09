@@ -2,7 +2,6 @@ package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
 import pt.ipp.isep.dei.esoft.project.ui.console.DevTeamUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.authorization.AuthenticationUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.menu.MenuItem;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.ArrayList;

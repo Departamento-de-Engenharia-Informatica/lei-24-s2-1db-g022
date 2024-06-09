@@ -42,8 +42,8 @@ public class Bootstrap implements Runnable {
         Collaborator collaborator4 = new Collaborator("diogo", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), "+351 914988673", "diogo@diogo.pt", new Address("streeName", "1234-123", 1), 675432564, "Passport", 123321122, new Job("Calceteiro"));
         GreenSpaceManager greenSpaceManager = new GreenSpaceManager("gsname", Date.valueOf("1999-01-10"), Date.valueOf("2024-01-10"), "+351 914981073", "gsm@gsm.pt", new Address("streeName", "1234-123", 1), 675432501, "Passport", 123021022, new Job("Gestor"));
 
-        greenSpaceManager.getGreenSpaces().addListBootstrapGreenSpaces(new Garden("Jardim Porto",3,"street Porto",12,"1234-123","Porto"));
-        greenSpaceManager.getGreenSpaces().addListBootstrapGreenSpaces(new Garden("Jardim Lisboa",5,"street Lisboa",11,"1234-143","Lisboa"));
+        greenSpaceManager.getListGreenSpaces().addListBootstrapGreenSpaces(new Garden("Jardim Porto",3,"street Porto",12,"1234-123","Porto"));
+        greenSpaceManager.getListGreenSpaces().addListBootstrapGreenSpaces(new Garden("Jardim Lisboa",5,"street Lisboa",11,"1234-143","Lisboa"));
 
         // Add skills to collaborators
         collaborator.addSkillCollaboratorBootStrap(new Skill("Podador"));

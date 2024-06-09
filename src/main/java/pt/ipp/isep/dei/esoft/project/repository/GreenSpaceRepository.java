@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repository for managing green spaces.
+ *
+ * @author Group22
+ */
 public class GreenSpaceRepository {
 
     private final List<GreenSpace> greenSpaceList;
@@ -56,6 +61,12 @@ public class GreenSpaceRepository {
         return !greenSpaceList.contains(greenSpace);
     }
 
+    /**
+     * Retrieves a green space by its name from the repository.
+     *
+     * @param greenSpaceName The name of the green space to retrieve.
+     * @return An Optional containing the green space if found, otherwise an empty Optional.
+     */
     public Optional<GreenSpace> getGreenSpaceByName(String greenSpaceName) {
 
         for (GreenSpace g : greenSpaceList) {

@@ -14,6 +14,8 @@ import java.util.Scanner;
  * This class represents the user interface for generating teams.
  * It interacts with the user through the console and utilizes a controller
  * to handle the business logic.
+ *
+ * @author Group22
  */
 public class GenerateTeamUI implements Runnable {
     private final GenerateTeamController controller;

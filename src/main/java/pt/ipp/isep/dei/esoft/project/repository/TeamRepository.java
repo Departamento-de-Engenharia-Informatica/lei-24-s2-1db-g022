@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * Repository class for managing Team objects.
+ *
+ * @author Group22
  */
 public class TeamRepository {
     private final List<Team> teamList;

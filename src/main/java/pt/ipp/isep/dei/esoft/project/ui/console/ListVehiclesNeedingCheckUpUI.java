@@ -5,6 +5,11 @@ import pt.ipp.isep.dei.esoft.project.domain.model.Vehicle;
 
 import java.util.List;
 
+/**
+ * User interface for listing vehicles needing check-up.
+ *
+ * @author Group22
+ */
 public class ListVehiclesNeedingCheckUpUI implements Runnable {
 
     private final ListVehiclesNeedingCheckUpController controller = new ListVehiclesNeedingCheckUpController();

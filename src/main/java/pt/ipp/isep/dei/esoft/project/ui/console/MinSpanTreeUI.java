@@ -11,6 +11,8 @@ import java.util.List;
 /**
  * The MinSpanTreeUI class provides a console-based user interface for visualizing
  * and analyzing minimum spanning trees.
+ *
+ * @author Group22
  */
 public class MinSpanTreeUI implements Runnable {
     private final String FILE_PATH = "MDISC\\US13\\Results";

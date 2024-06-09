@@ -5,6 +5,11 @@ import pt.ipp.isep.dei.esoft.project.domain.DTO.GreenSpaceDto;
 
 import java.util.List;
 
+/**
+ * User interface for listing green spaces.
+ *
+ * @author Group22
+ */
 public class ListGreenSpacesUI implements Runnable{
 
     private final ListGreenSpacesController controller;
@@ -13,6 +18,7 @@ public class ListGreenSpacesUI implements Runnable{
      * Constructs a ListGreenSpacesUI object with a new ListGreenSpacesController.
      */
     public ListGreenSpacesUI() {
+
         controller = new ListGreenSpacesController();
     }
 
@@ -21,13 +27,20 @@ public class ListGreenSpacesUI implements Runnable{
      * @return The ListGreenSpacesController instance.
      */
     private ListGreenSpacesController getController() {
+
         return controller;
     }
+
+    /**
+     * Runs the user interface to list green spaces and their areas.
+     */
     @Override
     public void run() {
+
         List<GreenSpaceDto> greenSpaceListDto = getController().getGreenSpaceManagerGSpaceSorted();
 
         for (GreenSpaceDto g: greenSpaceListDto) {
+
             System.out.println("\nParque: " + g.getGreenSpaceName());
             System.out.println("Área: " + g.getArea());
         }

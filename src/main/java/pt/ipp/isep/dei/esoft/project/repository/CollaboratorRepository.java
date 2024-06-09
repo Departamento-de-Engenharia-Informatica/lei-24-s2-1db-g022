@@ -9,6 +9,8 @@ import java.util.Optional;
 
 /**
  * Repository class for managing Collaborator objects.
+ *
+ * @author Group22
  */
 public class CollaboratorRepository {
     private final List<ICollaborator> collaboratorList;

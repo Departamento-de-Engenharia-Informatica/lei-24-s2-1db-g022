@@ -12,6 +12,11 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * User interface for finding the minimum route to access points.
+ *
+ * @author Group22
+ */
 public class MinRouteToApUI implements Runnable {
 
     private final String FILE_PATH = "MDISC\\US17\\Results\\single_output";

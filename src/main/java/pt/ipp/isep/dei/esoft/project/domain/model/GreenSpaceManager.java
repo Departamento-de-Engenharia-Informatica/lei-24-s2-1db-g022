@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+/**
+ * Represents a GreenSpaceManager, which is a type of collaborator responsible for managing green spaces.
+ *
+ * @author Group22
+ */
 public class GreenSpaceManager implements ICollaborator {
     private String name;
     private Date dateOfBirth;
@@ -230,18 +235,39 @@ public class GreenSpaceManager implements ICollaborator {
         return !(value == null) && !(value.isEmpty());
     }
 
+    /**
+     * Checks if the Collaborator has the same email as the given collaborator.
+     *
+     * @param collaborator The collaborator to compare emails with.
+     * @return true if the Collaborator has the same email as the given collaborator, false otherwise.
+     */
     @Override
     public boolean hasEqualsEmail(ICollaborator collaborator) {
+
         return this.email.equals(((GreenSpaceManager) collaborator).email);
     }
 
+    /**
+     * Checks if the GreenSpaceManager has the same phone number as the given collaborator.
+     *
+     * @param collaborator The collaborator to compare phone numbers with.
+     * @return true if the GreenSpaceManager has the same phone number as the given collaborator, false otherwise.
+     */
     @Override
     public boolean hasEqualsPhoneNumber(ICollaborator collaborator) {
+
         return this.phoneNumber.equals(((GreenSpaceManager) collaborator).phoneNumber);
     }
 
+    /**
+     * Checks if the Collaborator has the same tax number as the given collaborator.
+     *
+     * @param collaborator The collaborator to compare tax numbers with.
+     * @return true if the Collaborator has the same tax number as the given collaborator, false otherwise.
+     */
     @Override
     public boolean hasEqualsTaxNumber(ICollaborator collaborator) {
+
         return this.taxpayer == ((GreenSpaceManager) collaborator).taxpayer;
     }
 
@@ -261,8 +287,15 @@ public class GreenSpaceManager implements ICollaborator {
         return clone;
     }
 
+    /**
+     * Checks if the Collaborator has the given email.
+     *
+     * @param email The email to check against the Collaborator's email.
+     * @return true if the Collaborator has the given email, false otherwise.
+     */
     @Override
     public boolean hasEmail(String email) {
+
         return this.email.equals(email);
     }
 
@@ -315,7 +348,13 @@ public class GreenSpaceManager implements ICollaborator {
         return this.greenSpaces.addListGreenSpaces(greenSpace);
     }
 
-    public GreenSpaces getGreenSpaces() {
+    /**
+     * Retrieves the GreenSpaces object associated with this GreenSpaceManager.
+     *
+     * @return The GreenSpaces object associated with this GreenSpaceManager.
+     */
+    public GreenSpaces getListGreenSpaces() {
+
         return this.greenSpaces;
     }
 }

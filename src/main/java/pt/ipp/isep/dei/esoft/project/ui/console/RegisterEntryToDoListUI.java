@@ -11,6 +11,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+/**
+ * User interface for registering entries in the to-do list.
+ *
+ * @author Group22
+ */
 public class RegisterEntryToDoListUI implements Runnable {
 
     private final RegisterEntryToDoListController controller;
@@ -37,6 +42,9 @@ public class RegisterEntryToDoListUI implements Runnable {
         return controller;
     }
 
+    /**
+     * Executes the user interface for adding a new entry to the to-do list.
+     */
     @Override
     public void run() {
 
@@ -49,14 +57,19 @@ public class RegisterEntryToDoListUI implements Runnable {
         urgency = displayAndSelectUrgency();
 
         while (!register) {
+
             try {
+
                 requestData();
             } catch (ParseException e) {
+
                 throw new RuntimeException(e);
             }
+
             displayData();
 
             if (confirmationData()) {
+
                 register = submitData();
             }
         }
@@ -116,9 +129,14 @@ public class RegisterEntryToDoListUI implements Runnable {
         }
     }
 
+    /**
+     * Displays the list of green spaces and prompts the user to select one.
+     *
+     * @return The name of the selected green space.
+     */
     private String displayAndSelectGreenSpaceList() {
 
-        List<GreenSpaceDto> greenSpaceDtoList = controller.getGreenSpaceManagerGSpace();
+        List<GreenSpaceDto> greenSpaceDtoList = getController().getGreenSpaceManagerGSpace();
 
         int listSize = greenSpaceDtoList.size();
         int answer = -1;
@@ -136,9 +154,15 @@ public class RegisterEntryToDoListUI implements Runnable {
         return greenSpaceDtoList.get(answer - 1).getGreenSpaceName();
     }
 
+    /**
+     * Displays the options for selecting a green space from the provided list.
+     *
+     * @param greenSpaceDtoList The list of green space DTOs to display as options.
+     */
     private void displayGreenSpaceOptions(List<GreenSpaceDto> greenSpaceDtoList) {
 
         int i = 1;
+
         for (GreenSpaceDto gDto : greenSpaceDtoList) {
 
             System.out.println("  " + i + " - " + gDto.getGreenSpaceName());
@@ -146,9 +170,14 @@ public class RegisterEntryToDoListUI implements Runnable {
         }
     }
 
+    /**
+     * Displays the list of tasks and prompts the user to select one.
+     *
+     * @return The description of the selected task.
+     */
     private String displayAndSelectTaskList() {
 
-        List<TaskDto> taskDtoList = controller.getAllTasks();
+        List<TaskDto> taskDtoList = getController().getAllTasks();
 
         int listSize = taskDtoList.size();
         int answer = -1;
@@ -166,9 +195,15 @@ public class RegisterEntryToDoListUI implements Runnable {
         return taskDtoList.get(answer - 1).getTaskDescription();
     }
 
+    /**
+     * Displays the options for selecting a task from the provided list.
+     *
+     * @param taskDtoList The list of task DTOs to display as options.
+     */
     private void displayTaskOptions(List<TaskDto> taskDtoList) {
 
         int i = 1;
+
         for (TaskDto tDto : taskDtoList) {
 
             System.out.println("  " + i + " - " + tDto.getTaskDescription());
@@ -176,6 +211,11 @@ public class RegisterEntryToDoListUI implements Runnable {
         }
     }
 
+    /**
+     * Displays the list of urgency options and prompts the user to select one.
+     *
+     * @return The selected urgency level.
+     */
     private String displayAndSelectUrgency() {
 
         List<String> urgencyList = new ArrayList<>();
@@ -198,6 +238,11 @@ public class RegisterEntryToDoListUI implements Runnable {
         return urgencyList.get(answer - 1);
     }
 
+    /**
+     * Displays the options for selecting an urgency level from the provided list.
+     *
+     * @param urgencyList The list of urgency levels to display as options.
+     */
     private void displayUrgencyOptions(List<String> urgencyList) {
 
         int i = 1;
@@ -216,10 +261,15 @@ public class RegisterEntryToDoListUI implements Runnable {
         aproxExpectedDuration = requestaproxExpectedDuration();
     }
 
+    /**
+     * Requests the user to input the approximate expected duration of a task in minutes.
+     *
+     * @return The approximate expected duration inputted by the user.
+     */
     private int requestaproxExpectedDuration() {
 
         Scanner input = new Scanner(System.in);
-        System.out.println("Approximate Expected Duration: ");
+        System.out.println("Approximate Expected Duration (in minutes): ");
 
         return input.nextInt();
     }

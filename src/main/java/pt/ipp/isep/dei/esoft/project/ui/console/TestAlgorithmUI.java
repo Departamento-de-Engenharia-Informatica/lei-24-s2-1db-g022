@@ -11,25 +11,50 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * User interface for testing algorithms.
+ * This class provides functionality to run tests on minimum spanning tree and other algorithms.
+ * It initializes controllers for minimum spanning tree and algorithm testing.
+ */
 public class TestAlgorithmUI implements Runnable {
     private final MinSpanTreeController controller1;
     private final TestAlgorithmController controller2;
-
     private String filePath;
 
+    /**
+     * Constructs a new TestAlgorithmUI with default controllers.
+     */
     public TestAlgorithmUI() {
+
         controller1 = new MinSpanTreeController();
         controller2 = new TestAlgorithmController();
     }
 
+    /**
+     * Gets the controller for minimum spanning tree.
+     *
+     * @return The controller for minimum spanning tree.
+     */
     private MinSpanTreeController getController1() {
+
         return controller1;
     }
 
+    /**
+     * Gets the controller for algorithm testing.
+     *
+     * @return The controller for algorithm testing.
+     */
     private TestAlgorithmController getController2() {
+
         return controller2;
     }
 
+    /**
+     * Executes an analysis on an algorithm by running it for a range of input files.
+     * Measures the execution time and input size for each file, and saves the data
+     * to a CSV file. Additionally, generates a graph based on this data.
+     */
     @Override
     public void run() {
         System.out.println("\n\n--- Analysing Algorithm ------------------------");

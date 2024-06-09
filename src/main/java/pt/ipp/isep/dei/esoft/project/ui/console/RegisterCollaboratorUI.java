@@ -13,7 +13,9 @@ import java.util.Optional;
 import java.util.Scanner;
 
 /**
+ * User interface for registering collaborators.
  *
+ * @author Group22
  */
 public class RegisterCollaboratorUI implements Runnable {
 

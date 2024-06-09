@@ -3,6 +3,8 @@ package pt.ipp.isep.dei.esoft.project.domain.model;
 import java.util.Objects;
 
 /**
+ * Represents a water point.
+ *
  * @author Group22
  */
 public class WaterPoint {

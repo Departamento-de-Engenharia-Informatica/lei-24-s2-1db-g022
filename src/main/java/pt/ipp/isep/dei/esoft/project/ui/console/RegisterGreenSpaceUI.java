@@ -9,6 +9,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+/**
+ * User interface for registering a new green space.
+ *
+ * @author Group22
+ */
 public class RegisterGreenSpaceUI implements Runnable {
     private final RegisterGreenSpaceController controller;
     private String greenSpaceName;

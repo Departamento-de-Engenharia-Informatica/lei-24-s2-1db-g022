@@ -244,6 +244,12 @@ public class Collaborator implements ICollaborator {
     }
 
     //Metodo novo para as interfaces (ps: para nao dar conflito e ter de corrigir muito codigo)
+    /**
+     * Checks if the Collaborator has the given email.
+     *
+     * @param email The email to check against the Collaborator's email.
+     * @return true if the Collaborator has the given email, false otherwise.
+     */
     @Override
     public boolean hasEmail(String email) {
         return false;
@@ -307,18 +313,39 @@ public class Collaborator implements ICollaborator {
         return "Collaborator{" + "name='" + name + '\'' + ", dateOfBirth=" + dateOfBirth + ", admissionDate=" + admissionDate + ", phoneNumber=" + phoneNumber + ", email='" + email + '\'' + ", address=" + address + ", document=" + document + ", job=" + job + ", skillList=" + skillList + '}';
     }
 
+    /**
+     * Checks if the Collaborator has the same email as the given collaborator.
+     *
+     * @param collaborator The collaborator to compare emails with.
+     * @return true if the Collaborator has the same email as the given collaborator, false otherwise.
+     */
     @Override
     public boolean hasEqualsEmail(ICollaborator collaborator) {
+
         return this.email.equals(((Collaborator) collaborator).email);
     }
 
+    /**
+     * Checks if the GreenSpaceManager has the same phone number as the given collaborator.
+     *
+     * @param collaborator The collaborator to compare phone numbers with.
+     * @return true if the GreenSpaceManager has the same phone number as the given collaborator, false otherwise.
+     */
     @Override
     public boolean hasEqualsPhoneNumber(ICollaborator collaborator) {
+
         return this.phoneNumber.equals(((Collaborator) collaborator).phoneNumber);
     }
 
+    /**
+     * Checks if the Collaborator has the same tax number as the given collaborator.
+     *
+     * @param collaborator The collaborator to compare tax numbers with.
+     * @return true if the Collaborator has the same tax number as the given collaborator, false otherwise.
+     */
     @Override
     public boolean hasEqualsTaxNumber(ICollaborator collaborator) {
+
         return this.taxpayer == ((Collaborator) collaborator).taxpayer;
     }
 }

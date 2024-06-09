@@ -6,11 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repository for managing tasks.
+ *
+ * @author Group22
+ */
 public class TaskRepository {
-
     private final List<Task> taskList;
 
+    /**
+     * Constructs a new TaskRepository object.
+     */
     public TaskRepository() {
+
         taskList = new ArrayList<>();
     }
 
@@ -21,11 +29,14 @@ public class TaskRepository {
      * @return True if the task is successfully added, false otherwise.
      */
     private boolean addTask(Task task) {
+
         boolean success = false;
+
         if (validateTask(task)) {
-            // A clone of the task is added to the list of tasks, to avoid side effects and outside manipulation.
+
             success = taskList.add(task.clone());
         }
+
         return success;
     }
 
@@ -55,6 +66,7 @@ public class TaskRepository {
      * @return True if the task is valid (not already present), false otherwise.
      */
     private boolean validateTask(Task task) {
+
         return !taskList.contains(task);
     }
 
@@ -64,9 +76,16 @@ public class TaskRepository {
      * @return An unmodifiable list of all tasks.
      */
     public List<Task> getAllTaskDescriptions() {
+
         return List.copyOf(taskList);
     }
 
+    /**
+     * Retrieves a task by its description from the repository.
+     *
+     * @param taskDescription The description of the task to retrieve.
+     * @return An Optional containing the task if found, otherwise an empty Optional.
+     */
     public Optional<Task> getTaskByDescription(String taskDescription) {
 
         for (Task t : taskList) {

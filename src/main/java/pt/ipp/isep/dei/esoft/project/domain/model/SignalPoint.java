@@ -2,6 +2,11 @@ package pt.ipp.isep.dei.esoft.project.domain.model;
 
 import java.util.Objects;
 
+/**
+ * Represents a signal point.
+ *
+ * @author Group22
+ */
 public class SignalPoint {
     private String name;
 

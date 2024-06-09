@@ -3,6 +3,11 @@ package pt.ipp.isep.dei.esoft.project.domain.model;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+/**
+ * Represents a document.
+ *
+ * @author Group22
+ */
 public class Document {
     private String docType;
     private int number;

@@ -6,6 +6,11 @@ import pt.ipp.isep.dei.esoft.project.domain.model.Skill;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * User interface for assigning skills to collaborators.
+ *
+ * @author Group22
+ */
 public class AssignSkillUI implements Runnable {
 
     private final AssignSkillController controller = new AssignSkillController();

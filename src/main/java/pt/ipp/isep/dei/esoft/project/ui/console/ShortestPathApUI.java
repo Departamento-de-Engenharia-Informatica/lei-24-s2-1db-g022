@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
+/**
+ * User interface for finding the shortest path to an access point.
+ *
+ * @author Group22
+ */
 public class ShortestPathApUI implements Runnable {
 
     private final String FILE_PATH = "MDISC\\US18\\Results";
@@ -27,14 +32,7 @@ public class ShortestPathApUI implements Runnable {
     }
 
     /**
-     * Executes the task of finding the shortest path to the nearest assembly point for each non-assembly point,
-     * generates CSV content based on the results, and writes the content to a CSV file.
-     *
-     * <p>This method retrieves signal points and routes data from CSV files, identifies assembly points,
-     * finds the shortest path to the nearest assembly point for each non-assembly point, calculates total distances,
-     * generates CSV content based on the shortest paths, and writes the content to a CSV file.</p>
-     *
-     * @throws RuntimeException If an error occurs during the execution of the task.
+     * Runs the user interface for finding the shortest path to an assembly point.
      */
     @Override
     public void run() {
@@ -49,6 +47,11 @@ public class ShortestPathApUI implements Runnable {
         }
     }
 
+    /**
+     * Displays the shortest paths to assembly points for each signal point.
+     * Imports point names and routes from CSV files, calculates shortest paths to assembly points,
+     * displays the paths and total distance, and generates a CSV file with subgraphs.
+     */
     public void displayPaths() {
 
         List<SignalPoint> listPointNames = getController().importNamesFromCSV(FILE_PATH_NAMES);

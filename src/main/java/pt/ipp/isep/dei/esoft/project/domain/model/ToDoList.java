@@ -1,21 +1,29 @@
 package pt.ipp.isep.dei.esoft.project.domain.model;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Represents a list of tasks to be completed.
+ */
 public class ToDoList {
 
     private final List<TaskToDoList> taskTdlList;
 
+    /**
+     * Constructs a new ToDoList object.
+     */
     public ToDoList() {
 
         taskTdlList = new ArrayList<>();
     }
 
+    /**
+     * Prints the details of each taskToDoList in the to-do list.
+     */
     public void ver() {
 
         for (TaskToDoList ttdl : this.taskTdlList) {
@@ -29,7 +37,7 @@ public class ToDoList {
     /**
      * Adds a taskToDoList to the ToDoList.
      *
-     * @param taskToDoList The skill to add.
+     * @param taskToDoList The taskToDoList to add.
      * @return True if the taskToDoList is successfully added, false otherwise.
      */
     private boolean addTaskToDoList(TaskToDoList taskToDoList) {
@@ -55,10 +63,14 @@ public class ToDoList {
         return !taskTdlList.contains(taskToDoList);
     }
 
+    /**
+     * Generates a unique reference for the taskToDoList.
+     *
+     * @return A unique reference for the taskToDoList.
+     */
     private String generateUniqueReference() {
 
         String str = "REF";
-
         boolean condition = true;
 
         while (condition) {
@@ -69,18 +81,15 @@ public class ToDoList {
 
             if (matcher.find()) {
 
-                String prefix = matcher.group(1); // Parte não numérica
-                String numStr = matcher.group(2); // Parte numérica
+                String prefix = matcher.group(1); // ref
+                String numStr = matcher.group(2); // numbers
 
-                // Incrementa a parte numérica
                 int num = Integer.parseInt(numStr);
                 num++;
 
-                // Reconstroi a string com o número incrementado
                 str = prefix + num;
-
             } else {
-                // Se não houver número no final, adiciona "1"
+
                 str = str + "1";
             }
 
@@ -90,6 +99,12 @@ public class ToDoList {
         return str;
     }
 
+    /**
+     * Validates if the reference is unique within the to-do list.
+     *
+     * @param ref The reference to validate.
+     * @return True if the reference is unique, false otherwise.
+     */
     private boolean validateRef(String ref) {
 
         for (TaskToDoList ttdl : taskTdlList) {
@@ -103,6 +118,15 @@ public class ToDoList {
         return true;
     }
 
+    /**
+     * Registers an entry in the to-do list for a task related to a green space.
+     *
+     * @param greenSpace            The green space related to the task.
+     * @param task                  The task to be completed.
+     * @param urgency               The urgency level of the task.
+     * @param aproxExpectedDuration The approximate expected duration of the task.
+     * @return An Optional containing the registered taskToDoList if successful, otherwise an empty Optional.
+     */
     public Optional<TaskToDoList> registerEntryToDoList(GreenSpace greenSpace, Task task, String urgency, int aproxExpectedDuration) {
 
         String ref = generateUniqueReference();

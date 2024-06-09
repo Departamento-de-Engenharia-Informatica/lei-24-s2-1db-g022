@@ -2,6 +2,11 @@ package pt.ipp.isep.dei.esoft.project.domain.model;
 
 import java.util.Objects;
 
+/**
+ * Represents a route between two signal points with a certain distance.
+ *
+ * @author Group22
+ */
 public class Route {
     private int distance;
     private SignalPoint s1;

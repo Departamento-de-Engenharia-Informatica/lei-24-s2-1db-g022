@@ -3,6 +3,8 @@ package pt.ipp.isep.dei.esoft.project.domain.model;
 import java.util.Objects;
 
 /**
+ * Represents a pipe connecting two water points with a certain distance.
+ *
  * @author Group22
  */
 public class Pipe {

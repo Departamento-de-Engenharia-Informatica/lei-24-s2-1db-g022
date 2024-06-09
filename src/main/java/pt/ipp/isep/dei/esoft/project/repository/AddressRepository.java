@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repository for managing addresses.
+ *
+ * @author Group22
+ */
 public class AddressRepository {
     private final List<Address> addressList;
 

@@ -2,6 +2,11 @@ package pt.ipp.isep.dei.esoft.project.domain.model;
 
 import java.util.Objects;
 
+/**
+ * Represents a MediumPark entity that implements the GreenSpace interface.
+ *
+ * @author Group22
+ */
 public class MediumPark implements GreenSpace {
     private String name;
     private int area;
@@ -37,6 +42,12 @@ public class MediumPark implements GreenSpace {
         return this.address;
     }
 
+    /**
+     * Checks if the GreenSpace has the given name.
+     *
+     * @param greenSpaceName The name to check against the GreenSpace's name.
+     * @return true if the GreenSpace has the given name, false otherwise.
+     */
     @Override
     public boolean hasName(String greenSpaceName) {
 
@@ -65,6 +76,12 @@ public class MediumPark implements GreenSpace {
                 '}';
     }
 
+    /**
+     * Checks if the area of the GreenSpace is larger than the given area.
+     *
+     * @param area The area to compare with the GreenSpace's area.
+     * @return true if the GreenSpace's area is larger than the given area, false otherwise.
+     */
     @Override
     public boolean isAreaLarger(int area) {
 

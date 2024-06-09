@@ -10,6 +10,11 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
+/**
+ * User interface for registering vehicle check-ups.
+ *
+ * @author Group22
+ */
 public class RegisterCheckUpUI implements Runnable {
     private final RegisterCheckUpController controller;
     private Date checkUpDate;

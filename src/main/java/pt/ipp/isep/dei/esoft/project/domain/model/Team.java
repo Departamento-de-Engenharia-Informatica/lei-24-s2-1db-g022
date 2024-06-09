@@ -23,13 +23,26 @@ public class Team {
         this.collaboratorList = collaboratorList;
     }
 
-    public void generateId(int id){
+    /**
+     * Generates the ID for the object.
+     *
+     * @param id The ID to be assigned to the object.
+     */
+    public void generateId(int id) {
+
         this.id = id;
     }
 
+    /**
+     * Retrieves the ID of the object.
+     *
+     * @return The ID of the object.
+     */
     public int getId() {
+
         return id;
     }
+
 
     /**
      * Gets the list of collaborators in the team.
