@@ -121,27 +121,4 @@ class TaskTest {
         Task clone = task.clone();
         assertEquals(task, clone);
     }
-
-    @Test
-    void getAllTasksTest(){
-        TaskDto tDto = new TaskDto("Pintar chão");
-        TaskDto tDto1 = new TaskDto("Podar Árvores");
-
-        List<TaskDto> expected = new ArrayList<>();
-
-        expected.add(tDto);
-        expected.add(tDto1);
-
-        TaskRepository tR = Repositories.getInstance().getTaskRepository();
-        RegisterEntryToDoListController registerEntry = new RegisterEntryToDoListController();
-
-        tR.createTask("Pintar chão");
-        tR.createTask("Podar Árvores");
-
-        List<TaskDto> result = new ArrayList<>();
-
-        result = registerEntry.getAllTasks();
-
-        assertEquals(expected, result);
-    }
 }

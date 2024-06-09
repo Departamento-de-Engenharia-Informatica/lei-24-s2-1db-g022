@@ -64,7 +64,7 @@
 
 ## 5. Construction (Implementation)
 
-### Class RegisterSkillController
+### Class AssignTeamAgendaController
 
 ```java
 public List<TeamDto> getAllTeams() {

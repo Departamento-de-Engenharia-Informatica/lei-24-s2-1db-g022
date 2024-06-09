@@ -28,19 +28,6 @@ public class ToDoList {
     }
 
     /**
-     * Prints the details of each taskToDoList in the to-do list.
-     */
-    public void ver() {
-
-        for (TaskToDoList ttdl : this.taskTdlList) {
-
-            System.out.println("------------");
-            System.out.println(ttdl.toString());
-            System.out.println("------------");
-        }
-    }
-
-    /**
      * Adds a taskToDoList to the ToDoList.
      *
      * @param taskToDoList The taskToDoList to add.

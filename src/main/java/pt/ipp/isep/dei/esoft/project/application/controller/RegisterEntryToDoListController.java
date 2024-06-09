@@ -199,7 +199,6 @@ public class RegisterEntryToDoListController {
             taskTdl = getToDoList().registerEntryToDoList(greenSpace.get(), task.get(), urgency, aproxExpectedDuration);
         }
 
-        getToDoList().ver();
         return taskTdl;
     }
 

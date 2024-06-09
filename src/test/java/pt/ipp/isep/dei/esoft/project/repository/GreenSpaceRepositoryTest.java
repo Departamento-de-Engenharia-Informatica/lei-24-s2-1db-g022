@@ -2,9 +2,12 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pt.ipp.isep.dei.esoft.project.domain.model.Garden;
-import pt.ipp.isep.dei.esoft.project.domain.model.GreenSpace;
+import pt.ipp.isep.dei.esoft.project.application.controller.ListGreenSpacesController;
+import pt.ipp.isep.dei.esoft.project.domain.model.*;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -67,4 +70,30 @@ public class GreenSpaceRepositoryTest {
 
         assertTrue(result.isEmpty());
     }
+
+    /**
+     * Tests the sorting functionality of the list of green spaces belonging to a green space manager.
+     * It verifies that the green spaces are sorted correctly based on their names in ascending order.
+     */
+    @Test
+    void TestGreenSpaceSorted(){
+
+        GreenSpaceManager gsm = new GreenSpaceManager("gsname", Date.valueOf("1999-01-10"), Date.valueOf("2024-01-10"), "+351 914981073", "gsm@gsm.pt", new Address("streeName", "1234-123", 1), 675432501, "Passport", 123021022, new Job("Gestor"));
+
+        GreenSpace garden = new Garden("Jardim Porto",3,"street Porto",12,"1234-123","Porto");
+        GreenSpace garden1 = new Garden("Jardim Lisboa",5,"street Lisboa",11,"1234-143","Lisboa");
+        gsm.getListGreenSpaces().addListBootstrapGreenSpaces(garden);
+        gsm.getListGreenSpaces().addListBootstrapGreenSpaces(garden1);
+
+        List<GreenSpace> result = new ArrayList<>();
+        List<GreenSpace> expected = new ArrayList<>();
+
+        expected.add(garden1);
+        expected.add(garden);
+
+        result = gsm.getListGreenSpaces().getSortedGreenspaces();
+
+        assertEquals(expected,result);
+    }
+
 }
