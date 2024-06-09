@@ -166,7 +166,6 @@ package "Domain" <<Folder>> {
             - addTaskToDoList(taskTdl)
             - validateToDoList(taskTdl)
             - generateUniqueReference()
-            - validateref(taskRef)
         }
 
     }
