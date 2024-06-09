@@ -49,7 +49,9 @@ class GreenSpaceUser{
 
 class QualityAssessmentManager{}
 
-class Team{}
+class Team{
+    id
+}
 
 class Agenda{}
 
@@ -94,7 +96,6 @@ class Job{
 class MediumPark{
 }
 
-'Verificar o localName
 class GreenSpace{
     name
     area
@@ -146,6 +147,7 @@ class EmailService{
 }
 
 class TaskToDoList{
+    taskReference
     status
     urgency
     aproxExpectedDuration
@@ -153,7 +155,6 @@ class TaskToDoList{
 
 class TaskAgenda{
     startDate
-    endDate
     expectedDuration
 }
 
@@ -260,7 +261,7 @@ TaskToDoList "1..*" ----- "1" GreenSpace :  Carried out in  >
 TaskToDoList "1" -u- "1" Task : contains >
 
 '-------------Team-------------
-Team "1" --- "*" TaskAgenda : executes by <
+Team "1" --- "*" TaskAgenda : executed by <
 Team "*" -u- "1" EmailService : makes use of >
 
 '-------------ToDoList-------------

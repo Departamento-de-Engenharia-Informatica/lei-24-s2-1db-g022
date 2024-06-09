@@ -23,6 +23,8 @@ Iterative Development".
 * WaterPoint
 * IrrigationSystem
 * Document
+* Agenda
+* ToDoList
 
 ---
 
@@ -32,6 +34,7 @@ Iterative Development".
 * Vehicles
 * WaterPoint
 * Pipe
+* Task
 
 ---
 
@@ -59,6 +62,7 @@ Iterative Development".
 * (GSM) Green Spaces Manager
 * (GSU) Green Spaces User
 * (QAM) Software Quality Assessment Team Manager
+* Green Space User
 
 ---
 
@@ -150,6 +154,7 @@ Iterative Development".
 * Agenda
 * ToDoList
 * Check-up
+* Document
 
 ---
 
@@ -158,55 +163,73 @@ Iterative Development".
 An association is a relationship between instances of objects that indicates a relevant connection and that is worth of
 remembering, or it is derivable from the List of Common Associations:
 
-| Concept (A) 	             |     Association     |              Concept (B) |
-|---------------------------|:-------------------:|-------------------------:|
-| Collaborator              |        Has	         |                      Job |
-| Collaborator  	           |  Drives/Uses    	   |                  Vehicle |
-| Collaborator  	           |       Has   	       |                    Skill |
-| Collaborator              |   Generalization    | QualityAssessmentManager |
-| Collaborator              |   Generalization    |     HumanResourceManager |
-| Collaborator              |   Generalization    |      VehicleFleetManager |
-| Collaborator              |   Generalization    |        GreenSpaceManager |
-| Collaborator              |        Lives        |                  Address |
-| Collaborator              |         Has         |                 Document |
-| Team  	                   |     Contains  	     |             Collaborator |
-| Team  	                   |   Carries Out  	    |                   Agenda |
-| Agenda  	                 |      defines 	      |                     Task |
-| HumanResourceManager      |      Registers      |                      Job |
-| HumanResourceManager      |      Registers      |             Collaborator |     
-| HumanResourceManager      |      Registers      |                    Skill |
-| HumanResourceManager      |       Defines       |                     Team |
-| VehicleFleetManager       |       Manages       |                  Machine |
-| VehicleFleetManager       |       Manages       |                Equipment |
-| VehicleFleetManager       |  Registers/Manages  |                  Vehicle |
-| VehicleFleetManager       |      Registers      |                  CheckUp |
-| Vehicle                   |        Does         |                  CheckUp |
-| Vehicle                   | Needed to carry out |                     Task |
-| Vehicle                   |     Transports      |                  Machine |
-| Vehicle                   |     Transports      |                Equipment |
-| Vehicle                   |         Has         |                    Brand |
-| Vehicle                   |         Has         |                    Model |
-| Green Spaces Manager(GSM) |  Registers/Manages  |             Green Spaces |
-| Green Spaces User(GSU)    |        Uses         |             Green Spaces |
-| Green Space               |   Generalization    |                   Garden |
-| Green Space               |   Generalization    |               MediumPark |
-| Green Space               |   Generalization    |                LargePark |
-| ToDoList                  |      Includes       |                     Task |
-| IrrigationSystem          |      Contains       |                     Pipe |
-| Pipe                      |      Contains       |               WaterPoint |
-| InfraStructure            |   Generalization    |         IrrigationSystem |
-| Garden                    |         Has         |         IrrigationSystem |
-| Garden                    |       Possess       |                     Tree |
-| Garden                    |       Possess       |                    Bench |
-| MediumPark                |      Includes       |           InfraStructure |
-| MediumPark                |      Contains       |                   Garden |
-| LargePark                 |      Includes       |           InfraStructure |
-| LargePark                 |      Includes       |                  Service |
-| LargePark                 |      Contains       |                   Garden |
-| Task                      |   Carried out in    |               GreenSpace |
-| PlantMaterial             |   Generalization    |                     Tree |
-| UrbanFurniture            |   Generalization    |                    Bench |
-| Brand                     |         Has         |                    Model |
+| Concept (A) 	           |      Association       |              Concept (B) |
+|-------------------------|:----------------------:|-------------------------:|
+| Address  	              |         has 	          |                 PostCode |
+| Agenda  	               |       contains 	       |               TaskAgenda |
+| Brand                   |          Has           |                    Model |
+| Collaborator            |     Generalization     | QualityAssessmentManager |
+| Collaborator            |     Generalization     |     HumanResourceManager |
+| Collaborator            |     Generalization     |      VehicleFleetManager |
+| Collaborator            |     Generalization     |        GreenSpaceManager |
+| Collaborator            |         Lives          |                  Address |
+| Collaborator  	         |    Drives/Uses    	    |                  Vehicle |
+| Collaborator  	         |         Has  	         |                 Document |
+| Collaborator            |          Has	          |                      Job |
+| Collaborator  	         |        Has   	         |                    Skill |
+| Collaborator  	         |         Has  	         |                 Document |
+| Document  	             |         Has  	         |             DocumentType |
+| Garden  	               |         Has  	         |         IrrigationSystem |
+| Garden  	               |       possess  	       |                     Tree |
+| Garden  	               |       possess  	       |                    Bench |
+| GreenSpace              |     Generalization     |               MediumPark |
+| GreenSpace              |     Generalization     |                   Garden |
+| GreenSpace              |     Generalization     |                LargePark |
+| GreenSpace  	           |    is located in  	    |                  Address |
+| GreenSpace  	           |    makes use of  	     |                 Sortable |
+| GreenSpaceManager  	    |  registers/manages  	  |               GreenSpace |
+| GreenSpaceManager  	    |       creates  	       |                     Task |
+| GreenSpaceManager  	    |       inserts  	       |             TaskToDoList |
+| GreenSpaceManager  	    |  inserts new entry  	  |               TaskAgenda |
+| GreenSpaceManager  	    |     Assign Team  	     |               TaskAgenda |
+| GreenSpaceUser  	       |        uses   	        |               GreenSpace |
+| GreenSpaceUser  	       |        sends  	        |                  Comment |
+| GreenSpaceUser  	       |        uses  	         |               UserPortal |
+| HumanResourceManager  	 |     registers   	      |             Collaborator |
+| HumanResourceManager  	 |      registers  	      |                      Job |
+| HumanResourceManager  	 |      registers  	      |                    Skill |
+| HumanResourceManager  	 |       defines  	       |                     Team |
+| InfraStructure  	       |   Generalization  	    |         IrrigationSystem |
+| IrrigationSystem  	     |      contains  	       |                     Pipe |
+| LargePark  	            |      includes  	       |           InfraStructure |
+| LargePark  	            |      includes  	       |                  Service |
+| LargePark  	            |      contains  	       |                   Garden |
+| MediumPark  	           |      includes  	       |           InfraStructure |
+| MediumPark  	           |      contains  	       |                   Garden |
+| Pipe  	                 |      contains  	       |               WaterPoint |
+| PlantMaterial  	        |   Generalization  	    |                     Tree |
+| Task  	                 |   Carried out in  	    |               GreenSpace |
+| TaskAgenda  	           |   Carried out in  	    |               GreenSpace |
+| TaskAgenda  	           |   Carried out with 	   |                Equipment |
+| TaskAgenda  	           |       includes 	       |             TaskToDoList |
+| TaskAgenda  	           |    executed by    	    |                     Team |
+| TaskToDoList  	         |    Carried out in 	    |               GreenSpace |
+| TaskToDoList  	         |       contains 	       |                     Task |
+| Team  	                 |     Contains    	      |             Collaborator |
+| Team  	                 |   makes use of    	    |             EmailService |
+| ToDoList  	             |      includes  	       |                     Task |
+| ToDoList  	             |      includes  	       |             TaskToDoList |
+| UrbanFurniture  	       |   Generalization  	    |                    Bench |
+| UserPortal  	           |         has  	         |                  Comment |
+| Vehicle  	              | needed to carry out  	 |                     Task |
+| Vehicle  	              |     transports  	      |                  Machine |
+| Vehicle  	              |     transports  	      |                Equipment |
+| Vehicle  	              |         has  	         |                    Model |
+| Vehicle  	              |        does  	         |                  CheckUp |
+| VehicleFleetManager  	  |      manages   	       |                  Machine |
+| VehicleFleetManager  	  |       manages  	       |                Equipment |
+| VehicleFleetManager  	  |  registers/manages  	  |                  Vehicle |
+| VehicleFleetManager  	  |      Registers  	      |                  CheckUp |
 
 ## Domain Model
 
