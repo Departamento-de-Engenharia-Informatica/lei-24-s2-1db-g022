@@ -318,9 +318,6 @@ public class MinRouteToApController {
         pic.writeAll(graph, filePath);
     }
 
-    // Define the stylesheet
-
-
     public void writeCSVToFile(String csvContent, String filePath) {
         String csvFilePath = filePath + File.separator + "output_subgraph.csv";
 

@@ -41,40 +41,47 @@ public class ShortestPathApUI implements Runnable {
         System.out.println("\n\n--- Shortest Path to Assembly Point ------------------------");
         try {
             //requestData();
-            List<SignalPoint> listPointNames = getController().importNamesFromCSV(FILE_PATH_NAMES);
-            List<Route> listRoutes = getController().importRouteFromCSV(listPointNames, FILE_PATH_MATRIX);
-            boolean[] isAssemblyPoint = new boolean[listPointNames.size()];
-            String content = "";
+            displayPaths();
 
-            for (int i = 0; i < listPointNames.size(); i++) {
-                if (listPointNames.get(i).getName().startsWith("AP")) {
-                    isAssemblyPoint[i] = true;
-                }
-            }
-
-            for (SignalPoint sp : listPointNames) {
-
-                if (sp.getName().startsWith("AP")) {
-                    continue;
-                }
-
-                List<Route> paths = getController().findShortestPathToNearestAP(sp, listPointNames, listRoutes, isAssemblyPoint);
-
-                for (Route r : paths) {
-                    System.out.println(r.toString());
-                }
-
-                System.out.printf("\nTotal Distance: %d%n", getController().totalDistance(paths));
-
-                content = getController().generateSubgraphCSV(content, paths);
-            }
-
-            getController().writeCSVToFile(content, FILE_PATH);
-
-        } catch (Exception e) {
+        } catch (
+                Exception e) {
             throw new RuntimeException(e);
         }
     }
+
+    public void displayPaths() {
+
+        List<SignalPoint> listPointNames = getController().importNamesFromCSV(FILE_PATH_NAMES);
+        List<Route> listRoutes = getController().importRouteFromCSV(listPointNames, FILE_PATH_MATRIX);
+        boolean[] isAssemblyPoint = new boolean[listPointNames.size()];
+        String content = "";
+
+        for (int i = 0; i < listPointNames.size(); i++) {
+            if (listPointNames.get(i).getName().startsWith("AP")) {
+                isAssemblyPoint[i] = true;
+            }
+        }
+
+        for (SignalPoint sp : listPointNames) {
+
+            if (sp.getName().startsWith("AP")) {
+                continue;
+            }
+
+            List<Route> paths = getController().findShortestPathToNearestAP(sp, listPointNames, listRoutes, isAssemblyPoint);
+
+            for (Route r : paths) {
+                System.out.println(r.toString());
+            }
+
+            System.out.printf("\nTotal Distance: %d%n", getController().totalDistance(paths));
+
+            content = getController().generateSubgraphCSV(content, paths);
+        }
+
+        getController().writeCSVToFile(content, FILE_PATH);
+    }
+
 
     /**
      * Requests the user to enter the paths to the CSV files containing the matrix and points data.
