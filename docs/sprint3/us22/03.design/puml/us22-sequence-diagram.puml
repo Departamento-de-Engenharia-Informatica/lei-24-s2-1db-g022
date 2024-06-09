@@ -89,7 +89,7 @@ CTRL -> GSMP : toDTOGreenSpace(greenSpaceList)
     GSM->UI: selects task
     activate UI
 
-    UI --> GSM : requests data(startDate, endDate, expectedDuration)
+    UI --> GSM : requests data(startDate, expectedDuration)
     deactivate UI
 
     GSM -> UI : types data
@@ -101,7 +101,7 @@ CTRL -> GSMP : toDTOGreenSpace(greenSpaceList)
     GSM -> UI : confirms data
     activate UI
 
-    UI -> CTRL : addNewEntryToAgenda(taskToDoListReference, startDate, endDate, expectedDuration)
+    UI -> CTRL : addNewEntryToAgenda(taskToDoListReference, startDate, expectedDuration)
     activate CTRL
 
     CTRL -> RepositorySingleton : getInstance()
@@ -138,13 +138,13 @@ CTRL -> GSMP : toDTOGreenSpace(greenSpaceList)
         TDL --> CTRL : taskToDoList
         deactivate TDL
 
-    CTRL -> AGENDA : addNewEntryToAgenda(taskToDoList, startDate, endDate, expectedDuration)
+    CTRL -> AGENDA : addNewEntryToAgenda(taskToDoList, startDate, expectedDuration)
     activate AGENDA
 
-    AGENDA -> TASKSAGENDA : addNewEntryToAgenda(taskToDoList, startDate, endDate, expectedDuration)
+    AGENDA -> TASKSAGENDA : addNewEntryToAgenda(taskToDoList, startDate, expectedDuration)
     activate TASKSAGENDA
 
-    TASKSAGENDA -> TASKAGENDA**: create(taskToDolist, startDate, endDate, expectedDuration)
+    TASKSAGENDA -> TASKAGENDA**: create(taskToDolist, startDate, expectedDuration)
     activate TASKAGENDA
 
     TASKAGENDA -> TTDL : setStatusToPlanned()

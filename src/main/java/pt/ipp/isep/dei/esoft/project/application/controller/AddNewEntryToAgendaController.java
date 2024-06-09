@@ -195,17 +195,16 @@ public class AddNewEntryToAgendaController {
      *
      * @param taskToDoListReference The reference of the task to be added.
      * @param startDate             The start date of the entry.
-     * @param endDate               The end date of the entry.
      * @param expectedDuration      The expected duration of the task.
      * @return An Optional containing the added TaskAgenda if successful, empty otherwise.
      */
-    public Optional<TaskAgenda> addNewEntryToAgenda(String taskToDoListReference, Date startDate, Date endDate, int expectedDuration) {
+    public Optional<TaskAgenda> addNewEntryToAgenda(String taskToDoListReference, Date startDate, int expectedDuration) {
         Optional<TaskAgenda> optionalValue = Optional.empty();
 
         Optional<TaskToDoList> taskToDoListOptional = getToDoList().getTaskToDoListByReference(taskToDoListReference);
 
         if (taskToDoListOptional.isPresent()) {
-            optionalValue = getAgenda().addNewEntryToAgenda(taskToDoListOptional.get(), startDate, endDate, expectedDuration);
+            optionalValue = getAgenda().addNewEntryToAgenda(taskToDoListOptional.get(), startDate, expectedDuration);
 
             if (optionalValue.isPresent()) {
                 getToDoList().removeOldEntryToDoList(taskToDoListOptional.get());

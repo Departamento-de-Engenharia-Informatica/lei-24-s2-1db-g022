@@ -94,7 +94,6 @@ public class Team {
     }
 
     /**
-     * Returns a hash code value for the object. This method is supported for the benefit of hash tables such as those provided by {@link HashMap}.
      *
      * @return A hash code value for this object.
      */
@@ -162,5 +161,20 @@ public class Team {
 
         }
         return true;
+    }
+
+    /**
+     * Checks if the team contains the specified collaborator.
+     *
+     * @param collaborator the collaborator to check for
+     * @return true if the collaborator is part of the team, false otherwise
+     */
+    public boolean hasTeamByCollaborator(Collaborator collaborator) {
+        for (Collaborator collaborator1 : collaboratorList) {
+            if (collaborator.equals(collaborator1)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

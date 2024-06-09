@@ -24,7 +24,6 @@ public class AddNewEntryToAgendaUI implements Runnable {
     private String taskToDoListReference;
     private String greenSpaceName;
     private Date startDate;
-    private Date endDate;
     private int expectedDuration;
 
     /**
@@ -86,7 +85,7 @@ public class AddNewEntryToAgendaUI implements Runnable {
 
         boolean success = true;
 
-        Optional<TaskAgenda> taskAgenda = getController().addNewEntryToAgenda(taskToDoListReference, startDate, endDate, expectedDuration);
+        Optional<TaskAgenda> taskAgenda = getController().addNewEntryToAgenda(taskToDoListReference, startDate, expectedDuration);
 
         if (taskAgenda.isPresent()) {
             System.out.println("\nNew Entry added a Agenda with success !");
@@ -118,7 +117,6 @@ public class AddNewEntryToAgendaUI implements Runnable {
         System.out.printf("\nGreenSpace: %s", greenSpaceName);
         System.out.printf("\nTask: %s", taskToDoListReference);
         System.out.printf("\nStart Date: %s", DateFormat.getDateTimeInstance().format(startDate));
-        System.out.printf("\nEnd Date: %s", DateFormat.getDateTimeInstance().format(endDate));
         System.out.printf("\nExpected Duration: %d", expectedDuration);
 
     }
@@ -130,7 +128,6 @@ public class AddNewEntryToAgendaUI implements Runnable {
      */
     private void requestData() throws ParseException {
         startDate = requestStartDate();
-        endDate = requestEndDate();
         expectedDuration = requestExpectedDuration();
     }
 
@@ -148,19 +145,6 @@ public class AddNewEntryToAgendaUI implements Runnable {
         return formatter.parse(dateString);
     }
 
-    /**
-     * Requests and parses the end date for the agenda entry.
-     *
-     * @return The parsed end date.
-     * @throws ParseException If an error occurs while parsing the input date.
-     */
-    private Date requestEndDate() throws ParseException {
-        Scanner input = new Scanner(System.in);
-        System.out.println("End Date: ");
-        String dateString = input.next();
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        return formatter.parse(dateString);
-    }
 
     /**
      * Requests and retrieves the expected duration for the agenda entry.
@@ -175,6 +159,15 @@ public class AddNewEntryToAgendaUI implements Runnable {
         return input.nextInt();
     }
 
+    /**
+     * Displays the list of task to-do options for the user to select from,
+     * and returns the reference of the selected task to-do list.
+     * This method fetches the task to-do lists from the controller,
+     * displays them to the user, and allows the user to select one of them.
+     * The method then returns the reference of the selected task to-do list.
+     *
+     * @return the reference of the selected task to-do list.
+     */
     private String displayAndSelectTaskToDoList() {
         List<TaskToDoListDto> taskToDoListDtoList = getController().getTaskToDoList(greenSpaceName);
 
@@ -197,7 +190,6 @@ public class AddNewEntryToAgendaUI implements Runnable {
     /**
      * Displays the list of task to-do lists and prompts the user to select one.
      *
-     * @return The task to-do list reference selected by the user.
      */
     private void displayTaskToDoListOptions(List<TaskToDoListDto> greenSpaceDtoList) {
 

@@ -38,7 +38,25 @@ package "Domain" <<Folder>> {
         }
     }
 
+    package "Domain.DTO" <<Folder>> {
+
+            class TaskAgendaMapper{
+                + List<TaskAgendaDto> toDTO(List<TaskAgenda>list)
+                + TaskAgendaDto toDTO(TaskAgenda obj)
+            }
+
+            class TaskAgendaDto{
+                + String taskReference
+                + String description
+                + String greenSpaceName
+                + Date startDate
+
+                + TaskAgendaDto(description, greenSpaceName, startDate)
+            }
+    }
+
     package "Domain.Model" <<Folder>> {
+
 
         interface GreenSpace {
             + getName()
@@ -91,8 +109,8 @@ package "Domain" <<Folder>> {
             - Date endDate
 
             - hasTaskByTeam(team)
-            - hasStatus(status)
             - isBetweenDates(startDate, endDate)
+            + hasTaskByTeam(team)
         }
 
         class Collaborator implements ICollaborator{
@@ -111,6 +129,11 @@ package "Domain" <<Folder>> {
             + getTaskListByTeam(team)
             + filterTasksByStatusDate(taskListTeam, status, startDate, endDate)
             + sortTaskAgendaByDate(filteredTaskListTeam)
+        }
+
+        class TaskToDoList{
+
+            - hasStatus(status)
         }
 
     }
@@ -138,12 +161,14 @@ package "Domain" <<Folder>> {
     }
 }
 
+
 '-------------------Instance-------------------
 Repositories -> Repositories : instance
 ApplicationSession -> ApplicationSession : instance
 
 '-------------------UI-------------------
 ConsultAssignedTasksListUI ..> ConsultAssignedTasksController
+ConsultAssignedTasksListUI ..> TaskAgendaDto
 
 '-------------------Controller-------------------
 ConsultAssignedTasksController ...> Repositories : repositories
@@ -157,6 +182,8 @@ ConsultAssignedTasksController ...> Task
 ConsultAssignedTasksController ...> TaskAgenda
 ConsultAssignedTasksController ...> Agenda
 ConsultAssignedTasksController ...> Team
+ConsultAssignedTasksController ...> TaskAgendaMapper
+ConsultAssignedTasksController ...> TaskAgendaDto
 
 '-------------------ApplicationSession-------------------
 ApplicationSession --> "1" UserSession : userSession
@@ -180,7 +207,10 @@ TasksAgenda "1" -> "*" TaskAgenda: taskAgendaList
 '-------------------TaskAgenda-------------------
 TaskAgenda "*" --> "1" GreenSpace : greenSpace
 TaskAgenda "1..*" -> "1" Task : task
-TaskAgenda "*" ---> "1" Team : team
+TaskAgenda "*" --> "1" Team : team
+TaskAgenda ...> TaskAgendaDto
+TaskAgenda ...> TaskAgendaMapper
+TaskAgenda "1" --> "1" TaskToDoList : taskToDoList
 
 '-------------------Team-------------------
 Team "1" --> "1..*" Collaborator : collaboratorList

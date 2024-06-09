@@ -18,6 +18,8 @@ participant "collaborator\n:Collaborator" as Collab
 participant "agenda\n:Agenda" as AGENDA
 participant "tasksAgenda\n:TasksAgenda" as TASKSAGENDA
 participant "taskAgenda\n:TaskAgenda" as TASKAGENDA
+participant "taskToDoList\n:TaskToDoList" as TASKToDOList
+participant "taskAgendaMapper\n:TeamMapper" as TASKAGENDAMAPPER
 
 
 activate Col
@@ -95,24 +97,32 @@ activate Col
     activate AGENDA
 
 
+    AGENDA -> TASKSAGENDA: getTaskListByTeam(team)
 
-    loop for each task in TaskAgenda
+    activate TASKSAGENDA
+        loop for each task in TaskAgenda
 
-    AGENDA -> TASKAGENDA: hasTaskByTeam(team)
-    activate TASKAGENDA
+                TASKSAGENDA -> TASKAGENDA: hasTaskByTeam(team)
 
-            TASKAGENDA --> AGENDA: true/false
-            deactivate TASKAGENDA
+                activate TASKAGENDA
 
-            alt hasTaskByTeam == true
-                AGENDA -> AGENDA : addTaskListTeam()
-                activate AGENDA
+                TASKAGENDA --> TASKSAGENDA: true/false
+                deactivate TASKAGENDA
 
-                AGENDA --> AGENDA : true/false
-                deactivate AGENDA
-            end
+                alt hasTaskByTeam == true
+                    TASKSAGENDA -> TASKSAGENDA : addTaskListTeam()
+                    activate TASKSAGENDA
 
-    end
+                    TASKSAGENDA --> TASKSAGENDA : true/false
+                    deactivate TASKSAGENDA
+                end
+
+        end
+
+    TASKSAGENDA --> AGENDA : taskListTeam
+
+    deactivate TASKSAGENDA
+
 
     AGENDA --> CTRL: taskListTeam
     deactivate AGENDA
@@ -128,6 +138,14 @@ activate Col
                 loop for each taskAgenda in taskListTeam
         TASKSAGENDA -> TASKAGENDA : hasStatus(status)
         activate TASKAGENDA
+
+        TASKAGENDA -> TASKToDOList : hasStatus(status)
+
+        activate TASKToDOList
+
+        TASKToDOList --> TASKAGENDA : true/false
+
+        deactivate TASKToDOList
 
         TASKAGENDA --> TASKSAGENDA : true/false
         deactivate TASKAGENDA
@@ -165,8 +183,21 @@ activate Col
 
         AGENDA --> CTRL: sortedTaskListTeam
         deactivate AGENDA
+CTRL -> TASKAGENDAMAPPER : toDTO(listTaskAgenda)
 
+activate TASKAGENDAMAPPER
+
+ref over TASKAGENDAMAPPER
+
+Desing in 23
+
+end
+TASKAGENDAMAPPER --> CTRL : listTaskAgendaDTO
+
+deactivate TASKAGENDAMAPPER
         CTRL --> UI : sortedTaskListTeam
+
+        deactivate CTRL
 
     UI --> Col : shows list of assigned tasks
     deactivate UI

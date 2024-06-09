@@ -79,6 +79,15 @@ public class Collaborator implements ICollaborator {
         this.skillList = new ArrayList<>();
     }
 
+    /**
+     * Constructs a new Collaborator object with the specified email address.
+     *
+     * @param email the email address of the collaborator.
+     */
+    public Collaborator(String email) {
+        this.email = email;
+        this.skillList = new ArrayList<>();
+    }
 
     /**
      * Gets the name of the collaborator.

@@ -17,33 +17,8 @@ class Collaborator {
     email
 }
 
-class Document{
-    number
-}
-
-class DocumentType{
-    type
-}
-
-class Address {
-    street
-    doorNumber
-}
-
-class PostCode{
-    postCodeNumber
-    localization
-}
-
-class Skill{
-    name
-}
-
-class Job{
-    name
-}
-
 class Team{
+    id
 }
 
 class GreenSpace {
@@ -53,41 +28,32 @@ class GreenSpace {
 
 class TaskAgenda{
     startDate
-    endDate
     expectedDuration
-    status
-}
-
-class Task {
-    description
 }
 
 class Agenda{
 }
 
-Address "1..*" -- "1" PostCode : has >
-
-Document "1..*" - "1" DocumentType : has >
+class TaskToDoList{
+    taskReference
+    status
+    urgency
+    aproxExpectedDuration
+}
 
 '-------------Collaborator-------------
-Collaborator "1" - "1" Document : has >
-Collaborator "1..*" --- "1" Job : has >
-Address "1" - "1..*" Collaborator : lives <
-Skill "*" -- "*" Collaborator : has <
 Collaborator "1..*" -- "1" Team : Contains <
 
 '-------------GreenSpace-------------
-GreenSpace "1" - "1" Address : is located in >
 GreenSpace <|-- Garden
 GreenSpace <|-- MediumPark
 GreenSpace <|-- LargePark
-GreenSpace "*" -- "1" SortingAlgorithm : makes use of >
 
 '-------------Task-------------
 TaskAgenda "1..*" --- "1" GreenSpace :  Carried out in  >
+Team "1" --- "*" TaskAgenda : executed by <
+TaskToDoList "1..*" ----- "1" GreenSpace :  Carried out in  >
+Agenda "1" -u- "*" TaskAgenda : contains >
+TaskAgenda "1" - "1" TaskToDoList : includes >
 
-Team "1" --- "*" TaskAgenda : executes by <
-Agenda "1" - "*" Task : contains >
-
-(Task,Agenda) .. TaskAgenda
 @enduml

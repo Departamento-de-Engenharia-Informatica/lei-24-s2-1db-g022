@@ -24,12 +24,11 @@ public class Agenda {
      *
      * @param taskToDoList     The task to be added.
      * @param startDate        The start date of the task.
-     * @param endDate          The end date of the task.
      * @param expectedDuration The expected duration of the task.
      * @return An Optional containing the newly added TaskAgenda, or empty if addition fails.
      */
-    public Optional<TaskAgenda> addNewEntryToAgenda(TaskToDoList taskToDoList, Date startDate, Date endDate, int expectedDuration) {
-        return tasksAgenda.addTaskAgendaToList(taskToDoList, startDate, endDate, expectedDuration);
+    public Optional<TaskAgenda> addNewEntryToAgenda(TaskToDoList taskToDoList, Date startDate, int expectedDuration) {
+        return tasksAgenda.addTaskAgendaToList(taskToDoList, startDate, expectedDuration);
     }
 
     /**
@@ -61,5 +60,38 @@ public class Agenda {
      */
     public boolean assignTeamTask(Team team, TaskAgenda taskAgenda) {
         return tasksAgenda.assignTeamTask(team, taskAgenda);
+    }
+
+    /**
+     * Retrieves the list of task agendas assigned to a specific team.
+     *
+     * @param team the team for which to retrieve the task agendas.
+     * @return a list of task agendas assigned to the specified team.
+     */
+    public List<TaskAgenda> getTaskListByTeam(Team team) {
+        return tasksAgenda.getTaskListByTeam(team);
+    }
+
+    /**
+     * Filters the list of task agendas by status and date range.
+     *
+     * @param taskListTeam the list of task agendas to be filtered.
+     * @param status       the status to filter the tasks by.
+     * @param startDate    the start date of the date range to filter the tasks.
+     * @param endDate      the end date of the date range to filter the tasks.
+     * @return a list of task agendas that match the specified status and fall within the specified date range.
+     */
+    public List<TaskAgenda> filterTasksByStatusDate(List<TaskAgenda> taskListTeam, String status, Date startDate, Date endDate) {
+        return tasksAgenda.filterTasksByStatusDate(taskListTeam, status, startDate, endDate);
+    }
+
+    /**
+     * Sorts the list of task agendas by date.
+     *
+     * @param filteredTaskListTeam the list of task agendas to be sorted.
+     * @return a list of task agendas sorted by date.
+     */
+    public List<TaskAgenda> sortTaskAgendaDate(List<TaskAgenda> filteredTaskListTeam) {
+        return tasksAgenda.sortTaskAgendaByDate(filteredTaskListTeam);
     }
 }

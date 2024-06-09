@@ -3,10 +3,9 @@ package pt.ipp.isep.dei.esoft.project.domain.model;
 import java.util.Date;
 import java.util.List;
 
-public class TaskAgenda {
+public class TaskAgenda implements Comparable<TaskAgenda> {
     private TaskToDoList taskToDoList;
     private Date startDate;
-    private Date endDate;
     private int expectDuration;
     private Team team;
 
@@ -16,13 +15,11 @@ public class TaskAgenda {
      * @param taskToDoList   The task to be scheduled.
      * @param expectDuration The expected duration of the task.
      * @param startDate      The start date of the task.
-     * @param endDate        The end date of the task.
      */
-    public TaskAgenda(TaskToDoList taskToDoList, int expectDuration, Date startDate, Date endDate) {
+    public TaskAgenda(TaskToDoList taskToDoList, int expectDuration, Date startDate) {
         this.taskToDoList = taskToDoList;
         taskToDoList.setStatusToPlanned();
         this.startDate = startDate;
-        this.endDate = endDate;
         this.expectDuration = expectDuration;
         this.team = null;
     }
@@ -37,7 +34,6 @@ public class TaskAgenda {
         return "TaskAgenda{" +
                 "taskToDoList=" + taskToDoList +
                 ", startDate=" + startDate +
-                ", endDate=" + endDate +
                 ", expectDuration=" + expectDuration +
                 '}';
     }
@@ -51,6 +47,10 @@ public class TaskAgenda {
         return taskToDoList;
     }
 
+    public Date getStartDate() {
+        return startDate;
+    }
+
     /**
      * Verifies if the task is associated with any of the provided green spaces.
      *
@@ -59,7 +59,6 @@ public class TaskAgenda {
      */
     public boolean verifyGreenSpace(List<GreenSpace> greenSpaceList) {
         if (verifyNullTeam()) {
-            System.out.println("daodsas");
             for (GreenSpace greenSpace : greenSpaceList) {
                 if (taskToDoList.equalsGreenSpace(greenSpace)) {
                     return true;
@@ -99,7 +98,7 @@ public class TaskAgenda {
     public boolean equalsTask(TaskAgenda taskAgenda) {
         if (this == taskAgenda) return true;
 
-        return taskToDoList == taskAgenda.taskToDoList && startDate == taskAgenda.startDate && endDate == taskAgenda.endDate && expectDuration == taskAgenda.expectDuration && team == taskAgenda.team;
+        return taskToDoList == taskAgenda.taskToDoList && startDate == taskAgenda.startDate && expectDuration == taskAgenda.expectDuration && team == taskAgenda.team;
     }
 
     /**
@@ -111,5 +110,36 @@ public class TaskAgenda {
     public boolean updateTeam(Team team) {
         this.team = team;
         return true;
+    }
+
+    /**
+     * Checks if this TaskAgenda has the specified Team.
+     *
+     * @param team the Team to check against
+     * @return true if this TaskAgenda has the specified Team, false otherwise
+     */
+    public boolean hasTaskByTeam(Team team) {
+        return this.team.equals(team);
+    }
+
+    /**
+     * Checks if a given start date is before the end date.
+     *
+     * @param startDate The start date to be checked.
+     * @param endDate   The end date to be checked.
+     * @return True if the start date is before the end date; otherwise, false. Returns false if either the start date or the end date is null.
+     */
+    public boolean isBetweenDates(Date startDate, Date endDate) {
+        return startDate != null && endDate != null && this.startDate.after(startDate) && this.startDate.before(endDate);
+    }
+
+    /**
+     * Compares this TaskAgenda with another TaskAgenda for ordering based on their start dates.
+     *
+     * @param other the TaskAgenda to be compared
+     * @return a negative integer, zero, or a positive integer as this TaskAgenda is before, at the same time, or after the specified TaskAgenda.
+     */
+    public int compareTo(TaskAgenda other) {
+        return this.startDate.compareTo(other.startDate);
     }
 }

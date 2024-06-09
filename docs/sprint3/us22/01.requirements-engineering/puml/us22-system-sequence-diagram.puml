@@ -27,7 +27,7 @@ activate GSM
     GSM->System: selects task
     activate System
 
-    System --> GSM : requests data(startDate, endDate, expectedDuration)
+    System --> GSM : requests data(startDate, expectedDuration)
     deactivate System
 
     GSM -> System : types data

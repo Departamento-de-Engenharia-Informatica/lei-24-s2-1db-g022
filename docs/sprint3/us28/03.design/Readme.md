@@ -46,6 +46,14 @@ Get Collaborator
 
 ![Sequence Diagram - Split Manager](../../us20/03.design/svg/us20-partial-sequence-diagram-get-GSM.svg)
 
+Get Collaborator
+
+![Sequence Diagram - Split Manager](../../us20/03.design/svg/us20-partial-sequence-diagram-get-GSM.svg)
+
+toDTO List Task Agenda
+
+![Sequence Diagram - toDTO List Task Agenda](../../us23/03.design/svg/us23-partial-sequence-diagram-DTO-TaskAgenda.svg)
+
 ## 3.3. Class Diagram (CD)
 
 ![Class Diagram](svg/us28-class-diagram.svg)

@@ -29,7 +29,7 @@ public class TaskAgendaMapper {
         List<TaskAgendaDto> taskAgendaList = new ArrayList<>();
 
         for (TaskAgenda t : list) {
-            taskAgendaList.add(toDto(t.getTaskToDoList()));
+            taskAgendaList.add(toDto(t));
         }
 
         return taskAgendaList;
@@ -41,7 +41,7 @@ public class TaskAgendaMapper {
      * @param obj The TaskToDoList object to be converted.
      * @return A TaskAgendaDto object.
      */
-    private TaskAgendaDto toDto(TaskToDoList obj) {
-        return new TaskAgendaDto(obj.getTaskRef(), obj.getTask().getTaskDescription(), obj.getGreenSpace().getName());
+    private TaskAgendaDto toDto(TaskAgenda obj) {
+        return new TaskAgendaDto(obj.getTaskToDoList().getTaskRef(), obj.getTaskToDoList().getTask().getTaskDescription(), obj.getTaskToDoList().getGreenSpace().getName(),obj.getStartDate());
     }
 }

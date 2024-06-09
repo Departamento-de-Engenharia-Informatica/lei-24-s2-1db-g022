@@ -134,12 +134,6 @@ public class TeamRepository {
         return isCreated;
     }
 
-    public void ver() {
-        for (Team t : teamList) {
-            System.out.println(t.toString());
-        }
-    }
-
     /**
      * Retrieves a list of all teams.
      *
@@ -160,6 +154,21 @@ public class TeamRepository {
         for (Team t : teamList) {
             if (t.verifyIdTeam(id)) {
                 return Optional.of(t);
+            }
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Retrieves the team associated with the given collaborator.
+     *
+     * @param collaborator the collaborator to search for
+     * @return an Optional containing the team if the collaborator is found, otherwise an empty Optional
+     */
+    public Optional<Team> getTeambyCollaborator(Collaborator collaborator) {
+        for (Team team : teamList) {
+            if (team.hasTeamByCollaborator(collaborator)) {
+                return Optional.of(team);
             }
         }
         return Optional.empty();
