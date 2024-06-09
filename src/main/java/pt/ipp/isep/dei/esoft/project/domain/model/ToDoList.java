@@ -70,53 +70,9 @@ public class ToDoList {
      * @return A unique reference for the taskToDoList.
      */
     private String generateUniqueReference() {
+        referenceCount++;
 
-        String str = "REF";
-        boolean condition = true;
-
-        while (condition) {
-
-            String regex = "(\\D*)(\\d+)$";
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(str);
-
-            if (matcher.find()) {
-
-                String prefix = matcher.group(1); // ref
-                String numStr = matcher.group(2); // numbers
-
-                referenceCount = Integer.parseInt(numStr);
-                referenceCount++;
-
-                str = prefix + referenceCount;
-            } else {
-
-                str = str + "1";
-            }
-
-            condition = !validateRef(str);
-        }
-
-        return str;
-    }
-
-    /**
-     * Validates if the reference is unique within the to-do list.
-     *
-     * @param ref The reference to validate.
-     * @return True if the reference is unique, false otherwise.
-     */
-    private boolean validateRef(String ref) {
-
-        for (TaskToDoList ttdl : taskTdlList) {
-
-            if (ttdl.hasRef(ref)) {
-
-                return false;
-            }
-        }
-
-        return true;
+        return "REF" + referenceCount;
     }
 
     /**
