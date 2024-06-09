@@ -79,6 +79,15 @@ public class Bootstrap implements Runnable {
         addUsersGSM(greenSpaceManager2);
     }
 
+    /**
+     * Adds predefined green spaces to the repository for bootstrap purposes.
+     *
+     * This method initializes and adds the following green spaces to the repository:
+     * Jardim Porto - Garden in Porto
+     * Jardim Lisboa - Garden in Lisboa
+     * Jardim Braga - Medium Park in Braga
+     * Jardim Viseu - Large Park in Viseu
+     */
     private void addGreenSpaces(){
         GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
         GreenSpace garden = new Garden("Jardim Porto",3,"street Porto",12,"1234-123","Porto");
@@ -135,6 +144,13 @@ public class Bootstrap implements Runnable {
 
     }
 
+    /**
+     * Adds predefined vehicles to the repository for bootstrap purposes.
+     *
+     * This method initializes and adds the following vehicles to the repository:
+     * Vehicle 1 - Heavy vehicle with license plate AA-00-AA, brand BMW, model XM
+     * Vehicle 2 - Light vehicle with license plate BB-00-AA, brand BMW, model XM
+     */
     private void addVehicles() {
         VehicleRepository vehicleRepo = Repositories.getInstance().getVehicleRepository();
 

@@ -38,6 +38,15 @@ public class Address {
 
     }
 
+    /**
+     * Constructs an Address object with the specified attributes.
+     *
+     * @param streetName The name of the street.
+     * @param doorNumber The door number.
+     * @param postCodeNumber The postal code number.
+     * @param localization The localization.
+     * @throws IllegalArgumentException If the door number is zero or negative.
+     */
     public Address(String streetName, int doorNumber, String postCodeNumber, String localization) {
         this.streetName = streetName;
         if (validateNullInt(doorNumber)) {
@@ -90,18 +99,42 @@ public class Address {
                 '}';
     }
 
+    /**
+     * Creates and returns a new Address object with the same attributes as this Address.
+     *
+     * @return A new Address object.
+     */
     public Address clone() {
         return new Address(this.streetName, this.postCode.getPostCodeNumber(), this.doorNumber);
     }
 
+
+    /**
+     * Validates a string value to ensure it is not null or empty.
+     *
+     * @param value The string value to validate.
+     * @return {@code true} if the string value is not null or empty; {@code false} otherwise.
+     */
     private boolean validateNullString(String value) {
         return !(value == null) && !(value.isEmpty());
     }
 
+    /**
+     * Validates an integer value to ensure it is greater than zero.
+     *
+     * @param value The integer value to validate.
+     * @return {@code true} if the integer value is greater than zero; {@code false} otherwise.
+     */
     private boolean validateNullInt(int value) {
         return !(value <= 0);
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param o The object to compare for equality.
+     * @return {@code true} if this object is equal to the other object; {@code false} otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -110,6 +143,11 @@ public class Address {
         return doorNumber == address.doorNumber && Objects.equals(streetName, address.streetName) && Objects.equals(postCode, address.postCode);
     }
 
+    /**
+     * Returns a hash code value for the object.
+     *
+     * @return A hash code value for this object.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(streetName, postCode, doorNumber);

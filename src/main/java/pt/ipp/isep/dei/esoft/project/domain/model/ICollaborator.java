@@ -35,8 +35,18 @@ public interface ICollaborator {
      */
     boolean hasEqualsTaxNumber(ICollaborator collaborator);
 
+    /**
+     * Retrieves the document associated with this collaborator.
+     *
+     * @return The document associated with this collaborator.
+     */
     Document getDocument();
 
+    /**
+     * Creates and returns a copy of this collaborator.
+     *
+     * @return A copy of this collaborator.
+     */
     ICollaborator clone();
 
     /**

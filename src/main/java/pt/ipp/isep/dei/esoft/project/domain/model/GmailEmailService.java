@@ -5,8 +5,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * Represents a Gmail email service implementation of the EmailService interface.
+ */
 public class GmailEmailService implements EmailService {
 
+    /**
+     * Sends an email using Gmail.
+     *
+     * @param email The recipient's email address.
+     * @param msg   The message to be sent.
+     * @return true if the email was sent successfully, false otherwise.
+     */
     @Override
     public boolean sendEmail(String email, String msg) {
         Properties properties = new Properties();
@@ -20,7 +30,7 @@ public class GmailEmailService implements EmailService {
             Thread.sleep(2000);
             System.out.println("From: " + properties.getProperty("Company.email"));
             System.out.println("Sending email to " + email);
-            System.out.println("Mensage: " + msg);
+            System.out.println("Message: " + msg);
             System.out.println("-----------------------------------");
 
         } catch (InterruptedException | IOException e) {

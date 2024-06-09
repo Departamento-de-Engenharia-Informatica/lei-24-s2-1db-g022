@@ -18,6 +18,12 @@ public class GreenSpaces {
         greenSpacesList = new ArrayList<>();
     }
 
+    /**
+     * Adds a GreenSpace to the list of GreenSpaces.
+     *
+     * @param greenSpace the GreenSpace to be added.
+     * @return true if the GreenSpace was successfully added to the list, false otherwise.
+     */
     public boolean addListGreenSpaces(GreenSpace greenSpace) {
         return this.greenSpacesList.add(greenSpace);
     }
@@ -62,7 +68,11 @@ public class GreenSpaces {
         }
 
     }
-
+    /**
+     * Adds a GreenSpace to the list of bootstrap GreenSpaces.
+     *
+     * @param greenSpace the GreenSpace to be added.
+     */
     public void addListBootstrapGreenSpaces(GreenSpace greenSpace) {
         this.greenSpacesList.add(greenSpace);
     }

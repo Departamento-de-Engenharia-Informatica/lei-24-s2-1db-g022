@@ -116,6 +116,11 @@ public class Collaborator implements ICollaborator {
         return phoneNumber;
     }
 
+    /**
+     * Retrieves the document associated with this instance.
+     *
+     * @return The document associated with this instance.
+     */
     public Document getDocument() {
         return document;
     }
@@ -157,10 +162,24 @@ public class Collaborator implements ICollaborator {
         return List.copyOf(skillList);
     }
 
+    /**
+     * Validates an integer value to ensure it is greater than zero.
+     *
+     * @param value The integer value to validate.
+     * @return {@code true} if the integer value is greater than zero; {@code false} otherwise.
+     */
     private boolean validateNullInt(int value) {
         return !(value <= 0);
     }
 
+
+    /**
+     * Validates an integer value to ensure it matches the format of a tax payer identification number (TIN).
+     * A valid TIN should consist of exactly nine digits.
+     *
+     * @param value The integer value to validate as a TIN.
+     * @return {@code true} if the integer value matches the TIN format; {@code false} otherwise.
+     */
     private boolean validateTaxPayer(int value) {
         String regex = "\\b\\d{9}\\b";
 
@@ -185,7 +204,12 @@ public class Collaborator implements ICollaborator {
         return pattern.matcher(value).matches();
     }
 
-
+    /**
+     * Validates a name to ensure it consists of letters only and has a maximum length of six characters.
+     *
+     * @param value The name to validate.
+     * @return {@code true} if the name is valid; {@code false} otherwise.
+     */
     private boolean validateName(String value) {
         String regex = "^[a-zA-Z]{1,6}$"; // Matches up to six letters (upper or lower case)
         Pattern pattern = Pattern.compile(regex);

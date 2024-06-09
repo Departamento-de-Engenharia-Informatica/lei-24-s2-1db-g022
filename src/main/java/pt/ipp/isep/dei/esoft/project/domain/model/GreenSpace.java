@@ -29,5 +29,11 @@ public interface GreenSpace {
      */
     boolean isAreaLarger(int area);
 
+    /**
+     * Indicates whether some other object is "equal to" this GreenSpace.
+     *
+     * @param greenSpace the reference object with which to compare.
+     * @return true if this GreenSpace is the same as the obj argument; false otherwise.
+     */
     boolean equals(Object greenSpace);
 }

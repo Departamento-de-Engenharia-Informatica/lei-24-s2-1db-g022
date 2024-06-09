@@ -115,6 +115,37 @@ respective area.
 > **Answer:** Não existem USs previstas para essa gestão.
 > Por uma questão de simplicidade podem assumir que o GSM que cria o GS fica como gestor desse mesmo GS.
 
+> **Question:**
+> Good evening, in view of the description of GreenSpaces does it make sense to ask for optional mind for the different
+> types this data?
+>
+>Garden:
+>- Presence of trees (yes/no)
+>- Presence of irrigation system (yes/no)
+>- Presence of benches (yes/no)
+>
+>Medium-sized park:
+>- Presence of a wooded garden area (yes/no)
+>- Presence of toilets (yes/no)
+>- Presence of drinking fountains (yes/no)
+>- Presence of an irrigation system (yes/no)
+>- Presence of lighting (yes/no)
+>- Presence of a playground (yes/no)
+>
+>Large park:
+>- All data (medium-sized park)
+>- Presence of gardens (yes/no)
+>- Presence of woodland (yes/no)
+>- Presence of various facilities (yes/no)
+>
+> **Answer:**
+> In the current version, it is sufficient to define a park using name, size classification, area (hectare) and address.
+
+> **Question:** In the registration of a green space, should a green space's name be allowed to contain digits and special characters, or just letters and whitespaces?
+>
+> **Answer:** Same rules for other names in the business, letters, spaces and dashes.
+
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.

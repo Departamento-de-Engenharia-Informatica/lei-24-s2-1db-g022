@@ -22,6 +22,11 @@ As a GSM, I want to assign a Team to an entry in the Agenda.
 >
 > **Answer:** No.
 
+> **Question:** Should the team be generated like in the us05 or should each element be selected manually
+>
+> **Answer:** There is only one US that allows to create teams, as you mentioned, the US05.
+
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** A message must be sent to all team members informing them about the assignment.
