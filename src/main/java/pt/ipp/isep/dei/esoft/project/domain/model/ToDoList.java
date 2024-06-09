@@ -14,6 +14,11 @@ public class ToDoList {
     private final List<TaskToDoList> taskTdlList;
     private static int referenceCount = 0;
 
+    //Somente para testes
+    public static void setZeroReferenceCount() {
+        ToDoList.referenceCount = 0;
+    }
+
     /**
      * Constructs a new ToDoList object.
      */

@@ -1,8 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.esoft.project.domain.model.Address;
 import pt.ipp.isep.dei.esoft.project.domain.model.Collaborator;
+import pt.ipp.isep.dei.esoft.project.domain.model.ICollaborator;
 import pt.ipp.isep.dei.esoft.project.domain.model.Job;
 
 import java.sql.Date;
@@ -80,5 +82,20 @@ public class CollaboratorRepositoryTest {
         Optional<Collaborator> result = collaboratorRepository.registerCollaborator("testt", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), new Address("streeName", "1234-123", 1), "+351 914988672", "tomasas@tomas.pt", 123643820, "Passport", 123321122, new Job("Calceteiro"));
 
         assertTrue(result.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Found By Email")
+    void ensureFindByEmail() {
+        CollaboratorRepository collaboratorRepository = new CollaboratorRepository();
+
+        Optional<Collaborator> das = collaboratorRepository.registerCollaborator("test", Date.valueOf("1999-01-10"), Date.valueOf("1999-01-10"), new Address("streeName", "1234-123", 1), "+351 914988672", "tomas@tomas.pt", 123643820, "Passport", 123321121, new Job("Calceteiro"));
+
+        String email = das.get().getEmail();
+
+        Optional<ICollaborator> result = collaboratorRepository.getCollaboratorByEmail(email);
+
+        assertTrue(result.isPresent());
+
     }
 }

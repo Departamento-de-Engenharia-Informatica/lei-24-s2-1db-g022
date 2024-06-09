@@ -10,20 +10,20 @@ import java.util.Objects;
  */
 public class Address {
 
-    private String streetName;
+    private String street;
     private PostCode postCode;
     private int doorNumber;
 
     /**
      * Constructs an Address object with the specified street name, postal code, and door number.
      *
-     * @param streetName The street name.
+     * @param street The street name.
      * @param doorNumber The door number.
      */
-    public Address(String streetName, String postCodeNumber, int doorNumber) {
+    public Address(String street, String postCodeNumber, int doorNumber) {
 
-        if (validateNullString(streetName)) {
-            this.streetName = streetName;
+        if (validateNullString(street)) {
+            this.street = street;
         } else {
             throw new IllegalArgumentException("Address street name cannot be null or empty.");
         }
@@ -41,14 +41,14 @@ public class Address {
     /**
      * Constructs an Address object with the specified attributes.
      *
-     * @param streetName     The name of the street.
-     * @param doorNumber     The door number.
+     * @param street The name of the street.
+     * @param doorNumber The door number.
      * @param postCodeNumber The postal code number.
      * @param localization   The localization.
      * @throws IllegalArgumentException If the door number is zero or negative.
      */
-    public Address(String streetName, int doorNumber, String postCodeNumber, String localization) {
-        this.streetName = streetName;
+    public Address(String street, int doorNumber, String postCodeNumber, String localization) {
+        this.street = street;
         if (validateNullInt(doorNumber)) {
             this.doorNumber = doorNumber;
         } else {
@@ -63,8 +63,8 @@ public class Address {
      *
      * @return The street name.
      */
-    public String getStreetName() {
-        return streetName;
+    public String getStreet() {
+        return street;
     }
 
     /**
@@ -93,7 +93,7 @@ public class Address {
     @Override
     public String toString() {
         return "Address{" +
-                "streetName='" + streetName + '\'' +
+                "street='" + street + '\'' +
                 ", postCode='" + postCode + '\'' +
                 ", doorNumber=" + doorNumber +
                 '}';
@@ -105,7 +105,7 @@ public class Address {
      * @return A new Address object.
      */
     public Address clone() {
-        return new Address(this.streetName, this.postCode.getPostCodeNumber(), this.doorNumber);
+        return new Address(this.street, this.postCode.getPostCodeNumber(), this.doorNumber);
     }
 
 
@@ -140,7 +140,7 @@ public class Address {
         if (this == o) return true;
         if (!(o instanceof Address)) return false;
         Address address = (Address) o;
-        return doorNumber == address.doorNumber && Objects.equals(streetName, address.streetName) && Objects.equals(postCode, address.postCode);
+        return doorNumber == address.doorNumber && Objects.equals(street, address.street) && Objects.equals(postCode, address.postCode);
     }
 
     /**
@@ -150,6 +150,6 @@ public class Address {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(streetName, postCode, doorNumber);
+        return Objects.hash(street, postCode, doorNumber);
     }
 }

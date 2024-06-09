@@ -14,5 +14,5 @@ public interface EmailService {
      * @param msg   The message content.
      * @return {@code true} if the email was sent successfully; {@code false} otherwise.
      */
-    boolean sendEmail(String email, String msg);
+    boolean sendEmail(String email, String msg,int delay);
 }

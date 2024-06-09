@@ -165,7 +165,7 @@ respective area.
 * Typed data:
     * a type green space (e.g Garden,Medium-size Park and Large-size Park);
     * a name
-    * a address(e.g streetName,postCode)
+    * a address(e.g street,postCode)
     * a area
 
 **Output Data:**

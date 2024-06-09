@@ -10,6 +10,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controller responsible for registering new collaborators.
+ *
+ * @author Group22
+ */
 public class RegisterCollaboratorController {
     private CollaboratorRepository collaboratorRepository;
     private JobRepository jobRepository;

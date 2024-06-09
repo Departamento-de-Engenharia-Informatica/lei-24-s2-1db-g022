@@ -150,7 +150,7 @@ public class Team {
                 EmailService es = (EmailService) clazz.newInstance();
 
 
-                boolean success = es.sendEmail(email, msg);
+                boolean success = es.sendEmail(email, msg,2000);
                 if (!success) {
                     return false;
                 }

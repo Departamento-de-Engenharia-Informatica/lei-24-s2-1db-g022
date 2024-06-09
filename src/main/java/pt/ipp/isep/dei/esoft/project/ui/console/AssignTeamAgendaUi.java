@@ -53,7 +53,7 @@ public class AssignTeamAgendaUi implements Runnable {
             displayData();
 
             if (confirmationData()) {
-                submitData();
+                register = submitData();
             }
         }
 
@@ -62,15 +62,16 @@ public class AssignTeamAgendaUi implements Runnable {
     /**
      * Submits the assigned team task data.
      */
-    private void submitData() {
-
+    private boolean submitData() {
 
         boolean success = getController().assignTeamTask(teamId, taskReference);
 
         if (success) {
             System.out.println("\nAssign Team Task Successfully Submitted! !");
+            return true;
         } else {
             System.out.println("\nAssign Team Task has not been Submitted! !");
+            return false;
         }
     }
 

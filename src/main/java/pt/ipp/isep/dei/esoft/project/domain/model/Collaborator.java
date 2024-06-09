@@ -277,7 +277,7 @@ public class Collaborator implements ICollaborator {
      */
     @Override
     public boolean hasEmail(String email) {
-        return false;
+        return this.email.equals(email);
     }
 
     /**

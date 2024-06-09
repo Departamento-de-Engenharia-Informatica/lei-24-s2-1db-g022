@@ -40,10 +40,10 @@ public class RegisterGreenSpaceController {
      * @param greenSpaceRepository     The repository for green spaces.
      * @param authenticationRepository The repository for authentication.
      */
-    public RegisterGreenSpaceController(GreenSpaceRepository greenSpaceRepository, AuthenticationRepository authenticationRepository) {
+    public RegisterGreenSpaceController(GreenSpaceRepository greenSpaceRepository, AuthenticationRepository authenticationRepository,CollaboratorRepository collaboratorRepository) {
         this.greenSpaceRepository = greenSpaceRepository;
         this.authenticationRepository = authenticationRepository;
-        this.collaboratorRepository = new CollaboratorRepository();
+        this.collaboratorRepository = collaboratorRepository;
     }
 
     /**
@@ -120,7 +120,6 @@ public class RegisterGreenSpaceController {
         }
 
         if (addListSucess) {
-            getGreenSpaceRepository().ver();
             return greenSpaceOptional;
         }
 

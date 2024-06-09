@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.esoft.project.domain.model.*;
 
@@ -42,7 +43,7 @@ class ToDoListTest {
     void TestGenerateUniqueReference() {
 
         ToDoList toDoList = new ToDoList();
-
+        ToDoList.setZeroReferenceCount();
         List<String> expected = new ArrayList<>();
 
         expected.add("REF1");
@@ -95,6 +96,7 @@ class ToDoListTest {
     void TestGetTaskToDoListByReference() {
 
         ToDoList toDoList = new ToDoList();
+        ToDoList.setZeroReferenceCount();
 
         GreenSpace garden = new Garden("Jardim Porto", 3, "street Porto", 12, "1234-123", "Porto");
 
