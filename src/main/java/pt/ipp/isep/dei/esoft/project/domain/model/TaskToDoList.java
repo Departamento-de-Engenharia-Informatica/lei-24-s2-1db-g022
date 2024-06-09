@@ -46,9 +46,25 @@ public class TaskToDoList {
     /**
      * Checks if the task to do list has the given reference.
      *
-     * @param ref The reference to check against the task to do list's reference.
      * @return true if the task to do list has the given reference, false otherwise.
      */
+    public String getTaskRef() {
+        return taskRef;
+    }
+
+    public GreenSpace getGreenSpace() {
+        return greenSpace;
+    }
+
+    public Task getTask() {
+        return task;
+    }
+
+    private boolean validateNullInt(int value) {
+
+        return !(value <= 0);
+    }
+
     public boolean hasRef(String ref) {
 
         return this.taskRef.equals(ref);
@@ -112,6 +128,7 @@ public class TaskToDoList {
         return new TaskToDoList(this.greenSpace, this.task, this.urgency, this.aproxExpectedDuration, this.taskRef);
     }
 
+
     /**
      * Validates if the given integer value is positive.
      *
@@ -121,5 +138,8 @@ public class TaskToDoList {
     private boolean validatePositiveInt(int value) {
 
         return value > 0;
+    }
+    public void setStatusToPlanned() {
+        this.status = "Planned";
     }
 }

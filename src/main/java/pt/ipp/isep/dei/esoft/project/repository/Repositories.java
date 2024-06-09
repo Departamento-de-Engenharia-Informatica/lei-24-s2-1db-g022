@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import pt.ipp.isep.dei.esoft.project.domain.model.Agenda;
 import pt.ipp.isep.dei.esoft.project.domain.model.ToDoList;
 
 /**
@@ -21,6 +22,7 @@ public class Repositories {
     private final GreenSpaceRepository greenSpaceRepository;
     private final TaskRepository taskRepository;
     private final ToDoList toDoList;
+    private final Agenda agenda;
 
 
     /**
@@ -39,6 +41,8 @@ public class Repositories {
         greenSpaceRepository = new GreenSpaceRepository();
         taskRepository = new TaskRepository();
         toDoList = new ToDoList();
+        agenda = new Agenda();
+
     }
 
     /**
@@ -149,4 +153,9 @@ public class Repositories {
     public ToDoList getToDoList() {
         return toDoList;
     }
+
+    public Agenda getAgenda() {
+        return agenda;
+    }
+
 }

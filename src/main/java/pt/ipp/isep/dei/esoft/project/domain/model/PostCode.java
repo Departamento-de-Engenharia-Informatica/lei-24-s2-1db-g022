@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain.model;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
@@ -55,5 +56,18 @@ public class PostCode {
                 "localization='" + localization + '\'' +
                 ", postCodeNumber='" + postCodeNumber + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PostCode)) return false;
+        PostCode postCode = (PostCode) o;
+        return Objects.equals(localization, postCode.localization) && Objects.equals(postCodeNumber, postCode.postCodeNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(localization, postCodeNumber);
     }
 }

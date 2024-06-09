@@ -348,6 +348,7 @@ public class GreenSpaceManager implements ICollaborator {
         return this.greenSpaces.addListGreenSpaces(greenSpace);
     }
 
+
     /**
      * Retrieves the GreenSpaces object associated with this GreenSpaceManager.
      *

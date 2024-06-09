@@ -28,4 +28,6 @@ public interface GreenSpace {
      * @return true if the GreenSpace's area is larger than the given area, false otherwise.
      */
     boolean isAreaLarger(int area);
+
+    boolean equals(Object greenSpace);
 }

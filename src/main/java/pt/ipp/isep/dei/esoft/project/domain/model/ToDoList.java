@@ -143,4 +143,29 @@ public class ToDoList {
 
         return optionalTaskToDoList;
     }
+
+    public List<TaskToDoList> getTaskByGreenSpace(GreenSpace greenSpace) {
+        List<TaskToDoList> taskList = new ArrayList<>();
+        for (TaskToDoList ttdl : taskTdlList) {
+            if (ttdl.getGreenSpace().equals(greenSpace)) {
+                taskList.add(ttdl);
+            }
+        }
+        return taskList;
+    }
+
+    public Optional<TaskToDoList> getTaskToDoListByReference(String taskToDoListReference) {
+        Optional<TaskToDoList> optionalTaskToDoList = Optional.empty();
+
+        for (TaskToDoList ttdl : taskTdlList) {
+            if (ttdl.hasRef(taskToDoListReference)) {
+                optionalTaskToDoList = Optional.of(ttdl);
+            }
+        }
+        return optionalTaskToDoList;
+    }
+
+    public boolean removeOldEntryToDoList(TaskToDoList taskToDoList) {
+        return taskTdlList.remove(taskToDoList);
+    }
 }

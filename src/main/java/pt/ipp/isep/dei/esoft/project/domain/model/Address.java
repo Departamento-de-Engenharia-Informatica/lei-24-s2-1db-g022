@@ -40,9 +40,9 @@ public class Address {
 
     public Address(String streetName, int doorNumber, String postCodeNumber, String localization) {
         this.streetName = streetName;
-        if(validateNullInt(doorNumber)){
+        if (validateNullInt(doorNumber)) {
             this.doorNumber = doorNumber;
-        }else {
+        } else {
             throw new IllegalArgumentException("DoorNumber cannot be zero or negative numbers.");
         }
         this.postCode = new PostCode(postCodeNumber, localization);
@@ -103,10 +103,10 @@ public class Address {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (!(object instanceof Address)) return false;
-        Address address = (Address) object;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Address)) return false;
+        Address address = (Address) o;
         return doorNumber == address.doorNumber && Objects.equals(streetName, address.streetName) && Objects.equals(postCode, address.postCode);
     }
 
