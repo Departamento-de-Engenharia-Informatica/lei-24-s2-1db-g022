@@ -122,7 +122,7 @@ CTRL -> GSMP : toDTOGreenSpace(greenSpaceList)
     PLAT --> CTRL : toDoList
     deactivate PLAT
 
-    CTRL -> TDL : getTaskToDoList(taskToDoListReference)
+    CTRL -> TDL : getTaskToDoListByReference(taskToDoListReference)
     activate TDL
 
         loop for each taskToDoList in ToDoList
@@ -147,7 +147,7 @@ CTRL -> GSMP : toDTOGreenSpace(greenSpaceList)
     TASKSAGENDA -> TASKAGENDA**: create(taskToDolist, startDate, endDate, expectedDuration)
     activate TASKAGENDA
 
-    TASKAGENDA -> TTDL : setPlanned()
+    TASKAGENDA -> TTDL : setStatusToPlanned()
     activate TTDL
 
     TTDL --> TASKAGENDA :

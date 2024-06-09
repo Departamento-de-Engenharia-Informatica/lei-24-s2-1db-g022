@@ -27,10 +27,10 @@ activate GSM
     GSM->System: selects task
     activate System
 
-    System --> GSM : requests data(startDate)
+    System --> GSM : requests data(startDate, endDate, expectedDuration)
     deactivate System
 
-    GSM -> System : types data(startDate)
+    GSM -> System : types data
     activate System
 
     System --> GSM : shows all data and asks to confirm
