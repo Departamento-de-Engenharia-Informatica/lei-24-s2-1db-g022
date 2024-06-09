@@ -44,27 +44,41 @@ public class TaskToDoList {
     }
 
     /**
-     * Checks if the task to do list has the given reference.
+     * Gets the reference of this TaskToDoList.
      *
-     * @return true if the task to do list has the given reference, false otherwise.
+     * @return The reference of this TaskToDoList.
      */
     public String getTaskRef() {
+
         return taskRef;
     }
 
+    /**
+     * Gets the green space associated with this TaskToDoList.
+     *
+     * @return The green space associated with this TaskToDoList.
+     */
     public GreenSpace getGreenSpace() {
+
         return greenSpace;
     }
 
+    /**
+     * Gets the task associated with this TaskToDoList.
+     *
+     * @return The task associated with this TaskToDoList.
+     */
     public Task getTask() {
+
         return task;
     }
 
-    private boolean validateNullInt(int value) {
-
-        return !(value <= 0);
-    }
-
+    /**
+     * Checks if this TaskToDoList has the specified reference.
+     *
+     * @param ref the reference to check
+     * @return true if this TaskToDoList's reference matches the given reference, false otherwise
+     */
     public boolean hasRef(String ref) {
 
         return this.taskRef.equals(ref);
@@ -140,15 +154,36 @@ public class TaskToDoList {
         return value > 0;
     }
 
+    /**
+     * Sets the status of the TaskToDoList to "Planned".
+     *
+     * This method updates the status field of the TaskToDoList object to "Planned".
+     */
     public void setStatusToPlanned() {
+
         this.status = "Planned";
     }
 
+    /**
+     * Checks if the provided GreenSpace object is equal to the GreenSpace of this TaskToDoList
+     * and if the status of this TaskToDoList is "Planned".
+     *
+     * @param greenSpace The GreenSpace object to compare.
+     * @return True if the GreenSpace is equal and the status is "Planned", false otherwise.
+     */
     public boolean equalsGreenSpace(GreenSpace greenSpace) {
+
         return this.greenSpace.equals(greenSpace) && hasStatus("Planned");
     }
 
+    /**
+     * Checks if this TaskToDoList has the specified status.
+     *
+     * @param status The status to check against.
+     * @return True if this TaskToDoList has the specified status, false otherwise.
+     */
     public boolean hasStatus(String status) {
+
         return this.status.equals(status);
     }
 }

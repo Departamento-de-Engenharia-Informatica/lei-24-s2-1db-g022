@@ -18,7 +18,13 @@ public class Task {
      */
     public Task(String taskDescription) {
 
-        this.taskDescription = taskDescription;
+        if (validateNullString(taskDescription)) {
+
+            this.taskDescription = taskDescription;
+        } else {
+
+            throw new IllegalArgumentException("Task description cannot be null or empty.");
+        }
     }
 
     /**
@@ -29,6 +35,16 @@ public class Task {
     public String getTaskDescription() {
 
         return taskDescription;
+    }
+
+    /**
+     * Validates if the provided string is not null or empty.
+     *
+     * @param value The string to validate.
+     * @return True if the string is not null or empty, false otherwise.
+     */
+    private boolean validateNullString(String value) {
+        return !(value == null) && !(value.isEmpty());
     }
 
     /**

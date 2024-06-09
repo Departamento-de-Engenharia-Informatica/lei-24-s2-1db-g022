@@ -29,7 +29,7 @@ A collaborator is a person (an employee) that have a name, birthdate, a salary, 
 
 ### 1.4. Found out Dependencies
 
-* n/a
+* There is a dependency on "US20 - Register a Green Space".
 
 ### 1.5 Input and Output Data
 
