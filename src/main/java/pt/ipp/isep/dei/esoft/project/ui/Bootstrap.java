@@ -83,9 +83,13 @@ public class Bootstrap implements Runnable {
         GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
         GreenSpace garden = new Garden("Jardim Porto",3,"street Porto",12,"1234-123","Porto");
         GreenSpace garden2 = new Garden("Jardim Lisboa",5,"street Lisboa",11,"1234-143","Lisboa");
+        GreenSpace mediumPark = new MediumPark("Jardim Braga",10,"street Braga",12,"1235-135","Braga");
+        GreenSpace largePark = new LargePark("Jardim Viseu",30,"street Viseu",12,"1237-145","Viseu");
 
         greenSpaceRepository.addGreenSpaceBootstrap(garden);
         greenSpaceRepository.addGreenSpaceBootstrap(garden2);
+        greenSpaceRepository.addGreenSpaceBootstrap(mediumPark);
+        greenSpaceRepository.addGreenSpaceBootstrap(largePark);
     }
 
 
